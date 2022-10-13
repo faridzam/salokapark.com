@@ -1,0 +1,153 @@
+@font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-Black-v3.otf');
+    font-weight: 800;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-BlackItalic-v3.otf');
+    font-weight: 800;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-Bold-v3.otf');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-BoldItalic-v3.otf');
+    font-weight: 700;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-ExtraThin-v3.otf');
+    font-weight:200;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-ExtraThinItalic-v3.otf');
+    font-weight: 200;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-Light-v3.otf');
+    font-weight:400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-LightItalic-v3.otf');
+    font-weight: 400;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-Medium-v3.otf');
+    font-weight:600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-MediumItalic-v3.otf');
+    font-weight: 600;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-Regular-v3.otf');
+    font-weight:500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-RegularItalic-v3.otf');
+    font-weight: 500;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-Thin-v3.otf');
+    font-weight:300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-ThinItalic-v3.otf');
+    font-weight: 300;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "AlrightSans";
+    src: url('../fonts/AlrightSans-Ultra-v3.otf');
+    font-weight: 100;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Fontin";
+    src: url('../fonts/Fontin-Bold.otf');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Fontin";
+    src: url('../fonts/Fontin-Regular.otf');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Fontin";
+    src: url('../fonts/Fontin-Italic.otf');
+    font-weight: 500;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "Fontin";
+    src: url('../fonts/Fontin-SmallCaps.otf');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .fontinBold {
+    font-family: 'Fontin' , sans-serif;
+    font-weight: bold;
+  }
+  .fontinRegular {
+    font-family: 'Fontin' , sans-serif;
+    font-weight: normal;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  .sticky-nav-text{
+    color: #333;
+  }
+  .sticky-nav-text-active{
+    border-bottom: solid 3px #333;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+        box-shadow: none!important;
+  }
+  input,
+  select,
+  textarea,
+  button {
+        color: #333;
+  }

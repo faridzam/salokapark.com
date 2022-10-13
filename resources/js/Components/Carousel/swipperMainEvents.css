@@ -1,0 +1,28 @@
+
+.swiper-events > .swiper-button-next{
+    top: 50%;
+    width: 65px;
+    height: 65px;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 1);
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.swiper-events > .swiper-button-prev{
+    top: 50%;
+    width: 65px;
+    height: 65px;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 1);
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
