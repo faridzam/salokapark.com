@@ -25,8 +25,12 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/ticket', function () {
-    return Inertia::render('Ticket');
+    return Inertia::render('Ticket/Ticket');
 })->name('ticket');
+
+Route::get('/ticket/data-pemesan', function () {
+    return Inertia::render('Ticket/DataPemesan');
+})->name('dataPemesan');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

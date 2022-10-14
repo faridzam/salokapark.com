@@ -5,8 +5,8 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {Box, Typography, Card, Button, Fab, TextField, Zoom} from '@mui/material';
 import {Add, Remove} from '@mui/icons-material';
 
-import { Header, Footer, ToTopButton} from '../Components';
-import {media} from '../assets/images';
+import { Header, Footer, ToTopButton} from '../../Components';
+import {media} from '../../assets/images';
 import { Application, Calendar } from 'react-rainbow-components';
 
 const calendarContainerStyles = {
@@ -42,9 +42,11 @@ export function useIsMounted() {
 
 export default function Ticket(props) {
 
-    const [state, setState] = React.useState({
-        date: new Date(),
-    });
+    // booking date
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    const [bookingDate, setBookingDate] = React.useState(tomorrow);
 
     // ticket section
     const [ticketOrder, setTicketOrder] = React.useState([
@@ -52,45 +54,39 @@ export default function Ticket(props) {
             ticket_id: 1,
             ticket_name: 'Regular Weekdays Ticket',
             ticket_description: 'Nam a nisl aliquet arcu aliquam aliquam id semper metus.',
-            quantity: '0',
+            quantity: 0,
             price: 120000,
         },
         {
             ticket_id: 2,
-            ticket_name: 'Promo Ticket',
+            ticket_name: 'Ticket Sheila on 7',
             ticket_description: 'Proin imperdiet velit metus, a mattis tellus facilisis id.',
-            quantity: '0',
-            price: 108000,
+            quantity: 0,
+            price: 300000,
         },
     ]);
 
-    const ticketCount = Array.from(Array(ticketOrder.length).keys());
+    //get local storage data
+    React.useEffect(() => {
+        const localBookingDate = window.localStorage.getItem('arrivalDate');
+        setBookingDate(new Date(parseInt(localBookingDate)));
+        const localTicketOrder = window.localStorage.getItem('ticketOrder');
+        setTicketOrder(JSON.parse(localTicketOrder));
+    }, []);
 
-    const totalBill = () => {
-        let total = 0;
-        for (let index = 0; index < ticketOrder.length; index++) {
-            let subtotal = ticketOrder[index].price * ticketOrder[index].quantity;
-            total =+ subtotal;
-        }
-        return total;
+    const handleArrivalDate = (value) => {
+        setBookingDate(value);
+        window.localStorage.setItem('arrivalDate', JSON.stringify(value.getTime()));
     }
 
-    React.useEffect(() => {
-        const totalBill = () => {
-            let total = 0;
-            for (let index = 0; index < ticketOrder.length; index++) {
-                let subtotal = ticketOrder[index].price * ticketOrder[index].quantity;
-                total =+ subtotal;
-            }
-            return total;
-        }
-    })
+    const ticketCount = Array.from(Array(ticketOrder.length).keys());
 
     const addQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
         newArr[index].quantity++; // replace e.target.value with whatever you want to change it to
 
         setTicketOrder(newArr);
+        window.localStorage.setItem('ticketOrder', JSON.stringify(newArr));
     }
     const subQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
@@ -98,7 +94,17 @@ export default function Ticket(props) {
             newArr[index].quantity--; // replace e.target.value with whatever you want to change it to
         }
         setTicketOrder(newArr);
+        window.localStorage.setItem('ticketOrder', JSON.stringify(newArr));
     }
+
+    const [totalBill, setTotalBill] = React.useState(0);
+    React.useEffect(() => {
+            let subtotal = 0;
+            ticketOrder.forEach((ticket, index) => {
+                subtotal += ticket.price * ticket.quantity;
+            });
+            setTotalBill(subtotal)
+    }, [ticketOrder])
 
     const isMounted = useIsMounted();
     return (
@@ -164,9 +170,10 @@ export default function Ticket(props) {
                                         <Calendar
                                             variant='single'
                                             id="calendar-5"
-                                            value={state.date}
-                                            onChange={value => setState({ date: value })}
-                                            disabledDays={['2019/11/15', new Date('2019/11/20')]}
+                                            locale="id-ID"
+                                            value={bookingDate}
+                                            onChange={value => handleArrivalDate(value)}
+                                            minDate={ tomorrow }
                                         />
                                     </Application>
                                 </Card>
@@ -281,7 +288,7 @@ export default function Ticket(props) {
                                                         sx={{
                                                             fontSize: '24px',
                                                             fontWeight: 600
-                                                        }}>{ticketOrder[index].quantity}</Typography>
+                                                        }}>{ticketOrder[index].quantity.toString()}</Typography>
                                                         <Fab
                                                         onClick={() => addQuantityTicket(index)}
                                                         size="small"
@@ -322,18 +329,41 @@ export default function Ticket(props) {
                                             marginTop: '30px',
                                             width: '70%',
                                             display: 'flex',
-                                            justifyContent: 'flex-end',
+                                            justifyContent: 'space-between',
                                         }}>
+                                            <Box
+                                            sx={{
+                                                marginLeft: '10px',
+                                                height: '100%',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justiifyContent: 'center',
+                                                alignItems: 'flex-start',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                }}>
+                                                    arrival date:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '18px',
+                                                    fontWeight: 600,
+                                                }}>
+                                                    {bookingDate.toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                                                </Typography>
+                                            </Box>
                                             <Card
                                             elevation={5}
                                             sx={{
-                                                borderRadius: '10px'
+                                                borderRadius: '30px'
                                             }}>
                                                 <Box
                                                 sx={{
                                                     width: '300px',
                                                     height: '50px',
-                                                    borderRadius: '30px',
                                                     display: 'flex',
                                                     flexDirection: 'row',
                                                     justifyContent: 'space-between',
@@ -341,25 +371,32 @@ export default function Ticket(props) {
                                                 }}>
                                                     <Box
                                                     sx={{
-                                                        marginLeft: '20px',
+                                                        marginLeft: '10px'
                                                     }}>
                                                         <Typography
                                                         sx={{
                                                             fontWeight: 500
-                                                        }}>Rp. {totalBill}</Typography>
+                                                        }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                     </Box>
-                                                    <Button
-                                                    variant='contained'
-                                                    sx={{
-                                                        borderRadius: '10px',
-                                                        height: '100%',
-                                                    }}>
-                                                        <Typography
+                                                    <Link
+                                                    href={route('dataPemesan')}
+                                                    style={{
+                                                        height: '100%'
+                                                    }}
+                                                    >
+                                                        <Button
+                                                        variant='contained'
                                                         sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 600
-                                                        }}>Checkout</Typography>
-                                                    </Button>
+                                                            borderRadius: '30px',
+                                                            height: '100%',
+                                                        }}>
+                                                            <Typography
+                                                            sx={{
+                                                                fontSize: '18px',
+                                                                fontWeight: 600
+                                                            }}>Checkout</Typography>
+                                                        </Button>
+                                                    </Link>
                                                 </Box>
                                             </Card>
                                         </Box>
