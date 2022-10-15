@@ -32,6 +32,10 @@ Route::get('/ticket/data-pemesan', function () {
     return Inertia::render('Ticket/DataPemesan');
 })->name('dataPemesan');
 
+Route::get('/ticket/konfirmasi-pembayaran', function () {
+    return Inertia::render('Ticket/KonfirmasiPembayaran');
+})->name('konfirmasiPembayaran');
+
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

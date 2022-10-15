@@ -66,17 +66,25 @@ export default function Ticket(props) {
         },
     ]);
 
-    //get local storage data
+    //get session storage data
     React.useEffect(() => {
-        const localBookingDate = window.localStorage.getItem('arrivalDate');
-        setBookingDate(new Date(parseInt(localBookingDate)));
-        const localTicketOrder = window.localStorage.getItem('ticketOrder');
-        setTicketOrder(JSON.parse(localTicketOrder));
+        const localBookingDate = window.sessionStorage.getItem('arrivalDate');
+        if (localBookingDate) {
+            setBookingDate(new Date(parseInt(localBookingDate)));
+        } else {
+            //
+        }
+        const localTicketOrder = window.sessionStorage.getItem('ticketOrder');
+        if (localTicketOrder) {
+            setTicketOrder(JSON.parse(localTicketOrder));
+        } else {
+            //
+        }
     }, []);
 
     const handleArrivalDate = (value) => {
         setBookingDate(value);
-        window.localStorage.setItem('arrivalDate', JSON.stringify(value.getTime()));
+        window.sessionStorage.setItem('arrivalDate', JSON.stringify(value.getTime()));
     }
 
     const ticketCount = Array.from(Array(ticketOrder.length).keys());
@@ -86,7 +94,7 @@ export default function Ticket(props) {
         newArr[index].quantity++; // replace e.target.value with whatever you want to change it to
 
         setTicketOrder(newArr);
-        window.localStorage.setItem('ticketOrder', JSON.stringify(newArr));
+        window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
     }
     const subQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
@@ -94,9 +102,8 @@ export default function Ticket(props) {
             newArr[index].quantity--; // replace e.target.value with whatever you want to change it to
         }
         setTicketOrder(newArr);
-        window.localStorage.setItem('ticketOrder', JSON.stringify(newArr));
+        window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
     }
-
     const [totalBill, setTotalBill] = React.useState(0);
     React.useEffect(() => {
             let subtotal = 0;
@@ -378,25 +385,42 @@ export default function Ticket(props) {
                                                             fontWeight: 500
                                                         }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                     </Box>
-                                                    <Link
-                                                    href={route('dataPemesan')}
-                                                    style={{
-                                                        height: '100%'
-                                                    }}
-                                                    >
-                                                        <Button
-                                                        variant='contained'
-                                                        sx={{
-                                                            borderRadius: '30px',
-                                                            height: '100%',
-                                                        }}>
-                                                            <Typography
+
+                                                    {totalBill === 0
+                                                        ?   <Button
+                                                            disabled
+                                                            variant='contained'
                                                             sx={{
-                                                                fontSize: '18px',
-                                                                fontWeight: 600
-                                                            }}>Checkout</Typography>
-                                                        </Button>
-                                                    </Link>
+                                                                borderRadius: '30px',
+                                                                height: '100%',
+                                                            }}>
+                                                                <Typography
+                                                                sx={{
+                                                                    fontSize: '18px',
+                                                                    fontWeight: 600
+                                                                }}>Checkout</Typography>
+                                                            </Button>
+                                                        :   <Link
+                                                            href={route('dataPemesan')}
+                                                            style={{
+                                                                height: '100%'
+                                                            }}
+                                                            >
+                                                                <Button
+                                                                variant='contained'
+                                                                sx={{
+                                                                    borderRadius: '30px',
+                                                                    height: '100%',
+                                                                }}>
+                                                                    <Typography
+                                                                    sx={{
+                                                                        fontSize: '18px',
+                                                                        fontWeight: 600
+                                                                    }}>Checkout</Typography>
+                                                                </Button>
+                                                            </Link>
+                                                    }
+
                                                 </Box>
                                             </Card>
                                         </Box>
