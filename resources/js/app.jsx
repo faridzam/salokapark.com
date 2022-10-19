@@ -8,9 +8,9 @@ import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/inertia-react';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { Provider } from 'react-redux';
-import { persistor, store } from './store';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { Provider } from 'react-redux';
+// import { persistor, store } from './store';
+// import { PersistGate } from 'redux-persist/integration/react';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -21,13 +21,13 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
+            // <Provider store={store}>
+            //     <PersistGate loading={null} persistor={persistor}>
                     <ThemeProvider theme={theme}>
                         <App {...props} />
                     </ThemeProvider>
-                </PersistGate>
-            </Provider>
+            //     </PersistGate>
+            // </Provider>
         );
     },
 });

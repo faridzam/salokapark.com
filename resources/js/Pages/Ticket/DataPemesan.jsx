@@ -14,7 +14,7 @@ export function useIsMounted() {
     const isMounted = React.useCallback(() => isMountedRef.current, []);
 
     React.useEffect(() => {
-      return () => void (isMountedRef.current = false);
+        return () => void (isMountedRef.current = false);
     }, []);
 
     return isMounted;
@@ -52,17 +52,17 @@ export default function Ticket(props) {
         }
     }, []);
 
-    const [name, setName] = React.useState();
+    const [name, setName] = React.useState("");
     const handleNameChange = (value) => {
         setName(value.target.value);
         window.sessionStorage.setItem('customerName', JSON.stringify(value.target.value));
     }
-    const [phone, setPhone] = React.useState();
+    const [phone, setPhone] = React.useState("");
     const handlePhoneChange = (value) => {
         setPhone(value.target.value);
         window.sessionStorage.setItem('customerPhone', JSON.stringify(value.target.value));
     }
-    const [email, setEmail] = React.useState();
+    const [email, setEmail] = React.useState("");
     const [emailTyping, setEmailTyping] = React.useState(true);
     const [emailValid, setEmailValid] = React.useState(true);
     const [emailInvalidMessage, setEmailInvalidMessage] = React.useState('');
@@ -106,7 +106,7 @@ export default function Ticket(props) {
         setEmail(value.target.value);
         window.sessionStorage.setItem('customerEmail', JSON.stringify(value.target.value));
     }
-    const [address, setAddress] = React.useState();
+    const [address, setAddress] = React.useState("");
     const handleAddressChange = (value) => {
         setAddress(value.target.value);
         window.sessionStorage.setItem('customerAddress', JSON.stringify(value.target.value));
@@ -139,7 +139,8 @@ export default function Ticket(props) {
     }, [name, phone, email, emailValid, emailActive, address])
 
     const submit = () => {
-        console.log('submit');
+        let orderID = new Date().getFullYear().toString()+new Date().getMonth().toString()+new Date().getDate().toString()+new Date().getHours().toString()+new Date().getMinutes().toString()+new Date().getSeconds().toString()+new Date().getMilliseconds().toString()+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+        window.sessionStorage.setItem('orderID', JSON.stringify(orderID));
         handleDialogClose();
         Inertia.visit('/ticket/konfirmasi-pembayaran');
     }
