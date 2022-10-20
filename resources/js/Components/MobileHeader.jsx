@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from '@inertiajs/inertia-react';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import {Box, Typography, Button} from '@mui/material';
-import {ConfirmationNumber} from '@mui/icons-material';
+import {Box, Typography} from '@mui/material';
 import {media} from '../assets/images'
 import { useTheme, styled } from "@mui/material/styles";
 

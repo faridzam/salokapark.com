@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Fab, Zoom} from '@mui/material';
 import {KeyboardDoubleArrowUp} from '@mui/icons-material';
-import styles from './ToTopButton.css';
 
 const ToTopButton = () => {
     const [showTopBtn, setShowTopBtn] = useState(false);

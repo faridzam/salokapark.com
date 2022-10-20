@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia'
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import {Box, Paper, Typography, Card, InputAdornment, Button, TextField, Fade, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar} from '@mui/material';
+import {Box, Paper, Typography, Card, InputAdornment, Button, TextField, Fade, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import {AccountCircle, Email, Phone, LocationOn} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
