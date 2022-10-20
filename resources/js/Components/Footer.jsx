@@ -33,7 +33,7 @@ export default function Footer() {
         spacing={0}
         sx={{
             paddingY: '50px',
-            paddingX: '100px',
+            paddingX: '5%',
             display: 'flex',
             justifyContent: 'flex-start',
             alignItems: 'flex-start'
@@ -717,13 +717,13 @@ export default function Footer() {
                             display: 'flex',
                             width: '90%',
                             justifyContent: 'flex-start',
-                            alignItems: 'flex-end',
+                            alignItems: 'center',
                         }}>
                             <Box
                             sx={{
                                 width: '100%',
                                 display: 'flex',
-                                justifyContent: 'flex-end'
+                                justifyContent: 'center'
                             }}>
                                 <Typography
                                 sx={{
@@ -735,16 +735,18 @@ export default function Footer() {
                             </Box>
                             <Box
                             sx={{
-                                marginTop: '10px',
+                                marginTop: '20px',
                                 width: '100%',
+                                maxWidth: '400px',
                                 display: 'flex',
-                                justifyContent: 'flex-end'
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
                             }}>
                                 <Typography
                                 sx={{
                                     textAlign: 'right',
                                     marginRight: '20px',
-                                    fontSize: '20px',
+                                    fontSize: '16px',
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
@@ -754,13 +756,16 @@ export default function Footer() {
                             <Box
                             sx={{
                                 width: '100%',
+                                maxWidth: '400px',
                                 display: 'flex',
-                                justifyContent: 'flex-end'
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
                             }}>
                                 <Typography
                                 sx={{
+                                    textAlign: 'right',
                                     marginRight: '20px',
-                                    fontSize: '20px',
+                                    fontSize: '16px',
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
@@ -770,13 +775,16 @@ export default function Footer() {
                             <Box
                             sx={{
                                 width: '100%',
+                                maxWidth: '400px',
                                 display: 'flex',
-                                justifyContent: 'flex-end'
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
                             }}>
                                 <Typography
                                 sx={{
+                                    textAlign: 'right',
                                     marginRight: '20px',
-                                    fontSize: '20px',
+                                    fontSize: '16px',
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
@@ -786,25 +794,29 @@ export default function Footer() {
                             <Box
                             sx={{
                                 width: '100%',
+                                maxWidth: '400px',
                                 display: 'flex',
-                                justifyContent: 'flex-end'
+                                justifyContent: 'flex-end',
+                                alignItems: 'center',
                             }}>
                                 <Typography
                                 sx={{
+                                    textAlign: 'right',
                                     marginRight: '20px',
-                                    fontSize: '20px',
+                                    fontSize: '16px',
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
                                 >0823-5900-0077</Typography>
                                 <WhatsApp sx={{ color: '#eee'}}/>
                             </Box>
+
                             <Box
                             sx={{
                                 marginTop: '40px',
                                 width: '100%',
                                 display: 'flex',
-                                justifyContent: 'flex-end',
+                                justifyContent: 'center',
                             }}>
                                 <TextField
                                 placeholder="email"
@@ -832,8 +844,8 @@ export default function Footer() {
                                     "& .MuiOutlinedInput-root": {
                                         paddingRight: '0px',
                                         fontFamily: 'AlrightSans',
-                                        fontSize: '22px',
-                                        fontWeight: 700,
+                                        fontSize: '16px',
+                                        fontWeight: 600,
                                     },
                                 }}
                                 InputProps={{
@@ -879,8 +891,8 @@ export default function Footer() {
                         display: 'flex',
                         width: '100%',
                         height: '100%',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-end',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}>
                         <Box
                         sx={{

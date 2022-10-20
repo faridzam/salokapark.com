@@ -64,8 +64,8 @@ export default function Ticket(props) {
     }
     const [email, setEmail] = React.useState("");
     const [emailTyping, setEmailTyping] = React.useState(true);
-    const [emailValid, setEmailValid] = React.useState(true);
-    const [emailInvalidMessage, setEmailInvalidMessage] = React.useState('');
+    const [emailValid, setEmailValid] = React.useState(false);
+    const [emailInvalidMessage, setEmailInvalidMessage] = React.useState('kode booking akan dikirim melalui alamat email!');
     const [emailActive, setEmailActive] = React.useState(false);
     React.useEffect(() => {
         if (initialMountRef.current) {
@@ -174,7 +174,7 @@ export default function Ticket(props) {
                     sx={{
                         marginTop: '100px',
                         display: 'flex',
-                        width: '100%',
+                        maxWidth: '100%',
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
@@ -190,6 +190,8 @@ export default function Ticket(props) {
                         </Box>
                         <Card
                         sx={{
+                            width: '90%',
+                            maxWidth: '500px',
                             marginTop: '50px',
                             padding: '30px',
                             borderRadius: '30px',
@@ -201,11 +203,13 @@ export default function Ticket(props) {
                             sx={{
                                 display: 'flex',
                                 width: '100%',
+                                maxWidth: '500px',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}>
                                 <Box
                                 sx={{
+                                    width: '100%',
                                     padding: '10px',
                                     backgroundColor: '#fafafa',
                                 }}>
@@ -223,7 +227,7 @@ export default function Ticket(props) {
                                     ),
                                     }}
                                     sx={{
-                                        width: '400px'
+                                        width: '100%',
                                     }}
                                     variant="outlined"
                                     />
@@ -231,6 +235,7 @@ export default function Ticket(props) {
 
                                 <Box
                                 sx={{
+                                    width: '100%',
                                     padding: '10px',
                                     backgroundColor: '#fafafa',
                                 }}>
@@ -248,7 +253,7 @@ export default function Ticket(props) {
                                     ),
                                     }}
                                     sx={{
-                                        width: '400px'
+                                        width: '100%',
                                     }}
                                     variant="outlined"
                                     />
@@ -256,6 +261,7 @@ export default function Ticket(props) {
 
                                 <Box
                                 sx={{
+                                    width: '100%',
                                     padding: '10px',
                                     backgroundColor: '#fafafa',
                                 }}>
@@ -275,7 +281,7 @@ export default function Ticket(props) {
                                     ),
                                     }}
                                     sx={{
-                                        width: '400px'
+                                        width: '100%',
                                     }}
                                     variant="outlined"
                                     />
@@ -283,6 +289,7 @@ export default function Ticket(props) {
 
                                 <Box
                                 sx={{
+                                    width: '100%',
                                     padding: '10px',
                                     backgroundColor: '#fafafa',
                                 }}>
@@ -302,7 +309,7 @@ export default function Ticket(props) {
                                     ),
                                     }}
                                     sx={{
-                                        width: '400px'
+                                        width: '100%',
                                     }}
                                     variant="outlined"
                                     />

@@ -20,14 +20,6 @@ const ticketOptionStyles = {
     height: '100%',
 };
 
-const theme = {
-    rainbow: {
-        palette: {
-            brand: '#169870',
-        },
-    },
-};
-
 export function useIsMounted() {
 
     const isMountedRef = React.useRef(true);
@@ -39,6 +31,14 @@ export function useIsMounted() {
 
     return isMounted;
 }
+
+const rainbowTheme = {
+    rainbow: {
+        palette: {
+            brand: '#169870',
+        },
+    },
+};
 
 export default function Ticket(props) {
 
@@ -180,7 +180,7 @@ export default function Ticket(props) {
                                                 Tanggal Kedatangan
                                             </Typography>
                                         </Box>
-                                        <Application theme={theme}>
+                                        <Application theme={rainbowTheme}>
                                             <Calendar
                                                 variant='single'
                                                 id="calendar-5"

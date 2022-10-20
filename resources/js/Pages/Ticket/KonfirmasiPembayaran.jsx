@@ -437,7 +437,8 @@ export default function Ticket(props) {
                         <Paper
                         elevation={5}
                         sx={{
-                            width: '400px',
+                            width: '90%',
+                            maxWidth: '400px',
                             height: '100%',
                             display: 'flex',
                             flexDirection: 'column',
