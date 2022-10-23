@@ -142,57 +142,57 @@ export default function Ticket(props) {
             //
             window.snap.pay(response.data.token);
         }).catch((error) => {
-            axios.post('/api/get-midtrans-transaction-status', {
-                orderID: orderID,
-            }).then((response) => {
-                //
-                switch (response.data.status.payment_type) {
-                    case "echannel":
-                        handleTransactionDialogOpen({
-                            payment_type: "echannel",
-                            bank: "transfer bank - mandiri",
-                            transaction_status: response.data.status.transaction_status,
-                            payment_number_1: response.data.status.bill_key,
-                            payment_number_2: response.data.status.biller_code,
-                            total_bill: response.data.status.gross_amount,
-                        });
-                        break;
+            // axios.post('/api/get-midtrans-transaction-status', {
+            //     orderID: orderID,
+            // }).then((response) => {
+            //     //
+            //     switch (response.data.status.payment_type) {
+            //         case "echannel":
+            //             handleTransactionDialogOpen({
+            //                 payment_type: "echannel",
+            //                 bank: "transfer bank - mandiri",
+            //                 transaction_status: response.data.status.transaction_status,
+            //                 payment_number_1: response.data.status.bill_key,
+            //                 payment_number_2: response.data.status.biller_code,
+            //                 total_bill: response.data.status.gross_amount,
+            //             });
+            //             break;
 
-                    case "bank_transfer":
-                        if (response.data.status.hasOwnProperty('permata_va_number')) {
-                            handleTransactionDialogOpen({
-                                payment_type: "bank_transfer",
-                                bank: "transfer bank - permata",
-                                transaction_status: response.data.status.transaction_status,
-                                payment_number_1: response.data.status.permata_va_number,
-                                total_bill: response.data.status.gross_amount,
-                            });
-                        } else {
-                            handleTransactionDialogOpen({
-                                payment_type: "bank_transfer",
-                                bank: "transfer bank - "+response.data.status.va_numbers[0].bank,
-                                transaction_status: response.data.status.transaction_status,
-                                payment_number_1: response.data.status.va_numbers[0].va_number,
-                                total_bill: response.data.status.gross_amount,
-                            });
-                        }
-                        break;
-                    case "cstore":
-                        handleTransactionDialogOpen({
-                            payment_type: "cstore",
-                            bank: response.data.status.store,
-                            transaction_status: response.data.status.transaction_status,
-                            payment_number_1: response.data.status.payment_code,
-                            total_bill: response.data.status.gross_amount,
-                        });
-                        break;
+            //         case "bank_transfer":
+            //             if (response.data.status.hasOwnProperty('permata_va_number')) {
+            //                 handleTransactionDialogOpen({
+            //                     payment_type: "bank_transfer",
+            //                     bank: "transfer bank - permata",
+            //                     transaction_status: response.data.status.transaction_status,
+            //                     payment_number_1: response.data.status.permata_va_number,
+            //                     total_bill: response.data.status.gross_amount,
+            //                 });
+            //             } else {
+            //                 handleTransactionDialogOpen({
+            //                     payment_type: "bank_transfer",
+            //                     bank: "transfer bank - "+response.data.status.va_numbers[0].bank,
+            //                     transaction_status: response.data.status.transaction_status,
+            //                     payment_number_1: response.data.status.va_numbers[0].va_number,
+            //                     total_bill: response.data.status.gross_amount,
+            //                 });
+            //             }
+            //             break;
+            //         case "cstore":
+            //             handleTransactionDialogOpen({
+            //                 payment_type: "cstore",
+            //                 bank: response.data.status.store,
+            //                 transaction_status: response.data.status.transaction_status,
+            //                 payment_number_1: response.data.status.payment_code,
+            //                 total_bill: response.data.status.gross_amount,
+            //             });
+            //             break;
 
-                    default:
-                        break;
-                }
-            }).catch((error) => {
-                //
-            })
+            //         default:
+            //             break;
+            //     }
+            // }).catch((error) => {
+            //     //
+            // })
         });
     }
 

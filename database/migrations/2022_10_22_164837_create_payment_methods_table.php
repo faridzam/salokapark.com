@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type', ['gopay', 'qris', 'cstore']);
+            $table->enum('type', ['gopay', 'qris', 'cstore', 'credit_card', 'echannel', 'bank_transfer', 'bca_klikpay', 'bca_klikbca', 'bri_epay']);
             $table->string('corporate_name')->nullable();
             $table->timestamps();
         });

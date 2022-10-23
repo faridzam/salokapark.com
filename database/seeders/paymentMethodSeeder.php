@@ -22,7 +22,7 @@ class paymentMethodSeeder extends Seeder
             [
                 'name' => "gopay",
                 'type' => "gopay",
-                'corporate_name' => "goto",
+                'corporate_name' => "Gojek",
             ],
             [
                 'name' => "qris",
@@ -33,6 +33,36 @@ class paymentMethodSeeder extends Seeder
                 'name' => "alfamart",
                 'type' => "cstore",
                 'corporate_name' => "Alfamart",
+            ],
+            [
+                'name' => "indomaret",
+                'type' => "cstore",
+                'corporate_name' => "indomaret",
+            ],
+            [
+                'name' => "transfer bank - bca",
+                'type' => "bank_transfer",
+                'corporate_name' => "BCA",
+            ],
+            [
+                'name' => "transfer bank - bni",
+                'type' => "bank_transfer",
+                'corporate_name' => "BNI",
+            ],
+            [
+                'name' => "transfer bank - bri",
+                'type' => "bank_transfer",
+                'corporate_name' => "BRI",
+            ],
+            [
+                'name' => "transfer bank - mandiri",
+                'type' => "echannel",
+                'corporate_name' => "Bank Mandiri",
+            ],
+            [
+                'name' => "transfer bank - permata",
+                'type' => "bank_transfer",
+                'corporate_name' => "Bank Permata",
             ],
 
         ];

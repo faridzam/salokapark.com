@@ -50,7 +50,7 @@ class MidtransController extends Controller
             };
 
             $dtNow = Carbon::now();
-            $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate));
+            $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate))->endOfDay();
             $expireInMinutes = $bookingDate->diffInMinutes($dtNow->copy());
 
             $params = array(
@@ -78,7 +78,7 @@ class MidtransController extends Controller
 
             $reservation = reservation::find(request('reservationID'));
 
-            if ($reservation->snap_token === NULL) {
+            if (!$reservation->snap_token) {
 
                 $snapToken = \Midtrans\Snap::getSnapToken($params);
                 $reservation->snap_token = $snapToken;
@@ -91,6 +91,7 @@ class MidtransController extends Controller
 
             return response()->json([
                 'token' => $reservation->snap_token,
+
             ]);
         // } catch (\Throwable $th) {
 
@@ -154,7 +155,6 @@ class MidtransController extends Controller
     }
 
     public function midtransNotificationHandler(Request $request) {
-        require_once(dirname(__FILE__) . '/Midtrans.php');
         \Midtrans\Config::$isProduction = $this->isProduction;
         \Midtrans\Config::$serverKey = $this->serverKey;
         $notif = new \Midtrans\Notification();
@@ -163,6 +163,79 @@ class MidtransController extends Controller
         $type = $notif->payment_type;
         $order_id = $notif->order_id;
         $fraud = $notif->fraud_status;
+
+        switch ($type) {
+            case 'gopay':
+                $reservation = reservation::where('order_id', $order_id)
+                ->update([
+                    'payment_method_id' => 1,
+                ]);
+                break;
+            case 'qris':
+                $reservation = reservation::where('order_id', $order_id)
+                ->update([
+                    'payment_method_id' => 2,
+                ]);
+                break;
+            case 'cstore':
+
+                if ($notif->store = 'alfamart') {
+                    $reservation = reservation::where('order_id', $order_id)
+                    ->update([
+                        'payment_method_id' => 3,
+                    ]);
+                } elseif ($notif->store = 'indomaret') {
+                    $reservation = reservation::where('order_id', $order_id)
+                    ->update([
+                        'payment_method_id' => 4,
+                    ]);
+                }
+                break;
+            case 'bank_transfer':
+
+                if ($notif->permata_va_number) {
+                    $reservation = reservation::where('order_id', $order_id)
+                    ->update([
+                        'payment_method_id' => 9,
+                    ]);
+                } elseif ($notif->va_numbers[0]->bank) {
+                    switch ($notif->va_numbers[0]->bank) {
+                        case 'bca':
+                            $reservation = reservation::where('order_id', $order_id)
+                            ->update([
+                                'payment_method_id' => 5,
+                            ]);
+                            break;
+                        case 'bni':
+                            $reservation = reservation::where('order_id', $order_id)
+                            ->update([
+                                'payment_method_id' => 6,
+                            ]);
+                            break;
+                        case 'bri':
+                            $reservation = reservation::where('order_id', $order_id)
+                            ->update([
+                                'payment_method_id' => 7,
+                            ]);
+                            break;
+
+                        default:
+                            # code...
+                            break;
+                    }
+                }
+                break;
+            case 'echannel':
+                $reservation = reservation::where('order_id', $order_id)
+                ->update([
+                    'payment_method_id' => 8,
+                ]);
+                break;
+
+            default:
+                # code...
+                break;
+        }
 
         if ($transaction == 'capture') {
             // For credit card transaction, we need to check whether transaction is challenge by FDS or not

@@ -110,7 +110,17 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function updateStatusReservation(Request $request) {
+    public function getReservationByEmail(Request $request) {
         //
+        $customerIDs = customer::where('email', $request->email)
+        ->pluck('id');
+
+        $reservations = reservation::whereIn('customer_id', $customerIDs)
+        ->get();
+
+        return response()->json([
+            'reservations' => $reservations,
+        ]);
+
     }
 }

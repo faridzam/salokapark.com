@@ -36,6 +36,10 @@ Route::get('/ticket/konfirmasi-pembayaran', function () {
     return Inertia::render('Ticket/KonfirmasiPembayaran');
 })->name('konfirmasiPembayaran');
 
+Route::get('/ticket/check-status', function () {
+    return Inertia::render('Ticket/CheckStatus');
+})->name('checkStatus');
+
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

@@ -380,6 +380,7 @@ export default function Ticket(props) {
                         <Footer/>
                     </Box>
 
+                    {/*
                     <Dialog
                     open={openDialog}
                     onClose={handleDialogClose}
@@ -401,6 +402,7 @@ export default function Ticket(props) {
                             </Button>
                         </DialogActions>
                     </Dialog>
+                    */}
                 </div>
             </Zoom>
         </>
