@@ -26,6 +26,18 @@ export default function Ticket(props) {
 
     //get session storage data
     React.useEffect(() => {
+        const localBookingDate = window.sessionStorage.getItem('arrivalDate');
+        if (localBookingDate) {
+            setBookingDate(new Date(parseInt(localBookingDate)));
+        } else {
+            //
+        }
+        const localTicketOrder = window.sessionStorage.getItem('ticketOrder');
+        if (localTicketOrder) {
+            setTicketOrder(JSON.parse(localTicketOrder));
+        } else {
+            //
+        }
         const localCustomerName = window.sessionStorage.getItem('customerName');
         if (localCustomerName) {
             setName(JSON.parse(localCustomerName));
@@ -52,6 +64,8 @@ export default function Ticket(props) {
         }
     }, []);
 
+    const [bookingDate, setBookingDate] = React.useState( new Date());
+    const [ticketOrder, setTicketOrder] = React.useState();
     const [name, setName] = React.useState("");
     const handleNameChange = (value) => {
         setName(value.target.value);
@@ -64,13 +78,12 @@ export default function Ticket(props) {
     }
     const [email, setEmail] = React.useState("");
     const [emailTyping, setEmailTyping] = React.useState(true);
-    const [emailValid, setEmailValid] = React.useState(false);
+    const [emailValid, setEmailValid] = React.useState(true);
     const [emailInvalidMessage, setEmailInvalidMessage] = React.useState('kode booking akan dikirim melalui alamat email!');
     const [emailActive, setEmailActive] = React.useState(false);
     React.useEffect(() => {
         if (initialMountRef.current) {
             //initialMountRef.current = false;
-            console.log('initial render')
             return;
         } else {
             setEmailTyping(true);
@@ -82,7 +95,6 @@ export default function Ticket(props) {
         if (emailTyping === false) {
             axios.get(`https://emailvalidation.abstractapi.com/v1/?api_key=c028b3d712bd44bbb87a8951748ebf26&email=${email}`)
             .then(response => {
-                console.log(response.data);
                 if (response.data.deliverability === "DELIVERABLE") {
                     setEmailValid(true);
                     setEmailInvalidMessage("email is valid")
@@ -92,7 +104,6 @@ export default function Ticket(props) {
                 }
             })
             .catch(error => {
-                console.log(error);
                 setEmailInvalidMessage("check email validation failed!")
             });
         } else {
@@ -134,13 +145,28 @@ export default function Ticket(props) {
         } else {
             setCanSubmit(true)
         }
-        console.log(submitConditionsArray)
-        console.log(canSubmit)
     }, [name, phone, email, emailValid, emailActive, address])
 
     const submit = () => {
         let orderID = new Date().getFullYear().toString()+new Date().getMonth().toString()+new Date().getDate().toString()+new Date().getHours().toString()+new Date().getMinutes().toString()+new Date().getSeconds().toString()+new Date().getMilliseconds().toString()+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
         window.sessionStorage.setItem('orderID', JSON.stringify(orderID));
+
+        axios.post('/api/create-reservation', {
+            orderID: orderID,
+            name: name,
+            phone: phone,
+            email: email,
+            address: address,
+            bookingDate: bookingDate,
+            ticketOrder: ticketOrder,
+        }).then((response) => {
+            //
+            window.sessionStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
+        }).catch((error) => {
+            //
+            console.log(error)
+        })
+
         handleDialogClose();
         Inertia.visit('/ticket/konfirmasi-pembayaran');
     }

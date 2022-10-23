@@ -87,7 +87,6 @@ export default function Welcome(props) {
 
     const scrollToRef = (refProp) => {
         refProp.current.scrollIntoView({behavior: 'smooth'});
-        console.log(refProp.current);
     };
 
     const mapsProps = {
@@ -111,9 +110,9 @@ export default function Welcome(props) {
             credentials: 'same-origin',
             crossdomain: true,
         }).then((response) => {
-            console.log(response);
+            //
         }).catch((e) => {
-            console.log(e);
+            //
         });
     }, [tempLopait] );
 

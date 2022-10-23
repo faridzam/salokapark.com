@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ticket extends Model
+class reservation_detail extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'id',
-        'name',
-        'price',
+        'reservation_id',
+        'ticket_distribution_id',
+        'qty',
+        'subtotal',
     ];
 
 }

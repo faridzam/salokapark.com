@@ -24,6 +24,7 @@ export default function Ticket(props) {
     const isMounted = useIsMounted();
 
     const [bookingDate, setBookingDate] = React.useState( new Date());
+    const [reservationID, setReservationID] = React.useState();
     const [ticketOrder, setTicketOrder] = React.useState([
         {
             ticket_id: 1,
@@ -48,6 +49,12 @@ export default function Ticket(props) {
 
     //get session storage data
     React.useEffect(() => {
+        const localReservationID = window.sessionStorage.getItem('reservationID');
+        if (localReservationID) {
+            setReservationID(JSON.parse(localReservationID));
+        } else {
+            //
+        }
         const localOrderID = window.sessionStorage.getItem('orderID');
         if (localOrderID) {
             setOrderID(JSON.parse(localOrderID));
@@ -122,6 +129,7 @@ export default function Ticket(props) {
     const [orderID, setOrderID] = React.useState(0);
     const snapPay = () => {
         axios.post('/api/get-midtrans-token', {
+            reservationID: reservationID,
             orderID: orderID,
             bookingDate: bookingDate,
             ticketOrder: ticketOrder,

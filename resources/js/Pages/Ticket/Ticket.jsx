@@ -8,6 +8,7 @@ import {Add, Remove} from '@mui/icons-material';
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
 import { Application, Calendar } from 'react-rainbow-components';
+import axios from 'axios';
 
 const calendarContainerStyles = {
     padding: '30px',
@@ -53,22 +54,7 @@ export default function Ticket(props) {
     const [bookingDate, setBookingDate] = React.useState(tomorrow);
 
     // ticket section
-    const [ticketOrder, setTicketOrder] = React.useState([
-        {
-            ticket_id: 1,
-            ticket_name: 'Regular Weekdays Ticket',
-            ticket_description: 'Nam a nisl aliquet arcu aliquam aliquam id semper metus.',
-            quantity: 0,
-            price: 120000,
-        },
-        {
-            ticket_id: 2,
-            ticket_name: 'Ticket Sheila on 7',
-            ticket_description: 'Proin imperdiet velit metus, a mattis tellus facilisis id.',
-            quantity: 0,
-            price: 300000,
-        },
-    ]);
+    const [ticketOrder, setTicketOrder] = React.useState([]);
 
     //get session storage data
     React.useEffect(() => {
@@ -78,14 +64,52 @@ export default function Ticket(props) {
         } else {
             //
         }
+    }, []);
+    React.useEffect(() => {
         const localTicketOrder = window.sessionStorage.getItem('ticketOrder');
         if (localTicketOrder) {
-            setTicketOrder(JSON.parse(localTicketOrder));
+            window.sessionStorage.removeItem('ticketOrder');
+            getTicketByDate(bookingDate);
         } else {
-            //
+            getTicketByDate(bookingDate);
         }
-    }, []);
+    }, [bookingDate]);
 
+    const getTicketByDate = (date) => {
+        axios.post('/api/get-ticket-date', {
+            date: date
+        }).then((response) => {
+            //
+            let eventTicket = response.data.ticketEvent;
+            let regulerTicket = response.data.ticketReguler;
+            let newTicket = [];
+
+            for (let index = 0; index < eventTicket.length; index++) {
+                newTicket.push({
+                    ticket_id: eventTicket[index].id,
+                    ticket_name: eventTicket[index].name,
+                    ticket_description: eventTicket[index].description,
+                    quantity: 0,
+                    price: eventTicket[index].price,
+                })
+            }
+
+            for (let index = 0; index < regulerTicket.length; index++) {
+                newTicket.push({
+                    ticket_id: regulerTicket[index].id,
+                    ticket_name: regulerTicket[index].name,
+                    ticket_description: regulerTicket[index].description,
+                    quantity: 0,
+                    price: regulerTicket[index].price,
+                })
+            }
+
+            setTicketOrder(newTicket);
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }
     const handleArrivalDate = (value) => {
         setBookingDate(value);
         window.sessionStorage.setItem('arrivalDate', JSON.stringify(value.getTime()));

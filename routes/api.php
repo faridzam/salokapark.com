@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\MidtransController;
+use App\Http\Controllers\API\TicketController;
+use App\Http\Controllers\API\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('get-midtrans-token', [MidtransController::class, 'getTransactionToken']);
 Route::post('get-midtrans-transaction-status', [MidtransController::class, 'getMidtransTransactionStatus']);
 Route::post('cancel-midtrans-transaction', [MidtransController::class, 'cancelMidtransTransaction']);
+Route::post('notification-handler', [MidtransController::class, 'midtransNotificationHandler']);
+
+//Ticket
+Route::post('get-ticket-date', [TicketController::class, 'getTicketDate']);
+Route::post('create-reservation', [ReservationController::class, 'createReservation']);

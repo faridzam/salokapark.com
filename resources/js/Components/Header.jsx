@@ -7,6 +7,7 @@ import {media} from '../assets/images'
 import { useTheme, styled } from "@mui/material/styles";
 
 import './header.css';
+import { Inertia } from '@inertiajs/inertia';
 
 const NavbarMenu = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -30,6 +31,11 @@ export default function Header() {
 
     const [drawerState, setDrawerState] = React.useState(false);
     const theme = useTheme();
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
+
     return(
 
         // header
@@ -271,7 +277,8 @@ export default function Header() {
                         paddingX: '20px',
                     }}>
                         <ListItem key="home">
-                            <ListItemButton>
+                            <ListItemButton
+                            onClick={() => redirect('/')}>
                                 <ListItemText primary="Home" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
