@@ -53,17 +53,15 @@ export default function Header() {
                 display: 'flex',
                 flexDirection: 'row',
             }}>
-                <Link
-                href={route('welcome')}
-                >
-                    <Box
-                    sx={{
-                        marginLeft: '50px',
-                        cursor: 'pointer',
-                    }}>
-                        <img src={media[0]} alt="logo saloka" width={150} height={75}></img>
-                    </Box>
-                </Link>
+
+                <Box
+                onClick={() => redirect('/')}
+                sx={{
+                    marginLeft: '50px',
+                    cursor: 'pointer',
+                }}>
+                    <img src={media[0]} alt="logo saloka" width={150} height={75}></img>
+                </Box>
 
                 <NavbarMenu>
                 <Grid
@@ -226,31 +224,28 @@ export default function Header() {
                 <Box
                 sx={{
                 }}>
-                    <Link
-                        href={route('ticket')}
-                    >
-                        <Button
-                        className="ticket-cta-button"
-                        variant="contained"
-                        sx={{
+                    <Button
+                    onClick={() => redirect('/ticket')}
+                    className="ticket-cta-button"
+                    variant="contained"
+                    sx={{
+                        backgroundColor: 'red.light',
+                        height: '50px',
+                        marginRight: '50px',
+                        borderRadius: '10px',
+                        '&:hover': {
                             backgroundColor: 'red.light',
-                            height: '50px',
-                            marginRight: '50px',
-                            borderRadius: '10px',
-                            '&:hover': {
-                                backgroundColor: 'red.light',
-                            },
-                        }}
-                        >
-                            <ConfirmationNumber/>
-                            <Typography
-                            sx={{
-                                fontFamily: 'AlrightSans',
-                                marginLeft: '10px',
-                                fontWeight: 700
-                            }}>TICKET!</Typography>
-                        </Button>
-                    </Link>
+                        },
+                    }}
+                    >
+                        <ConfirmationNumber/>
+                        <Typography
+                        sx={{
+                            fontFamily: 'AlrightSans',
+                            marginLeft: '10px',
+                            fontWeight: 700
+                        }}>TICKET!</Typography>
+                    </Button>
 
                 </Box>
             </NavbarMenu>
