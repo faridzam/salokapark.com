@@ -801,6 +801,31 @@ export default function Ticket(props) {
                                                 </Box>
                                             </Card>
                                         </Box>
+                                        <Box
+                                        sx={{
+                                            marginTop: '30px',
+                                            width: '90%',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                        }}>
+                                            <Typography
+                                            sx={{
+                                                fontSize: '15px',
+                                            }}>
+                                            *telah melakukan reservasi? cek status reservasi
+                                                <a
+                                                className='noselect'
+                                                onClick={() => redirect('/ticket/check-status')}
+                                                style={{
+                                                    marginLeft: '5px',
+                                                    fontSize: '15px',
+                                                    color: 'blue.light',
+                                                    textDecoration: 'underline',
+                                                    cursor: 'pointer',
+                                                }}>
+                                                di sini</a>
+                                            </Typography>
+                                        </Box>
                                     </Box>
                                 </Card>
                             </Grid>
