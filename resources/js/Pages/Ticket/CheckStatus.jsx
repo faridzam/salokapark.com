@@ -28,7 +28,12 @@ export default function CheckStatus(props) {
 
     const [email, setEmail] = React.useState();
     const [reservation, setReservation] = React.useState([]);
-    const [selectedReservation, setSelectedReservation] = React.useState();
+    const [selectedReservation, setSelectedReservation] = React.useState({
+        id: 0,
+        bill: 0,
+        status: '',
+    });
+    const [selectedReservationDetail, setSelectedReservationDetail] = React.useState();
 
     const reservationCount = Array.from(Array(reservation.length).keys());
 
@@ -62,7 +67,191 @@ export default function CheckStatus(props) {
 
     const selectReservation = (id) => {
         //
-        setSelectedReservation(id);
+        setSelectedReservation({
+            id: id,
+            bill: 0,
+            status: '',
+        });
+        axios.post('/api/get-reservation-detail', {
+            id: id
+        }).then((response) => {
+            //
+
+            let reservation = response.data.reservation;
+            let customer = response.data.customer;
+            let reservationDetail = response.data.reservationDetail;
+            let newReservationDetail = [];
+
+            setSelectedReservation({
+                id: reservation.id,
+                snap_token: reservation.snap_token,
+                order_id: reservation.order_id,
+                arrival_date: reservation.arrival_date,
+                bill: reservation.bill,
+                status: reservation.status,
+                name: customer.name,
+            });
+
+            for (let index = 0; index < reservationDetail.length; index++) {
+                newReservationDetail.push({
+                    name: reservationDetail[index].name,
+                    qty: reservationDetail[index].qty,
+                    subtotal: reservationDetail[index].subtotal,
+                })
+            }
+
+            setSelectedReservationDetail(newReservationDetail);
+
+
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+
+    }
+
+    const renderCurrentStatus = (status) => {
+        switch (status) {
+            case "created":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                    }}>
+                        Created
+                    </Typography>
+                </Box>;
+                break;
+            case "payment":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                    }}>
+                        Payments
+                    </Typography>
+                </Box>;
+                break;
+            case "pending":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                    }}>
+                        Pending
+                    </Typography>
+                </Box>;
+                break;
+            case "settlement":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                        color: 'primary.light',
+                    }}>
+                        Success
+                    </Typography>
+                </Box>;
+                break;
+            case "capture":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                        color: 'primary.light',
+                    }}>
+                        Captured
+                    </Typography>
+                </Box>;
+                break;
+            case "deny":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                        color: 'red.main',
+                    }}>
+                        Denied
+                    </Typography>
+                </Box>;
+                break;
+            case "cancle":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                        color: 'red.main',
+                    }}>
+                        Canceled
+                    </Typography>
+                </Box>;
+                break;
+            case "expire":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                        color: 'red.main',
+                    }}>
+                        Expired
+                    </Typography>
+                </Box>;
+                break;
+            case "failure":
+                return <Box>
+                    <Typography
+                    sx={{
+                        fontSize: '28px',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                        color: 'red.main',
+                    }}>
+                        Failure
+                    </Typography>
+                </Box>;
+                break;
+            default:
+                return null;
+        }
+    };
+
+    React.useEffect(() => {
+        //change this to the script source you want to load, for example this is snap.js sandbox env
+        const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
+        //change this according to your client-key
+        const myMidtransClientKey = 'SB-Mid-client-nxEqAslc-ufQu9az';
+
+        let scriptTag = document.createElement('script');
+        scriptTag.src = midtransScriptUrl;
+        // optional if you want to set script attribute
+        // for example snap.js have data-client-key attribute
+        scriptTag.setAttribute('data-client-key', myMidtransClientKey);
+
+        document.body.appendChild(scriptTag);
+        return () => {
+            document.body.removeChild(scriptTag);
+        }
+    }, []);
+
+    const snapPay = (token) => {
+        //
+        window.snap.pay(token);
     }
 
     return (
@@ -229,7 +418,7 @@ export default function CheckStatus(props) {
                                     }}>
                                         <Card
                                         elevation={2}
-                                        className={`reservation-container ${selectedReservation ===  reservation[index].id ? styles.reservationContainerActive : ""} `}
+                                        className={`reservation-container ${selectedReservation.id ===  reservation[index].id ? styles.reservationContainerActive : ""} `}
                                         onClick={() => selectReservation(reservation[index].id)}
                                         sx={{
                                             display: 'flex',
@@ -314,33 +503,156 @@ export default function CheckStatus(props) {
                             borderRadius: '30px',
                         }}>
                             {
-                                selectedReservation
+                                selectedReservation.id !== 0
                                 ?
                                 <Grid
                                 container={true}
-                                direction="row"
+                                direction="column"
                                 spacing={0}
                                 sx={{
                                     display: 'flex',
                                     width: '100%',
                                     justifyContent: 'center',
-                                    alignItems: 'flex-start',
+                                    alignItems: 'center',
                                 }}>
                                     <Box
                                     sx={{
                                         marginTop: '20px',
-                                        width: '100%',
+                                        width: '50%',
+                                        height: '100px',
                                         display: 'flex',
+                                        flexDirection: 'column',
                                         justifyContent: 'center',
+                                        alignItems: 'center',
+                                        backgroundColor: '#ddd',
+                                        borderRadius: '30px',
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontSize: '24px',
-                                            fontWeight: 600
+                                            fontSize: '14px',
+                                            fontWeight: 600,
+                                            textAlign: 'center',
                                         }}>
-                                            id :
+                                            status:
+                                        </Typography>
+                                        {renderCurrentStatus(selectedReservation.status)}
+                                    </Box>
+
+                                    <Box
+                                    sx={{
+                                        marginTop: '40px',
+                                        width: '70%',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: 600,
+                                            textAlign: 'left',
+                                        }}>
+                                            order ID:
+                                        </Typography>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: 400,
+                                            textAlign: 'right',
+                                        }}>
+                                            {selectedReservation.order_id}
                                         </Typography>
                                     </Box>
+
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '70%',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: 600,
+                                            textAlign: 'left',
+                                        }}>
+                                            name:
+                                        </Typography>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: 400,
+                                            textAlign: 'right',
+                                        }}>
+                                            {selectedReservation.name}
+                                        </Typography>
+                                    </Box>
+
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '70%',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: 600,
+                                            textAlign: 'left',
+                                        }}>
+                                            arrival date:
+                                        </Typography>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: 400,
+                                            textAlign: 'right',
+                                        }}>
+                                            {selectedReservation.arrival_date}
+                                        </Typography>
+                                    </Box>
+
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '70%',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: 600,
+                                            textAlign: 'left',
+                                        }}>
+                                            bill:
+                                        </Typography>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '14px',
+                                            fontWeight: 400,
+                                            textAlign: 'right',
+                                        }}>
+                                            Rp. {selectedReservation.bill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                        </Typography>
+                                    </Box>
+
+                                    <Box
+                                    sx={{
+                                        marginY: '20px',
+                                    }}>
+                                        <Button
+                                        onClick={() => snapPay(selectedReservation.snap_token)}
+                                        className='payButton'
+                                        id="pay-button"
+                                        variant="contained"
+                                        sx={{
+                                            borderRadius: '30px',
+                                        }}
+                                        >Bayar</Button>
+                                    </Box>
+
                                 </Grid>
                                 :
                                 <Box

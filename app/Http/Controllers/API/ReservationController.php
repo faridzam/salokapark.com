@@ -116,11 +116,31 @@ class ReservationController extends Controller
         ->pluck('id');
 
         $reservations = reservation::whereIn('customer_id', $customerIDs)
+        ->where('status', '!=', 'created')
         ->get();
 
         return response()->json([
             'reservations' => $reservations,
         ]);
 
+    }
+
+    public function getReservationDetail(Request $request) {
+
+        $reservation = reservation::find($request->id);
+        $reservationDetail = reservation_detail::where('reservation_id', $request->id)->get();
+        $customer = customer::find($reservation->customer_id);
+
+        foreach ($reservationDetail as $key =>$value) {
+            $ticketDistribution = ticket_distribution::find($value->ticket_distribution_id);
+            $ticket = ticket::find($ticketDistribution->ticket_id);
+            $value->name = $ticket->name;
+        }
+
+        return response()->json([
+            'reservation' => $reservation,
+            'reservationDetail' => $reservationDetail,
+            'customer' => $customer,
+        ]);
     }
 }

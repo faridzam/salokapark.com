@@ -207,31 +207,31 @@ export default function Ticket(props) {
         message: '',
     })
 
-    const handleTransactionDialogOpen = (params) => {
-        setTransactionStatusDialog({
-            open: true,
-            payment_type: params.payment_type,
-            bank: params.bank,
-            payment_number_1: params.payment_number_1,
-            payment_number_2: params.payment_number_2,
-            total_bill: params.total_bill,
-            transaction_status: params.transaction_status,
-            message: params.message,
-        });
-      };
+    // const handleTransactionDialogOpen = (params) => {
+    //     setTransactionStatusDialog({
+    //         open: true,
+    //         payment_type: params.payment_type,
+    //         bank: params.bank,
+    //         payment_number_1: params.payment_number_1,
+    //         payment_number_2: params.payment_number_2,
+    //         total_bill: params.total_bill,
+    //         transaction_status: params.transaction_status,
+    //         message: params.message,
+    //     });
+    //   };
 
-      const handleTransactionDialogClose = () => {
-        setTransactionStatusDialog({
-            open: false,
-            payment_type: '',
-            bank: '',
-            payment_number_1: '',
-            payment_number_2: '',
-            total_bill: 0,
-            transaction_status: '',
-            message: '',
-        });
-    };
+    //   const handleTransactionDialogClose = () => {
+    //     setTransactionStatusDialog({
+    //         open: false,
+    //         payment_type: '',
+    //         bank: '',
+    //         payment_number_1: '',
+    //         payment_number_2: '',
+    //         total_bill: 0,
+    //         transaction_status: '',
+    //         message: '',
+    //     });
+    // };
 
     const handleCancelTransaction = () => {
         setTransactionStatusDialog({
@@ -287,7 +287,8 @@ export default function Ticket(props) {
 
                 <div>
 
-                    {/* dialog */}
+                    {/*
+
                     <Dialog
                         open={transactionStatusDialog.open}
                         onClose={handleTransactionDialogClose}
@@ -426,6 +427,8 @@ export default function Ticket(props) {
                         <Button variant='outlined' onClick={handleTransactionDialogClose}>tutup</Button>
                         </DialogActions>
                     </Dialog>
+
+                    */}
 
                     {/* header */}
                     <Header/>
