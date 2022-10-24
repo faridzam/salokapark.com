@@ -10,6 +10,9 @@ import {media} from '../../assets/images';
 import { Application, Calendar } from 'react-rainbow-components';
 import axios from 'axios';
 
+import styles from "../../styles/index.css";
+import { Inertia } from '@inertiajs/inertia';
+
 const calendarContainerStyles = {
     padding: '30px',
     width: '100%',
@@ -46,6 +49,11 @@ export default function Ticket(props) {
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
+
+    // redirect function
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     // booking date
     const today = new Date()
@@ -455,6 +463,30 @@ export default function Ticket(props) {
 
                                                     </Box>
                                                 </Card>
+                                            </Box>
+                                            <Box
+                                            sx={{
+                                                marginTop: '30px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'flex-end',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '15px'
+                                                }}>
+                                                *telah melakukan reservasi? cek status reservasi</Typography>
+                                                <Typography
+                                                className='noselect'
+                                                onClick={() => redirect('/ticket/check-status')}
+                                                sx={{
+                                                    marginLeft: '5px',
+                                                    fontSize: '15px',
+                                                    color: 'blue.light',
+                                                    textDecoration: 'underline',
+                                                    cursor: 'pointer',
+                                                }}>
+                                                di sini</Typography>
                                             </Box>
                                         </Box>
                                     </Card>
