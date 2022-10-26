@@ -236,6 +236,51 @@ export default function CheckStatus(props) {
         }
     };
 
+    const selectedReservationByOrderID = (order_id) => {
+        setSelectedReservation({
+            id: 0,
+            bill: 0,
+            status: '',
+        });
+        axios.post('/api/get-reservation-by-order-id', {
+            orderID: order_id
+        }).then((response) => {
+            //
+
+            let reservation = response.data.reservation;
+            let customer = response.data.customer;
+            let reservationDetail = response.data.reservationDetail;
+            let newReservationDetail = [];
+
+            setSelectedReservation({
+                id: reservation.id,
+                snap_token: reservation.snap_token,
+                order_id: reservation.order_id,
+                arrival_date: reservation.arrival_date,
+                bill: reservation.bill,
+                status: reservation.status,
+                name: customer.name,
+            });
+
+            for (let index = 0; index < reservationDetail.length; index++) {
+                newReservationDetail.push({
+                    name: reservationDetail[index].name,
+                    qty: reservationDetail[index].qty,
+                    subtotal: reservationDetail[index].subtotal,
+                })
+            }
+
+            setSelectedReservationDetail(newReservationDetail);
+
+
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }
+
+
+
     React.useEffect(() => {
         //change this to the script source you want to load, for example this is snap.js sandbox env
         const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
@@ -251,6 +296,19 @@ export default function CheckStatus(props) {
         document.body.appendChild(scriptTag);
         return () => {
             document.body.removeChild(scriptTag);
+        }
+    }, []);
+    React.useEffect(() => {
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let orderID = params.get('order_id');
+
+        if (orderID) {
+            try {
+                selectedReservationByOrderID(orderID);
+            } catch (error) {
+                console.log(error)
+            }
         }
     }, []);
 

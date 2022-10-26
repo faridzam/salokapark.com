@@ -18,15 +18,15 @@ use Inertia\Inertia;
 Route::get('/', function () {
 
     //only ticket
-    return Inertia::location('https://webdev.salokapark.com/ticket');
+    // return Inertia::location('https://webdev.salokapark.com/ticket');
 
     //whole site
-    // return Inertia::render('Welcome', [
-    //     'canLogin' => Route::has('login'),
-    //     'canRegister' => Route::has('register'),
-    //     'laravelVersion' => Application::VERSION,
-    //     'phpVersion' => PHP_VERSION,
-    // ]);
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 })->name('welcome');
 
 Route::get('/ticket', function () {
@@ -40,6 +40,10 @@ Route::get('/ticket/data-pemesan', function () {
 Route::get('/ticket/konfirmasi-pembayaran', function () {
     return Inertia::render('Ticket/KonfirmasiPembayaran');
 })->name('konfirmasiPembayaran');
+
+Route::get('/ticket/finished-transaction', function () {
+    return Inertia::render('Ticket/FinishedTransaction');
+})->name('finishedTransaction');
 
 Route::get('/ticket/check-status', function () {
     return Inertia::render('Ticket/CheckStatus');

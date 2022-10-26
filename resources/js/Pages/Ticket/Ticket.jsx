@@ -59,7 +59,7 @@ export default function Ticket(props) {
     const today = new Date()
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
-    const [bookingDate, setBookingDate] = React.useState(tomorrow);
+    const [bookingDate, setBookingDate] = React.useState(today);
 
     // ticket section
     const [ticketOrder, setTicketOrder] = React.useState([]);
@@ -219,7 +219,7 @@ export default function Ticket(props) {
                                                 locale="id-ID"
                                                 value={bookingDate}
                                                 onChange={value => handleArrivalDate(value)}
-                                                minDate={ tomorrow }
+                                                minDate={ today }
                                             />
                                         </Application>
                                     </Card>

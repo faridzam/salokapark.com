@@ -108,7 +108,6 @@ export default function Ticket(props) {
             setTotalBill(subtotal)
     }, [ticketOrder])
 
-
     React.useEffect(() => {
         //change this to the script source you want to load, for example this is snap.js sandbox env
         const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';

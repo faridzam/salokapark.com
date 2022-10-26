@@ -306,7 +306,8 @@ export default function Header() {
                         <Divider/>
 
                         <ListItem key="ticket">
-                            <ListItemButton>
+                            <ListItemButton
+                            onClick={() => redirect('/ticket')}>
                                 <ListItemText primary="Ticket" sx={{textAlign: 'center', color: 'red.light'}}/>
                             </ListItemButton>
                         </ListItem>

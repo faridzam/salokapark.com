@@ -18,6 +18,7 @@ export function useIsMounted() {
     }, []);
 
     return isMounted;
+
 }
 
 export default function Ticket(props) {
@@ -87,25 +88,32 @@ export default function Ticket(props) {
             return;
         } else {
             setEmailTyping(true);
-            const timeoutId = setTimeout(() => setEmailTyping(false), 3000);
+            const timeoutId = setTimeout(() => setEmailTyping(false), 2000);
             return () => clearTimeout(timeoutId);
         }
     }, [email]);
     React.useEffect(() => {
         if (emailTyping === false) {
-            axios.get(`https://emailvalidation.abstractapi.com/v1/?api_key=c028b3d712bd44bbb87a8951748ebf26&email=${email}`)
-            .then(response => {
-                if (response.data.deliverability === "DELIVERABLE") {
-                    setEmailValid(true);
-                    setEmailInvalidMessage("email is valid")
-                } else {
-                    setEmailValid(false);
-                    setEmailInvalidMessage("email is invalid!")
-                }
-            })
-            .catch(error => {
-                setEmailInvalidMessage("check email validation failed!")
-            });
+            // axios.get(`https://emailvalidation.abstractapi.com/v1/?api_key=c028b3d712bd44bbb87a8951748ebf26&email=${email}`)
+            // .then(response => {
+            //     if (response.data.deliverability === "DELIVERABLE") {
+            //         setEmailValid(true);
+            //         setEmailInvalidMessage("email is valid")
+            //     } else {
+            //         setEmailValid(false);
+            //         setEmailInvalidMessage("email is invalid!")
+            //     }
+            // })
+            // .catch(error => {
+            //     setEmailInvalidMessage("check email validation failed!")
+            // });
+            if (email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                setEmailValid(true);
+                setEmailInvalidMessage("email format is valid")
+            } else {
+                setEmailValid(false);
+                setEmailInvalidMessage("email format is not valid")
+            }
         } else {
             //
         }
@@ -148,7 +156,7 @@ export default function Ticket(props) {
     }, [name, phone, email, emailValid, emailActive, address])
 
     const submit = () => {
-        let orderID = new Date().getFullYear().toString()+new Date().getMonth().toString()+new Date().getDate().toString()+new Date().getHours().toString()+new Date().getMinutes().toString()+new Date().getSeconds().toString()+new Date().getMilliseconds().toString()+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
+        let orderID = new Date().getFullYear().toString()+new Date().getMonth().toString()+new Date().getDate().toString()+new Date().getMinutes().toString()+new Date().getMilliseconds().toString()+(Math.floor(Math.random() * 10) + 10).toString().substring(1);
         window.sessionStorage.setItem('orderID', JSON.stringify(orderID));
 
         axios.post('/api/create-reservation', {
@@ -244,7 +252,7 @@ export default function Ticket(props) {
                                     onChange={value => handleNameChange(value)}
                                     autoComplete='off'
                                     label="Nama"
-                                    placeholder='Ahmad Farid Imam Zamani'
+                                    placeholder='nama'
                                     InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -270,7 +278,7 @@ export default function Ticket(props) {
                                     onChange={value => handlePhoneChange(value)}
                                     autoComplete='off'
                                     label="Nomor Telepon"
-                                    placeholder='08993011870'
+                                    placeholder='08123456789'
                                     InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -296,7 +304,7 @@ export default function Ticket(props) {
                                     onChange={value => handleEmailChange(value)}
                                     autoComplete='off'
                                     label="Email"
-                                    placeholder='zamtechcorp@gmail.com'
+                                    placeholder='yourname@mail.com'
                                     helperText={emailInvalidMessage}
                                     error={!emailValid}
                                     InputProps={{

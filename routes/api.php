@@ -34,4 +34,5 @@ Route::post('get-ticket-date', [TicketController::class, 'getTicketDate']);
 //Reservation
 Route::post('create-reservation', [ReservationController::class, 'createReservation']);
 Route::post('get-reservation-by-email', [ReservationController::class, 'getReservationByEmail']);
+Route::post('get-reservation-by-order-id', [ReservationController::class, 'getReservationByOrderID']);
 Route::post('get-reservation-detail', [ReservationController::class, 'getReservationDetail']);

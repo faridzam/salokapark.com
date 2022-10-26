@@ -143,4 +143,23 @@ class ReservationController extends Controller
             'customer' => $customer,
         ]);
     }
+
+    public function getReservationByOrderID(Request $request) {
+        //
+        $reservation = reservation::where('order_id', $request->orderID)->first();
+        $reservationDetail = reservation_detail::where('reservation_id', $request->orderID)->get();
+        $customer = customer::find($reservation->customer_id);
+
+        foreach ($reservationDetail as $key =>$value) {
+            $ticketDistribution = ticket_distribution::find($value->ticket_distribution_id);
+            $ticket = ticket::find($ticketDistribution->ticket_id);
+            $value->name = $ticket->name;
+        }
+
+        return response()->json([
+            'reservation' => $reservation,
+            'reservationDetail' => $reservationDetail,
+            'customer' => $customer,
+        ]);
+    }
 }

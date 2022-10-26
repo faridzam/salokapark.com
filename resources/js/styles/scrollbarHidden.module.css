@@ -1,0 +1,8 @@
+.stickyNavbar{
+    -ms-overflow-style: none;
+    scrollbar-color: transparent transparent;
+    scrollbar-width: none;
+}
+.stickyNavbar::-webkit-scrollbar {
+    display: none;
+}

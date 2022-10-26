@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('reservation_option_id')->default(1);
             $table->string('snap_token')->nullable();
             $table->string('order_id');
+            $table->string('kode_booking')->nullable();
             $table->date('arrival_date')->nullable();
             $table->double('bill');
             $table->enum('status', ['created', 'payment', 'pending', 'settlement', 'capture', 'deny', 'cancel', 'expire', 'failure']);

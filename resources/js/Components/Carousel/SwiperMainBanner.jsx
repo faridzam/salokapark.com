@@ -47,14 +47,14 @@ export default function App() {
                     objectFit: 'cover',
                     objectPosition: 'top',
                     width: '100%',
-                    minHeight: '85vh',
+                    minHeight: '30vh',
                 }}></img>
             </Box>
         </SwiperSlide>
         <SwiperSlide>
             <Box
             sx={{
-                maxHeight: '85vh',
+                maxHeight: '30vh',
                 cursor: 'pointer',
             }}>
                 <img
