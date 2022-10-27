@@ -79,7 +79,7 @@ export default function Ticket(props) {
     }
     const [email, setEmail] = React.useState("");
     const [emailTyping, setEmailTyping] = React.useState(true);
-    const [emailValid, setEmailValid] = React.useState(true);
+    const [emailValid, setEmailValid] = React.useState(false);
     const [emailInvalidMessage, setEmailInvalidMessage] = React.useState('kode booking akan dikirim melalui alamat email!');
     const [emailActive, setEmailActive] = React.useState(false);
     React.useEffect(() => {
@@ -88,7 +88,7 @@ export default function Ticket(props) {
             return;
         } else {
             setEmailTyping(true);
-            const timeoutId = setTimeout(() => setEmailTyping(false), 2000);
+            const timeoutId = setTimeout(() => setEmailTyping(false), 500);
             return () => clearTimeout(timeoutId);
         }
     }, [email]);
