@@ -117,6 +117,8 @@ class FrontEndReservationController extends Controller
 
         $reservations = reservation::whereIn('customer_id', $customerIDs)
         ->where('status', '!=', 'created')
+        ->orderBy('created_at', 'desc')
+        ->limit(5)
         ->get();
 
         return response()->json([
