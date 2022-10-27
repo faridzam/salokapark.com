@@ -291,6 +291,7 @@ export default function CheckStatus(props) {
 
     React.useEffect(() => {
 
+        window.sessionStorage.clear();
         // catch search params
         let search = window.location.search;
         let params = new URLSearchParams(search);
