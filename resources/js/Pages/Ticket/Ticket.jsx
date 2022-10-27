@@ -540,14 +540,14 @@ export default function Ticket(props) {
                                                 Tanggal Kedatangan
                                             </Typography>
                                         </Box>
-                                        <Application theme={theme}>
+                                        <Application theme={rainbowTheme}>
                                             <Calendar
                                                 variant='single'
                                                 id="calendar-5"
                                                 locale="id-ID"
                                                 value={bookingDate}
                                                 onChange={value => handleArrivalDate(value)}
-                                                minDate={ tomorrow }
+                                                minDate={ today }
                                             />
                                         </Application>
                                     </Card>

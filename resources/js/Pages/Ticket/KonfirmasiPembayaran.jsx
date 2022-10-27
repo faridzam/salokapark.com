@@ -17,10 +17,29 @@ export function useIsMounted() {
       return () => void (isMountedRef.current = false);
     }, []);
 
+    React.useEffect(() => {
+        //change this to the script source you want to load, for example this is snap.js sandbox env
+        const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
+        //change this according to your client-key
+        const myMidtransClientKey = 'SB-Mid-client-nxEqAslc-ufQu9az';
+
+        let scriptTag = document.createElement('script');
+        scriptTag.src = midtransScriptUrl;
+        // optional if you want to set script attribute
+        // for example snap.js have data-client-key attribute
+        scriptTag.setAttribute('data-client-key', myMidtransClientKey);
+
+        document.body.appendChild(scriptTag);
+        return () => {
+            document.body.removeChild(scriptTag);
+        }
+    }, []);
+
     return isMounted;
 }
 
 export default function Ticket(props) {
+
     const isMounted = useIsMounted();
 
     const [bookingDate, setBookingDate] = React.useState( new Date());
@@ -107,24 +126,6 @@ export default function Ticket(props) {
             });
             setTotalBill(subtotal)
     }, [ticketOrder])
-
-    React.useEffect(() => {
-        //change this to the script source you want to load, for example this is snap.js sandbox env
-        const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
-        //change this according to your client-key
-        const myMidtransClientKey = 'SB-Mid-client-nxEqAslc-ufQu9az';
-
-        let scriptTag = document.createElement('script');
-        scriptTag.src = midtransScriptUrl;
-        // optional if you want to set script attribute
-        // for example snap.js have data-client-key attribute
-        scriptTag.setAttribute('data-client-key', myMidtransClientKey);
-
-        document.body.appendChild(scriptTag);
-        return () => {
-            document.body.removeChild(scriptTag);
-        }
-    }, []);
     const [orderID, setOrderID] = React.useState(0);
     const snapPay = () => {
         axios.post('/api/get-midtrans-token', {
