@@ -22,6 +22,39 @@ export function useIsMounted() {
         return () => void (isMountedRef.current = false);
     }, []);
 
+    React.useEffect(() => {
+
+        window.sessionStorage.clear();
+        // catch search params
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let orderID = params.get('order_id');
+
+        if (orderID) {
+            try {
+                selectedReservationByOrderID(orderID);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        //change this to the script source you want to load, for example this is snap.js sandbox env
+        const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
+        //change this according to your client-key
+        const myMidtransClientKey = 'SB-Mid-client-nxEqAslc-ufQu9az';
+
+        let scriptTag = document.createElement('script');
+        scriptTag.src = midtransScriptUrl;
+        // optional if you want to set script attribute
+        // for example snap.js have data-client-key attribute
+        scriptTag.setAttribute('data-client-key', myMidtransClientKey);
+
+        document.body.appendChild(scriptTag);
+        return () => {
+            document.body.removeChild(scriptTag);
+        }
+    }, []);
+
     return isMounted;
 }
 
@@ -286,41 +319,6 @@ export default function CheckStatus(props) {
             console.log(error);
         })
     }
-
-
-
-    React.useEffect(() => {
-
-        window.sessionStorage.clear();
-        // catch search params
-        let search = window.location.search;
-        let params = new URLSearchParams(search);
-        let orderID = params.get('order_id');
-
-        if (orderID) {
-            try {
-                selectedReservationByOrderID(orderID);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        //change this to the script source you want to load, for example this is snap.js sandbox env
-        const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
-        //change this according to your client-key
-        const myMidtransClientKey = 'SB-Mid-client-nxEqAslc-ufQu9az';
-
-        let scriptTag = document.createElement('script');
-        scriptTag.src = midtransScriptUrl;
-        // optional if you want to set script attribute
-        // for example snap.js have data-client-key attribute
-        scriptTag.setAttribute('data-client-key', myMidtransClientKey);
-
-        document.body.appendChild(scriptTag);
-        return () => {
-            document.body.removeChild(scriptTag);
-        }
-    }, []);
 
     const snapPay = (token) => {
         //
