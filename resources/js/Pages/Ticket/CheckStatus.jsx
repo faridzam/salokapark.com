@@ -24,6 +24,8 @@ export function useIsMounted() {
 
     React.useEffect(() => {
 
+        window.sessionStorage.clear();
+
         //change this to the script source you want to load, for example this is snap.js sandbox env
         const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
         //change this according to your client-key
@@ -266,7 +268,6 @@ export default function CheckStatus(props) {
 
     React.useEffect(() => {
 
-        window.sessionStorage.clear();
         // catch search params
         let search = window.location.search;
         let params = new URLSearchParams(search);
