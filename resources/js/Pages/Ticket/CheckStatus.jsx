@@ -282,6 +282,20 @@ export default function CheckStatus(props) {
 
 
     React.useEffect(() => {
+
+        // catch search params
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let orderID = params.get('order_id');
+
+        if (orderID) {
+            try {
+                selectedReservationByOrderID(orderID);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
         //change this to the script source you want to load, for example this is snap.js sandbox env
         const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
         //change this according to your client-key
@@ -296,19 +310,6 @@ export default function CheckStatus(props) {
         document.body.appendChild(scriptTag);
         return () => {
             document.body.removeChild(scriptTag);
-        }
-    }, []);
-    React.useEffect(() => {
-        let search = window.location.search;
-        let params = new URLSearchParams(search);
-        let orderID = params.get('order_id');
-
-        if (orderID) {
-            try {
-                selectedReservationByOrderID(orderID);
-            } catch (error) {
-                console.log(error)
-            }
         }
     }, []);
 
@@ -326,677 +327,148 @@ export default function CheckStatus(props) {
         in={isMounted}
         timeout={1000}
         style={{ transitionDelay: isMounted ? '500ms' : '0ms' }}>
-            {
-                desktop
-                ?
-                <div>
-                    {/* header */}
-                    <Header/>
+            <div>
 
-                    {/* content */}
-                    <Grid
-                    container={true}
-                    direction="column"
-                    spacing={0}
-                    sx={{
-                        marginTop: '100px',
-                        display: 'flex',
-                        maxWidth: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}>
+                {/* header */}
+                <Header/>
+                {
+                    desktop
+                    ?
+                    <div>
 
-                        <Grid
-                        container={true}
-                        direction="row"
-                        spacing={0}
-                        sx={{
-                            display: 'flex',
-                            width: '100%',
-                            justifyContent: 'center',
-                            alignItems: 'flex-start',
-                        }}>
-
-                            {/*pilih reservasi*/}
-                            <Paper
-                            elevation={3}
-                            sx={{
-                                marginX: '2%',
-                                width: '50%',
-                                height: '100%',
-                                borderRadius: '30px',
-                            }}>
-
-                                <Box
-                                sx={{
-                                    marginTop: '20px',
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                }}>
-                                    <TextField
-                                    placeholder="email"
-                                    onChange={value => handleEmailChange(value)}
-                                    sx={{
-                                        width: '50%',
-                                        margin: 0,
-                                        padding: 0,
-                                        backgroundColor: '#eee',
-                                        border: 'solid 0px',
-                                        borderBottomLeftRadius: '50px',
-                                        borderTopLeftRadius: '50px',
-                                        borderBottomRightRadius: '50px',
-                                        borderTopRightRadius: '50px',
-                                        '&:hover fieldset': {
-                                            border: 'solid 0px',
-                                        },
-                                        'fieldset': {
-                                            border: 'solid 0px',
-                                        },
-                                        "& .MuiOutlinedInput-root.Mui-focused": {
-                                            "& > fieldset": {
-                                                border: "solid 0px",
-                                            }
-                                        },
-                                        "& .MuiOutlinedInput-root": {
-                                            paddingRight: '0px',
-                                            fontFamily: 'AlrightSans',
-                                            fontSize: '16px',
-                                            fontWeight: 600,
-                                        },
-                                    }}
-                                    InputProps={{
-                                        endAdornment:
-                                            <Button
-                                            onClick={() => findReservation()}
-                                            variant="contained"
-                                            color='secondary'
-                                            sx={{
-                                                margin: 0,
-                                                padding: 0,
-                                                width: '100%',
-                                                height: '100%',
-                                                borderBottomLeftRadius: '50px',
-                                                borderTopLeftRadius: '50px',
-                                                borderBottomRightRadius: '50px',
-                                                borderTopRightRadius: '50px',
-                                            }}>
-
-                                                <Search
-                                                sx={{
-                                                    color: '#eee',
-                                                }}/>
-                                                <Typography
-                                                sx={{
-                                                    marginX: '5px',
-                                                    fontSize: '18px',
-                                                    fontWeight: 400,
-                                                    color: '#eee'
-                                                }}
-                                                >Search</Typography>
-
-                                            </Button>
-                                    }}>
-                                    </TextField>
-
-                                </Box>
-
-                                <Box
-                                sx={{
-                                    marginTop: '20px',
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                }}>
-                                    <Typography
-                                    sx={{
-                                        fontSize: '24px',
-                                        fontWeight: 600
-                                    }}>
-                                        Reservations:
-                                    </Typography>
-                                </Box>
-
-                                <Box
-                                sx={{
-                                    marginTop: '20px',
-                                    paddingBottom: '20px',
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                }}>
-
-                                <Grid
-                                container={true}
-                                direction="column"
-                                spacing={0}
-                                sx={{
-                                    display: 'flex',
-                                    width: '100%',
-                                    justifyContent: 'center',
-                                }}>
-                                    {reservationCount.map((index) => (
-                                        <Box
-                                        sx={{
-                                            marginY: '5px',
-                                            width: '100%',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                        }}>
-                                            <Card
-                                            elevation={2}
-                                            className={`reservation-container ${selectedReservation.id ===  reservation[index].id ? styles.reservationContainerActive : ""} `}
-                                            onClick={() => selectReservation(reservation[index].id)}
-                                            sx={{
-                                                display: 'flex',
-                                                width: '80%',
-                                                height: '100px',
-                                                justifyContent: 'center',
-                                                borderRadius: '30px',
-                                                cursor: 'pointer',
-                                                '&:hover': {
-                                                    backgroundColor: 'secondary.lightest',
-                                                },
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="row"
-                                                spacing={0}
-                                                sx={{
-                                                    display: 'flex',
-                                                    width: '90%',
-                                                    justifyContent: 'space-between',
-                                                    alignItems: 'center'
-                                                }}>
-
-                                                    <Box
-                                                    sx={{
-                                                        width: '60%',
-                                                        display: 'flex',
-                                                        flexDirection: 'column',
-                                                    }}>
-                                                        <Typography
-                                                        sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 600,
-                                                            color: '#333'
-                                                        }}>
-                                                            {reservation[index].order_id}
-                                                        </Typography>
-                                                        <Typography
-                                                        sx={{
-                                                            fontSize: '12px',
-                                                            fontWeight: 400,
-                                                            color: '#555'
-                                                        }}>
-                                                            tanggal kedatangan: {reservation[index].arrival_date}
-                                                        </Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        width: '40%',
-                                                        display: 'flex',
-                                                        flexDirection: 'column',
-                                                    }}>
-                                                        <Typography
-                                                        sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 600,
-                                                            color: '#333',
-                                                            textAlign: 'right',
-                                                        }}>
-                                                            Rp. {reservation[index].bill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                                        </Typography>
-                                                    </Box>
-
-                                                </Grid>
-                                            </Card>
-                                        </Box>
-                                    ))}
-                                </Grid>
-
-                                </Box>
-
-                            </Paper>
-
-                            {/*status reservasi*/}
-                            <Paper
-                            elevation={3}
-                            sx={{
-                                marginX: '2%',
-                                width: '30%',
-                                height: '500px',
-                                borderRadius: '30px',
-                            }}>
-                                {
-                                    selectedReservation.id !== 0
-                                    ?
-                                    <Grid
-                                    container={true}
-                                    direction="column"
-                                    spacing={0}
-                                    sx={{
-                                        display: 'flex',
-                                        width: '100%',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}>
-                                        <Box
-                                        sx={{
-                                            marginTop: '20px',
-                                            width: '50%',
-                                            height: '100px',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            backgroundColor: '#ddd',
-                                            borderRadius: '30px',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'center',
-                                            }}>
-                                                status:
-                                            </Typography>
-                                            {renderCurrentStatus(selectedReservation.status)}
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginTop: '40px',
-                                            width: '70%',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'left',
-                                            }}>
-                                                order ID:
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                textAlign: 'right',
-                                            }}>
-                                                {selectedReservation.order_id}
-                                            </Typography>
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginTop: '20px',
-                                            width: '70%',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'left',
-                                            }}>
-                                                name:
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                textAlign: 'right',
-                                            }}>
-                                                {selectedReservation.name}
-                                            </Typography>
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginTop: '20px',
-                                            width: '70%',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'left',
-                                            }}>
-                                                arrival date:
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                textAlign: 'right',
-                                            }}>
-                                                {selectedReservation.arrival_date}
-                                            </Typography>
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginTop: '20px',
-                                            width: '70%',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'left',
-                                            }}>
-                                                bill:
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                textAlign: 'right',
-                                            }}>
-                                                Rp. {selectedReservation.bill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                            </Typography>
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginY: '20px',
-                                        }}>
-                                            <Button
-                                            onClick={() => snapPay(selectedReservation.snap_token)}
-                                            className='payButton'
-                                            id="pay-button"
-                                            variant="contained"
-                                            sx={{
-                                                borderRadius: '30px',
-                                            }}
-                                            >Bayar</Button>
-                                        </Box>
-
-                                    </Grid>
-                                    :
-                                    <Box
-                                    sx={{
-                                        width: '100%',
-                                        height: '100%',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}>
-                                        <Box
-                                        sx={{
-                                            width: '100%',
-                                            height: '100%',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '24px',
-                                                fontWeight: 600,
-                                                color: '#aaa'
-                                            }}>
-                                                ID Reservasi Belum Dipilih
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '18px',
-                                                fontWeight: 400,
-                                                color: '#aaa'
-                                            }}>
-                                                Silahkan masukkan email reservasi anda lalu pilih ID reservasi!
-                                            </Typography>
-                                        </Box>
-                                    </Box>
-                                }
-                            </Paper>
-
-                        </Grid>
-
-                    </Grid>
-
-                    {/* footer */}
-                    <Box
-                    sx={{
-                        width: '100%',
-                        height: '800px',
-                        backgroundImage: `url(${media[2]})`,
-                        backgroundRepeat: `no-repeat`,
-                        backgroundSize: `cover`
-                    }}>
-                        <Footer/>
-                    </Box>
-
-                </div>
-                :
-                <div>
-                    {/* header */}
-                    <Header/>
-
-                    {/* content */}
-                    <Grid
-                    container={true}
-                    direction="column"
-                    spacing={0}
-                    sx={{
-                        marginTop: '100px',
-                        display: 'flex',
-                        maxWidth: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}>
-
+                        {/* content */}
                         <Grid
                         container={true}
                         direction="column"
                         spacing={0}
                         sx={{
+                            marginTop: '100px',
                             display: 'flex',
-                            width: '100%',
+                            maxWidth: '100%',
                             justifyContent: 'center',
                             alignItems: 'center',
                         }}>
 
-                            {/*pilih reservasi*/}
-                            <Paper
-                            elevation={3}
+                            <Grid
+                            container={true}
+                            direction="row"
+                            spacing={0}
                             sx={{
-                                width: '90%',
-                                height: '100%',
-                                borderRadius: '30px',
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'flex-start',
                             }}>
 
-                                <Box
+                                {/*pilih reservasi*/}
+                                <Paper
+                                elevation={3}
                                 sx={{
-                                    marginTop: '20px',
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'center',
+                                    marginX: '2%',
+                                    width: '50%',
+                                    height: '100%',
+                                    borderRadius: '30px',
                                 }}>
-                                    <TextField
-                                    placeholder="email"
-                                    onChange={value => handleEmailChange(value)}
+
+                                    <Box
                                     sx={{
-                                        width: '80%',
-                                        margin: 0,
-                                        padding: 0,
-                                        backgroundColor: '#eee',
-                                        border: 'solid 0px',
-                                        borderBottomLeftRadius: '50px',
-                                        borderTopLeftRadius: '50px',
-                                        borderBottomRightRadius: '50px',
-                                        borderTopRightRadius: '50px',
-                                        '&:hover fieldset': {
-                                            border: 'solid 0px',
-                                        },
-                                        'fieldset': {
-                                            border: 'solid 0px',
-                                        },
-                                        "& .MuiOutlinedInput-root.Mui-focused": {
-                                            "& > fieldset": {
-                                                border: "solid 0px",
-                                            }
-                                        },
-                                        "& .MuiOutlinedInput-root": {
-                                            paddingRight: '0px',
-                                            fontFamily: 'AlrightSans',
-                                            fontSize: '16px',
-                                            fontWeight: 600,
-                                        },
-                                    }}
-                                    InputProps={{
-                                        endAdornment:
-                                            <Button
-                                            onClick={() => findReservation()}
-                                            variant="contained"
-                                            color='secondary'
-                                            sx={{
-                                                margin: 0,
-                                                padding: 0,
-                                                width: '10%',
-                                                height: '100%',
-                                                borderBottomLeftRadius: '50px',
-                                                borderTopLeftRadius: '50px',
-                                                borderBottomRightRadius: '50px',
-                                                borderTopRightRadius: '50px',
-                                            }}>
-
-                                                <Search
-                                                sx={{
-                                                    color: '#eee',
-                                                }}/>
-
-                                            </Button>
+                                        marginTop: '20px',
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent: 'center',
                                     }}>
-                                    </TextField>
-
-                                </Box>
-
-                                <Box
-                                sx={{
-                                    marginTop: '20px',
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                }}>
-                                    <Typography
-                                    sx={{
-                                        fontSize: '18px',
-                                        fontWeight: 600
-                                    }}>
-                                        Reservations:
-                                    </Typography>
-                                </Box>
-
-                                <Box
-                                sx={{
-                                    marginTop: '20px',
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                }}>
-
-                                <Grid
-                                container={true}
-                                direction="column"
-                                spacing={0}
-                                sx={{
-                                    paddingBottom: '20px',
-                                    display: 'flex',
-                                    width: '100%',
-                                    justifyContent: 'center',
-                                }}>
-                                    {reservationCount.map((index) => (
-                                        <Box
+                                        <TextField
+                                        placeholder="email"
+                                        onChange={value => handleEmailChange(value)}
                                         sx={{
-                                            marginY: '5px',
-                                            width: '100%',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                        }}>
-                                            <Card
-                                            elevation={2}
-                                            className={`reservation-container ${selectedReservation.id ===  reservation[index].id ? styles.reservationContainerActive : ""} `}
-                                            onClick={() => selectReservation(reservation[index].id)}
-                                            sx={{
-                                                display: 'flex',
-                                                width: '80%',
-                                                height: '100px',
-                                                justifyContent: 'center',
-                                                borderRadius: '30px',
-                                                cursor: 'pointer',
-                                                '&:hover': {
-                                                    backgroundColor: 'secondary.lightest',
-                                                },
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="row"
-                                                spacing={0}
+                                            width: '50%',
+                                            margin: 0,
+                                            padding: 0,
+                                            backgroundColor: '#eee',
+                                            border: 'solid 0px',
+                                            borderBottomLeftRadius: '50px',
+                                            borderTopLeftRadius: '50px',
+                                            borderBottomRightRadius: '50px',
+                                            borderTopRightRadius: '50px',
+                                            '&:hover fieldset': {
+                                                border: 'solid 0px',
+                                            },
+                                            'fieldset': {
+                                                border: 'solid 0px',
+                                            },
+                                            "& .MuiOutlinedInput-root.Mui-focused": {
+                                                "& > fieldset": {
+                                                    border: "solid 0px",
+                                                }
+                                            },
+                                            "& .MuiOutlinedInput-root": {
+                                                paddingRight: '0px',
+                                                fontFamily: 'AlrightSans',
+                                                fontSize: '16px',
+                                                fontWeight: 600,
+                                            },
+                                        }}
+                                        InputProps={{
+                                            endAdornment:
+                                                <Button
+                                                onClick={() => findReservation()}
+                                                variant="contained"
+                                                color='secondary'
                                                 sx={{
-                                                    display: 'flex',
-                                                    width: '90%',
-                                                    justifyContent: '',
-                                                    alignItems: 'center'
+                                                    margin: 0,
+                                                    padding: 0,
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    borderBottomLeftRadius: '50px',
+                                                    borderTopLeftRadius: '50px',
+                                                    borderBottomRightRadius: '50px',
+                                                    borderTopRightRadius: '50px',
                                                 }}>
 
-                                                    <Box
+                                                    <Search
                                                     sx={{
-                                                        width: '100%',
-                                                        display: 'flex',
-                                                        flexDirection: 'column',
-                                                    }}>
-                                                        <Typography
-                                                        sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 600,
-                                                            color: '#333',
-                                                            textAlign: 'center',
-                                                        }}>
-                                                            {reservation[index].order_id}
-                                                        </Typography>
-                                                        <Typography
-                                                        sx={{
-                                                            fontSize: '12px',
-                                                            fontWeight: 400,
-                                                            color: '#555',
-                                                            textAlign: 'center',
-                                                        }}>
-                                                            tanggal kedatangan: {reservation[index].arrival_date}
-                                                        </Typography>
-                                                    </Box>
+                                                        color: '#eee',
+                                                    }}/>
+                                                    <Typography
+                                                    sx={{
+                                                        marginX: '5px',
+                                                        fontSize: '18px',
+                                                        fontWeight: 400,
+                                                        color: '#eee'
+                                                    }}
+                                                    >Search</Typography>
 
-                                                </Grid>
-                                            </Card>
-                                        </Box>
-                                    ))}
-                                </Grid>
+                                                </Button>
+                                        }}>
+                                        </TextField>
 
-                                </Box>
+                                    </Box>
 
-                            </Paper>
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '24px',
+                                            fontWeight: 600
+                                        }}>
+                                            Reservations:
+                                        </Typography>
+                                    </Box>
 
-                            {/*status reservasi*/}
-                            <Paper
-                            elevation={3}
-                            sx={{
-                                marginTop: '20px',
-                                width: '90%',
-                                height: '500px',
-                                borderRadius: '30px',
-                            }}>
-                                {
-                                    selectedReservation.id !== 0
-                                    ?
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        paddingBottom: '20px',
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                    }}>
+
                                     <Grid
                                     container={true}
                                     direction="column"
@@ -1005,207 +477,757 @@ export default function CheckStatus(props) {
                                         display: 'flex',
                                         width: '100%',
                                         justifyContent: 'center',
-                                        alignItems: 'center',
                                     }}>
-                                        <Box
+                                        {reservationCount.map((index) => (
+                                            <Box
+                                            sx={{
+                                                marginY: '5px',
+                                                width: '100%',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                            }}>
+                                                <Card
+                                                elevation={2}
+                                                className={`reservation-container ${selectedReservation.id ===  reservation[index].id ? styles.reservationContainerActive : ""} `}
+                                                onClick={() => selectReservation(reservation[index].id)}
+                                                sx={{
+                                                    display: 'flex',
+                                                    width: '80%',
+                                                    height: '100px',
+                                                    justifyContent: 'center',
+                                                    borderRadius: '30px',
+                                                    cursor: 'pointer',
+                                                    '&:hover': {
+                                                        backgroundColor: 'secondary.lightest',
+                                                    },
+                                                }}>
+                                                    <Grid
+                                                    container={true}
+                                                    direction="row"
+                                                    spacing={0}
+                                                    sx={{
+                                                        display: 'flex',
+                                                        width: '90%',
+                                                        justifyContent: 'space-between',
+                                                        alignItems: 'center'
+                                                    }}>
+
+                                                        <Box
+                                                        sx={{
+                                                            width: '60%',
+                                                            display: 'flex',
+                                                            flexDirection: 'column',
+                                                        }}>
+                                                            <Typography
+                                                            sx={{
+                                                                fontSize: '18px',
+                                                                fontWeight: 600,
+                                                                color: '#333'
+                                                            }}>
+                                                                {reservation[index].order_id}
+                                                            </Typography>
+                                                            <Typography
+                                                            sx={{
+                                                                fontSize: '12px',
+                                                                fontWeight: 400,
+                                                                color: '#555'
+                                                            }}>
+                                                                tanggal kedatangan: {reservation[index].arrival_date}
+                                                            </Typography>
+                                                        </Box>
+
+                                                        <Box
+                                                        sx={{
+                                                            width: '40%',
+                                                            display: 'flex',
+                                                            flexDirection: 'column',
+                                                        }}>
+                                                            <Typography
+                                                            sx={{
+                                                                fontSize: '18px',
+                                                                fontWeight: 600,
+                                                                color: '#333',
+                                                                textAlign: 'right',
+                                                            }}>
+                                                                Rp. {reservation[index].bill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                                            </Typography>
+                                                        </Box>
+
+                                                    </Grid>
+                                                </Card>
+                                            </Box>
+                                        ))}
+                                    </Grid>
+
+                                    </Box>
+
+                                </Paper>
+
+                                {/*status reservasi*/}
+                                <Paper
+                                elevation={3}
+                                sx={{
+                                    marginX: '2%',
+                                    width: '30%',
+                                    height: '500px',
+                                    borderRadius: '30px',
+                                }}>
+                                    {
+                                        selectedReservation.id !== 0
+                                        ?
+                                        <Grid
+                                        container={true}
+                                        direction="column"
+                                        spacing={0}
                                         sx={{
-                                            marginTop: '20px',
-                                            width: '50%',
-                                            height: '100px',
                                             display: 'flex',
-                                            flexDirection: 'column',
+                                            width: '100%',
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            backgroundColor: '#ddd',
-                                            borderRadius: '30px',
                                         }}>
-                                            <Typography
+                                            <Box
                                             sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'center',
-                                            }}>
-                                                status:
-                                            </Typography>
-                                            {renderCurrentStatus(selectedReservation.status)}
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginTop: '40px',
-                                            width: '70%',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'left',
-                                            }}>
-                                                order ID:
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                textAlign: 'right',
-                                            }}>
-                                                {selectedReservation.order_id}
-                                            </Typography>
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginTop: '20px',
-                                            width: '70%',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'left',
-                                            }}>
-                                                name:
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                textAlign: 'right',
-                                            }}>
-                                                {selectedReservation.name}
-                                            </Typography>
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginTop: '20px',
-                                            width: '70%',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'left',
-                                            }}>
-                                                arrival date:
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                textAlign: 'right',
-                                            }}>
-                                                {selectedReservation.arrival_date}
-                                            </Typography>
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginTop: '20px',
-                                            width: '70%',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 600,
-                                                textAlign: 'left',
-                                            }}>
-                                                bill:
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                textAlign: 'right',
-                                            }}>
-                                                Rp. {selectedReservation.bill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                            </Typography>
-                                        </Box>
-
-                                        <Box
-                                        sx={{
-                                            marginY: '20px',
-                                        }}>
-                                            <Button
-                                            onClick={() => snapPay(selectedReservation.snap_token)}
-                                            className='payButton'
-                                            id="pay-button"
-                                            variant="contained"
-                                            sx={{
+                                                marginTop: '20px',
+                                                width: '50%',
+                                                height: '100px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                backgroundColor: '#eee',
                                                 borderRadius: '30px',
-                                            }}
-                                            >Bayar</Button>
-                                        </Box>
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'center',
+                                                }}>
+                                                    status:
+                                                </Typography>
+                                                {renderCurrentStatus(selectedReservation.status)}
+                                            </Box>
 
-                                    </Grid>
-                                    :
-                                    <Box
-                                    sx={{
-                                        width: '100%',
-                                        height: '100%',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}>
+                                            <Box
+                                            sx={{
+                                                marginTop: '40px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'left',
+                                                }}>
+                                                    order ID:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'right',
+                                                }}>
+                                                    {selectedReservation.order_id}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginTop: '20px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'left',
+                                                }}>
+                                                    name:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'right',
+                                                }}>
+                                                    {selectedReservation.name}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginTop: '20px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'left',
+                                                }}>
+                                                    arrival date:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'right',
+                                                }}>
+                                                    {selectedReservation.arrival_date}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginTop: '20px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'left',
+                                                }}>
+                                                    bill:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'right',
+                                                }}>
+                                                    Rp. {selectedReservation.bill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                width: '70%',
+                                                marginTop: '20px',
+                                            }}>
+
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '12px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'justify',
+                                                }}>
+                                                    kode booking akan dikirim paling lambat 1x24 jam melalui email anda.
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginY: '20px',
+                                            }}>
+                                                <Button
+                                                onClick={() => snapPay(selectedReservation.snap_token)}
+                                                className='payButton'
+                                                id="pay-button"
+                                                variant="contained"
+                                                sx={{
+                                                    borderRadius: '30px',
+                                                }}
+                                                >Bayar</Button>
+                                            </Box>
+
+                                        </Grid>
+                                        :
                                         <Box
                                         sx={{
-                                            width: '80%',
+                                            width: '100%',
                                             height: '100%',
                                             display: 'flex',
-                                            flexDirection: 'column',
                                             justifyContent: 'center',
                                             alignItems: 'center',
                                         }}>
-                                            <Typography
+                                            <Box
                                             sx={{
-                                                fontSize: '20px',
-                                                fontWeight: 600,
-                                                color: '#aaa',
-                                                textAlign: 'center',
+                                                width: '100%',
+                                                height: '100%',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
                                             }}>
-                                                ID Reservasi Belum Dipilih
-                                            </Typography>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '14px',
-                                                fontWeight: 400,
-                                                color: '#aaa',
-                                                textAlign: 'center',
-                                            }}>
-                                                Silahkan masukkan email reservasi anda lalu pilih ID reservasi!
-                                            </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '24px',
+                                                    fontWeight: 600,
+                                                    color: '#aaa'
+                                                }}>
+                                                    ID Reservasi Belum Dipilih
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '18px',
+                                                    fontWeight: 400,
+                                                    color: '#aaa'
+                                                }}>
+                                                    Silahkan masukkan email reservasi anda lalu pilih ID reservasi!
+                                                </Typography>
+                                            </Box>
                                         </Box>
-                                    </Box>
-                                }
-                            </Paper>
+                                    }
+                                </Paper>
+
+                            </Grid>
 
                         </Grid>
 
-                    </Grid>
+                    </div>
+                    :
+                    <div>
 
-                    {/* footer */}
-                    <Box
-                    sx={{
-                        width: '100%',
-                        height: '800px',
-                        backgroundImage: `url(${media[2]})`,
-                        backgroundRepeat: `no-repeat`,
-                        backgroundSize: `cover`
-                    }}>
-                        <Footer/>
-                    </Box>
+                        {/* content */}
+                        <Grid
+                        container={true}
+                        direction="column"
+                        spacing={0}
+                        sx={{
+                            marginTop: '100px',
+                            display: 'flex',
+                            maxWidth: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}>
 
-                </div>
-            }
+                            <Grid
+                            container={true}
+                            direction="column"
+                            spacing={0}
+                            sx={{
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
 
+                                {/*pilih reservasi*/}
+                                <Paper
+                                elevation={3}
+                                sx={{
+                                    width: '90%',
+                                    height: '100%',
+                                    borderRadius: '30px',
+                                }}>
+
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <TextField
+                                        placeholder="email"
+                                        onChange={value => handleEmailChange(value)}
+                                        sx={{
+                                            width: '80%',
+                                            margin: 0,
+                                            padding: 0,
+                                            backgroundColor: '#eee',
+                                            border: 'solid 0px',
+                                            borderBottomLeftRadius: '50px',
+                                            borderTopLeftRadius: '50px',
+                                            borderBottomRightRadius: '50px',
+                                            borderTopRightRadius: '50px',
+                                            '&:hover fieldset': {
+                                                border: 'solid 0px',
+                                            },
+                                            'fieldset': {
+                                                border: 'solid 0px',
+                                            },
+                                            "& .MuiOutlinedInput-root.Mui-focused": {
+                                                "& > fieldset": {
+                                                    border: "solid 0px",
+                                                }
+                                            },
+                                            "& .MuiOutlinedInput-root": {
+                                                paddingRight: '0px',
+                                                fontFamily: 'AlrightSans',
+                                                fontSize: '16px',
+                                                fontWeight: 600,
+                                            },
+                                        }}
+                                        InputProps={{
+                                            endAdornment:
+                                                <Button
+                                                onClick={() => findReservation()}
+                                                variant="contained"
+                                                color='secondary'
+                                                sx={{
+                                                    margin: 0,
+                                                    padding: 0,
+                                                    width: '10%',
+                                                    height: '100%',
+                                                    borderBottomLeftRadius: '50px',
+                                                    borderTopLeftRadius: '50px',
+                                                    borderBottomRightRadius: '50px',
+                                                    borderTopRightRadius: '50px',
+                                                }}>
+
+                                                    <Search
+                                                    sx={{
+                                                        color: '#eee',
+                                                    }}/>
+
+                                                </Button>
+                                        }}>
+                                        </TextField>
+
+                                    </Box>
+
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontSize: '18px',
+                                            fontWeight: 600
+                                        }}>
+                                            Reservations:
+                                        </Typography>
+                                    </Box>
+
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                    }}>
+
+                                    <Grid
+                                    container={true}
+                                    direction="column"
+                                    spacing={0}
+                                    sx={{
+                                        paddingBottom: '20px',
+                                        display: 'flex',
+                                        width: '100%',
+                                        justifyContent: 'center',
+                                    }}>
+                                        {reservationCount.map((index) => (
+                                            <Box
+                                            sx={{
+                                                marginY: '5px',
+                                                width: '100%',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                            }}>
+                                                <Card
+                                                elevation={2}
+                                                className={`reservation-container ${selectedReservation.id ===  reservation[index].id ? styles.reservationContainerActive : ""} `}
+                                                onClick={() => selectReservation(reservation[index].id)}
+                                                sx={{
+                                                    display: 'flex',
+                                                    width: '80%',
+                                                    height: '100px',
+                                                    justifyContent: 'center',
+                                                    borderRadius: '30px',
+                                                    cursor: 'pointer',
+                                                    '&:hover': {
+                                                        backgroundColor: 'secondary.lightest',
+                                                    },
+                                                }}>
+                                                    <Grid
+                                                    container={true}
+                                                    direction="row"
+                                                    spacing={0}
+                                                    sx={{
+                                                        display: 'flex',
+                                                        width: '90%',
+                                                        justifyContent: '',
+                                                        alignItems: 'center'
+                                                    }}>
+
+                                                        <Box
+                                                        sx={{
+                                                            width: '100%',
+                                                            display: 'flex',
+                                                            flexDirection: 'column',
+                                                        }}>
+                                                            <Typography
+                                                            sx={{
+                                                                fontSize: '18px',
+                                                                fontWeight: 600,
+                                                                color: '#333',
+                                                                textAlign: 'center',
+                                                            }}>
+                                                                {reservation[index].order_id}
+                                                            </Typography>
+                                                            <Typography
+                                                            sx={{
+                                                                fontSize: '12px',
+                                                                fontWeight: 400,
+                                                                color: '#555',
+                                                                textAlign: 'center',
+                                                            }}>
+                                                                tanggal kedatangan: {reservation[index].arrival_date}
+                                                            </Typography>
+                                                        </Box>
+
+                                                    </Grid>
+                                                </Card>
+                                            </Box>
+                                        ))}
+                                    </Grid>
+
+                                    </Box>
+
+                                </Paper>
+
+                                {/*status reservasi*/}
+                                <Paper
+                                elevation={3}
+                                sx={{
+                                    marginTop: '20px',
+                                    width: '90%',
+                                    height: '500px',
+                                    borderRadius: '30px',
+                                }}>
+                                    {
+                                        selectedReservation.id !== 0
+                                        ?
+                                        <Grid
+                                        container={true}
+                                        direction="column"
+                                        spacing={0}
+                                        sx={{
+                                            display: 'flex',
+                                            width: '100%',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}>
+                                            <Box
+                                            sx={{
+                                                marginTop: '20px',
+                                                width: '50%',
+                                                height: '100px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                backgroundColor: '#eee',
+                                                borderRadius: '30px',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'center',
+                                                }}>
+                                                    status:
+                                                </Typography>
+                                                {renderCurrentStatus(selectedReservation.status)}
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginTop: '40px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'left',
+                                                }}>
+                                                    order ID:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'right',
+                                                }}>
+                                                    {selectedReservation.order_id}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginTop: '20px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'left',
+                                                }}>
+                                                    name:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'right',
+                                                }}>
+                                                    {selectedReservation.name}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginTop: '20px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'left',
+                                                }}>
+                                                    arrival date:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'right',
+                                                }}>
+                                                    {selectedReservation.arrival_date}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginTop: '20px',
+                                                width: '70%',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 600,
+                                                    textAlign: 'left',
+                                                }}>
+                                                    bill:
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'right',
+                                                }}>
+                                                    Rp. {selectedReservation.bill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                width: '70%',
+                                                marginTop: '20px',
+                                            }}>
+
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '12px',
+                                                    fontWeight: 400,
+                                                    textAlign: 'justify',
+                                                }}>
+                                                    kode booking akan dikirim paling lambat 1x24 jam melalui email anda.
+                                                </Typography>
+                                            </Box>
+
+                                            <Box
+                                            sx={{
+                                                marginTop: '20px',
+                                            }}>
+                                                <Button
+                                                onClick={() => snapPay(selectedReservation.snap_token)}
+                                                className='payButton'
+                                                id="pay-button"
+                                                variant="contained"
+                                                sx={{
+                                                    borderRadius: '30px',
+                                                }}
+                                                >Bayar</Button>
+                                            </Box>
+
+                                        </Grid>
+                                        :
+                                        <Box
+                                        sx={{
+                                            width: '100%',
+                                            height: '100%',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}>
+                                            <Box
+                                            sx={{
+                                                width: '80%',
+                                                height: '100%',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '20px',
+                                                    fontWeight: 600,
+                                                    color: '#aaa',
+                                                    textAlign: 'center',
+                                                }}>
+                                                    ID Reservasi Belum Dipilih
+                                                </Typography>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 400,
+                                                    color: '#aaa',
+                                                    textAlign: 'center',
+                                                }}>
+                                                    Silahkan masukkan email reservasi anda lalu pilih ID reservasi!
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    }
+                                </Paper>
+
+                            </Grid>
+
+                        </Grid>
+
+                    </div>
+                }
+
+                {/* footer */}
+                <Box
+                sx={{
+                    width: '100%',
+                    height: '800px',
+                    backgroundImage: `url(${media[2]})`,
+                    backgroundRepeat: `no-repeat`,
+                    backgroundSize: `cover`
+                }}>
+                    <Footer/>
+                </Box>
+
+            </div>
         </Zoom>
 
         </>
