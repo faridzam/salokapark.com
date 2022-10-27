@@ -818,24 +818,29 @@ export default function CheckStatus(props) {
                                                     fontWeight: 400,
                                                     textAlign: 'justify',
                                                 }}>
-                                                    kode booking akan dikirim paling lambat 1x24 jam melalui email anda.
+                                                    Kode Booking akan dikirim secepatnya paling lambat 1x24 jam melalui email anda. Terima kasih.
                                                 </Typography>
                                             </Box>
 
-                                            <Box
-                                            sx={{
-                                                marginY: '20px',
-                                            }}>
-                                                <Button
-                                                onClick={() => snapPay(selectedReservation.snap_token)}
-                                                className='payButton'
-                                                id="pay-button"
-                                                variant="contained"
+                                            {
+                                                selectedReservation.status !== "settlement"
+                                                ?
+                                                <Box
                                                 sx={{
-                                                    borderRadius: '30px',
-                                                }}
-                                                >Bayar</Button>
-                                            </Box>
+                                                    marginY: '20px',
+                                                }}>
+                                                    <Button
+                                                    onClick={() => snapPay(selectedReservation.snap_token)}
+                                                    className='payButton'
+                                                    id="pay-button"
+                                                    variant="contained"
+                                                    sx={{
+                                                        borderRadius: '30px',
+                                                    }}
+                                                    >Bayar</Button>
+                                                </Box>
+                                                : null
+                                            }
 
                                         </Grid>
                                         :
@@ -1245,24 +1250,29 @@ export default function CheckStatus(props) {
                                                     fontWeight: 400,
                                                     textAlign: 'justify',
                                                 }}>
-                                                    kode booking akan dikirim paling lambat 1x24 jam melalui email anda.
+                                                    Kode Booking akan dikirim secepatnya paling lambat 1x24 jam melalui email anda. Terima kasih.
                                                 </Typography>
                                             </Box>
 
-                                            <Box
-                                            sx={{
-                                                marginTop: '20px',
-                                            }}>
-                                                <Button
-                                                onClick={() => snapPay(selectedReservation.snap_token)}
-                                                className='payButton'
-                                                id="pay-button"
-                                                variant="contained"
+                                            {
+                                                selectedReservation.status !== "settlement"
+                                                ?
+                                                <Box
                                                 sx={{
-                                                    borderRadius: '30px',
-                                                }}
-                                                >Bayar</Button>
-                                            </Box>
+                                                    marginY: '20px',
+                                                }}>
+                                                    <Button
+                                                    onClick={() => snapPay(selectedReservation.snap_token)}
+                                                    className='payButton'
+                                                    id="pay-button"
+                                                    variant="contained"
+                                                    sx={{
+                                                        borderRadius: '30px',
+                                                    }}
+                                                    >Bayar</Button>
+                                                </Box>
+                                                : null
+                                            }
 
                                         </Grid>
                                         :

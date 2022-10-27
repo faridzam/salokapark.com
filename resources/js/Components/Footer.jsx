@@ -85,7 +85,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '38px',
+                                    fontSize: '34px',
                                     fontWeight: 600,
                                     color: '#eee'
                                 }}
@@ -101,7 +101,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -120,7 +120,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -139,7 +139,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -158,7 +158,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -177,7 +177,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -207,7 +207,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '38px',
+                                    fontSize: '34px',
                                     fontWeight: 600,
                                     color: '#eee'
                                 }}
@@ -223,7 +223,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -242,7 +242,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -261,7 +261,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -291,7 +291,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '38px',
+                                    fontSize: '34px',
                                     fontWeight: 600,
                                     color: '#eee',
                                 }}
@@ -307,7 +307,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -326,7 +326,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -345,7 +345,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -364,7 +364,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -383,7 +383,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -402,7 +402,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '22px',
+                                    fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
