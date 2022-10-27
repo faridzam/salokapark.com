@@ -24,20 +24,6 @@ export function useIsMounted() {
 
     React.useEffect(() => {
 
-        window.sessionStorage.clear();
-        // catch search params
-        let search = window.location.search;
-        let params = new URLSearchParams(search);
-        let orderID = params.get('order_id');
-
-        if (orderID) {
-            try {
-                selectedReservationByOrderID(orderID);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
         //change this to the script source you want to load, for example this is snap.js sandbox env
         const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
         //change this according to your client-key
@@ -53,6 +39,7 @@ export function useIsMounted() {
         return () => {
             document.body.removeChild(scriptTag);
         }
+
     }, []);
 
     return isMounted;
@@ -276,6 +263,24 @@ export default function CheckStatus(props) {
                 return null;
         }
     };
+
+    React.useEffect(() => {
+
+        window.sessionStorage.clear();
+        // catch search params
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let orderID = params.get('order_id');
+
+        if (orderID) {
+            try {
+                selectedReservationByOrderID(orderID);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+    }, []);
 
     const selectedReservationByOrderID = (order_id) => {
         setSelectedReservation({
