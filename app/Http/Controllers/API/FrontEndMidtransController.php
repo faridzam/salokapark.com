@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 use App\Models\reservation;
 
-class MidtransController extends Controller
+class FrontEndMidtransController extends Controller
 {
 
     public function __construct(){

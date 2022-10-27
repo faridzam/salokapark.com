@@ -11,7 +11,7 @@ use App\Models\ticket_distribution;
 use App\Models\stock;
 use App\Models\option;
 
-class TicketController extends Controller
+class FrontEndTicketController extends Controller
 {
     public function getTicketDate(Request $request) {
         //

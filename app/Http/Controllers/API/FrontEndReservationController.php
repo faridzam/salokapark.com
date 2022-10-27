@@ -13,7 +13,7 @@ use App\Models\ticket_distribution;
 use App\Models\ticket;
 use App\Models\option;
 
-class ReservationController extends Controller
+class FrontEndReservationController extends Controller
 {
     //
     public function createReservation(Request $request) {

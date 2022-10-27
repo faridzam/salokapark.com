@@ -4,12 +4,14 @@ import { Inertia } from '@inertiajs/inertia'
 import { useTheme } from "@mui/material/styles";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Paper, Typography, Card, Button, TextField, Zoom} from '@mui/material';
-import {Search} from '@mui/icons-material';
+import {Search, Error} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
 import axios from 'axios';
 import styles from './CheckStatus.module.css';
+
+import toast, { Toaster } from 'react-hot-toast';
 
 export function useIsMounted() {
 
@@ -62,11 +64,17 @@ export default function CheckStatus(props) {
                     arrival_date: reservations[index].arrival_date,
                 })
             }
-
             setReservation(newReservation);
+            if (newReservation.length < 1) {
+                notify({
+                    message: "data tidak ditemukan",
+                    status: "error"
+                });
+            }
         }).catch((error) => {
             //
             console.log(error);
+            notify({message: error});
         })
     }
 
@@ -318,6 +326,92 @@ export default function CheckStatus(props) {
         window.snap.pay(token);
     }
 
+    const notify = (params) => {
+        if (params.status === "error") {
+            toast(params.message, {
+                duration: 4000,
+                position: 'top-center',
+
+                // Styling
+                style: {
+                    background: '#f45049',
+                    color: '#eee'
+                },
+                className: 'toastNotification',
+
+                // Custom Icon
+                icon: <Error/>,
+
+                // Change colors of success/error/loading icon
+                iconTheme: {
+                primary: '#000',
+                secondary: '#fff',
+                },
+
+                // Aria
+                ariaProps: {
+                role: 'status',
+                'aria-live': 'polite',
+                },
+          })
+        } else if (params.status === "success") {
+            toast(params.message, {
+                duration: 4000,
+                position: 'top-center',
+
+                // Styling
+                style: {
+                    background: '#45ad8d',
+                    color: '#eee'
+                },
+                className: 'toastNotification',
+
+                // Custom Icon
+                icon: <Error/>,
+
+                // Change colors of success/error/loading icon
+                iconTheme: {
+                primary: '#000',
+                secondary: '#fff',
+                },
+
+                // Aria
+                ariaProps: {
+                role: 'status',
+                'aria-live': 'polite',
+                },
+          })
+        } else if (params.status === "info") {
+            toast(params.message, {
+                duration: 4000,
+                position: 'top-center',
+
+                // Styling
+                style: {
+                    background: '#4b78bf',
+                    color: '#eee'
+                },
+                className: 'toastNotification',
+
+                // Custom Icon
+                icon: <Error/>,
+
+                // Change colors of success/error/loading icon
+                iconTheme: {
+                primary: '#000',
+                secondary: '#fff',
+                },
+
+                // Aria
+                ariaProps: {
+                role: 'status',
+                'aria-live': 'polite',
+                },
+          })
+        }
+
+    };
+
     return (
         <>
 
@@ -328,6 +422,9 @@ export default function CheckStatus(props) {
         timeout={1000}
         style={{ transitionDelay: isMounted ? '500ms' : '0ms' }}>
             <div>
+
+                {/* toaster */}
+                <Toaster/>
 
                 {/* header */}
                 <Header/>
