@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
 import { useTheme } from "@mui/material/styles";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import {useMediaQuery, Box, Typography, Card, Button, Fab, Zoom} from '@mui/material';
+import {useMediaQuery, Box, Typography, Card, Button, Fab, Fade} from '@mui/material';
 import {Add, Remove} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
@@ -153,7 +153,7 @@ export default function Ticket(props) {
     return (
         <>
             <Head title='Ticket'/>
-            <Zoom
+            <Fade
             in={isMounted}
             timeout={1000}
             style={{ transitionDelay: isMounted ? '500ms' : '0ms' }}>
@@ -833,7 +833,7 @@ export default function Ticket(props) {
                     {/* scroll to top button */}
                     <ToTopButton/>
                 </div>
-            </Zoom>
+            </Fade>
         </>
     )
 }

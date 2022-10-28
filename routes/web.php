@@ -18,18 +18,19 @@ use Inertia\Inertia;
 Route::get('/', function () {
 
     //only ticket
-    return Inertia::location('https://webdev.salokapark.com/ticket');
+    // return Inertia::location('https://webdev.salokapark.com/ticket');
     // return Inertia::location('http://localhost:8000/ticket');
 
     //whole site
-    // return Inertia::render('Welcome', [
-    //     'canLogin' => Route::has('login'),
-    //     'canRegister' => Route::has('register'),
-    //     'laravelVersion' => Application::VERSION,
-    //     'phpVersion' => PHP_VERSION,
-    // ]);
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 })->name('welcome');
 
+// Ticket
 Route::get('/ticket', function () {
     return Inertia::render('Ticket/Ticket');
 })->name('ticket');
@@ -42,13 +43,14 @@ Route::get('/ticket/konfirmasi-pembayaran', function () {
     return Inertia::render('Ticket/KonfirmasiPembayaran');
 })->name('konfirmasiPembayaran');
 
-// Route::get('/ticket/finished-transaction', function () {
-//     return Inertia::render('Ticket/FinishedTransaction');
-// })->name('finishedTransaction');
-
 Route::get('/ticket/check-status', function () {
     return Inertia::render('Ticket/CheckStatus');
 })->name('checkStatus');
+
+// Promotion
+Route::get('/promosi', function () {
+    return Inertia::render('Promotion/Promotion');
+})->name('promotion');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

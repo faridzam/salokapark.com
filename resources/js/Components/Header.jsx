@@ -110,6 +110,7 @@ export default function Header() {
                     alignItems: 'center',
                     }}>
                     <Typography
+                    onClick={() => redirect('/promosi')}
                     noWrap={true}
                     sx={{
                         fontFamily: 'AlrightSans',
@@ -278,7 +279,8 @@ export default function Header() {
                             </ListItemButton>
                         </ListItem>
                         <ListItem key="promosi">
-                            <ListItemButton>
+                            <ListItemButton
+                            onClick={() => redirect('/promosi')}>
                                 <ListItemText primary="Promosi" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>

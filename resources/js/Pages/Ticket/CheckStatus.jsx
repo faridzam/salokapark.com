@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
-import { Inertia } from '@inertiajs/inertia'
 import { useTheme } from "@mui/material/styles";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import {useMediaQuery, Box, Paper, Typography, Card, Button, TextField, Zoom} from '@mui/material';
+import {useMediaQuery, Box, Paper, Typography, Card, Button, TextField, Fade} from '@mui/material';
 import {Search, Error} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
@@ -422,7 +421,7 @@ export default function CheckStatus(props) {
 
         <Head title='Check Status'/>
 
-        <Zoom
+        <Fade
         in={isMounted}
         timeout={1000}
         style={{ transitionDelay: isMounted ? '500ms' : '0ms' }}>
@@ -1340,7 +1339,7 @@ export default function CheckStatus(props) {
                 </Box>
 
             </div>
-        </Zoom>
+        </Fade>
 
         </>
     )

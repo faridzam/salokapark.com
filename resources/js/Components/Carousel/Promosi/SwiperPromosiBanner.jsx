@@ -12,9 +12,9 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay, EffectFade, Pagination } from "swiper";
 
-import {media} from '../../assets/images/carousel_assets'
+import {media} from '../../../assets/images/carousel_assets/promosiBanner'
 import {Box} from '@mui/material';
-import './swiperMainBanner.css';
+import './swiperPromosiBanner.module.css';
 
 export default function App() {
   return (
@@ -31,7 +31,7 @@ export default function App() {
         loop={true}
         effect={"fade"}
         modules={[Autoplay, EffectFade, Pagination]}
-        className="main-banner-swiper"
+        className="promosi-banner-swiper"
       >
         <SwiperSlide>
             <Box

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia'
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import {Box, Typography, Card, InputAdornment, Button, TextField, Zoom, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
+import {Box, Typography, Card, InputAdornment, Button, TextField, Fade, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import {AccountCircle, Email, Phone, LocationOn} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
@@ -192,7 +192,7 @@ export default function Ticket(props) {
     return (
         <>
             <Head title='Data Pemesan'/>
-            <Zoom
+            <Fade
             in={isMounted}
             timeout={1000}
             style={{ transitionDelay: isMounted ? '500ms' : '0ms' }}>
@@ -411,7 +411,7 @@ export default function Ticket(props) {
                     </Dialog>
 
                 </div>
-            </Zoom>
+            </Fade>
         </>
     )
 }

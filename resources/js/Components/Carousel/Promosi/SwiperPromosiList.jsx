@@ -6,12 +6,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import {media, zonaByIndex} from '../../assets/images/carousel_assets/zona';
+import {media, zonaByIndex} from '../../../assets/images/carousel_assets/promosiList';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
 import {ArrowForward} from '@mui/icons-material';
-import "./swiperMainZones.css";
+import "./swiperPromosiList.module.css";
 
 // import required modules
 import { Navigation } from "swiper";
@@ -22,7 +22,7 @@ export default function App() {
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
 
-    const SLIDE_COUNT = 5;
+    const SLIDE_COUNT = 4;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
 
     return (
@@ -36,7 +36,7 @@ export default function App() {
                 loop={true}
                 navigation={true}
                 modules={[Navigation]}
-                className="swiper-zones noselect"
+                className="swiper-promosi noselect"
                 style={{
                     width: '100%',
                 }}
@@ -64,8 +64,8 @@ export default function App() {
                                 }}>
                                     <Box
                                     sx={{
-                                        maxHeight: '300px',
-                                        width: '80%',
+                                        maxHeight: '800px',
+                                        width: '90%',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         justifyContent: 'center',
@@ -85,7 +85,7 @@ export default function App() {
                                     <Box
                                     sx={{
                                         marginTop: '100px',
-                                        width: '80%',
+                                        width: '90%',
                                     }}>
                                         <Box
                                         sx={{
@@ -159,7 +159,7 @@ export default function App() {
                 loop={true}
                 navigation={true}
                 modules={[Navigation]}
-                className="swiper-zones noselect"
+                className="swiper-promosi noselect"
                 style={{
                     width: '100%',
                 }}
