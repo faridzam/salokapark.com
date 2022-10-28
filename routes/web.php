@@ -18,11 +18,11 @@ use Inertia\Inertia;
 Route::get('/', function () {
 
     //only ticket
-    return Inertia::location('https://webdev.salokapark.com/ticket');
+    // return Inertia::location('https://webdev.salokapark.com/ticket');
     // return Inertia::location('http://localhost:8000/ticket');
 
     //whole site
-    // return Inertia::render('Welcome');
+    return Inertia::render('Welcome');
 })->name('welcome');
 
 // Ticket
