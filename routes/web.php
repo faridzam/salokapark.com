@@ -18,16 +18,16 @@ use Inertia\Inertia;
 Route::get('/', function () {
 
     //only ticket
-    // return Inertia::location('https://webdev.salokapark.com/ticket');
+    return Inertia::location('https://webdev.salokapark.com/ticket');
     // return Inertia::location('http://localhost:8000/ticket');
 
     //whole site
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
 })->name('welcome');
 
 // Ticket
