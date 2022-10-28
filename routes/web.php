@@ -22,7 +22,12 @@ Route::get('/', function () {
     // return Inertia::location('http://localhost:8000/ticket');
 
     //whole site
-    return Inertia::render('Welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 })->name('welcome');
 
 // Ticket
