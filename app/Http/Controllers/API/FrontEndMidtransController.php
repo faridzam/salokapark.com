@@ -253,8 +253,8 @@ class FrontEndMidtransController extends Controller
             }
             else if ($transaction == 'settlement'){
                 // TODO set payment status in merchant's database to 'Settlement'
-                $arrival_date = reservation::where('order_id', $order_id)->value('arrival_date');
-                $bookingCode = date('Ymd', strtotime( $arrival_date ));
+                $reservationData = reservation::where('order_id', $order_id)->first();
+                $bookingCode = date('Ymd', strtotime( $arrival_date->arrival_date )).$reservationData->customer_id.$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
                 $reservation = reservation::where('order_id', $order_id)
                 ->update([
                     'booking_code' => $bookingCode,
