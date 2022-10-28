@@ -11,7 +11,7 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
 import {ArrowForward} from '@mui/icons-material';
-import "./swiperMainZones.css";
+import "./swiperMainZones.module.css";
 
 // import required modules
 import { Navigation } from "swiper";

@@ -14,7 +14,7 @@ import { Autoplay, EffectFade, Pagination } from "swiper";
 
 import {media} from '../../assets/images/carousel_assets'
 import {Box} from '@mui/material';
-import './swiperMainBanner.css';
+import './swiperMainBanner.module.css';
 
 export default function App() {
   return (
