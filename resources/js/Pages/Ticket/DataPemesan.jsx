@@ -156,7 +156,7 @@ export default function Ticket(props) {
     }, [name, phone, email, emailValid, emailActive, address])
 
     const submit = () => {
-        let orderID = new Date().getFullYear().toString()+new Date().getMonth().toString()+new Date().getDate().toString()+new Date().getMinutes().toString()+new Date().getMilliseconds().toString()+(Math.floor(Math.random() * 10) + 10).toString().substring(1);
+        let orderID = new Date().getFullYear().toString()+new Date().getMonth().toString().padStart(2, "0")+new Date().getDate().toString().padStart(2, "0")+new Date().getMinutes().toString().padStart(2, "0")+new Date().getMilliseconds().toString().padStart(2, "0")+Math.floor(Math.random()*(999-100+1)+100).toString().substring(1);
         window.sessionStorage.setItem('orderID', JSON.stringify(orderID));
 
         axios.post('/api/create-reservation', {
