@@ -13,7 +13,6 @@ import {media} from '../assets/images';
 import {mediaHome} from '../assets/images/home';
 
 import styles from "../styles/index.css";
-import styleModuleScrollbar from "../styles/scrollbarHidden.module.css";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -524,7 +523,6 @@ export default function Welcome(props) {
                         backgroundColor: 'secondary.light'
                     }}>
                         <Grid
-                        className={styleModuleScrollbar.stickyNavbar}
                         container={true}
                         direction="row"
                         spacing={0}

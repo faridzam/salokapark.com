@@ -2,15 +2,12 @@ import React from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
 import { useTheme } from "@mui/material/styles";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import {useMediaQuery, Box, Typography, Button, Fade} from '@mui/material';
-import {AccessTime} from '@mui/icons-material';
+import {useMediaQuery, Box, Typography, Fade} from '@mui/material';
+import {} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
-import {mediaHome} from '../../assets/images/home';
-import { SwiperPromosiBanner, SwiperPromosiList } from '../../Components/Carousel/Promosi';
-
-import styles from "../../styles/index.css";
+import { SwiperPromosiBanner, SwiperPromosiList } from '../../Components/Carousel';
 
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);

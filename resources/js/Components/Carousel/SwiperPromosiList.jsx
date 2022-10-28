@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-import {media, zonaByIndex} from '../../../assets/images/carousel_assets/promosiList';
+import {media, promosiListByIndex} from '../../assets/images/carousel_assets/promosiList';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
@@ -99,7 +99,7 @@ export default function App() {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{zonaByIndex(index).nama}</Typography>
+                                            >{promosiListByIndex(index).nama}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -116,7 +116,7 @@ export default function App() {
                                                 fontWeight: 400,
                                                 color: '#333'
                                             }}
-                                            >{zonaByIndex(index).deskripsi}</Typography>
+                                            >{promosiListByIndex(index).deskripsi}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -222,7 +222,7 @@ export default function App() {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{zonaByIndex(index).nama}</Typography>
+                                            >{promosiListByIndex(index).nama}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -239,7 +239,7 @@ export default function App() {
                                                 fontWeight: 400,
                                                 color: '#333'
                                             }}
-                                            >{zonaByIndex(index).deskripsi}</Typography>
+                                            >{promosiListByIndex(index).deskripsi}</Typography>
                                         </Box>
                                         <Box
                                         sx={{

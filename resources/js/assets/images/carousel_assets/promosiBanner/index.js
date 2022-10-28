@@ -2,7 +2,7 @@ import media1 from "./media-1.jpg";
 import media2 from "./media-2.jpg";
 
 export const media = [media1, media2];
-export const events = [
+export const promosiBanner = [
     {
         nama: 'media 1',
         title: 'Lorem Ipsum Dolor',
@@ -17,5 +17,5 @@ export const events = [
     },
 ];
 
-export const eventByIndex = index => events[index];
+export const promosiBannerByIndex = index => promosiBanner[index];
 export const mediaByIndex = index => media[index % media.length];

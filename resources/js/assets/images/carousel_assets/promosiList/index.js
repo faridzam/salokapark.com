@@ -4,7 +4,7 @@ import media3 from "./promosi3.png";
 import media4 from "./promosi4.png";
 
 export const media = [media1, media2, media3, media4];
-export const zona = [
+export const promosiList = [
     {
         nama: 'Flash Sale Hari Pelanggan Nasional',
         deskripsi: 'Ada FLASH SALE di Hari Pelanggan Nasional, Lur! Tanggal 2 September 2022 akan ada harga spesial!'
@@ -22,5 +22,5 @@ export const zona = [
         deskripsi: 'Ceria di hari senin dan nikmati lebih dari 20+ wahana! Dengan pembelian tiket 100k khusus di hari senin.'
     },
 ];
-export const zonaByIndex = index => zona[index];
+export const promosiListByIndex = index => promosiList[index];
 export const mediaByIndex = index => media[index % media.length];

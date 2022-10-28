@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay, EffectFade, Pagination } from "swiper";
 
-import {media} from '../../../assets/images/carousel_assets/promosiBanner'
+import {media} from '../../assets/images/carousel_assets/promosiBanner'
 import {Box} from '@mui/material';
 import './swiperPromosiBanner.module.css';
 
