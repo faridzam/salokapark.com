@@ -52,6 +52,26 @@ Route::get('/promosi', function () {
     return Inertia::render('Promotion/Promotion');
 })->name('promotion');
 
+// Zone
+Route::get('/zona', function () {
+    return Inertia::render('Zone/Zone');
+})->name('zone');
+
+// Show & Event
+Route::get('/show-event', function () {
+    return Inertia::render('ShowEvent/ShowEvent');
+})->name('showEvent');
+
+// Restaurant
+Route::get('/restaurant', function () {
+    return Inertia::render('Restaurant/Restaurant');
+})->name('restaurant');
+
+// Restaurant
+Route::get('/merchandise', function () {
+    return Inertia::render('Merchandise/Merchandise');
+})->name('merchandise');
+
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

@@ -7,7 +7,7 @@ import {} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
-import { SwiperPromosiBanner, SwiperPromosiList } from '../../Components/Carousel';
+import { SwiperPromosiBanner, SwiperPromosiList, SwiperPromosiEventList } from '../../Components/Carousel';
 
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);
@@ -35,103 +35,186 @@ export default function Promotion(props) {
             in={isMounted}
             timeout={1000}
             style={{ transitionDelay: isMounted ? '500ms' : '0ms' }}>
-                {
-                    desktop
-                    ?
-                    <div>
-                        {/* header */}
-                        <Header/>
+                <div>
+                    {/* header */}
+                    <Header/>
+                    {
+                        desktop
+                        ?
+                        <div>
 
-                        {/* banner */}
-                        <Box
-                        sx={{
-                            marginTop: '20px'
-                        }}>
-                            <SwiperPromosiBanner/>
-                        </Box>
-
-                        {/* promo */}
-                        <Grid
-                        container={true}
-                        direction="column"
-                        spacing={0}
-                        sx={{
-                            marginTop: '100px',
-                            display: 'flex',
-                            width: '100%',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}>
+                            {/* banner */}
                             <Box
                             sx={{
-
+                                marginTop: '20px'
                             }}>
-                                <Typography
-                                sx={{
-                                    fontFamily: 'fontin',
-                                    fontWeight: 600,
-                                    fontSize: '38px',
-                                    color: '#333'
-                                }}>Promosi Saloka Theme Park</Typography>
+                                <SwiperPromosiBanner/>
                             </Box>
-                            <Box
+
+                            {/* promo */}
+                            <Grid
+                            container={true}
+                            direction="column"
+                            spacing={0}
                             sx={{
+                                marginTop: '100px',
+                                display: 'flex',
                                 width: '100%',
-                                marginTop: '50px'
+                                justifyContent: 'center',
+                                alignItems: 'center',
                             }}>
-                                <SwiperPromosiList/>
-                            </Box>
-                        </Grid>
-
-                        {/* promo-event */}
-                        <Grid
-                        container={true}
-                        direction="column"
-                        spacing={0}
-                        sx={{
-                            marginTop: '100px',
-                            display: 'flex',
-                            width: '100%',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}>
-                            <Box
-                            sx={{
-
-                            }}>
-                                <Typography
+                                <Box
                                 sx={{
-                                    fontFamily: 'fontin',
-                                    fontWeight: 600,
-                                    fontSize: '38px',
-                                    color: '#333'
-                                }}>Promosi Event Saloka Theme Park</Typography>
-                            </Box>
+
+                                }}>
+                                    <Typography
+                                    sx={{
+                                        fontFamily: 'fontin',
+                                        fontWeight: 600,
+                                        fontSize: '38px',
+                                        color: '#333'
+                                    }}>Promosi Saloka Theme Park</Typography>
+                                </Box>
+                                <Box
+                                sx={{
+                                    width: '100%',
+                                    marginTop: '50px'
+                                }}>
+                                    <SwiperPromosiList/>
+                                </Box>
+                            </Grid>
+
+                            {/* promo-event */}
+                            <Grid
+                            container={true}
+                            direction="column"
+                            spacing={0}
+                            sx={{
+                                marginTop: '100px',
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                                <Box
+                                sx={{
+
+                                }}>
+                                    <Typography
+                                    sx={{
+                                        fontFamily: 'fontin',
+                                        fontWeight: 600,
+                                        fontSize: '38px',
+                                        color: '#333'
+                                    }}>Promosi Event Saloka Theme Park</Typography>
+                                </Box>
+                                <Box
+                                sx={{
+                                    width: '100%',
+                                    marginTop: '50px'
+                                }}>
+                                    <SwiperPromosiEventList/>
+                                </Box>
+                            </Grid>
+
+                        </div>
+                        :
+                        <div>
+
+                            {/* banner */}
                             <Box
                             sx={{
-                                width: '100%',
-                                marginTop: '50px'
+                                marginTop: '20px'
                             }}>
-                                <SwiperPromosiList/>
+                                <SwiperPromosiBanner/>
                             </Box>
-                        </Grid>
 
-                        {/* footer */}
-                        <Box
-                        sx={{
-                            width: '100%',
-                            height: '800px',
-                            backgroundImage: `url(${media[2]})`,
-                            backgroundRepeat: `no-repeat`,
-                            backgroundSize: `cover`
-                        }}>
-                            <Footer/>
-                        </Box>
+                            {/* promo */}
+                            <Grid
+                            container={true}
+                            direction="column"
+                            spacing={0}
+                            sx={{
+                                marginTop: '100px',
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                                <Box
+                                sx={{
 
-                    </div>
-                    :
-                    <h1>ini mobile</h1>
-                }
+                                }}>
+                                    <Typography
+                                    sx={{
+                                        fontFamily: 'fontin',
+                                        fontWeight: 600,
+                                        fontSize: '28px',
+                                        color: '#333',
+                                        textAlign: 'center',
+                                    }}>Promosi Saloka Theme Park</Typography>
+                                </Box>
+                                <Box
+                                sx={{
+                                    width: '100%',
+                                    marginTop: '50px'
+                                }}>
+                                    <SwiperPromosiList/>
+                                </Box>
+                            </Grid>
+
+                            {/* promo-event */}
+                            <Grid
+                            container={true}
+                            direction="column"
+                            spacing={0}
+                            sx={{
+                                marginTop: '100px',
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                                <Box
+                                sx={{
+
+                                }}>
+                                    <Typography
+                                    sx={{
+                                        fontFamily: 'fontin',
+                                        fontWeight: 600,
+                                        fontSize: '28px',
+                                        color: '#333',
+                                        textAlign: 'center',
+                                    }}>Promosi Event Saloka Theme Park</Typography>
+                                </Box>
+                                <Box
+                                sx={{
+                                    width: '100%',
+                                    marginTop: '50px'
+                                }}>
+                                    <SwiperPromosiEventList/>
+                                </Box>
+                            </Grid>
+
+
+                        </div>
+                    }
+                    {/* footer */}
+                    <Box
+                    sx={{
+                        width: '100%',
+                        height: '800px',
+                        backgroundImage: `url(${media[2]})`,
+                        backgroundRepeat: `no-repeat`,
+                        backgroundSize: `cover`
+                    }}>
+                        <Footer/>
+                    </Box>
+
+                    {/* scroll to top button */}
+                    <ToTopButton/>
+                </div>
             </Fade>
         </>
     )

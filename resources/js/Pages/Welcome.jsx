@@ -13,6 +13,7 @@ import {media} from '../assets/images';
 import {mediaHome} from '../assets/images/home';
 
 import styles from "../styles/index.css";
+import '../styles/scrollbarHidden.module.css';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -48,23 +49,11 @@ export default function Welcome(props) {
 
     // ref scroll
     const tentangScrollRef = React.useRef();
-    const tentangNavigationRef = React.useRef(null);
-    const executeScrollTentang = () => tentangNavigationRef.current.scrollIntoView({block: 'nearest'});
     const zonaScrollRef = React.useRef();
-    const zonaNavigationRef = React.useRef(null);
-    const executeScrollZona = () => zonaNavigationRef.current.scrollIntoView();
     const mapsScrollRef = React.useRef();
-    const mapsNavigationRef = React.useRef(null);
-    const executeScrollMaps = () => mapsNavigationRef.current.scrollIntoView();
     const eventsScrollRef = React.useRef();
-    const eventsNavigationRef = React.useRef(null);
-    const executeScrollEvents = () => eventsNavigationRef.current.scrollIntoView();
     const faqsScrollRef = React.useRef();
-    const faqsNavigationRef = React.useRef(null);
-    const executeScrollFaqs = () => faqsNavigationRef.current.scrollIntoView();
     const contactsScrollRef = React.useRef();
-    const contactsNavigationRef = React.useRef(null);
-    const executeScrollContacts = () => contactsNavigationRef.current.scrollIntoView();
 
     const [tentangRef, tentangInView] = useInView({
       threshold: 0.3,
@@ -79,28 +68,11 @@ export default function Welcome(props) {
       threshold: 0.3,
     });
     const [faqsRef, faqsInView] = useInView({
-      threshold: 0.3,
+      threshold: 0.5,
     });
     const [contactsRef, contactsInView] = useInView({
-      threshold: 0.3,
+      threshold: 0.5,
     });
-
-    React.useEffect(() => {
-        //
-        if (tentangInView && !zonaInView) {
-            executeScrollTentang();
-        } else if (zonaInView && !mapsInView) {
-            executeScrollZona();
-        } else if (mapsInView && !eventsInView) {
-            executeScrollMaps();
-        } else if (eventsInView && !faqsInView) {
-            executeScrollEvents();
-        } else if (faqsInView && !contactsInView) {
-            executeScrollFaqs();
-        } else if (contactsInView) {
-            executeScrollContacts();
-        }
-    }, [tentangInView, zonaInView, mapsInView, eventsInView, faqsInView, contactsInView] );
 
     const setRefs = React.useCallback(
         (node) => {
@@ -127,24 +99,24 @@ export default function Welcome(props) {
         zoom: 15
     };
 
-    const [tempLopait, setTempLopait] = React.useState();
-    React.useEffect(() => {
-        axios('https://api.openweathermap.org/data/2.5/weather?lat=-7.280711095665581&lon=110.45955097017394&appid=ce6e29a8019014230bf75c290bdbd5c9', {
-            method: 'GET',
-            mode: 'no-cors',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            credentials: 'same-origin',
-            crossdomain: true,
-        }).then((response) => {
-            //
-        }).catch((e) => {
-            //
-        });
-    }, [tempLopait] );
+    // const [tempLopait, setTempLopait] = React.useState();
+    // React.useEffect(() => {
+    //     axios('https://api.openweathermap.org/data/2.5/weather?lat=-7.280711095665581&lon=110.45955097017394&appid=ce6e29a8019014230bf75c290bdbd5c9', {
+    //         method: 'GET',
+    //         mode: 'no-cors',
+    //         headers: {
+    //             'Access-Control-Allow-Origin': '*',
+    //             Accept: 'application/json',
+    //             'Content-Type': 'application/json',
+    //         },
+    //         credentials: 'same-origin',
+    //         crossdomain: true,
+    //     }).then((response) => {
+    //         //
+    //     }).catch((e) => {
+    //         //
+    //     });
+    // }, [tempLopait] );
 
     const isMounted = useIsMounted();
 
@@ -534,7 +506,6 @@ export default function Welcome(props) {
                             alignItems: 'center'
                         }}>
                             <Box
-                            ref={tentangNavigationRef}
                             onClick={() => scrollToRef(tentangScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -555,7 +526,6 @@ export default function Welcome(props) {
                                 >TENTANG</Typography>
                             </Box>
                             <Box
-                            ref={zonaNavigationRef}
                             onClick={() => scrollToRef(zonaScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -576,7 +546,6 @@ export default function Welcome(props) {
                                 >ZONA</Typography>
                             </Box>
                             <Box
-                            ref={mapsNavigationRef}
                             onClick={() => scrollToRef(mapsScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -597,7 +566,6 @@ export default function Welcome(props) {
                                 >MAPS</Typography>
                             </Box>
                             <Box
-                            ref={eventsNavigationRef}
                             onClick={() => scrollToRef(eventsScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -618,7 +586,6 @@ export default function Welcome(props) {
                                 >EVENTS</Typography>
                             </Box>
                             <Box
-                            ref={faqsNavigationRef}
                             onClick={() => scrollToRef(faqsScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -639,7 +606,6 @@ export default function Welcome(props) {
                                 >FAQs</Typography>
                             </Box>
                             <Box
-                            ref={contactsNavigationRef}
                             onClick={() => scrollToRef(contactsScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -1519,6 +1485,7 @@ export default function Welcome(props) {
 
                     {/* navigation-fixed */}
                     <Box
+                    className='stickyNavbar'
                     sx={{
                         zIndex: '1001',
                         position: 'sticky',
@@ -1526,6 +1493,7 @@ export default function Welcome(props) {
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'center',
+                        overflowX: 'scroll',
                         alignItems: 'center',
                         width: '100%',
                         height: '50px',
@@ -1537,14 +1505,12 @@ export default function Welcome(props) {
                         wrap="nowrap"
                         spacing={0}
                         sx={{
-                            overflowX: 'scroll',
                             display: 'flex',
                             height: '100%',
                             justifyContent: 'flex-start',
                             alignItems: 'center'
                         }}>
                             <Box
-                            ref={tentangNavigationRef}
                             onClick={() => scrollToRef(tentangScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -1565,7 +1531,6 @@ export default function Welcome(props) {
                                 >TENTANG</Typography>
                             </Box>
                             <Box
-                            ref={zonaNavigationRef}
                             onClick={() => scrollToRef(zonaScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -1586,7 +1551,6 @@ export default function Welcome(props) {
                                 >ZONA</Typography>
                             </Box>
                             <Box
-                            ref={mapsNavigationRef}
                             onClick={() => scrollToRef(mapsScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -1607,7 +1571,6 @@ export default function Welcome(props) {
                                 >MAPS</Typography>
                             </Box>
                             <Box
-                            ref={eventsNavigationRef}
                             onClick={() => scrollToRef(eventsScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -1628,7 +1591,6 @@ export default function Welcome(props) {
                                 >EVENTS</Typography>
                             </Box>
                             <Box
-                            ref={faqsNavigationRef}
                             onClick={() => scrollToRef(faqsScrollRef)}
                             sx={{
                                 display: 'flex',
@@ -1649,7 +1611,6 @@ export default function Welcome(props) {
                                 >FAQs</Typography>
                             </Box>
                             <Box
-                            ref={contactsNavigationRef}
                             onClick={() => scrollToRef(contactsScrollRef)}
                             sx={{
                                 display: 'flex',

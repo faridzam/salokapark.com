@@ -48,6 +48,24 @@ export const theme = createTheme({
             text: '#fff',
             contrasText: '#fff',
         },
+        white: {
+            lightest: '#ffffff',
+            light: '#eeeeee',
+            main: '#dddddd',
+            dark: '#cccccc',
+            darkest: '#bbbbbb',
+            text: '#fff',
+            contrasText: '#fff',
+        },
+        black: {
+            lightest: '#000000',
+            light: '#111111',
+            main: '#222222',
+            dark: '#333333',
+            darkest: '#444444',
+            text: '#fff',
+            contrasText: '#fff',
+        },
     },
     rainbow: {
         palette:{

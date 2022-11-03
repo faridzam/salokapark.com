@@ -187,7 +187,6 @@ export default function App() {
                                 }}>
                                     <Box
                                     sx={{
-                                        maxHeight: '300px',
                                         width: '100%',
                                         cursor: 'pointer',
                                         display: 'flex',
@@ -203,12 +202,13 @@ export default function App() {
                                             objectPosition: 'top',
                                             width: '100%',
                                             minHeight: '300px',
+                                            maxHeight: '1000px',
                                         }}></img>
                                     </Box>
                                     <Box
                                     sx={{
                                         marginTop: '50px',
-                                        width: '100%',
+                                        width: '90%',
                                     }}>
                                         <Box
                                         sx={{
@@ -234,8 +234,7 @@ export default function App() {
                                             <Typography
                                             textAlign="justify"
                                             sx={{
-                                                lineHeight: 2,
-                                                fontSize: '18px',
+                                                fontSize: '15px',
                                                 fontWeight: 400,
                                                 color: '#333'
                                             }}
@@ -253,7 +252,7 @@ export default function App() {
                                             align="justify"
                                             sx={{
                                                 cursor: 'pointer',
-                                                fontSize: '18px',
+                                                fontSize: '15px',
                                                 fontWeight: 400,
                                                 color: '#789acf'
                                             }}

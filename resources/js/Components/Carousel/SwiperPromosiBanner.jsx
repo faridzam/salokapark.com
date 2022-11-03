@@ -48,6 +48,7 @@ export default function App() {
                     objectPosition: 'top',
                     width: '100%',
                     minHeight: '30vh',
+                    maxHeight: '85vh',
                 }}></img>
             </Box>
         </SwiperSlide>

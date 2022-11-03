@@ -32,6 +32,12 @@ export default function Header() {
     const [drawerState, setDrawerState] = React.useState(false);
     const theme = useTheme();
 
+    const [activeRoute, setActiveRoute] = React.useState('');
+
+    React.useEffect(() => {
+        setActiveRoute(route().current());
+      }, []);
+
     const redirect = (route) => {
         Inertia.visit(route);
     }
@@ -82,23 +88,21 @@ export default function Header() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     }}>
-                        <Link
-                        href={route('welcome')}
-                        >
-                            <Typography
-                            noWrap={true}
-                            sx={{
-                                fontFamily: 'AlrightSans',
-                                fontSize: '18px',
-                                fontWeight: 700,
-                                color: '#333',
-                                cursor: 'pointer',
-                                "&:hover": {
-                                    color: 'secondary.light',
-                                },
-                            }}
-                            >HOME</Typography>
-                        </Link>
+                        <Typography
+                        className={`navbar-item noselect ${activeRoute === "welcome" ? " navbar-item-active" : ""}`}
+                        onClick={() => redirect('/')}
+                        noWrap={true}
+                        sx={{
+                            fontFamily: 'AlrightSans',
+                            fontSize: '18px',
+                            fontWeight: 700,
+                            color: '#333',
+                            cursor: 'pointer',
+                            "&:hover": {
+                                color: 'secondary.light',
+                            },
+                        }}
+                        >HOME</Typography>
                     </Box>
                     <Box
                     sx={{
@@ -110,6 +114,7 @@ export default function Header() {
                     alignItems: 'center',
                     }}>
                     <Typography
+                    className={`navbar-item noselect ${activeRoute === "promotion" ? " navbar-item-active" : ""}`}
                     onClick={() => redirect('/promosi')}
                     noWrap={true}
                     sx={{
@@ -134,6 +139,8 @@ export default function Header() {
                     alignItems: 'center',
                     }}>
                     <Typography
+                    className={`navbar-item noselect ${activeRoute === "zone" ? " navbar-item-active" : ""}`}
+                    onClick={() => redirect('/zona')}
                     noWrap={true}
                     sx={{
                         fontFamily: 'AlrightSans',
@@ -157,6 +164,8 @@ export default function Header() {
                     alignItems: 'center',
                     }}>
                     <Typography
+                    className={`navbar-item noselect ${activeRoute === "showEvent" ? " navbar-item-active" : ""}`}
+                    onClick={() => redirect('/show-event')}
                     noWrap={true}
                     sx={{
                         fontFamily: 'AlrightSans',
@@ -180,6 +189,8 @@ export default function Header() {
                     alignItems: 'center',
                     }}>
                     <Typography
+                    className={`navbar-item noselect ${activeRoute === "restaurant" ? " navbar-item-active" : ""}`}
+                    onClick={() => redirect('/restaurant')}
                     noWrap={true}
                     sx={{
                         fontFamily: 'AlrightSans',
@@ -203,6 +214,8 @@ export default function Header() {
                     alignItems: 'center',
                     }}>
                     <Typography
+                    className={`navbar-item noselect ${activeRoute === "merchandise" ? " navbar-item-active" : ""}`}
+                    onClick={() => redirect('/merchandise')}
                     noWrap={true}
                     sx={{
                         fontFamily: 'AlrightSans',
@@ -274,33 +287,43 @@ export default function Header() {
                     }}>
                         <ListItem key="home">
                             <ListItemButton
+                            className={`navbar-item noselect ${activeRoute === "welcome" ? " navbar-item-active" : ""}`}
                             onClick={() => redirect('/')}>
                                 <ListItemText primary="Home" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
                         <ListItem key="promosi">
                             <ListItemButton
+                            className={`navbar-item noselect ${activeRoute === "promotion" ? " navbar-item-active" : ""}`}
                             onClick={() => redirect('/promosi')}>
                                 <ListItemText primary="Promosi" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
                         <ListItem key="zona">
-                            <ListItemButton>
+                            <ListItemButton
+                            className={`navbar-item noselect ${activeRoute === "zone" ? " navbar-item-active" : ""}`}
+                            onClick={() => redirect('/zona')}>
                                 <ListItemText primary="Zona" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
                         <ListItem key="show&event">
-                            <ListItemButton>
+                            <ListItemButton
+                            className={`navbar-item noselect ${activeRoute === "showEvent" ? " navbar-item-active" : ""}`}
+                            onClick={() => redirect('/show-event')}>
                                 <ListItemText primary="Show & Event" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
                         <ListItem key="restaurant">
-                            <ListItemButton>
+                            <ListItemButton
+                            className={`navbar-item noselect ${activeRoute === "restaurant" ? " navbar-item-active" : ""}`}
+                            onClick={() => redirect('/restaurant')}>
                                 <ListItemText primary="Restaurant" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
                         <ListItem key="merchandise">
-                            <ListItemButton>
+                            <ListItemButton
+                            className={`navbar-item noselect ${activeRoute === "merchandise" ? " navbar-item-active" : ""}`}
+                            onClick={() => redirect('/merchandise')}>
                                 <ListItemText primary="Merchandise" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>

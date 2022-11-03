@@ -1,0 +1,32 @@
+:root {
+    --swiper-theme-color: #f5b247;
+}
+.swiper-button-next::after{
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
+    right:10px;
+    padding: 20px;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+}
+
+.swiper-button-prev::after {
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
+    right:10px;
+    padding: 20px;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+}
+
+.swiper-pagination-bullet {
+    background-color: white;
+    opacity: 0.8;
+}
+
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: #f5b247;
+    opacity: 1;
+}
