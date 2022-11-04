@@ -6,6 +6,7 @@ import {useMediaQuery, Box, Typography, Button, Accordion, AccordionSummary, Acc
 import {AccessTime, DeviceThermostat, ConfirmationNumber, Stars, ArrowForward, CalendarMonth, ExpandMore} from '@mui/icons-material';
 import { useInView } from 'react-intersection-observer';
 import GoogleMapReact from 'google-map-react';
+import { Inertia } from '@inertiajs/inertia';
 
 import { Header, Footer, ToTopButton} from '../Components';
 import { SwiperMainBanner, SwiperMainZones, SwiperMainEvents } from '../Components/Carousel';
@@ -34,6 +35,10 @@ export default function Welcome(props) {
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     // faqs accordion
     const PRIMARY_FAQ_AMOUNT = 4;
@@ -281,6 +286,7 @@ export default function Welcome(props) {
                             direction="row"
                             spacing={0}>
                             <Box
+                            onClick={() => redirect('/ticket')}
                             sx={{
                                 width: '200px',
                                 height: '50px',
@@ -699,6 +705,7 @@ export default function Welcome(props) {
                                 >SALOKA hadir sebagai salah satu destinasi wisata Pesona Indonesia yang berbentuk taman rekreasi tematik keluarga di Jawa Tengah yang mengusung konsep kearifan lokal. Berlokasi di persimpangan antara kota Semarang, Salatiga, Surakarta dan Daerah Istimewa Yogyakarta.</Typography>
                             </Box>
                             <Box
+                            onClick={() => redirect('/tentang')}
                             sx={{
                                 display: 'flex',
                                 marginTop: '10px',
@@ -906,6 +913,7 @@ export default function Welcome(props) {
                             marginTop: '50px',
                         }}>
                             <Button
+                            onClick={() => redirect('/zona')}
                             variant="outlined"
                             sx={{
                                 width: '200px',
@@ -994,6 +1002,7 @@ export default function Welcome(props) {
                         }}
                         >Jangan lewatkan salah satu keseruannya. Rencanakan hari Anda mengunjungi 5 zona.</Typography>
                         <Button
+                        onClick={() => redirect('/zona')}
                         variant="contained"
                         sx={{
                             borderRadius: 25,
@@ -1279,6 +1288,7 @@ export default function Welcome(props) {
                             }}>
 
                             <Box
+                            onClick={() => redirect('/ticket')}
                             sx={{
                                 width: '50%',
                                 height: '50px',
@@ -1705,6 +1715,7 @@ export default function Welcome(props) {
                                 >SALOKA hadir sebagai salah satu destinasi wisata Pesona Indonesia yang berbentuk taman rekreasi tematik keluarga di Jawa Tengah yang mengusung konsep kearifan lokal. Berlokasi di persimpangan antara kota Semarang, Salatiga, Surakarta dan Daerah Istimewa Yogyakarta.</Typography>
                             </Box>
                             <Box
+                            onClick={() => redirect('/tentang')}
                             sx={{
                                 display: 'flex',
                                 marginTop: '10px',
@@ -1771,6 +1782,7 @@ export default function Welcome(props) {
                             marginTop: '50px',
                         }}>
                             <Button
+                            onClick={() => redirect('/zona')}
                             variant="outlined"
                             sx={{
                                 width: '200px',
@@ -1862,6 +1874,7 @@ export default function Welcome(props) {
                         }}
                         >Jangan lewatkan salah satu keseruannya. Rencanakan hari Anda mengunjungi 5 zona.</Typography>
                         <Button
+                        onClick={() => redirect('/zona')}
                         variant="contained"
                         sx={{
                             borderRadius: 25,

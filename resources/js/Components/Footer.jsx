@@ -505,6 +505,7 @@ export default function Footer() {
                                 >0823-5900-0077</Typography>
                                 <WhatsApp sx={{ color: '#eee'}}/>
                             </Box>
+                            {/*
                             <Box
                             sx={{
                                 marginTop: '40px',
@@ -572,6 +573,7 @@ export default function Footer() {
                                 </TextField>
 
                             </Box>
+                            */}
                             <Box
                             sx={{
                                 marginTop: '10px',
@@ -811,6 +813,7 @@ export default function Footer() {
                                 <WhatsApp sx={{ color: '#eee'}}/>
                             </Box>
 
+                            {/*
                             <Box
                             sx={{
                                 marginTop: '40px',
@@ -878,6 +881,8 @@ export default function Footer() {
                                 </TextField>
 
                             </Box>
+                            */}
+
                         </Grid>
 
                     </Grid>

@@ -10,6 +10,7 @@ import SwiperMerchandisePakaian from './SwiperMerchandisePakaian'
 import SwiperMerchandiseAccessories from './SwiperMerchandiseAccessories'
 import SwiperMerchandiseGantungan from './SwiperMerchandiseGantungan'
 import SwiperMerchandiseBoneka from './SwiperMerchandiseBoneka'
+import SwiperTentangFasum from './SwiperTentangFasum'
 
 export {
     SwiperMainBanner,
@@ -24,4 +25,5 @@ export {
     SwiperMerchandiseAccessories,
     SwiperMerchandiseGantungan,
     SwiperMerchandiseBoneka,
+    SwiperTentangFasum,
 }

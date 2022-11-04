@@ -72,6 +72,11 @@ Route::get('/merchandise', function () {
     return Inertia::render('Merchandise/Merchandise');
 })->name('merchandise');
 
+// About
+Route::get('/tentang', function () {
+    return Inertia::render('About/About');
+})->name('about');
+
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
