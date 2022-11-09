@@ -7,8 +7,10 @@ import {ArrowForward} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
-import {mediaShowEvent, showEvent} from '../../assets/images/showEvent';
+import {mediaShowEvent, showEvent, showEventByIndex} from '../../assets/images/showEvent';
 import { SwiperShowEventBanner } from '../../Components/Carousel';
+
+import { Inertia } from '@inertiajs/inertia';
 
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);
@@ -31,6 +33,10 @@ export default function ShowEvent(props) {
 
     const CONTENT_COUNT = showEvent.length;
     const contents = Array.from(Array(CONTENT_COUNT).keys());
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     return(
         <>
@@ -109,6 +115,7 @@ export default function ShowEvent(props) {
                                                     width: '60%',
                                                 }}>
                                                     <img
+                                                    onClick={() => redirect(showEventByIndex(index).link)}
                                                     src={mediaShowEvent[index]}
                                                     alt={`showEvent`+index}
                                                     style={{
@@ -178,6 +185,7 @@ export default function ShowEvent(props) {
                                                             alignItems: 'center',
                                                         }}>
                                                             <Typography
+                                                            onClick={() => redirect(showEventByIndex(index).link)}
                                                             className="noselect"
                                                             align="justify"
                                                             sx={{
@@ -269,6 +277,7 @@ export default function ShowEvent(props) {
                                                     width: '100%',
                                                 }}>
                                                     <img
+                                                    onClick={() => redirect(showEventByIndex(index).link)}
                                                     src={mediaShowEvent[index]}
                                                     alt={`showEvent`+index}
                                                     style={{
@@ -339,6 +348,7 @@ export default function ShowEvent(props) {
                                                             alignItems: 'center',
                                                         }}>
                                                             <Typography
+                                                            onClick={() => redirect(showEventByIndex(index).link)}
                                                             className="noselect"
                                                             align="justify"
                                                             sx={{

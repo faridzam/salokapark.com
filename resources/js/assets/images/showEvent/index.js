@@ -11,7 +11,7 @@ export const showEvent = [
         nama: 'banner',
         title: 'Baru Klinthing Show di Jejogedan',
         deskripsi: 'Baru Klinthing Show merupakan pertunjukan yang mengadaptasi cerita rakyat mengenai Baru Klinthing, dengan memadukan teknologi modern, animasi 3D, laser, musik, dan air mancur menari',
-        link: '/show-event/promosi-1',
+        link: '/show-event/baru-klinthing-show',
     },
     {
         slugs: 'galileo-liveness',
@@ -19,7 +19,7 @@ export const showEvent = [
         nama: 'banner',
         title: 'Galileo Liveness di Lumbung Ilmu Galileo',
         deskripsi: 'Atraksi edukasi yang dipersembahkan para talent SALOKA untuk para pengunjung yang masuk di wahana Lumbung Ilmu Galileo.',
-        link: '/show-event/promosi-2',
+        link: '/show-event/galileo-liveness',
     },
     {
         slugs: 'baru-klinthing',
@@ -27,7 +27,7 @@ export const showEvent = [
         nama: 'banner',
         title: 'Baru Klinthing Show di Jejogedan',
         deskripsi: 'Dance show yang dilakukan sosok clown bernama Ayayi bersama 4 Peri Hutan Negeri SALOKA untuk berbagi keceriaan kepada para anak-anak di sekitar zona anak, Kamayayi.',
-        link: '/show-event/promosi-3',
+        link: '/show-event/baru-klinthing',
     },
     {
         slugs: 'salokarnival',
@@ -35,10 +35,10 @@ export const showEvent = [
         nama: 'banner',
         title: 'Salokarnival di Plaza Ararya',
         deskripsi: 'Karnaval yang menampilkan karakter-karakter yang ada di Negeri SALOKA dan karakter-karakter yang muncul di cerita-cerita rakyat. Pertunjukkan ini dikemas dalam bentuk tarian dan photo moment.',
-        link: '/show-event/promosi-4',
+        link: '/show-event/salokarnival',
     },
 ];
 
-export const promosiBannerByIndex = index => showEvent[index];
+export const showEventByIndex = index => showEvent[index];
 export const mediaByIndex = index => mediaShowEvent[index % mediaShowEvent.length];
 export const getIndexShowEventBySlugs = slugs => showEvent.findIndex(x => x.slugs === slugs);

@@ -4,6 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography, IconButton, TextField, Button} from '@mui/material';
 import {Instagram, Facebook, Twitter, YouTube, LocationOn, Email, Phone, WhatsApp} from '@mui/icons-material';
 import {media} from '../assets/images';
+import { Inertia } from '@inertiajs/inertia';
 
 const styles = {
     container: {
@@ -25,6 +26,10 @@ export default function Footer() {
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     return(
         <Grid
@@ -99,6 +104,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/zona/pesisir')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -118,6 +124,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/zona/balalantara')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -137,6 +144,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/zona/kamayayi')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -156,6 +164,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/zona/ararya')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -175,6 +184,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/zona/segara-prada')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -221,6 +231,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/tentang')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -240,6 +251,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/tentang')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -305,6 +317,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/restaurant/rimba')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -324,6 +337,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/restaurant/daimami')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -343,6 +357,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/restaurant/jenju')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -362,6 +377,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/restaurant/tuk-cio')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -381,6 +397,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/restaurant/srengenge')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',
@@ -400,6 +417,7 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                onClick={() => redirect('/restaurant/ice-cream-shop')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '18px',

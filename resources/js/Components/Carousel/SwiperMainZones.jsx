@@ -12,6 +12,7 @@ import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
 import {ArrowForward} from '@mui/icons-material';
 import "./swiperMainZones.module.css";
+import { Inertia } from '@inertiajs/inertia';
 
 // import required modules
 import { Navigation } from "swiper";
@@ -24,6 +25,10 @@ export default function App() {
 
     const SLIDE_COUNT = 5;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     return (
         <>
@@ -72,6 +77,7 @@ export default function App() {
                                         alignItems: 'center',
                                     }}>
                                         <img
+                                        onClick={() => redirect(zonaByIndex(index).link)}
                                         src={media[index]}
                                         alt="logo saloka"
                                         style={{
@@ -126,6 +132,7 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <Typography
+                                            onClick={() => redirect(zonaByIndex(index).link)}
                                             className="noselect"
                                             align="justify"
                                             sx={{
@@ -195,6 +202,7 @@ export default function App() {
                                         alignItems: 'center',
                                     }}>
                                         <img
+                                        onClick={() => redirect(zonaByIndex(index).link)}
                                         src={media[index]}
                                         alt="logo saloka"
                                         style={{
@@ -249,6 +257,7 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <Typography
+                                            onClick={() => redirect(zonaByIndex(index).link)}
                                             className="noselect"
                                             align="justify"
                                             sx={{

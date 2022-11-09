@@ -11,6 +11,7 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography, Button} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
 import "./swiperMainEvents.module.css";
+import { Inertia } from '@inertiajs/inertia';
 
 // import required modules
 import { Navigation } from "swiper";
@@ -23,6 +24,10 @@ export default function App() {
 
     const SLIDE_COUNT = 2;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     return (
         <>
@@ -153,6 +158,7 @@ export default function App() {
                                                     alignItems: 'center',
                                                 }}>
                                                     <Button
+                                                    onClick={() => redirect(eventByIndex(index).link)}
                                                     variant="contained"
                                                     sx={{
                                                         borderRadius: 5,
@@ -302,6 +308,7 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <Button
+                                            onClick={() => redirect(eventByIndex(index).link)}
                                             variant="contained"
                                             sx={{
                                                 borderRadius: 5,

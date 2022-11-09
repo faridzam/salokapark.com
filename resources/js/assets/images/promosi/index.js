@@ -2,8 +2,16 @@ import media1 from "./promosi1.png";
 import media2 from "./promosi2.png";
 import media3 from "./promosi3.png";
 import media4 from "./promosi4.png";
+import media5 from "./promosiEvent1.png";
+import media6 from "./promosiEvent2.png";
+import media7 from "./promosiEvent3.png";
+import media8 from "./promosiEvent4.png";
 
-export const mediaPromosi = [media1, media2, media3, media4];
+
+export const mediaPromosi = [
+    media1, media2, media3, media4,
+    media5, media6, media7, media8,
+];
 export const promosiList = [
     {
         slugs: 'hari-pelanggan',
@@ -32,6 +40,38 @@ export const promosiList = [
         deskripsiLengkap: 'Vivamus porta quis sem vel lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec neque eget justo finibus vehicula vitae quis justo. Pellentesque viverra lobortis orci quis facilisis. Nulla ultrices ullamcorper eros vitae sagittis. Vivamus vitae tincidunt purus, in fermentum tellus. Phasellus ac imperdiet massa. Nullam rutrum nisi turpis, sed volutpat dui gravida ac.',
         nama: 'Monday Funday',
         deskripsi: 'Ceria di hari senin dan nikmati lebih dari 20+ wahana! Dengan pembelian tiket 100k khusus di hari senin.'
+    },
+    {
+        slugs: 'gelaran-budaya-oengaran-menari',
+        title: 'Saloka Gelaran Budaya Oengaran Menari',
+        deskripsiLengkap: 'Vivamus porta quis sem vel lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec neque eget justo finibus vehicula vitae quis justo. Pellentesque viverra lobortis orci quis facilisis. Nulla ultrices ullamcorper eros vitae sagittis. Vivamus vitae tincidunt purus, in fermentum tellus. Phasellus ac imperdiet massa. Nullam rutrum nisi turpis, sed volutpat dui gravida ac.',
+        nama: 'Saloka Gelaran Budaya Oengaran Menari',
+        deskripsi: 'Akan ada keseruan lagi di Saloka nih, Lur! Saloka Gelaran Budaya featuring Oengaran Menari',
+        link: ''
+    },
+    {
+        slugs: 'fashion-kids-competition',
+        title: 'Saloka Fashion Kids Competition',
+        deskripsiLengkap: 'Vivamus porta quis sem vel lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec neque eget justo finibus vehicula vitae quis justo. Pellentesque viverra lobortis orci quis facilisis. Nulla ultrices ullamcorper eros vitae sagittis. Vivamus vitae tincidunt purus, in fermentum tellus. Phasellus ac imperdiet massa. Nullam rutrum nisi turpis, sed volutpat dui gravida ac.',
+        nama: 'Saloka Fashion Kids Competition',
+        deskripsi: 'Raih hadiah jutaan rupiah di Saloka Fashion Kids, Lur! Daftarkan anak, keponakan atau saudara anda.',
+        link: ''
+    },
+    {
+        slugs: 'cooking-class-donut',
+        title: 'Cooking Class Dounut',
+        deskripsiLengkap: 'Vivamus porta quis sem vel lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec neque eget justo finibus vehicula vitae quis justo. Pellentesque viverra lobortis orci quis facilisis. Nulla ultrices ullamcorper eros vitae sagittis. Vivamus vitae tincidunt purus, in fermentum tellus. Phasellus ac imperdiet massa. Nullam rutrum nisi turpis, sed volutpat dui gravida ac.',
+        nama: 'Cooking Class Dounut',
+        deskripsi: 'Bermain sambil belajar di Saloka Theme Park, Lur! Dengan pembelian tiket 100k per orang.',
+        link: ''
+    },
+    {
+        slugs: 'pentas-seni-tari-drumblek',
+        title: 'Pentas Seni Tari dan Drumblek',
+        deskripsiLengkap: 'Vivamus porta quis sem vel lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec neque eget justo finibus vehicula vitae quis justo. Pellentesque viverra lobortis orci quis facilisis. Nulla ultrices ullamcorper eros vitae sagittis. Vivamus vitae tincidunt purus, in fermentum tellus. Phasellus ac imperdiet massa. Nullam rutrum nisi turpis, sed volutpat dui gravida ac.',
+        nama: 'Pentas Seni Tari dan Drumblek',
+        deskripsi: 'Long weekend #ceriatiadahabisnya di Saloka, Lur! Siapa nih yang kemarin ketinggalan show kemarin?',
+        link: ''
     },
 ];
 export const promosiListByIndex = index => promosiList[index];

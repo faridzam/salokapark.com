@@ -8,6 +8,7 @@ import {ArrowForward} from '@mui/icons-material';
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
 import {mediaZona, zonaByIndex} from '../../assets/images/zona';
+import { Inertia } from '@inertiajs/inertia';
 
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);
@@ -26,6 +27,10 @@ export default function Zona(props) {
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     return(
         <>
@@ -212,6 +217,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(1).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -311,6 +317,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(2).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -426,6 +433,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(3).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -524,6 +532,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(4).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -639,6 +648,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(5).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -844,6 +854,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(1).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -953,6 +964,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(2).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -1062,6 +1074,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(3).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -1171,6 +1184,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(4).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{
@@ -1280,6 +1294,7 @@ export default function Zona(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Typography
+                                                        onClick={() => redirect(zonaByIndex(5).link)}
                                                         className="noselect"
                                                         align="justify"
                                                         sx={{

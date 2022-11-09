@@ -7,7 +7,7 @@ import {ArrowForward} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
-import {mediaShowEvent, promosiBannerByIndex, getIndexShowEventBySlugs} from '../../assets/images/showEvent';
+import {mediaShowEvent, showEventByIndex, getIndexShowEventBySlugs} from '../../assets/images/showEvent';
 
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);
@@ -82,7 +82,7 @@ export default function Zona(props) {
                                     fontSize: '32px',
                                     color: '#333',
                                     textAlign: 'center',
-                                }}>{promosiBannerByIndex(getIndexShowEventBySlugs(props.slugs)).title}</Typography>
+                                }}>{showEventByIndex(getIndexShowEventBySlugs(props.slugs)).title}</Typography>
                             </Box>
 
                             <Box
@@ -100,7 +100,7 @@ export default function Zona(props) {
                                     fontWeight: 400,
                                     color: '#333'
                                 }}
-                                >{promosiBannerByIndex(getIndexShowEventBySlugs(props.slugs)).deskripsiLengkap}</Typography>
+                                >{showEventByIndex(getIndexShowEventBySlugs(props.slugs)).deskripsiLengkap}</Typography>
                             </Box>
 
                         </Grid>
