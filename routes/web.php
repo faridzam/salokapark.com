@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\DynamicRoutingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,9 @@ Route::get('/merchandise', function () {
 Route::get('/tentang', function () {
     return Inertia::render('About/About');
 })->name('about');
+
+// Dynamic Routing
+Route::get('/{category}/{slugs}', [DynamicRoutingController::class, 'renderDetailComponent']);
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
