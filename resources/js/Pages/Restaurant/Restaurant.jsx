@@ -4,10 +4,11 @@ import { useTheme } from "@mui/material/styles";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography, Fade} from '@mui/material';
 import {ArrowForward} from '@mui/icons-material';
+import { Inertia } from '@inertiajs/inertia';
 
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
-import {mediaRestaurant, restaurant} from '../../assets/images/restaurant';
+import {mediaRestaurant, restaurant, restaurantBannerByIndex} from '../../assets/images/restaurant';
 import { SwiperRestaurantBanner } from '../../Components/Carousel';
 
 export function useIsMounted() {
@@ -31,6 +32,10 @@ export default function Restaurant(props) {
 
     const CONTENT_COUNT = restaurant.length;
     const contents = Array.from(Array(CONTENT_COUNT).keys());
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     return(
         <>
@@ -108,6 +113,7 @@ export default function Restaurant(props) {
                                                     width: '60%',
                                                 }}>
                                                     <img
+                                                    onClick={() => redirect(restaurantBannerByIndex(index).link)}
                                                     src={mediaRestaurant[index]}
                                                     alt={`restaurant`+index}
                                                     style={{
@@ -177,6 +183,7 @@ export default function Restaurant(props) {
                                                             alignItems: 'center',
                                                         }}>
                                                             <Typography
+                                                            onClick={() => redirect(restaurantBannerByIndex(index).link)}
                                                             className="noselect"
                                                             align="justify"
                                                             sx={{
@@ -268,6 +275,7 @@ export default function Restaurant(props) {
                                                     width: '100%',
                                                 }}>
                                                     <img
+                                                    onClick={() => redirect(restaurantBannerByIndex(index).link)}
                                                     src={mediaRestaurant[index]}
                                                     alt={`restaurant`+index}
                                                     style={{
@@ -338,6 +346,7 @@ export default function Restaurant(props) {
                                                             alignItems: 'center',
                                                         }}>
                                                             <Typography
+                                                            onClick={() => redirect(restaurantBannerByIndex(index).link)}
                                                             className="noselect"
                                                             align="justify"
                                                             sx={{
