@@ -10,7 +10,6 @@ import {media} from '../../assets/images';
 import { Application, Calendar } from 'react-rainbow-components';
 import axios from 'axios';
 
-import styles from "../../styles/index.css";
 import { Inertia } from '@inertiajs/inertia';
 
 const calendarContainerStyles = {
