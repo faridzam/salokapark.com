@@ -8,6 +8,7 @@ import "swiper/css/autoplay";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/lazy";
 
 // import required modules
 import { Autoplay, EffectFade, Pagination, Lazy } from "swiper";
@@ -29,6 +30,7 @@ export default function App() {
           clickable: true,
         }}
         loop={true}
+        preloadImages={false}
         lazy={true}
         effect={"fade"}
         modules={[Autoplay, EffectFade, Pagination]}

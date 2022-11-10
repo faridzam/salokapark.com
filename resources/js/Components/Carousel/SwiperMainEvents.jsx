@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/lazy";
 
 import {media, eventByIndex} from '../../assets/images/carousel_assets/events';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
@@ -38,6 +39,7 @@ export default function App() {
                     slidesPerView={1}
                     slidesPerGroup={1}
                     loop={true}
+                    preloadImages={false}
                     navigation={true}
                     lazy={true}
                     modules={[Navigation]}
