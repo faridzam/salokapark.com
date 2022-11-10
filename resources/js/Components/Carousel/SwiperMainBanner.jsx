@@ -42,6 +42,7 @@ export default function App() {
                 <img
                 src={media[0]}
                 alt="logo saloka"
+                loading="lazy"
                 style={{
                     layout: 'fill',
                     objectFit: 'cover',
@@ -59,6 +60,7 @@ export default function App() {
             }}>
                 <img
                 src={media[1]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',

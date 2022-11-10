@@ -41,6 +41,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaFasum[0]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',
@@ -58,6 +59,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaFasum[1]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',
@@ -75,6 +77,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaFasum[2]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',

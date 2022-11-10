@@ -87,6 +87,7 @@ export default function App() {
                                             }}>
                                                 <img
                                                 src={media[index]}
+                                                loading="lazy"
                                                 alt="logo saloka"
                                                 style={{
                                                     layout: 'fill',
@@ -237,6 +238,7 @@ export default function App() {
                                         }}>
                                             <img
                                             src={media[index]}
+                                            loading="lazy"
                                             alt="logo saloka"
                                             style={{
                                                 layout: 'fill',

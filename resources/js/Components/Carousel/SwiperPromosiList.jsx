@@ -79,6 +79,7 @@ export default function App() {
                                         <img
                                         onClick={() => redirect(promosiListByIndex(index).link)}
                                         src={media[index]}
+                                        loading="lazy"
                                         alt="logo saloka"
                                         style={{
                                             layout: 'fill',
@@ -203,6 +204,7 @@ export default function App() {
                                         <img
                                         onClick={() => redirect(promosiListByIndex(index).link)}
                                         src={media[index]}
+                                        loading="lazy"
                                         alt="logo saloka"
                                         style={{
                                             layout: 'fill',

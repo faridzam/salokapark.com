@@ -41,6 +41,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaRestaurant[0]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',
@@ -59,6 +60,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaRestaurant[1]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',
@@ -77,6 +79,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaRestaurant[2]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',
@@ -95,6 +98,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaRestaurant[3]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',
@@ -113,6 +117,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaRestaurant[4]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',
@@ -131,6 +136,7 @@ export default function App() {
             }}>
                 <img
                 src={mediaRestaurant[5]}
+                loading="lazy"
                 alt="logo saloka"
                 style={{
                     layout: 'fill',
