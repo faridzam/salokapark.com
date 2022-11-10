@@ -36,6 +36,10 @@ Route::get('/ticket', function () {
     return Inertia::render('Ticket/Ticket');
 })->name('ticket');
 
+Route::get('/ticket/pilih-ticket', function () {
+    return Inertia::render('Ticket/SalokaTicket');
+})->name('pilihTicket');
+
 Route::get('/ticket/data-pemesan', function () {
     return Inertia::render('Ticket/DataPemesan');
 })->name('dataPemesan');

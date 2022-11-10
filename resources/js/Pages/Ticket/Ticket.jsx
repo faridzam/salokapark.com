@@ -177,323 +177,88 @@ export default function Ticket(props) {
                                 display: 'flex',
                                 width: '100%',
                                 justifyContent: 'center',
+                                alignItems: 'center',
                             }}>
-                                <Grid
-                                container={true}
-                                direction="row"
-                                spacing={0}
+                                <Card
+                                elevation={3}
                                 sx={{
-                                    display: 'flex',
-                                    width: '100%',
-                                    justifyContent: 'center',
+                                    width: '70%',
+                                    borderRadius: '30px',
                                 }}>
-                                    <Box
-                                    sx={{
-                                        width: '30%',
-                                        height: '100%',
-                                    }}>
-                                        <Card
-                                        elevation={2}
-                                        style={calendarContainerStyles}
-                                        sx={{
-                                            borderRadius: '30px',
-                                            height: '100%',
-                                        }}>
-                                            <Box
-                                            sx={{
-                                                marginBottom: '50px',
-                                                width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Typography
-                                                sx={{
-                                                    fontSize: '24px',
-                                                    fontWeight: 600
-                                                }}>
-                                                    Tanggal Kedatangan
-                                                </Typography>
-                                            </Box>
-                                            <Application theme={rainbowTheme}>
-                                                <Calendar
-                                                    variant='single'
-                                                    id="calendar-5"
-                                                    locale="id-ID"
-                                                    value={bookingDate}
-                                                    onChange={value => handleArrivalDate(value)}
-                                                    minDate={ today }
-                                                />
-                                            </Application>
-                                        </Card>
-                                    </Box>
-
                                     <Grid
                                     container={true}
                                     direction="column"
                                     spacing={0}
                                     sx={{
-                                        marginLeft: '50px',
+                                        marginY: '30px',
                                         display: 'flex',
-                                        width: '60%',
-                                        justifyContent: 'flex-start',
+                                        width: '100%',
+                                        justifyContent: 'center',
                                         alignItems: 'center',
                                     }}>
-                                        <Card
-                                        elevation={2}
-                                        style={ticketOptionStyles}
+                                        <Box
                                         sx={{
                                             width: '100%',
                                             display: 'flex',
-                                            flexDirection: 'column',
-                                            borderRadius: '30px',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
                                         }}>
-                                            <Box
+                                            <Typography
+                                            sx={{
+                                                fontSize: '28px',
+                                                fontWeight: 500
+                                            }}>Rencanakan kunjungan kamu dan keluarga ke Saloka!</Typography>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            width: '50%',
+                                            minWidth: '550px',
+                                            marginTop: '30px',
+                                        }}>
+                                            <Button
+                                            onClick={() => redirect('/ticket/pilih-ticket')}
+                                            variant='contained'
                                             sx={{
                                                 width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
+                                                height: '75px',
+                                                borderRadius: '30px',
                                             }}>
                                                 <Typography
                                                 sx={{
-                                                    fontSize: '28px',
-                                                    fontWeight: 600
-                                                }}>Ticket Types</Typography>
-                                            </Box>
-                                            <Box
+                                                    fontSize: '24px',
+                                                    fontWeight: 600,
+                                                    letterSpacing: 2
+                                                }}>Ticket by Saloka!</Typography>
+                                            </Button>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            width: '40%',
+                                            minWidth: '440px',
+                                        }}>
+                                            <Grid
+                                            container={true}
+                                            direction="row"
+                                            spacing={0}
                                             sx={{
-                                                marginTop: '50px',
-                                                width: '100%',
+                                                marginTop: '30px',
                                                 display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'center',
+                                                width: '100%',
+                                                justifyContent: 'space-between',
                                                 alignItems: 'center',
                                             }}>
-                                                {ticketCount.map((index) => (
-                                                    <Card
-                                                    elevation={2}
-                                                    sx={{
-                                                        marginY: '10px',
-                                                        width: '70%',
-                                                        borderRadius: '10px',
-                                                    }}>
-                                                        <Grid
-                                                        container={true}
-                                                        direction="row"
-                                                        spacing={0}
-                                                        sx={{
-                                                            paddingX: '50px',
-                                                            paddingY: '20px',
-                                                            width: '100%',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                        }}>
-                                                            <Box
-                                                            sx={{
-                                                                display: 'flex',
-                                                                flexDirection: 'column',
-                                                                width: '40%',
-                                                                alignItems: 'flex-start',
-                                                                justifyContent: 'flex-start',
-                                                            }}>
-                                                                <Typography
-                                                                sx={{
-                                                                    fontSize: '20px',
-                                                                    fontWeight: 600
-                                                                }}>{ticketOrder[index].ticket_name}</Typography>
-                                                                <Typography
-                                                                sx={{
-                                                                    fontSize: '12px',
-                                                                    fontWeight: 400
-                                                                }}>{ticketOrder[index].ticket_description}</Typography>
-                                                            </Box>
-                                                            <Box
-                                                            sx={{
-                                                                display: 'flex',
-                                                                flexDirection: 'row',
-                                                                width: '30%',
-                                                                alignItems: 'center',
-                                                                justifyContent: 'center',
-                                                            }}>
-                                                                <Fab
-                                                                onClick={() => subQuantityTicket(index)}
-                                                                size="small"
-                                                                variant='outlined'
-                                                                color='primary'
-                                                                sx={{
-                                                                    minWidth: '30px',
-                                                                    width: '30px',
-                                                                    minHeight: '30px',
-                                                                    height: '30px',
-                                                                    marginX: '20px'
-                                                                }}>
-                                                                    <Remove
-                                                                    sx={{
-                                                                        margin: 0,
-                                                                        padding: 0,
-                                                                    }}/>
-                                                                </Fab>
-                                                                <Typography
-                                                                sx={{
-                                                                    fontSize: '24px',
-                                                                    fontWeight: 600
-                                                                }}>{ticketOrder[index].quantity.toString()}</Typography>
-                                                                <Fab
-                                                                onClick={() => addQuantityTicket(index)}
-                                                                size="small"
-                                                                variant='outlined'
-                                                                color='primary'
-                                                                sx={{
-                                                                    minWidth: '30px',
-                                                                    width: '30px',
-                                                                    minHeight: '30px',
-                                                                    height: '30px',
-                                                                    marginX: '20px'
-                                                                }}>
-                                                                    <Add
-                                                                    sx={{
-                                                                        margin: 0,
-                                                                        padding: 0,
-                                                                    }}/>
-                                                                </Fab>
-                                                            </Box>
-                                                            <Box
-                                                            sx={{
-                                                                width: '30%',
-                                                                display: 'flex',
-                                                                justifyContent: 'flex-end',
-                                                                alignItems: 'center',
-                                                            }}>
-                                                                <Typography
-                                                                sx={{
-                                                                    fontWeight: 500
-                                                                }}>Rp. {ticketOrder[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
-                                                            </Box>
-                                                        </Grid>
-                                                    </Card>
 
-                                                ))}
-                                                <Box
-                                                sx={{
-                                                    marginTop: '30px',
-                                                    width: '70%',
-                                                    display: 'flex',
-                                                    justifyContent: 'space-between',
-                                                }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginLeft: '10px',
-                                                        height: '100%',
-                                                        display: 'flex',
-                                                        flexDirection: 'column',
-                                                        justiifyContent: 'center',
-                                                        alignItems: 'flex-start',
-                                                    }}>
-                                                        <Typography
-                                                        sx={{
-                                                            fontSize: '14px',
-                                                            fontWeight: 400,
-                                                        }}>
-                                                            arrival date:
-                                                        </Typography>
-                                                        <Typography
-                                                        sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 600,
-                                                        }}>
-                                                            {bookingDate.toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                                                        </Typography>
-                                                    </Box>
-                                                    <Card
-                                                    elevation={5}
-                                                    sx={{
-                                                        borderRadius: '30px'
-                                                    }}>
-                                                        <Box
-                                                        sx={{
-                                                            width: '300px',
-                                                            height: '50px',
-                                                            display: 'flex',
-                                                            flexDirection: 'row',
-                                                            justifyContent: 'space-between',
-                                                            alignItems: 'center',
-                                                        }}>
-                                                            <Box
-                                                            sx={{
-                                                                marginLeft: '10px'
-                                                            }}>
-                                                                <Typography
-                                                                sx={{
-                                                                    fontWeight: 500
-                                                                }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
-                                                            </Box>
-
-                                                            {totalBill === 0
-                                                                ?   <Button
-                                                                    disabled
-                                                                    variant='contained'
-                                                                    sx={{
-                                                                        borderRadius: '30px',
-                                                                        height: '100%',
-                                                                    }}>
-                                                                        <Typography
-                                                                        sx={{
-                                                                            fontSize: '18px',
-                                                                            fontWeight: 600
-                                                                        }}>Checkout</Typography>
-                                                                    </Button>
-                                                                :   <Link
-                                                                    href={route('dataPemesan')}
-                                                                    style={{
-                                                                        height: '100%'
-                                                                    }}
-                                                                    >
-                                                                        <Button
-                                                                        variant='contained'
-                                                                        sx={{
-                                                                            borderRadius: '30px',
-                                                                            height: '100%',
-                                                                        }}>
-                                                                            <Typography
-                                                                            sx={{
-                                                                                fontSize: '18px',
-                                                                                fontWeight: 600
-                                                                            }}>Checkout</Typography>
-                                                                        </Button>
-                                                                    </Link>
-                                                            }
-
-                                                        </Box>
-                                                    </Card>
+                                                <Box>
+                                                    <Button>Ticket by goers</Button>
                                                 </Box>
-                                                <Box
-                                                sx={{
-                                                    marginTop: '30px',
-                                                    width: '70%',
-                                                    display: 'flex',
-                                                    justifyContent: 'flex-end',
-                                                }}>
-                                                    <Typography
-                                                    sx={{
-                                                        fontSize: '15px'
-                                                    }}>
-                                                    *telah melakukan reservasi? cek status reservasi</Typography>
-                                                    <Typography
-                                                    className='noselect'
-                                                    onClick={() => redirect('/ticket/check-status')}
-                                                    sx={{
-                                                        marginLeft: '5px',
-                                                        fontSize: '15px',
-                                                        color: 'blue.light',
-                                                        textDecoration: 'underline',
-                                                        cursor: 'pointer',
-                                                    }}>
-                                                    di sini</Typography>
+                                                <Box>
+                                                    <Button>Ticket by zeals</Button>
                                                 </Box>
-                                            </Box>
-                                        </Card>
+
+                                            </Grid>
+                                        </Box>
                                     </Grid>
-                                </Grid>
+                                </Card>
                             </Grid>
 
                         </div>
@@ -513,308 +278,6 @@ export default function Ticket(props) {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}>
-                                <Box
-                                sx={{
-                                    width: '80%',
-                                    height: '100%',
-                                }}>
-                                    <Card
-                                    elevation={2}
-                                    style={calendarContainerStyles}
-                                    sx={{
-                                        borderRadius: '30px',
-                                        height: '100%',
-                                    }}>
-                                        <Box
-                                        sx={{
-                                            marginBottom: '50px',
-                                            width: '100%',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '24px',
-                                                fontWeight: 600
-                                            }}>
-                                                Tanggal Kedatangan
-                                            </Typography>
-                                        </Box>
-                                        <Application theme={rainbowTheme}>
-                                            <Calendar
-                                                variant='single'
-                                                id="calendar-5"
-                                                locale="id-ID"
-                                                value={bookingDate}
-                                                onChange={value => handleArrivalDate(value)}
-                                                minDate={ today }
-                                            />
-                                        </Application>
-                                    </Card>
-                                </Box>
-                                <Grid
-                                container={true}
-                                direction="column"
-                                spacing={0}
-                                sx={{
-                                    marginTop: '50px',
-                                    display: 'flex',
-                                    width: '80%',
-                                    justifyContent: 'flex-start',
-                                    alignItems: 'center',
-                                }}>
-                                    <Card
-                                    elevation={2}
-                                    style={ticketOptionStyles}
-                                    sx={{
-                                        width: '100%',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        borderRadius: '30px',
-                                    }}>
-                                        <Box
-                                        sx={{
-                                            width: '100%',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '28px',
-                                                fontWeight: 600
-                                            }}>Ticket Types</Typography>
-                                        </Box>
-                                        <Box
-                                        sx={{
-                                            marginTop: '50px',
-                                            width: '100%',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }}>
-                                            {ticketCount.map((index) => (
-                                                <Card
-                                                elevation={2}
-                                                sx={{
-                                                    marginY: '10px',
-                                                    width: '100%',
-                                                    borderRadius: '10px',
-                                                }}>
-                                                    <Grid
-                                                    container={true}
-                                                    direction="column"
-                                                    spacing={0}
-                                                    sx={{
-                                                        paddingY: '20px',
-                                                        width: '100%',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                    }}>
-                                                        <Box
-                                                        sx={{
-                                                            display: 'flex',
-                                                            flexDirection: 'column',
-                                                            width: '100%',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                        }}>
-                                                            <Typography
-                                                            sx={{
-                                                                fontSize: '18px',
-                                                                fontWeight: 600,
-                                                                textAlign: 'center'
-                                                            }}>{ticketOrder[index].ticket_name}</Typography>
-                                                        </Box>
-                                                        <Box
-                                                        sx={{
-                                                            marginY: '20px',
-                                                            display: 'flex',
-                                                            flexDirection: 'row',
-                                                            width: '30%',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                        }}>
-                                                            <Fab
-                                                            onClick={() => subQuantityTicket(index)}
-                                                            size="small"
-                                                            variant='outlined'
-                                                            color='primary'
-                                                            sx={{
-                                                                minWidth: '30px',
-                                                                width: '30px',
-                                                                minHeight: '30px',
-                                                                height: '30px',
-                                                                marginX: '20px'
-                                                            }}>
-                                                                <Remove
-                                                                sx={{
-                                                                    margin: 0,
-                                                                    padding: 0,
-                                                                }}/>
-                                                            </Fab>
-                                                            <Typography
-                                                            sx={{
-                                                                fontSize: '24px',
-                                                                fontWeight: 600
-                                                            }}>{ticketOrder[index].quantity.toString()}</Typography>
-                                                            <Fab
-                                                            onClick={() => addQuantityTicket(index)}
-                                                            size="small"
-                                                            variant='outlined'
-                                                            color='primary'
-                                                            sx={{
-                                                                minWidth: '30px',
-                                                                width: '30px',
-                                                                minHeight: '30px',
-                                                                height: '30px',
-                                                                marginX: '20px'
-                                                            }}>
-                                                                <Add
-                                                                sx={{
-                                                                    margin: 0,
-                                                                    padding: 0,
-                                                                }}/>
-                                                            </Fab>
-                                                        </Box>
-                                                        <Box
-                                                        sx={{
-                                                            width: '100%',
-                                                            display: 'flex',
-                                                            justifyContent: 'center',
-                                                            alignItems: 'center',
-                                                        }}>
-                                                            <Typography
-                                                            sx={{
-                                                                fontWeight: 500
-                                                            }}>Rp. {ticketOrder[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
-                                                        </Box>
-                                                    </Grid>
-                                                </Card>
-
-                                            ))}
-                                            <Box
-                                            sx={{
-                                                marginTop: '30px',
-                                                width: '100%',
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'space-between',
-                                            }}>
-                                                <Box
-                                                sx={{
-                                                    marginLeft: '10px',
-                                                    height: '100%',
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    justiifyContent: 'center',
-                                                    alignItems: 'flex-start',
-                                                }}>
-                                                    <Typography
-                                                    sx={{
-                                                        fontSize: '14px',
-                                                        fontWeight: 400,
-                                                    }}>
-                                                        arrival date:
-                                                    </Typography>
-                                                    <Typography
-                                                    sx={{
-                                                        fontSize: '18px',
-                                                        fontWeight: 600,
-                                                    }}>
-                                                        {bookingDate.toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                                                    </Typography>
-                                                </Box>
-                                                <Card
-                                                elevation={5}
-                                                sx={{
-                                                    borderRadius: '30px'
-                                                }}>
-                                                    <Box
-                                                    sx={{
-                                                        height: '50px',
-                                                        display: 'flex',
-                                                        flexDirection: 'row',
-                                                        justifyContent: 'space-between',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Box
-                                                        sx={{
-                                                            marginLeft: '10px'
-                                                        }}>
-                                                            <Typography
-                                                            sx={{
-                                                                fontWeight: 500
-                                                            }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
-                                                        </Box>
-
-                                                        {totalBill === 0
-                                                            ?   <Button
-                                                                disabled
-                                                                variant='contained'
-                                                                sx={{
-                                                                    borderRadius: '30px',
-                                                                    height: '100%',
-                                                                }}>
-                                                                    <Typography
-                                                                    sx={{
-                                                                        fontSize: '18px',
-                                                                        fontWeight: 600
-                                                                    }}>Checkout</Typography>
-                                                                </Button>
-                                                            :   <Link
-                                                                href={route('dataPemesan')}
-                                                                style={{
-                                                                    height: '100%'
-                                                                }}
-                                                                >
-                                                                    <Button
-                                                                    variant='contained'
-                                                                    sx={{
-                                                                        borderRadius: '30px',
-                                                                        height: '100%',
-                                                                    }}>
-                                                                        <Typography
-                                                                        sx={{
-                                                                            fontSize: '18px',
-                                                                            fontWeight: 600
-                                                                        }}>Checkout</Typography>
-                                                                    </Button>
-                                                                </Link>
-                                                        }
-
-                                                    </Box>
-                                                </Card>
-                                            </Box>
-                                            <Box
-                                            sx={{
-                                                marginTop: '30px',
-                                                width: '90%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Typography
-                                                sx={{
-                                                    fontSize: '15px',
-                                                }}>
-                                                *telah melakukan reservasi? cek status reservasi
-                                                    <a
-                                                    className='noselect'
-                                                    onClick={() => redirect('/ticket/check-status')}
-                                                    style={{
-                                                        marginLeft: '5px',
-                                                        fontSize: '15px',
-                                                        color: 'blue.light',
-                                                        textDecoration: 'underline',
-                                                        cursor: 'pointer',
-                                                    }}>
-                                                    di sini</a>
-                                                </Typography>
-                                            </Box>
-                                        </Box>
-                                    </Card>
-                                </Grid>
                             </Grid>
                         </div>
                     }
