@@ -14,7 +14,7 @@ import "./swiperMainEvents.module.css";
 import { Inertia } from '@inertiajs/inertia';
 
 // import required modules
-import { Navigation } from "swiper";
+import { Navigation, Lazy } from "swiper";
 
 export default function App() {
 
@@ -39,6 +39,7 @@ export default function App() {
                     slidesPerGroup={1}
                     loop={true}
                     navigation={true}
+                    lazy={true}
                     modules={[Navigation]}
                     className="swiper-events noselect"
                     style={{

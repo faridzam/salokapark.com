@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Autoplay, EffectFade, Pagination } from "swiper";
+import { Autoplay, EffectFade, Pagination, Lazy } from "swiper";
 
 import {mediaFasum} from '../../assets/images/carousel_assets/tentangFasum'
 import {Box} from '@mui/material';
@@ -29,6 +29,7 @@ export default function App() {
           clickable: true,
         }}
         loop={true}
+        lazy={true}
         effect={"fade"}
         modules={[Autoplay, EffectFade, Pagination]}
         className="promosi-banner-swiper"

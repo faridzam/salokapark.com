@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 // import required modules
-import { Autoplay, EffectFade, Pagination } from "swiper";
+import { Autoplay, EffectFade, Pagination, Lazy } from "swiper";
 
 import {media} from '../../assets/images/carousel_assets'
 import {Box} from '@mui/material';
@@ -28,6 +28,7 @@ export default function App() {
         pagination={{
           clickable: true,
         }}
+        lazy= {true}
         loop={true}
         effect={"fade"}
         modules={[Autoplay, EffectFade, Pagination]}

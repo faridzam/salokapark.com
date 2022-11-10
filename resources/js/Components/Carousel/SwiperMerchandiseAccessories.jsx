@@ -14,7 +14,7 @@ import {ArrowForward} from '@mui/icons-material';
 import "./swiperMerchandiseAccessories.module.css";
 
 // import required modules
-import { Navigation } from "swiper";
+import { Navigation, Lazy } from "swiper";
 
 export default function App() {
 
@@ -34,6 +34,7 @@ export default function App() {
                 slidesPerView={2}
                 slidesPerGroup={1}
                 loop={true}
+                lazy={true}
                 navigation={true}
                 modules={[Navigation]}
                 className="swiper-promosi noselect"
