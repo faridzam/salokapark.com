@@ -1,7 +1,7 @@
-import showEventBanner1 from "./showEventBanner1.png";
-import showEventBanner2 from "./showEventBanner2.png";
-import showEventBanner3 from "./showEventBanner3.png";
-import showEventBanner4 from "./showEventBanner4.png";
+import showEventBanner1 from "./showEventBanner1.jpg";
+import showEventBanner2 from "./showEventBanner2.jpg";
+import showEventBanner3 from "./showEventBanner3.jpg";
+import showEventBanner4 from "./showEventBanner4.jpg";
 
 export const media = [showEventBanner1, showEventBanner2, showEventBanner3, showEventBanner4];
 export const showEventBanner = [

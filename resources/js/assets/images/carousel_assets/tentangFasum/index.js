@@ -1,6 +1,6 @@
-import fasum1 from "./fasum1.png";
-import fasum2 from "./fasum2.png";
-import fasum3 from "./fasum3.png";
+import fasum1 from "./fasum1.jpg";
+import fasum2 from "./fasum2.jpg";
+import fasum3 from "./fasum3.jpg";
 
 export const mediaFasum = [fasum1, fasum2, fasum3];
 export const fasum = [

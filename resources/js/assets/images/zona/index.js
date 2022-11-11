@@ -1,9 +1,9 @@
-import ZonaBanner from "./zonaBanner.png";
-import ZonaPesisir from "./zonaPesisir.png";
-import ZonaBalalantara from "./zonaBalalantara.png";
-import ZonaKamayayi from "./zonaKamayayi.png";
-import ZonaArarya from "./zonaArarya.png";
-import ZonaSegaraPrada from "./zonaSegaraPrada.png";
+import ZonaBanner from "./zonaBanner.jpg";
+import ZonaPesisir from "./zonaPesisir.jpg";
+import ZonaBalalantara from "./zonaBalalantara.jpg";
+import ZonaKamayayi from "./zonaKamayayi.jpg";
+import ZonaArarya from "./zonaArarya.jpg";
+import ZonaSegaraPrada from "./zonaSegaraPrada.jpg";
 
 export const mediaZona = [ZonaBanner, ZonaPesisir, ZonaBalalantara, ZonaKamayayi, ZonaArarya, ZonaSegaraPrada];
 export const zona = [

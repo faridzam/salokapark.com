@@ -1,7 +1,7 @@
-import media1 from "./promosi1.png";
-import media2 from "./promosi2.png";
-import media3 from "./promosi3.png";
-import media4 from "./promosi4.png";
+import media1 from "./promosi1.jpg";
+import media2 from "./promosi2.jpg";
+import media3 from "./promosi3.jpg";
+import media4 from "./promosi4.jpg";
 
 export const media = [media1, media2, media3, media4];
 export const promosiList = [

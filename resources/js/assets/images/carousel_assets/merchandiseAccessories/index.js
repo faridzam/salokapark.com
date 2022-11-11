@@ -1,16 +1,16 @@
-import accessory1 from "./accessory1.png";
-import accessory2 from "./accessory2.png";
-import accessory3 from "./accessory3.png";
-import accessory4 from "./accessory4.png";
-import accessory5 from "./accessory5.png";
-import accessory6 from "./accessory6.png";
-import accessory7 from "./accessory7.png";
-import accessory8 from "./accessory8.png";
-import accessory9 from "./accessory9.png";
-import accessory10 from "./accessory10.png";
-import accessory11 from "./accessory11.png";
-import accessory12 from "./accessory12.png";
-import accessory13 from "./accessory13.png";
+import accessory1 from "./accessory1.jpg";
+import accessory2 from "./accessory2.jpg";
+import accessory3 from "./accessory3.jpg";
+import accessory4 from "./accessory4.jpg";
+import accessory5 from "./accessory5.jpg";
+import accessory6 from "./accessory6.jpg";
+import accessory7 from "./accessory7.jpg";
+import accessory8 from "./accessory8.jpg";
+import accessory9 from "./accessory9.jpg";
+import accessory10 from "./accessory10.jpg";
+import accessory11 from "./accessory11.jpg";
+import accessory12 from "./accessory12.jpg";
+import accessory13 from "./accessory13.jpg";
 
 export const mediaMerchandiseAccessories = [
     accessory1,

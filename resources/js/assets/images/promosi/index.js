@@ -1,11 +1,11 @@
-import media1 from "./promosi1.png";
-import media2 from "./promosi2.png";
-import media3 from "./promosi3.png";
-import media4 from "./promosi4.png";
-import media5 from "./promosiEvent1.png";
-import media6 from "./promosiEvent2.png";
-import media7 from "./promosiEvent3.png";
-import media8 from "./promosiEvent4.png";
+import media1 from "./promosi1.jpg";
+import media2 from "./promosi2.jpg";
+import media3 from "./promosi3.jpg";
+import media4 from "./promosi4.jpg";
+import media5 from "./promosiEvent1.jpg";
+import media6 from "./promosiEvent2.jpg";
+import media7 from "./promosiEvent3.jpg";
+import media8 from "./promosiEvent4.jpg";
 
 
 export const mediaPromosi = [

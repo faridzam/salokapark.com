@@ -1,9 +1,9 @@
-import daimami from "./daimami.png";
-import rimba from "./rimba.png";
-import jenju from "./jenju.png";
-import tukCio from "./tuk-cio.png";
-import srengenge from "./srengenge.png";
-import iceCreamShop from "./ice-cream-shop.png";
+import daimami from "./daimami.jpg";
+import rimba from "./rimba.jpg";
+import jenju from "./jenju.jpg";
+import tukCio from "./tuk-cio.jpg";
+import srengenge from "./srengenge.jpg";
+import iceCreamShop from "./ice-cream-shop.jpg";
 
 export const mediaRestaurant = [daimami, rimba, jenju, tukCio, srengenge, iceCreamShop];
 export const restaurant = [

@@ -1,7 +1,7 @@
-import pakaian1 from "./pakaian1.png";
-import pakaian2 from "./pakaian2.png";
-import pakaian3 from "./pakaian3.png";
-import pakaian4 from "./pakaian4.png";
+import pakaian1 from "./pakaian1.jpg";
+import pakaian2 from "./pakaian2.jpg";
+import pakaian3 from "./pakaian3.jpg";
+import pakaian4 from "./pakaian4.jpg";
 
 export const mediaMerchandisePakaian = [pakaian1, pakaian2, pakaian3, pakaian4];
 export const merchandisePakaian = [

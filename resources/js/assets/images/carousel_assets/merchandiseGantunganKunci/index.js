@@ -1,7 +1,7 @@
-import gantungan1 from "./gantungan1.png";
-import gantungan2 from "./gantungan2.png";
-import gantungan3 from "./gantungan3.png";
-import gantungan4 from "./gantungan4.png";
+import gantungan1 from "./gantungan1.jpg";
+import gantungan2 from "./gantungan2.jpg";
+import gantungan3 from "./gantungan3.jpg";
+import gantungan4 from "./gantungan4.jpg";
 
 export const mediaMerchandiseGantungan = [gantungan1, gantungan2, gantungan3, gantungan4];
 export const merchandiseGantungan = [
