@@ -20,7 +20,8 @@ use App\Meta;
 Route::get('/', function () {
 
     Meta::addMeta('title', 'saloka theme park');
-    Meta::addMeta('description', 'saloka theme park, taman bermain terbaik dan terbesar di jawa tengah indonesia / best theme park in central java indonesia');
+    Meta::addMeta('description', 'saloka theme park, taman bermain terbaik dan terbesar di jawa tengah');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, taman bermain, jawa tengah, wahana');
     //only ticket
     // return Inertia::location('https://webdev.salokapark.com/ticket');
     // return Inertia::location('http://localhost:8000/ticket');
@@ -32,7 +33,8 @@ Route::get('/', function () {
 // Ticket
 Route::get('/ticket', function () {
     Meta::addMeta('title', 'saloka theme park - tiket');
-    Meta::addMeta('description', 'ticket saloka theme park reservation / pesan tiket taman bermain saloka theme park');
+    Meta::addMeta('description', 'pesan tiket taman bermain saloka theme park dan bermain sepuasnya bersama keluarga.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket saloka, pesan tiket saloka');
     return Inertia::render('Ticket/Ticket');
 })->name('ticket');
 
