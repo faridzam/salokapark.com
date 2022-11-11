@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\DynamicRoutingController;
+use App\Meta;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,21 +19,20 @@ use App\Http\Controllers\DynamicRoutingController;
 
 Route::get('/', function () {
 
+    Meta::addMeta('title', 'saloka theme park');
+    Meta::addMeta('description', 'saloka theme park, taman bermain terbaik dan terbesar di jawa tengah indonesia / best theme park in central java indonesia');
     //only ticket
     // return Inertia::location('https://webdev.salokapark.com/ticket');
     // return Inertia::location('http://localhost:8000/ticket');
 
     //whole site
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Welcome');
 })->name('welcome');
 
 // Ticket
 Route::get('/ticket', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket');
+    Meta::addMeta('description', 'ticket saloka theme park reservation / pesan tiket taman bermain saloka theme park');
     return Inertia::render('Ticket/Ticket');
 })->name('ticket');
 
@@ -49,16 +49,22 @@ Route::get('/ticket/konfirmasi-pembayaran', function () {
 })->name('konfirmasiPembayaran');
 
 Route::get('/ticket/check-status', function () {
+    Meta::addMeta('title', 'saloka theme park - cek status pemesanan');
+    Meta::addMeta('description', 'check saloka theme park ticket reservation payment status / cek status pemesanan tiket saloka theme park');
     return Inertia::render('Ticket/CheckStatus');
 })->name('checkStatus');
 
 // Promotion
 Route::get('/promosi', function () {
+    Meta::addMeta('title', 'saloka theme park - promosi');
+    Meta::addMeta('description', 'saloka theme park event, show & promotion / promosi, pertunjukan, dan event di saloka theme park');
     return Inertia::render('Promotion/Promotion');
 })->name('promotion');
 
 // Zone
 Route::get('/zona', function () {
+    Meta::addMeta('title', 'saloka theme park - zona');
+    Meta::addMeta('description', 'maps and zone in saloka theme park / peta dan zona di saloka theme park');
     return Inertia::render('Zone/Zone');
 })->name('zone');
 
