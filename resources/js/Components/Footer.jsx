@@ -37,7 +37,7 @@ export default function Footer() {
         direction="column"
         spacing={0}
         sx={{
-            paddingY: '50px',
+            paddingTop: '50px',
             paddingX: '5%',
             display: 'flex',
             justifyContent: 'flex-start',
@@ -50,17 +50,17 @@ export default function Footer() {
                 <>
                     <Box
                     sx={{
-                        marginTop: '150px',
+                        marginTop: '125px',
                         display: 'flex',
                         width: '100%',
-                        height: '87px',
+                        height: '50px',
                         justifyContent: `flex-end`
                     }}>
                         <img
                         src={media[1]}
                         alt="logo_saloka"
-                        width={300}
-                        height={87}></img>
+                        width={200}
+                        height={50}></img>
                     </Box>
 
                     <Grid
@@ -68,7 +68,7 @@ export default function Footer() {
                     direction="row"
                     spacing={0}
                     sx={{
-                        marginTop: '100px',
+                        marginTop: '50px',
                         width: '100%',
                     }}>
 
@@ -78,6 +78,7 @@ export default function Footer() {
                         direction="column"
                         spacing={0}
                         sx={{
+                            marginTop: '50px',
                             display: 'flex',
                             width: '15%'
                         }}>
@@ -205,6 +206,7 @@ export default function Footer() {
                         direction="column"
                         spacing={0}
                         sx={{
+                            marginTop: '50px',
                             display: 'flex',
                             width: '23%'
                         }}>
@@ -291,6 +293,7 @@ export default function Footer() {
                         direction="column"
                         spacing={0}
                         sx={{
+                            marginTop: '50px',
                             display: 'flex',
                             width: '22%'
                         }}>

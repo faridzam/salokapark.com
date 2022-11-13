@@ -383,7 +383,7 @@ export default function ShowEvent(props) {
                     <Box
                     sx={{
                         width: '100%',
-                        height: '800px',
+                        height: '100%',
                         backgroundImage: `url(${media[2]})`,
                         backgroundRepeat: `no-repeat`,
                         backgroundSize: `cover`

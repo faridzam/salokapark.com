@@ -938,7 +938,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        marginTop: '200px',
+                        marginTop: '100px',
                         display: 'flex',
                         height: '100%',
                         justifyContent: 'center',
@@ -1027,7 +1027,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        marginTop: '200px',
+                        marginTop: '100px',
                         display: 'flex',
                         height: '100%',
                         justifyContent: 'center',
@@ -1065,7 +1065,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        marginTop: '200px',
+                        marginTop: '100px',
                         display: 'flex',
                         height: '100%',
                         justifyContent: 'center',
@@ -1105,7 +1105,7 @@ export default function Welcome(props) {
 
                         <Box
                         sx={{
-                            marginTop: '100px',
+                            marginTop: '50px',
                             width: '60vw',
                             display: 'flex',
                             justifyContent: 'center',
@@ -1230,7 +1230,7 @@ export default function Welcome(props) {
                     ref={contactsRef}
                     sx={{
                         width: '100%',
-                        height: '800px',
+                        height: '100%',
                         backgroundImage: `url(${media[2]})`,
                         backgroundRepeat: `no-repeat`,
                         backgroundSize: `cover`
