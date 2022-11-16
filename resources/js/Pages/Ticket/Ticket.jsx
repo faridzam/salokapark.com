@@ -247,6 +247,7 @@ export default function Ticket(props) {
                                                 alignItems: 'center',
                                             }}>
 
+                                                <Typography>other ticket provider:</Typography>
                                                 <Box>
                                                     <Button>Ticket by goers</Button>
                                                 </Box>
@@ -271,13 +272,96 @@ export default function Ticket(props) {
                             direction="column"
                             spacing={0}
                             sx={{
-                                marginTop: '50px',
+                                marginTop: '100px',
                                 display: 'flex',
                                 width: '100%',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}>
+                                <Card
+                                elevation={3}
+                                sx={{
+                                    width: '80%',
+                                    borderRadius: '30px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}>
+                                    <Grid
+                                    container={true}
+                                    direction="column"
+                                    spacing={0}
+                                    sx={{
+                                        marginY: '30px',
+                                        display: 'flex',
+                                        width: '90%',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}>
+                                        <Box
+                                        sx={{
+                                            width: '100%',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}>
+                                            <Typography
+                                            sx={{
+                                                textAlign: 'center',
+                                                fontSize: '18px',
+                                                fontWeight: 500
+                                            }}>Rencanakan kunjungan kamu dan keluarga ke Saloka!</Typography>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            width: '80%',
+                                            marginTop: '30px',
+                                        }}>
+                                            <Button
+                                            onClick={() => redirect('/ticket/pilih-ticket')}
+                                            variant='contained'
+                                            sx={{
+                                                width: '100%',
+                                                height: '75px',
+                                                borderRadius: '30px',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '18px',
+                                                    fontWeight: 600,
+                                                }}>Ticket by Saloka!</Typography>
+                                            </Button>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            width: '80%',
+                                        }}>
+                                            <Grid
+                                            container={true}
+                                            direction="column"
+                                            spacing={0}
+                                            sx={{
+                                                marginTop: '30px',
+                                                display: 'flex',
+                                                width: '100%',
+                                                justifyContent: 'space-between',
+                                                alignItems: 'center',
+                                            }}>
+                                                <Typography>other ticket provider:</Typography>
+
+                                                <Box>
+                                                    <Button>Ticket by goers</Button>
+                                                </Box>
+                                                <Box>
+                                                    <Button>Ticket by zeals</Button>
+                                                </Box>
+
+                                            </Grid>
+                                        </Box>
+                                    </Grid>
+                                </Card>
                             </Grid>
+
                         </div>
                     }
                     {/* footer */}
