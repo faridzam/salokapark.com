@@ -264,7 +264,7 @@ class FrontEndMidtransController extends Controller
                 ]);
 
                 $reserved = reserved::crete([
-                    'reservation_id' => $reservation->id,
+                    'reservation_id' => $reservationData->id,
                     'customer_id' => $reservationData->customer_id,
                 ]);
             }
