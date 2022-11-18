@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\Models\reservation;
+use App\Models\reserved;
 
 class FrontEndMidtransController extends Controller
 {
@@ -259,6 +260,10 @@ class FrontEndMidtransController extends Controller
                 ->update([
                     'booking_code' => $bookingCode,
                     'status' => 'settlement',
+                ]);
+                $reserved = reserved::crete([
+                    'reservation_id' => $reservationData->id,
+                    'customer_id' => $reservationData->customer_id,
                 ]);
             }
             else if($transaction == 'pending'){
