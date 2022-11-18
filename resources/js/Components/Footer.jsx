@@ -38,7 +38,7 @@ export default function Footer() {
         spacing={0}
         sx={{
             paddingTop: '50px',
-            paddingX: '5%',
+            paddingX: '10%',
             display: 'flex',
             justifyContent: 'flex-start',
             alignItems: 'flex-start'
@@ -80,7 +80,7 @@ export default function Footer() {
                         sx={{
                             marginTop: '50px',
                             display: 'flex',
-                            width: '15%'
+                            width: '10%'
                         }}>
                             <Box
                             sx={{
@@ -91,7 +91,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '34px',
+                                    fontSize: '24px',
                                     fontWeight: 600,
                                     color: '#eee'
                                 }}
@@ -108,7 +108,7 @@ export default function Footer() {
                                 onClick={() => redirect('/zona/pesisir')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -128,7 +128,7 @@ export default function Footer() {
                                 onClick={() => redirect('/zona/balalantara')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -148,7 +148,7 @@ export default function Footer() {
                                 onClick={() => redirect('/zona/kamayayi')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -168,7 +168,7 @@ export default function Footer() {
                                 onClick={() => redirect('/zona/ararya')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -188,7 +188,7 @@ export default function Footer() {
                                 onClick={() => redirect('/zona/segara-prada')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -208,7 +208,7 @@ export default function Footer() {
                         sx={{
                             marginTop: '50px',
                             display: 'flex',
-                            width: '23%'
+                            width: '15%'
                         }}>
                             <Box
                             sx={{
@@ -219,7 +219,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '34px',
+                                    fontSize: '24px',
                                     fontWeight: 600,
                                     color: '#eee'
                                 }}
@@ -236,7 +236,7 @@ export default function Footer() {
                                 onClick={() => redirect('/tentang')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -256,7 +256,7 @@ export default function Footer() {
                                 onClick={() => redirect('/tentang')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -275,7 +275,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -295,7 +295,7 @@ export default function Footer() {
                         sx={{
                             marginTop: '50px',
                             display: 'flex',
-                            width: '22%'
+                            width: '15%'
                         }}>
                             <Box
                             sx={{
@@ -306,7 +306,7 @@ export default function Footer() {
                                 <Typography
                                 className="noselect"
                                 sx={{
-                                    fontSize: '34px',
+                                    fontSize: '24px',
                                     fontWeight: 600,
                                     color: '#eee',
                                 }}
@@ -323,7 +323,7 @@ export default function Footer() {
                                 onClick={() => redirect('/restaurant/rimba')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -343,7 +343,7 @@ export default function Footer() {
                                 onClick={() => redirect('/restaurant/daimami')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -363,7 +363,7 @@ export default function Footer() {
                                 onClick={() => redirect('/restaurant/jenju')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -383,7 +383,7 @@ export default function Footer() {
                                 onClick={() => redirect('/restaurant/tuk-cio')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -403,7 +403,7 @@ export default function Footer() {
                                 onClick={() => redirect('/restaurant/srengenge')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -423,7 +423,7 @@ export default function Footer() {
                                 onClick={() => redirect('/restaurant/ice-cream-shop')}
                                 className="noselect"
                                 sx={{
-                                    fontSize: '18px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee',
                                     cursor: 'pointer',
@@ -442,7 +442,7 @@ export default function Footer() {
                         spacing={0}
                         sx={{
                             display: 'flex',
-                            width: '40%',
+                            width: '60%',
                             justifyContent: 'flex-start',
                             alignItems: 'flex-end',
                         }}>
@@ -454,7 +454,7 @@ export default function Footer() {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontSize: '32px',
+                                    fontSize: '24px',
                                     fontWeight: 600,
                                     color: '#eee'
                                 }}
@@ -471,7 +471,7 @@ export default function Footer() {
                                 sx={{
                                     textAlign: 'right',
                                     marginRight: '20px',
-                                    fontSize: '20px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
@@ -487,7 +487,7 @@ export default function Footer() {
                                 <Typography
                                 sx={{
                                     marginRight: '20px',
-                                    fontSize: '20px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
@@ -503,7 +503,7 @@ export default function Footer() {
                                 <Typography
                                 sx={{
                                     marginRight: '20px',
-                                    fontSize: '20px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
@@ -519,82 +519,13 @@ export default function Footer() {
                                 <Typography
                                 sx={{
                                     marginRight: '20px',
-                                    fontSize: '20px',
+                                    fontSize: '14px',
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
                                 >0823-5900-0077</Typography>
                                 <WhatsApp sx={{ color: '#eee'}}/>
                             </Box>
-                            {/*
-                            <Box
-                            sx={{
-                                marginTop: '40px',
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'flex-end',
-                            }}>
-                                <TextField
-                                placeholder="email"
-                                sx={{
-                                    width: '500px',
-                                    margin: 0,
-                                    padding: 0,
-                                    backgroundColor: '#eee',
-                                    border: 'solid 0px',
-                                    borderBottomLeftRadius: '50px',
-                                    borderTopLeftRadius: '50px',
-                                    borderBottomRightRadius: '50px',
-                                    borderTopRightRadius: '50px',
-                                    '&:hover fieldset': {
-                                        border: 'solid 0px',
-                                    },
-                                    'fieldset': {
-                                        border: 'solid 0px',
-                                    },
-                                    "& .MuiOutlinedInput-root.Mui-focused": {
-                                        "& > fieldset": {
-                                            border: "solid 0px",
-                                        }
-                                    },
-                                    "& .MuiOutlinedInput-root": {
-                                        paddingRight: '0px',
-                                        fontFamily: 'AlrightSans',
-                                        fontSize: '22px',
-                                        fontWeight: 700,
-                                    },
-                                }}
-                                InputProps={{
-                                    endAdornment:
-                                        <Button
-                                        variant="contained"
-                                        sx={{
-                                            margin: 0,
-                                            padding: 0,
-                                            width: '300px',
-                                            height: '100%',
-                                            borderBottomLeftRadius: '50px',
-                                            borderTopLeftRadius: '50px',
-                                            borderBottomRightRadius: '50px',
-                                            borderTopRightRadius: '50px',
-                                            boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
-                                        }}
-                                        style={{
-                                            boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset"
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '20px',
-                                                fontWeight: 500,
-                                                color: '#eee'
-                                            }}
-                                            >Subscribe</Typography>
-                                        </Button>
-                                }}>
-                                </TextField>
-
-                            </Box>
-                            */}
                             <Box
                             sx={{
                                 marginTop: '10px',
