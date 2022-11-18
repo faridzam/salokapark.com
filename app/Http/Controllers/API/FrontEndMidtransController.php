@@ -263,7 +263,7 @@ class FrontEndMidtransController extends Controller
                     'status' => 'settlement',
                 ]);
 
-                $reserved = reserved::crete([
+                $reserved = reserved::create([
                     'reservation_id' => $reservationData->id,
                     'customer_id' => $reservationData->customer_id,
                 ]);
