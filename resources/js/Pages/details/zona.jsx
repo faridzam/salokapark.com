@@ -8,6 +8,7 @@ import {ArrowForward} from '@mui/icons-material';
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
 import {mediaZona, zonaByIndex, getIndexZonaBySlugs} from '../../assets/images/zona';
+import { SwiperZonaWahana } from '../../Components/Carousel';
 
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);
@@ -101,6 +102,29 @@ export default function Zona(props) {
                                     color: '#333'
                                 }}
                                 >{zonaByIndex(getIndexZonaBySlugs(props.slugs)).deskripsiLengkap}</Typography>
+                            </Box>
+
+                            <Box
+                            sx={{
+                                marginTop: '50px',
+                            }}>
+                                <Typography
+                                sx={{
+                                    fontFamily: 'fontin',
+                                    fontWeight: 600,
+                                    fontSize: '32px',
+                                    color: '#333',
+                                    textAlign: 'center',
+                                }}>Yang Wajib Kamu Kunjungi di Zona {zonaByIndex(getIndexZonaBySlugs(props.slugs)).nama}</Typography>
+                            </Box>
+
+                            <Box
+                            sx={{
+                                marginTop: '30px',
+                                width: '100%'
+                            }}>
+                                <SwiperZonaWahana
+                                slugs={props.slugs}/>
                             </Box>
 
                         </Grid>

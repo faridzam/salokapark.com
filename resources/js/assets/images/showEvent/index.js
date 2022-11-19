@@ -12,6 +12,12 @@ export const showEvent = [
         title: 'Baru Klinthing Show di Jejogedan',
         deskripsi: 'Baru Klinthing Show merupakan pertunjukan yang mengadaptasi cerita rakyat mengenai Baru Klinthing, dengan memadukan teknologi modern, animasi 3D, laser, musik, dan air mancur menari',
         link: '/show-event/baru-klinthing-show',
+        zona: 'pesisir',
+        jadwal: {
+            weekdays : '14:00 - 17:00 WIB',
+            weekends : '14:00 - 19:00 WIB',
+            tanggalMerah : '14:00 - 19:00 WIB',
+        }
     },
     {
         slugs: 'galileo-liveness',
@@ -20,6 +26,12 @@ export const showEvent = [
         title: 'Galileo Liveness di Lumbung Ilmu Galileo',
         deskripsi: 'Atraksi edukasi yang dipersembahkan para talent SALOKA untuk para pengunjung yang masuk di wahana Lumbung Ilmu Galileo.',
         link: '/show-event/galileo-liveness',
+        zona: 'pesisir',
+        jadwal: {
+            weekdays : '14:00 - 17:00 WIB',
+            weekends : '14:00 - 19:00 WIB',
+            tanggalMerah : '14:00 - 19:00 WIB',
+        }
     },
     {
         slugs: 'baru-klinthing',
@@ -28,6 +40,12 @@ export const showEvent = [
         title: 'Baru Klinthing Show di Jejogedan',
         deskripsi: 'Dance show yang dilakukan sosok clown bernama Ayayi bersama 4 Peri Hutan Negeri SALOKA untuk berbagi keceriaan kepada para anak-anak di sekitar zona anak, Kamayayi.',
         link: '/show-event/baru-klinthing',
+        zona: 'pesisir',
+        jadwal: {
+            weekdays : '14:00 - 17:00 WIB',
+            weekends : '14:00 - 19:00 WIB',
+            tanggalMerah : '14:00 - 19:00 WIB',
+        }
     },
     {
         slugs: 'salokarnival',
@@ -36,6 +54,12 @@ export const showEvent = [
         title: 'Salokarnival di Plaza Ararya',
         deskripsi: 'Karnaval yang menampilkan karakter-karakter yang ada di Negeri SALOKA dan karakter-karakter yang muncul di cerita-cerita rakyat. Pertunjukkan ini dikemas dalam bentuk tarian dan photo moment.',
         link: '/show-event/salokarnival',
+        zona: 'pesisir & ararya',
+        jadwal: {
+            weekdays : '14:00 - 17:00 WIB',
+            weekends : '14:00 - 19:00 WIB',
+            tanggalMerah : '14:00 - 19:00 WIB',
+        }
     },
 ];
 

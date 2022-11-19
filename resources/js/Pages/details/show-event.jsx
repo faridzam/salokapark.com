@@ -71,36 +71,138 @@ export default function Zona(props) {
                                 }}></img>
                             </Box>
 
-                            <Box
-                            sx={{
-                                marginTop: '50px',
-                            }}>
-                                <Typography
+                            <Box>
+                                <Grid
+                                container={true}
+                                direction="row"
+                                spacing={0}
                                 sx={{
-                                    fontFamily: 'fontin',
-                                    fontWeight: 600,
-                                    fontSize: '32px',
-                                    color: '#333',
-                                    textAlign: 'center',
-                                }}>{showEventByIndex(getIndexShowEventBySlugs(props.slugs)).title}</Typography>
-                            </Box>
+                                    marginTop: '50px',
+                                    display: 'flex',
+                                    width: '100%',
+                                    justifyContent: 'center',
+                                    alignItems: 'flex-start',
+                                }}>
+                                <Box
+                                sx={{
+                                    width: '70%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-start',
+                                    justifyContent: 'flex-start'
+                                }}>
+                                    <Box>
+                                        <Typography
+                                        sx={{
+                                            fontFamily: 'fontin',
+                                            fontWeight: 600,
+                                            fontSize: '32px',
+                                            color: '#333',
+                                            textAlign: 'center',
+                                        }}>{showEventByIndex(getIndexShowEventBySlugs(props.slugs)).title}</Typography>
+                                    </Box>
 
-                            <Box
-                            sx={{
-                                marginTop: '10px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                width: '80%',
-                            }}>
-                                <Typography
-                                textAlign="justify"
+                                    <Box
+                                    sx={{
+                                        marginTop: '10px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        width: '80%',
+                                    }}>
+                                        <Typography
+                                        textAlign="justify"
+                                        sx={{
+                                            lineHeight: 2,
+                                            fontSize: '18px',
+                                            fontWeight: 400,
+                                            color: '#333'
+                                        }}>{showEventByIndex(getIndexShowEventBySlugs(props.slugs)).deskripsiLengkap}</Typography>
+                                    </Box>
+                                </Box>
+                                <Box
                                 sx={{
-                                    lineHeight: 2,
-                                    fontSize: '18px',
-                                    fontWeight: 400,
-                                    color: '#333'
-                                }}
-                                >{showEventByIndex(getIndexShowEventBySlugs(props.slugs)).deskripsiLengkap}</Typography>
+                                    width: '20%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-start',
+                                    justifyContent: 'flex-start'
+                                }}>
+                                    <Typography
+                                    sx={{
+                                        fontFamily: 'fontin',
+                                        fontWeight: 600,
+                                        fontSize: '28px',
+                                        color: '#333',
+                                        textAlign: 'center',
+                                    }}>
+                                        Jadwal Show:
+                                    </Typography>
+                                    <Typography
+                                    sx={{
+                                        fontSize: '18px',
+                                        fontWeight: 500,
+                                        color: '#333'
+                                    }}>
+                                        weekdays:
+                                    </Typography>
+                                    <Typography
+                                    sx={{
+                                        fontSize: '15px',
+                                        fontWeight: 400,
+                                        color: '#333'
+                                    }}>
+                                        {showEventByIndex(getIndexShowEventBySlugs(props.slugs)).jadwal.weekdays}
+                                    </Typography>
+                                    <Typography
+                                    sx={{
+                                        fontSize: '18px',
+                                        fontWeight: 500,
+                                        color: '#333'
+                                    }}>
+                                        weekends:
+                                    </Typography>
+                                    <Typography
+                                    sx={{
+                                        fontSize: '15px',
+                                        fontWeight: 400,
+                                        color: '#333'
+                                    }}>
+                                        {showEventByIndex(getIndexShowEventBySlugs(props.slugs)).jadwal.weekends}
+                                    </Typography>
+                                    <Typography
+                                    sx={{
+                                        fontSize: '18px',
+                                        fontWeight: 500,
+                                        color: '#333'
+                                    }}>
+                                        Tanggal Merah:
+                                    </Typography>
+                                    <Typography
+                                    sx={{
+                                        fontSize: '15px',
+                                        fontWeight: 400,
+                                        color: '#333'
+                                    }}>
+                                        {showEventByIndex(getIndexShowEventBySlugs(props.slugs)).jadwal.tanggalMerah}
+                                    </Typography>
+
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontWeight: 600,
+                                            fontSize: '24px',
+                                            color: '#333',
+                                            textAlign: 'center',
+                                        }}>
+                                            Zona: {showEventByIndex(getIndexShowEventBySlugs(props.slugs)).zona}
+                                        </Typography>
+                                    </Box>
+
+                                </Box>
+                                </Grid>
                             </Box>
 
                         </Grid>

@@ -91,7 +91,7 @@ Route::get('/tentang', function () {
 })->name('about');
 
 // Dynamic Routing
-Route::get('/{category}/{slugs}', [DynamicRoutingController::class, 'renderDetailComponent'])->name('dynamic');
+Route::get('/{category}/{slugs}', [DynamicRoutingController::class, 'renderDetailComponent']);
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
