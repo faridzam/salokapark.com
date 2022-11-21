@@ -30,7 +30,7 @@ export default function App() {
           clickable: true,
         }}
         loop={true}
-        preloadImages={false}
+        preloadImages={true}
         lazy={true}
         effect={"fade"}
         modules={[Autoplay, EffectFade, Pagination]}

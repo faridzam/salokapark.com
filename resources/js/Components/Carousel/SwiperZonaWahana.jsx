@@ -42,7 +42,7 @@ export default function App(props) {
                 slidesPerView={2}
                 slidesPerGroup={1}
                 loop={true}
-                preloadImages={false}
+                preloadImages={true}
                 lazy={true}
                 navigation={true}
                 modules={[Navigation]}

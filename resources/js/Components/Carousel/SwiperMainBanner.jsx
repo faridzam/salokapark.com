@@ -29,7 +29,7 @@ export default function App() {
         pagination={{
           clickable: true,
         }}
-        preloadImages={false}
+        preloadImages={true}
         lazy= {true}
         loop={true}
         effect={"fade"}
