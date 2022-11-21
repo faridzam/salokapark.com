@@ -40,7 +40,7 @@ export default function Restaurant(props) {
     return(
         <>
 
-            <Head title='Show & Event'/>
+            <Head title='Restaurant'/>
             <Fade
             in={isMounted}
             timeout={1000}

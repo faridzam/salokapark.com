@@ -30,7 +30,7 @@ export default function Zona(props) {
 
     return(
         <>
-            <Head title='Show and Event'/>
+            <Head title={props.slugs}/>
             <Fade
             in={isMounted}
             timeout={1000}
