@@ -39,6 +39,7 @@ class FrontEndReservationController extends Controller
             'customer_id' => $customer->id,
             'order_id' => request('orderID'),
             'arrival_date' => $bookingDate,
+            'zeals_code' => $request->zeals_code,
             'bill' => $totalBill,
             'status' => "created",
         ]);

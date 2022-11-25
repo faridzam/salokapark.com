@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('payment_method_id')->nullable();
             $table->bigInteger('reservation_option_id')->default(1);
             $table->string('snap_token')->nullable();
+            $table->string('zeals_code')->nullable();
             $table->string('order_id');
             $table->string('booking_code')->nullable();
             $table->date('arrival_date')->nullable();

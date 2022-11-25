@@ -5,6 +5,7 @@ import {useMediaQuery, Box, Typography, IconButton, TextField, Button} from '@mu
 import {Instagram, Facebook, Twitter, YouTube, LocationOn, Email, Phone, WhatsApp} from '@mui/icons-material';
 import {media} from '../assets/images';
 import { Inertia } from '@inertiajs/inertia';
+import {Helmet} from "react-helmet";
 
 const styles = {
     container: {
@@ -939,6 +940,9 @@ export default function Footer() {
                     </Grid>
                 </>
             }
+            <Helmet>
+                <script src="https://demo.zeals.asia/platform/js/zealsamp.js"> </script>
+            </Helmet>
         </Grid>
     )
 }

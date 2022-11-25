@@ -47,6 +47,18 @@ export function useIsMounted() {
 }
 
 export default function CheckStatus(props) {
+    
+    // React.useEffect(() => {
+    //     // componentDidMount() {}
+    //     const externalScript = document.createElement('script');
+    //     externalScript.src = '...';
+    //     externalScript.async = true;
+    //     document.head.append(externalScript);
+    //     return () => {
+    //         document.body.removeChild(scriptTag);
+    //     }
+    // }, []);
+    
 
     //media query
     const theme = useTheme();
@@ -1340,7 +1352,6 @@ export default function CheckStatus(props) {
 
             </div>
         </Fade>
-
         </>
     )
 }

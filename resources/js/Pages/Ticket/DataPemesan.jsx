@@ -158,6 +158,7 @@ export default function Ticket(props) {
     const submit = () => {
         let orderID = new Date().getFullYear().toString()+new Date().getMonth().toString().padStart(2, "0")+new Date().getDate().toString().padStart(2, "0")+new Date().getMinutes().toString().padStart(2, "0")+new Date().getMilliseconds().toString().padStart(2, "0")+Math.floor(Math.random()*(999-100+1)+100).toString().substring(1);
         window.sessionStorage.setItem('orderID', JSON.stringify(orderID));
+        let zealsCode = window.localStorage.getItem('zeals_track')
 
         axios.post('/api/create-reservation', {
             orderID: orderID,
@@ -165,6 +166,7 @@ export default function Ticket(props) {
             phone: phone,
             email: email,
             address: address,
+            zeals_code: zealsCode,
             bookingDate: bookingDate,
             ticketOrder: ticketOrder,
         }).then((response) => {

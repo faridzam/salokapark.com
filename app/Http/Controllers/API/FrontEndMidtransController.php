@@ -10,6 +10,7 @@ use Carbon\Carbon;
 
 use App\Models\reservation;
 use App\Models\reserved;
+use App\Models\zeals_callback_history;
 
 class FrontEndMidtransController extends Controller
 {
@@ -267,6 +268,40 @@ class FrontEndMidtransController extends Controller
                     'reservation_id' => $reservationData->id,
                     'customer_id' => $reservationData->customer_id,
                 ]);
+
+                $affiliateID = 'IKF9RBNO';
+                // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
+                //     'encrypted_code' => $reservationData->zeals_code,
+                //     'aff_id' => $affiliateID,
+                //     'unique_random_code' => $order_id,
+                //     'transaction_value' => $reservationData->bill
+                // ])
+                // ->throw()
+                // ->json();
+
+                $client = new Client([
+                    'headers' => ['Content-Type' => 'application/json']
+                ]);
+                $response = $client->post('https://demo.zeals.asia/apiv1/AMPcallback', [
+                    'json' => [
+                        'encrypted_code' => $reservationData->zeals_code,
+                        'aff_id' => $affiliateID,
+                        'unique_random_code' => $order_id,
+                        'transaction_value' => $reservationData->bill
+                    ]
+                ]);
+                $data = json_decode($response->getBody(), true);
+
+                zeals_callback_history::create([
+                    'response' => $response->getBody()->getContents(),
+                    'status_code' => $response->getStatusCode(),
+                ]);
+
+                // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
+                // $context = stream_context_create($opts);
+                // // $header = file_get_contents('https://www.example.com',false,$context);
+                // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
+                
             }
             else if($transaction == 'pending'){
                 // TODO set payment status in merchant's database to 'Pending'

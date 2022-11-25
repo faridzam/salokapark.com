@@ -16,6 +16,7 @@ class reservation extends Model
         'reservation_option_id',
         'snap_token',
         'order_id',
+        'zeals_code',
         'booking_code',
         'arrival_date',
         'bill',
