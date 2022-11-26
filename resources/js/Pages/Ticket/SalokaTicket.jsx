@@ -75,8 +75,19 @@ export default function Ticket(props) {
     // booking date
     const today = new Date()
     const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    const [bookingDate, setBookingDate] = React.useState(today);
+    const timeString = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+    const [, hours, ampm] = timeString.match(/ (\d+).* ([AP]M)/);
+    console.log('In ID, it is:', hours, ampm);
+
+    if(Number(hours) < 3 && ampm === 'PM'){
+        //
+        console.log("bisa");
+        tomorrow.setDate(tomorrow.getDate())
+    } else {
+        console.log("tidak bisa");
+        tomorrow.setDate(tomorrow.getDate() + 1)
+    }
+    const [bookingDate, setBookingDate] = React.useState(tomorrow);
 
     // ticket section
     const [ticketOrder, setTicketOrder] = React.useState([]);
@@ -238,7 +249,7 @@ export default function Ticket(props) {
                                                     locale="id-ID"
                                                     value={bookingDate}
                                                     onChange={value => handleArrivalDate(value)}
-                                                    minDate={ today }
+                                                    minDate={ tomorrow }
                                                 />
                                             </Application>
                                         </Card>
@@ -564,7 +575,7 @@ export default function Ticket(props) {
                                                 locale="id-ID"
                                                 value={bookingDate}
                                                 onChange={value => handleArrivalDate(value)}
-                                                minDate={ today }
+                                                minDate={ tomorrow }
                                             />
                                         </Application>
                                     </Card>

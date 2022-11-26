@@ -19,6 +19,7 @@ class ticket_distribution extends Model
         'max_qty',
         'date_start',
         'date_end',
+        'day',
         'coupon_code',
         'payment_method',
         'isActive',

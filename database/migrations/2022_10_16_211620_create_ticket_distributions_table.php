@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('max_qty');
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();
+            $table->String('days')->nullable();
             $table->string('coupon_code')->nullable();
             $table->string('payment_method')->nullable();
             $table->boolean('isActive')->default(true);

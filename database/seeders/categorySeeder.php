@@ -26,6 +26,9 @@ class categorySeeder extends Seeder
             [
                 'name' => 'Holiday',
             ],
+            [
+                'name' => 'Reguler-Events',
+            ],
         ];
 
         category::insert($categories);

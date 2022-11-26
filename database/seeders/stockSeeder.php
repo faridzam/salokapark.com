@@ -33,6 +33,10 @@ class stockSeeder extends Seeder
                 'ticket_id' => 4,
                 'stock' => 2500,
             ],
+            [
+                'ticket_id' => 5,
+                'stock' => 999999999999999,
+            ],
         ];
 
         stock::insert($stocks);

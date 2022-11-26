@@ -33,6 +33,10 @@ class ticketSeeder extends Seeder
                 'name' => 'Konser - Sheila on 7',
                 'price' => 250000,
             ],
+            [
+                'name' => 'Holiday - Natal dan Tahun Baru 2022',
+                'price' => 150000,
+            ],
         ];
 
         ticket::insert($tickets);

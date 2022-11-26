@@ -13,6 +13,7 @@ class reserved extends Model
         'id',
         'reservation_id',
         'customer_id',
+        'status',
     ];
 
 }

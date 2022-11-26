@@ -256,7 +256,7 @@ class FrontEndMidtransController extends Controller
             else if ($transaction == 'settlement'){
                 // TODO set payment status in merchant's database to 'Settlement'
                 $reservationData = reservation::where('order_id', $order_id)->first();
-                $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->customer_id.$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id.strval(mt_rand(100,999));
+                $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->customer_id.$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
 
                 $reservation = reservation::where('order_id', $order_id)
                 ->update([
@@ -267,9 +267,10 @@ class FrontEndMidtransController extends Controller
                 $reserved = reserved::create([
                     'reservation_id' => $reservationData->id,
                     'customer_id' => $reservationData->customer_id,
+                    'status' => 0,
                 ]);
 
-                $affiliateID = 'IKF9RBNO';
+                $affiliateID = '5443331226';
                 // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
                 //     'encrypted_code' => $reservationData->zeals_code,
                 //     'aff_id' => $affiliateID,

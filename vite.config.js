@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
 import viteCompression from 'vite-plugin-compression';
+// import vsharp from "vite-plugin-vsharp";
 // import viteImagemin from 'vite-plugin-imagemin'
 
 export default defineConfig({
@@ -14,6 +15,7 @@ export default defineConfig({
             refresh: true,
         }),
         react(),
+        // vsharp(),
         viteCompression(),
         // viteImagemin({
         //     gifsicle: {
