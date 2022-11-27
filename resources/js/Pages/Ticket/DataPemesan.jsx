@@ -160,22 +160,41 @@ export default function Ticket(props) {
         window.sessionStorage.setItem('orderID', JSON.stringify(orderID));
         let zealsCode = window.localStorage.getItem('zeals_track')
 
-        axios.post('/api/create-reservation', {
-            orderID: orderID,
-            name: name,
-            phone: phone,
-            email: email,
-            address: address,
-            zeals_code: zealsCode,
-            bookingDate: bookingDate,
-            ticketOrder: ticketOrder,
-        }).then((response) => {
-            //
-            window.sessionStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
-        }).catch((error) => {
-            //
-            console.log(error)
-        })
+        if(zealsCode) {
+            axios.post('/api/create-reservation', {
+                orderID: orderID,
+                name: name,
+                phone: phone,
+                email: email,
+                address: address,
+                zeals_code: zealsCode,
+                bookingDate: bookingDate,
+                ticketOrder: ticketOrder,
+            }).then((response) => {
+                //
+                window.sessionStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
+            }).catch((error) => {
+                //
+                console.log(error)
+            });
+        } else {
+            axios.post('/api/create-reservation', {
+                orderID: orderID,
+                name: name,
+                phone: phone,
+                email: email,
+                address: address,
+                zeals_code: null,
+                bookingDate: bookingDate,
+                ticketOrder: ticketOrder,
+            }).then((response) => {
+                //
+                window.sessionStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
+            }).catch((error) => {
+                //
+                console.log(error)
+            });
+        }
 
         handleDialogClose();
         Inertia.visit('/ticket/konfirmasi-pembayaran');

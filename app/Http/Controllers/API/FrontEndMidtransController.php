@@ -302,7 +302,7 @@ class FrontEndMidtransController extends Controller
                 // $context = stream_context_create($opts);
                 // // $header = file_get_contents('https://www.example.com',false,$context);
                 // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
-                
+
             }
             else if($transaction == 'pending'){
                 // TODO set payment status in merchant's database to 'Pending'
