@@ -349,9 +349,6 @@ export default function Ticket(props) {
                                                 <Box>
                                                     <Button>Ticket by goers</Button>
                                                 </Box>
-                                                <Box>
-                                                    <Button>Ticket by zeals</Button>
-                                                </Box>
 
                                             </Grid>
                                         </Box>
