@@ -69,12 +69,12 @@ class FrontEndTicketController extends Controller
 
                 #price-option
                 // $value->price = $ticket->price;
-                if ($value->option_id === 3) {
+                if ($option->type === 'special_price') {
                     $value->price = $option->special_price;
                 } else {
                     $value->price = $ticket->price;
                 }
-                
+
                 $value->description = $option->description;
 
             }
