@@ -42,6 +42,10 @@ export default function Header() {
         Inertia.visit(route);
     }
 
+    const externalRedirect = (route) => {
+        window.location.href = route
+    }
+
     return(
 
         // header
@@ -61,7 +65,8 @@ export default function Header() {
             }}>
 
                 <Box
-                onClick={() => redirect('/')}
+                //onClick={() => redirect('/')}
+                onClick={() => externalRedirect('https://salokapark.com/')}
                 sx={{
                     marginLeft: '50px',
                     cursor: 'pointer',
@@ -90,7 +95,8 @@ export default function Header() {
                     }}>
                         <Typography
                         className={`navbar-item noselect ${activeRoute === "/" ? " navbar-item-active" : ""}`}
-                        onClick={() => redirect('/')}
+                        //onClick={() => redirect('/')}
+                        onClick={() => externalRedirect('https://salokapark.com/')}
                         noWrap={true}
                         sx={{
                             fontFamily: 'AlrightSans',
@@ -104,6 +110,8 @@ export default function Header() {
                         }}
                         >HOME</Typography>
                     </Box>
+
+                    {/*
                     <Box
                     sx={{
                     marginY: '10px',
@@ -129,6 +137,7 @@ export default function Header() {
                     }}
                     >PROMOSI</Typography>
                     </Box>
+
                     <Box
                     sx={{
                     marginY: '10px',
@@ -154,6 +163,9 @@ export default function Header() {
                     }}
                     >ZONA</Typography>
                     </Box>
+
+                    */}
+
                     <Box
                     sx={{
                     marginY: '10px',
@@ -165,7 +177,8 @@ export default function Header() {
                     }}>
                     <Typography
                     className={`navbar-item noselect ${activeRoute.includes("show-event") ? " navbar-item-active" : ""}`}
-                    onClick={() => redirect('/show-event')}
+                    //onClick={() => redirect('/show-event')}
+                    onClick={() => externalRedirect('https://salokapark.com/event')}
                     noWrap={true}
                     sx={{
                         fontFamily: 'AlrightSans',
@@ -190,7 +203,8 @@ export default function Header() {
                     }}>
                     <Typography
                     className={`navbar-item noselect ${activeRoute.includes("restaurant") ? " navbar-item-active" : ""}`}
-                    onClick={() => redirect('/restaurant')}
+                    //onClick={() => redirect('/restaurant')}
+                    onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                     noWrap={true}
                     sx={{
                         fontFamily: 'AlrightSans',
@@ -204,6 +218,8 @@ export default function Header() {
                     }}
                     >RESTAURANT</Typography>
                     </Box>
+
+                    {/*
                     <Box
                     sx={{
                     marginY: '10px',
@@ -229,6 +245,7 @@ export default function Header() {
                     }}
                     >MERCHANDISE</Typography>
                     </Box>
+                    */}
 
                 </Grid>
                 </NavbarMenu>
@@ -239,7 +256,8 @@ export default function Header() {
                 sx={{
                 }}>
                     <Button
-                    onClick={() => redirect('/ticket')}
+                    //onClick={() => redirect('/ticket')}
+                    onClick={() => externalRedirect('https://webdev.salokapark.com/ticket')}
                     className="ticket-cta-button"
                     variant="contained"
                     sx={{
@@ -288,10 +306,13 @@ export default function Header() {
                         <ListItem key="home">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute === "/" ? " navbar-item-active" : ""}`}
-                            onClick={() => redirect('/')}>
+                            //onClick={() => redirect('/')}
+                            onClick={() => externalRedirect('https://salokapark.com/')}
+                            >
                                 <ListItemText primary="Home" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
+                        {/*
                         <ListItem key="promosi">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("promosi") ? " navbar-item-active" : ""}`}
@@ -299,6 +320,7 @@ export default function Header() {
                                 <ListItemText primary="Promosi" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
+
                         <ListItem key="zona">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("zona") ? " navbar-item-active" : ""}`}
@@ -306,20 +328,27 @@ export default function Header() {
                                 <ListItemText primary="Zona" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
+                        */}
                         <ListItem key="show&event">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("show-event") ? " navbar-item-active" : ""}`}
-                            onClick={() => redirect('/show-event')}>
+                            //onClick={() => redirect('/show-event')}
+                            onClick={() => externalRedirect('https://salokapark.com/event')}
+                            >
                                 <ListItemText primary="Show & Event" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
                         <ListItem key="restaurant">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("restaurant") ? " navbar-item-active" : ""}`}
-                            onClick={() => redirect('/restaurant')}>
+                            //onClick={() => redirect('/restaurant')}
+                            onClick={() => externalRedirect('https://salokapark.com/kuliner')}
+                            >
                                 <ListItemText primary="Restaurant" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
+
+                        {/*
                         <ListItem key="merchandise">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("merchandise") ? " navbar-item-active" : ""}`}
@@ -327,12 +356,15 @@ export default function Header() {
                                 <ListItemText primary="Merchandise" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
+                        */}
 
                         <Divider/>
 
                         <ListItem key="ticket">
                             <ListItemButton
-                            onClick={() => redirect('/ticket')}>
+                            //onClick={() => redirect('/ticket')}
+                            onClick={() => externalRedirect('https://webdev.salokapark.com/ticket')}
+                            >
                                 <ListItemText primary="Ticket" sx={{textAlign: 'center', color: 'red.light'}}/>
                             </ListItemButton>
                         </ListItem>

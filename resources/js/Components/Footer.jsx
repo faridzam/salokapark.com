@@ -31,6 +31,9 @@ export default function Footer() {
     const redirect = (route) => {
         Inertia.visit(route);
     }
+    const externalRedirect = (route) => {
+        window.location.href = route
+    }
 
     return(
         <Grid
@@ -106,7 +109,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/zona/pesisir')}
+                                //onClick={() => redirect('/zona/pesisir')}
+                                onClick={() => externalRedirect('https://salokapark.com/pesisir')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -126,7 +130,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/zona/balalantara')}
+                                // onClick={() => redirect('/zona/balalantara')}
+                                onClick={() => externalRedirect('https://salokapark.com/balalantara')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -146,7 +151,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/zona/kamayayi')}
+                                //onClick={() => redirect('/zona/kamayayi')}
+                                onClick={() => externalRedirect('https://salokapark.com/kamayayi')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -166,7 +172,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/zona/ararya')}
+                                //onClick={() => redirect('/zona/ararya')}
+                                onClick={() => externalRedirect('https://salokapark.com/ararya')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -186,7 +193,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/zona/segara-prada')}
+                                //onClick={() => redirect('/zona/segara-prada')}
+                                onClick={() => externalRedirect('https://salokapark.com/segara_prada')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -234,7 +242,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/tentang')}
+                                //onClick={() => redirect('/tentang')}
+                                onClick={() => externalRedirect('https://salokapark.com/sejarah')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -254,7 +263,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/tentang')}
+                                // onClick={() => redirect('/tentang')}
+                                onClick={() => externalRedirect('https://salokapark.com/area_sekitar')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -274,6 +284,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
+                                // onClick={() => redirect('/tentang')}
+                                onClick={() => externalRedirect('https://salokapark.com/hubungi')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -321,7 +333,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/restaurant/rimba')}
+                                // onClick={() => redirect('/restaurant/rimba')}
+                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -341,7 +354,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/restaurant/daimami')}
+                                // onClick={() => redirect('/restaurant/daimami')}
+                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -361,7 +375,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/restaurant/jenju')}
+                                // onClick={() => redirect('/restaurant/jenju')}
+                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -381,7 +396,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/restaurant/tuk-cio')}
+                                // onClick={() => redirect('/restaurant/tuk-cio')}
+                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -401,7 +417,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/restaurant/srengenge')}
+                                // onClick={() => redirect('/restaurant/srengenge')}
+                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -421,7 +438,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                onClick={() => redirect('/restaurant/ice-cream-shop')}
+                                // onClick={() => redirect('/restaurant/ice-cream-shop')}
+                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -536,6 +554,7 @@ export default function Footer() {
                             }}>
                                 <Box>
                                     <IconButton
+                                    onClick={() => externalRedirect('https://www.instagram.com/salokapark/')}
                                     aria-label="instagram"
                                     component="label"
                                     sx={{
@@ -546,6 +565,7 @@ export default function Footer() {
                                 </Box>
                                 <Box>
                                     <IconButton
+                                    onClick={() => externalRedirect('https://www.facebook.com/salokapark/')}
                                     aria-label="facebook"
                                     component="label"
                                     sx={{
@@ -556,6 +576,7 @@ export default function Footer() {
                                 </Box>
                                 <Box>
                                     <IconButton
+                                    onClick={() => externalRedirect('https://twitter.com/salokapark')}
                                     aria-label="twitter"
                                     component="label"
                                     sx={{
@@ -566,6 +587,7 @@ export default function Footer() {
                                 </Box>
                                 <Box>
                                     <IconButton
+                                    onClick={() => externalRedirect('https://www.youtube.com/channel/UC-X0frGAtka_RZu9LUTBWUA')}
                                     aria-label="Youtube"
                                     component="label"
                                     sx={{
@@ -578,6 +600,7 @@ export default function Footer() {
                                 sx={{
                                 }}>
                                     <IconButton
+                                    onClick={() => externalRedirect('https://www.tiktok.com/@salokapark')}
                                     aria-label="tiktok"
                                     component="label"
                                     sx={{
@@ -875,6 +898,7 @@ export default function Footer() {
                         }}>
                             <Box>
                                 <IconButton
+                                onClick={() => externalRedirect('https://www.instagram.com/salokapark/')}
                                 aria-label="instagram"
                                 component="label"
                                 sx={{
@@ -885,6 +909,7 @@ export default function Footer() {
                             </Box>
                             <Box>
                                 <IconButton
+                                onClick={() => externalRedirect('https://www.facebook.com/salokapark/')}
                                 aria-label="facebook"
                                 component="label"
                                 sx={{
@@ -895,6 +920,7 @@ export default function Footer() {
                             </Box>
                             <Box>
                                 <IconButton
+                                onClick={() => externalRedirect('https://twitter.com/salokapark')}
                                 aria-label="twitter"
                                 component="label"
                                 sx={{
@@ -905,6 +931,7 @@ export default function Footer() {
                             </Box>
                             <Box>
                                 <IconButton
+                                onClick={() => externalRedirect('https://www.youtube.com/channel/UC-X0frGAtka_RZu9LUTBWUA')}
                                 aria-label="Youtube"
                                 component="label"
                                 sx={{
@@ -917,6 +944,7 @@ export default function Footer() {
                             sx={{
                             }}>
                                 <IconButton
+                                onClick={() => externalRedirect('https://www.tiktok.com/@salokapark')}
                                 aria-label="tiktok"
                                 component="label"
                                 sx={{
