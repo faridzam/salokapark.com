@@ -298,6 +298,17 @@ class FrontEndMidtransController extends Controller
                     'status_code' => $response->getStatusCode(),
                 ]);
 
+                $customer = customer::find($reservationData->customer_id);
+                $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
+                    'json' => [
+                        'name' => $customer->name,
+                        'booking_code' => $bookingCode,
+                        'email' => $customer->email,
+                        'arrival' => $reservationData->arrival_date,
+                        'status' => 100,
+                    ]
+                ]);
+
                 // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
                 // $context = stream_context_create($opts);
                 // // $header = file_get_contents('https://www.example.com',false,$context);
