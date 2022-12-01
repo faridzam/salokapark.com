@@ -109,8 +109,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                //onClick={() => redirect('/zona/pesisir')}
-                                onClick={() => externalRedirect('https://salokapark.com/pesisir')}
+                                onClick={() => redirect('/zona/pesisir')}
+                                // onClick={() => externalRedirect('https://salokapark.com/pesisir')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -130,8 +130,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/zona/balalantara')}
-                                onClick={() => externalRedirect('https://salokapark.com/balalantara')}
+                                onClick={() => redirect('/zona/balalantara')}
+                                // onClick={() => externalRedirect('https://salokapark.com/balalantara')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -151,8 +151,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                //onClick={() => redirect('/zona/kamayayi')}
-                                onClick={() => externalRedirect('https://salokapark.com/kamayayi')}
+                                onClick={() => redirect('/zona/kamayayi')}
+                                // onClick={() => externalRedirect('https://salokapark.com/kamayayi')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -172,8 +172,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                //onClick={() => redirect('/zona/ararya')}
-                                onClick={() => externalRedirect('https://salokapark.com/ararya')}
+                                onClick={() => redirect('/zona/ararya')}
+                                // onClick={() => externalRedirect('https://salokapark.com/ararya')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -193,8 +193,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                //onClick={() => redirect('/zona/segara-prada')}
-                                onClick={() => externalRedirect('https://salokapark.com/segara_prada')}
+                                onClick={() => redirect('/zona/segara-prada')}
+                                // onClick={() => externalRedirect('https://salokapark.com/segara_prada')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -242,8 +242,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                //onClick={() => redirect('/tentang')}
-                                onClick={() => externalRedirect('https://salokapark.com/sejarah')}
+                                onClick={() => redirect('/tentang')}
+                                // onClick={() => externalRedirect('https://salokapark.com/sejarah')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -263,8 +263,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/tentang')}
-                                onClick={() => externalRedirect('https://salokapark.com/area_sekitar')}
+                                onClick={() => redirect('/tentang')}
+                                // onClick={() => externalRedirect('https://salokapark.com/area_sekitar')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -284,8 +284,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/tentang')}
-                                onClick={() => externalRedirect('https://salokapark.com/hubungi')}
+                                onClick={() => redirect('/tentang')}
+                                // onClick={() => externalRedirect('https://salokapark.com/hubungi')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -333,8 +333,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/restaurant/rimba')}
-                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
+                                onClick={() => redirect('/restaurant/rimba')}
+                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -354,8 +354,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/restaurant/daimami')}
-                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
+                                onClick={() => redirect('/restaurant/daimami')}
+                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -375,8 +375,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/restaurant/jenju')}
-                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
+                                onClick={() => redirect('/restaurant/jenju')}
+                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -396,8 +396,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/restaurant/tuk-cio')}
-                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
+                                onClick={() => redirect('/restaurant/tuk-cio')}
+                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -417,8 +417,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/restaurant/srengenge')}
-                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
+                                onClick={() => redirect('/restaurant/srengenge')}
+                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',
@@ -438,8 +438,8 @@ export default function Footer() {
                                 justifyContent: 'flex-start'
                             }}>
                                 <Typography
-                                // onClick={() => redirect('/restaurant/ice-cream-shop')}
-                                onClick={() => externalRedirect('https://salokapark.com/kuliner')}
+                                onClick={() => redirect('/restaurant/ice-cream-shop')}
+                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                                 className="noselect"
                                 sx={{
                                     fontSize: '14px',

@@ -23,11 +23,11 @@ Route::get('/', function () {
     Meta::addMeta('description', 'saloka theme park, taman bermain terbaik dan terbesar di jawa tengah');
     Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, taman bermain, jawa tengah, wahana, terbesar, terbaik');
     //only ticket webdev
-    return Inertia::location('https://webdev.salokapark.com/ticket');
+    // return Inertia::location('https://webdev.salokapark.com/ticket');
     //only ticket local
     // return Inertia::location('http://localhost:8000/ticket');
     //whole site
-    // return Inertia::render('Welcome');
+    return Inertia::render('Welcome');
 })->name('welcome');
 
 // Ticket
