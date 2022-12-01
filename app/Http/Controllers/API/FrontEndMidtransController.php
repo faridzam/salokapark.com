@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\Models\reservation;
+use App\Models\customer;
 use App\Models\reserved;
 use App\Models\zeals_callback_history;
 
