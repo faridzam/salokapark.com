@@ -26,9 +26,9 @@ export function useIsMounted() {
         window.sessionStorage.clear();
 
         //change this to the script source you want to load, for example this is snap.js sandbox env
-        const midtransScriptUrl = 'https://app.sandbox.midtrans.com/snap/snap.js';
+        const midtransScriptUrl = 'https://app.midtrans.com/snap/snap.js';
         //change this according to your client-key
-        const myMidtransClientKey = 'SB-Mid-client-nxEqAslc-ufQu9az';
+        const myMidtransClientKey = 'Mid-client-lYBi_CM3a6fBcx3w';
 
         let scriptTag = document.createElement('script');
         scriptTag.src = midtransScriptUrl;

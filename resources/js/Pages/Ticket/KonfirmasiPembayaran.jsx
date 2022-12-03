@@ -821,8 +821,8 @@ export default function Ticket(props) {
             </Fade>
             <Helmet>
                 <script type="text/javascript"
-                src="https://app.sandbox.midtrans.com/snap/snap.js"
-                data-client-key="SB-Mid-client-nxEqAslc-ufQu9az"></script>
+                src="https://app.midtrans.com/snap/snap.js"
+                data-client-key="Mid-client-lYBi_CM3a6fBcx3w"></script>
             </Helmet>
         </>
     )

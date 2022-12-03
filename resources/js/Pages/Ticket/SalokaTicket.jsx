@@ -74,17 +74,15 @@ export default function Ticket(props) {
 
     // booking date
     const today = new Date()
+    const maxDate = new Date("2022-12-23");
     const tomorrow = new Date(today)
     const timeString = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
     const [, hours, ampm] = timeString.match(/ (\d+).* ([AP]M)/);
-    console.log('In ID, it is:', hours, ampm);
 
-    if(Number(hours) < 3 && ampm === 'PM'){
+    if(Number(hours) < 0 && ampm === 'AM'){
         //
-        console.log("bisa");
         tomorrow.setDate(tomorrow.getDate())
     } else {
-        console.log("tidak bisa");
         tomorrow.setDate(tomorrow.getDate() + 1)
     }
     const [bookingDate, setBookingDate] = React.useState(tomorrow);
@@ -250,6 +248,7 @@ export default function Ticket(props) {
                                                     value={bookingDate}
                                                     onChange={value => handleArrivalDate(value)}
                                                     minDate={ tomorrow }
+                                                    maxDate={maxDate}
                                                 />
                                             </Application>
                                         </Card>
@@ -576,6 +575,7 @@ export default function Ticket(props) {
                                                 value={bookingDate}
                                                 onChange={value => handleArrivalDate(value)}
                                                 minDate={ tomorrow }
+                                                maxDate={maxDate}
                                             />
                                         </Application>
                                     </Card>

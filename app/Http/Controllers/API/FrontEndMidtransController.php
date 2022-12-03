@@ -17,8 +17,8 @@ class FrontEndMidtransController extends Controller
 {
 
     public function __construct(){
-        $this->serverKey = 'SB-Mid-server-Mcyaglb-OqsipP7H_PPvHnLD';
-        $this->isProduction = false;
+        $this->serverKey = 'Mid-server-vDvFh0-mEQcapYlBhoNayo4E';
+        $this->isProduction = true;
         $this->isSanitized = true;
         $this->is3ds = true;
     }
@@ -120,7 +120,7 @@ class FrontEndMidtransController extends Controller
     public function getMidtransTransactionStatus(Request $request) {
         //
         $client = new Client();
-        $response = $client->get('https://api.sandbox.midtrans.com/v2/'.$request->orderID.'/status', [
+        $response = $client->get('https://api.midtrans.com/v2/'.$request->orderID.'/status', [
             'auth' => [
                 $this->serverKey,
                 "",
@@ -141,7 +141,7 @@ class FrontEndMidtransController extends Controller
         //
 
         $client = new Client();
-        $response = $client->post('https://api.sandbox.midtrans.com/v2/'.$request->orderID.'/cancel', [
+        $response = $client->post('https://api.midtrans.com/v2/'.$request->orderID.'/cancel', [
             'auth' => [
                 $this->serverKey,
                 "",
@@ -257,7 +257,7 @@ class FrontEndMidtransController extends Controller
             else if ($transaction == 'settlement'){
                 // TODO set payment status in merchant's database to 'Settlement'
                 $reservationData = reservation::where('order_id', $order_id)->first();
-                $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->customer_id.$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
+                $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
 
                 $reservation = reservation::where('order_id', $order_id)
                 ->update([
