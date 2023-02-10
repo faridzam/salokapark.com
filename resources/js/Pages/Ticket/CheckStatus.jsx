@@ -1341,6 +1341,7 @@ export default function CheckStatus(props) {
                 {/* footer */}
                 <Box
                 sx={{
+                    marginTop: '100px',
                     width: '100%',
                     height: '100%',
                     backgroundImage: `url(${media[2]})`,

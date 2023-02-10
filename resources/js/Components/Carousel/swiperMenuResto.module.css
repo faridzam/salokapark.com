@@ -1,0 +1,185 @@
+:root {
+    --swiper-theme-color: #f5b247;
+}
+
+.swiper-zones > .swiper-button-next{
+    top: 30%;
+    width: 65px;
+    height: 65px;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 1);
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.swiper-zones > .swiper-button-prev{
+    top: 30%;
+    width: 65px;
+    height: 65px;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 1);
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.prevMainMenus{
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 20%;
+    margin-left: 10px;
+    width: 65px;
+    height: 65px;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 1);
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.nextMainMenus{
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    top: 20%;
+    width: 65px;
+    height: 65px;
+    margin-right: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 1);
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.swiper-button-next:after{
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.swiper-button-prev:after{
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.swiper-pagination-bullet {
+    background-color: white;
+    opacity: 0.8;
+}
+
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background-color: #f5b247;
+    opacity: 1;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    /* For mobile phones: */
+    .swiper-zones > .swiper-button-next{
+        top: 30%;
+        width: 40px;
+        height: 40px;
+        font-size: 25px;
+        font-weight: bold;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-top-left-radius: 100%;
+        border-bottom-left-radius: 100%;
+        border-top-right-radius: 100%;
+        border-bottom-right-radius: 100%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .swiper-zones > .swiper-button-prev{
+        top: 30%;
+        width: 40px;
+        height: 40px;
+        font-size: 25px;
+        font-weight: bold;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-top-right-radius: 100%;
+        border-bottom-right-radius: 100%;
+        border-top-left-radius: 100%;
+        border-bottom-left-radius: 100%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .prevMainMenus{
+        position: absolute;
+        z-index: 10;
+        left: -5;
+        top: 18%;
+        width: 65px;
+        height: 65px;
+        margin-left: 5px;
+        font-size: 25px;
+        font-weight: bold;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-top-left-radius: 100%;
+        border-bottom-left-radius: 100%;
+        border-top-right-radius: 100%;
+        border-bottom-right-radius: 100%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    
+    .nextMainMenus{
+        position: absolute;
+        z-index: 10;
+        right: -5;
+        top: 18%;
+        width: 65px;
+        height: 65px;
+        margin-right: 5px;
+        font-size: 25px;
+        font-weight: bold;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-top-right-radius: 100%;
+        border-bottom-right-radius: 100%;
+        border-top-left-radius: 100%;
+        border-bottom-left-radius: 100%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+  }

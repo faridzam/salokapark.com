@@ -54,9 +54,11 @@ export default function Header() {
         direction="row"
         spacing={0}
         sx={{
-          marginTop: '20px',
-          display: 'flex',
-          justifyContent: 'space-between',
+            height: '100px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: 'white.lightest',
         }}>
             <Box
             sx={{
@@ -83,12 +85,13 @@ export default function Header() {
                 //
                 }}>
 
+                    {/* tombol home
                     <Box
                     sx={{
                     marginY: '10px',
                     marginLeft: '50px',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
+                    paddingLeft: '15px',
+                    paddingRight: '15px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -110,12 +113,14 @@ export default function Header() {
                         }}
                         >HOME</Typography>
                     </Box>
+                    */}
 
                     <Box
                     sx={{
                     marginY: '10px',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
+                    marginLeft: '50px',
+                    paddingLeft: '15px',
+                    paddingRight: '15px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -140,8 +145,8 @@ export default function Header() {
                     <Box
                     sx={{
                     marginY: '10px',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
+                    paddingLeft: '15px',
+                    paddingRight: '15px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -167,8 +172,8 @@ export default function Header() {
                     <Box
                     sx={{
                     marginY: '10px',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
+                    paddingLeft: '15px',
+                    paddingRight: '15px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -193,8 +198,8 @@ export default function Header() {
                     <Box
                     sx={{
                     marginY: '10px',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
+                    paddingLeft: '15px',
+                    paddingRight: '15px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -214,18 +219,20 @@ export default function Header() {
                             color: 'secondary.light',
                         },
                     }}
-                    >RESTAURANT</Typography>
+                    >RESTO & CAFE</Typography>
                     </Box>
 
+                    {/* tombol merchandise
                     <Box
                     sx={{
                     marginY: '10px',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
+                    paddingLeft: '15px',
+                    paddingRight: '15px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     }}>
+
                     <Typography
                     className={`navbar-item noselect ${activeRoute.includes("merchandise") ? " navbar-item-active" : ""}`}
                     onClick={() => redirect('/merchandise')}
@@ -241,6 +248,33 @@ export default function Header() {
                         },
                     }}
                     >MERCHANDISE</Typography>
+                    </Box>
+                    */}
+
+                    <Box
+                    sx={{
+                    marginY: '10px',
+                    paddingLeft: '15px',
+                    paddingRight: '15px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    }}>
+                        <Typography
+                        className={`navbar-item noselect ${activeRoute.includes("group") ? " navbar-item-active" : ""}`}
+                        onClick={() => redirect('/group')}
+                        noWrap={true}
+                        sx={{
+                            fontFamily: 'AlrightSans',
+                            fontSize: '18px',
+                            fontWeight: 700,
+                            color: '#333',
+                            cursor: 'pointer',
+                            "&:hover": {
+                                color: 'secondary.light',
+                            },
+                        }}
+                        >ROMBONGAN</Typography>
                     </Box>
 
                 </Grid>
@@ -299,6 +333,7 @@ export default function Header() {
                         width: '320px',
                         paddingX: '20px',
                     }}>
+                        {/* home button
                         <ListItem key="home">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute === "/" ? " navbar-item-active" : ""}`}
@@ -308,6 +343,7 @@ export default function Header() {
                                 <ListItemText primary="Home" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
+                        */}
 
                         <ListItem key="promosi">
                             <ListItemButton
@@ -340,15 +376,25 @@ export default function Header() {
                             onClick={() => redirect('/restaurant')}
                             // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
                             >
-                                <ListItemText primary="Restaurant" sx={{textAlign: 'center'}}/>
+                                <ListItemText primary="Resto & Cafe" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
 
+                        {/* home button
                         <ListItem key="merchandise">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("merchandise") ? " navbar-item-active" : ""}`}
                             onClick={() => redirect('/merchandise')}>
                                 <ListItemText primary="Merchandise" sx={{textAlign: 'center'}}/>
+                            </ListItemButton>
+                        </ListItem>
+                        */}
+
+                        <ListItem key="group">
+                            <ListItemButton
+                            className={`navbar-item noselect ${activeRoute.includes("group") ? " navbar-item-active" : ""}`}
+                            onClick={() => redirect('/group')}>
+                                <ListItemText primary="Rombongan" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
 

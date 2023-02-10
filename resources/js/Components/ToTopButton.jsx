@@ -23,7 +23,7 @@ const ToTopButton = () => {
     const fabStyle = {
         zIndex: '12000',
         position: 'fixed',
-        bottom: 16,
+        bottom: 70,
         right: 16,
     };
 

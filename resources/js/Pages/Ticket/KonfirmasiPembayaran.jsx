@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Head } from '@inertiajs/inertia-react';
+import { Inertia } from '@inertiajs/inertia'
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {Box, Paper, Typography, Button, Fade} from '@mui/material';
 
@@ -38,6 +39,10 @@ export function useIsMounted() {
 }
 
 export default function Ticket(props) {
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
 
     const isMounted = useIsMounted();
 
@@ -127,72 +132,79 @@ export default function Ticket(props) {
     }, [ticketOrder])
     const [orderID, setOrderID] = React.useState(0);
     const snapPay = () => {
-        axios.post('/api/get-midtrans-token', {
-            reservationID: reservationID,
-            orderID: orderID,
-            bookingDate: bookingDate,
-            ticketOrder: ticketOrder,
-            name: name,
-            phone: phone,
-            email: email,
-            address: address,
-        })
-        .then((response) => {
-            //
-            window.snap.pay(response.data.token);
-        }).catch((error) => {
-            // axios.post('/api/get-midtrans-transaction-status', {
-            //     orderID: orderID,
-            // }).then((response) => {
-            //     //
-            //     switch (response.data.status.payment_type) {
-            //         case "echannel":
-            //             handleTransactionDialogOpen({
-            //                 payment_type: "echannel",
-            //                 bank: "transfer bank - mandiri",
-            //                 transaction_status: response.data.status.transaction_status,
-            //                 payment_number_1: response.data.status.bill_key,
-            //                 payment_number_2: response.data.status.biller_code,
-            //                 total_bill: response.data.status.gross_amount,
-            //             });
-            //             break;
+        var now = new Date();
+        now.setHours(0,0,0,0);
 
-            //         case "bank_transfer":
-            //             if (response.data.status.hasOwnProperty('permata_va_number')) {
-            //                 handleTransactionDialogOpen({
-            //                     payment_type: "bank_transfer",
-            //                     bank: "transfer bank - permata",
-            //                     transaction_status: response.data.status.transaction_status,
-            //                     payment_number_1: response.data.status.permata_va_number,
-            //                     total_bill: response.data.status.gross_amount,
-            //                 });
-            //             } else {
-            //                 handleTransactionDialogOpen({
-            //                     payment_type: "bank_transfer",
-            //                     bank: "transfer bank - "+response.data.status.va_numbers[0].bank,
-            //                     transaction_status: response.data.status.transaction_status,
-            //                     payment_number_1: response.data.status.va_numbers[0].va_number,
-            //                     total_bill: response.data.status.gross_amount,
-            //                 });
-            //             }
-            //             break;
-            //         case "cstore":
-            //             handleTransactionDialogOpen({
-            //                 payment_type: "cstore",
-            //                 bank: response.data.status.store,
-            //                 transaction_status: response.data.status.transaction_status,
-            //                 payment_number_1: response.data.status.payment_code,
-            //                 total_bill: response.data.status.gross_amount,
-            //             });
-            //             break;
-
-            //         default:
-            //             break;
-            //     }
-            // }).catch((error) => {
-            //     //
-            // })
-        });
+        if(bookingDate <= now){
+            redirect('/ticket/pilih-ticket');
+        } else {
+            axios.post('/api/get-midtrans-token', {
+                reservationID: reservationID,
+                orderID: orderID,
+                bookingDate: bookingDate,
+                ticketOrder: ticketOrder,
+                name: name,
+                phone: phone,
+                email: email,
+                address: address,
+            })
+            .then((response) => {
+                //
+                window.snap.pay(response.data.token);
+            }).catch((error) => {
+                // axios.post('/api/get-midtrans-transaction-status', {
+                //     orderID: orderID,
+                // }).then((response) => {
+                //     //
+                //     switch (response.data.status.payment_type) {
+                //         case "echannel":
+                //             handleTransactionDialogOpen({
+                //                 payment_type: "echannel",
+                //                 bank: "transfer bank - mandiri",
+                //                 transaction_status: response.data.status.transaction_status,
+                //                 payment_number_1: response.data.status.bill_key,
+                //                 payment_number_2: response.data.status.biller_code,
+                //                 total_bill: response.data.status.gross_amount,
+                //             });
+                //             break;
+    
+                //         case "bank_transfer":
+                //             if (response.data.status.hasOwnProperty('permata_va_number')) {
+                //                 handleTransactionDialogOpen({
+                //                     payment_type: "bank_transfer",
+                //                     bank: "transfer bank - permata",
+                //                     transaction_status: response.data.status.transaction_status,
+                //                     payment_number_1: response.data.status.permata_va_number,
+                //                     total_bill: response.data.status.gross_amount,
+                //                 });
+                //             } else {
+                //                 handleTransactionDialogOpen({
+                //                     payment_type: "bank_transfer",
+                //                     bank: "transfer bank - "+response.data.status.va_numbers[0].bank,
+                //                     transaction_status: response.data.status.transaction_status,
+                //                     payment_number_1: response.data.status.va_numbers[0].va_number,
+                //                     total_bill: response.data.status.gross_amount,
+                //                 });
+                //             }
+                //             break;
+                //         case "cstore":
+                //             handleTransactionDialogOpen({
+                //                 payment_type: "cstore",
+                //                 bank: response.data.status.store,
+                //                 transaction_status: response.data.status.transaction_status,
+                //                 payment_number_1: response.data.status.payment_code,
+                //                 total_bill: response.data.status.gross_amount,
+                //             });
+                //             break;
+    
+                //         default:
+                //             break;
+                //     }
+                // }).catch((error) => {
+                //     //
+                // })
+            });
+        }
     }
 
     const [transactionStatusDialog, setTransactionStatusDialog] = React.useState({
@@ -807,6 +819,7 @@ export default function Ticket(props) {
                     {/* footer */}
                     <Box
                     sx={{
+                        marginTop: '100px',
                         width: '100%',
                         height: '100%',
                         backgroundImage: `url(${media[2]})`,

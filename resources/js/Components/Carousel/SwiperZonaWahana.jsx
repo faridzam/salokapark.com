@@ -11,8 +11,8 @@ import {wahanaByIndex, getIndexesWahanaBySlugs} from '../../assets/images/carous
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
-import {ArrowForward} from '@mui/icons-material';
-import "./swiperMainZones.module.css";
+import {ArrowForwardIos, ArrowBackIos} from '@mui/icons-material';
+import customStyle from "./swiperZonaWahana.module.css";
 import { Inertia } from '@inertiajs/inertia';
 
 // import required modules
@@ -24,10 +24,27 @@ export default function App(props) {
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
 
-    const SLIDE_COUNT = getIndexesWahanaBySlugs(props.slugs).length;
-    const slides = Array.from(Array(SLIDE_COUNT).keys());
+    const [wahana, setWahana] = React.useState([]);
+    React.useEffect(() => {
+        axios.post('/api/get-content-wahana', {
+            id: props.slugs,
+        })
+        .then((response) => {
+            //
+            let Obj = response.data.wahana;
+            var result=[];
+            for(var i=0;i<Obj.length;i++){
+                result.push({id: Obj[i].id, nama: Obj[i].nama, link: Obj[i].link, gambar: Obj[i].gambar, desk_singkat: Obj[i].desk_singkat, deskripsi: Obj[i].deskripsi, zona: Obj[i].zona, level: Obj[i].level, usia: Obj[i].usia, idzona: Obj[i].idzona, status: Obj[i].status});
+            }
+            setWahana(result);
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }, []);
 
-    console.log(slides);
+    const SLIDE_COUNT = wahana.length;
+    const slides = Array.from(Array(SLIDE_COUNT).keys());
 
     const redirect = (route) => {
         Inertia.visit(route);
@@ -44,7 +61,10 @@ export default function App(props) {
                 loop={true}
                 preloadImages={true}
                 lazy={true}
-                navigation={true}
+                navigation={{
+                    prevEl: '.prev-main-wahana',
+                    nextEl: '.next-main-wahana',
+                }}
                 modules={[Navigation]}
                 className="swiper-zones noselect"
                 style={{
@@ -74,7 +94,7 @@ export default function App(props) {
                                 }}>
                                     <Box
                                     sx={{
-                                        maxHeight: '300px',
+                                        height: '400px',
                                         width: '80%',
                                         cursor: 'pointer',
                                         display: 'flex',
@@ -82,7 +102,8 @@ export default function App(props) {
                                         alignItems: 'center',
                                     }}>
                                         <img
-                                        src={wahanaByIndex(index, props.slugs).image}
+                                        src={'https://dashboard.salokapark.com/public/foto/zona/konten/'+wahana[index].gambar}
+                                        // onClick={() => redirect(wahanaByIndex(index, props.slugs).link)}
                                         loading="lazy"
                                         alt="logo saloka"
                                         style={{
@@ -90,12 +111,13 @@ export default function App(props) {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
-                                            minHeight: '400px',
+                                            height: '400px',
                                         }}></img>
                                     </Box>
                                     <Box
+                                    // onClick={() => redirect(wahanaByIndex(index, props.slugs).link)}
                                     sx={{
-                                        marginTop: '100px',
+                                        marginTop: '20px',
                                         width: '80%',
                                     }}>
                                         <Box
@@ -110,24 +132,22 @@ export default function App(props) {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{wahanaByIndex(index, props.slugs).title}</Typography>
+                                            >{wahana[index].nama}</Typography>
                                         </Box>
-                                        <Box
-                                        sx={{
-                                            marginTop: '10px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            width: '100%',
-                                        }}>
-                                            <Typography
-                                            textAlign="justify"
+                                            <Box
                                             sx={{
-                                                lineHeight: 2,
-                                                fontSize: '18px',
-                                                fontWeight: 400,
-                                                color: '#333'
-                                            }}
-                                            >{wahanaByIndex(index, props.slugs).deskripsiLengkap}</Typography>
+                                                marginTop: '10px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                width: '100%',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '14px',
+                                                    fontWeight: 500,
+                                                    color: '#333'
+                                                }}
+                                                >{wahana[index].desk_singkat.slice(0, 500)+(wahana[index].desk_singkat.length > 500 ? "..." : "")}</Typography>
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -136,6 +156,43 @@ export default function App(props) {
                         ))}
 
                     </Box>
+
+                    <div className={`prev-main-wahana ${customStyle.prevMainWahana}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowBackIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
+                    <div className={`next-main-wahana ${customStyle.nextMainWahana}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowForwardIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
 
                 </Swiper>
                 :
@@ -143,7 +200,10 @@ export default function App(props) {
                 slidesPerView={1}
                 slidesPerGroup={1}
                 loop={true}
-                navigation={true}
+                navigation={{
+                    prevEl: '.prev-main-wahana',
+                    nextEl: '.next-main-wahana',
+                }}
                 modules={[Navigation]}
                 className="swiper-zones noselect"
                 style={{
@@ -173,7 +233,7 @@ export default function App(props) {
                                 }}>
                                     <Box
                                     sx={{
-                                        maxHeight: '300px',
+                                        height: '300px',
                                         width: '100%',
                                         cursor: 'pointer',
                                         display: 'flex',
@@ -181,8 +241,8 @@ export default function App(props) {
                                         alignItems: 'center',
                                     }}>
                                         <img
-                                        onClick={() => redirect(zonaByIndex(index).link)}
-                                        src={media[index]}
+                                        // onClick={() => redirect(wahanaByIndex(index, props.slugs).link)}
+                                        src={'https://dashboard.salokapark.com/public/foto/zona/konten/'+wahana[index].gambar}
                                         loading="lazy"
                                         alt="logo saloka"
                                         style={{
@@ -190,13 +250,14 @@ export default function App(props) {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
-                                            minHeight: '300px',
+                                            height: '300px',
                                         }}></img>
                                     </Box>
                                     <Box
+                                    // onClick={() => redirect(wahanaByIndex(index, props.slugs).link)}
                                     sx={{
-                                        marginTop: '50px',
-                                        width: '100%',
+                                        marginTop: '20px',
+                                        width: '90%',
                                     }}>
                                         <Box
                                         sx={{
@@ -210,7 +271,7 @@ export default function App(props) {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{zonaByIndex(index).nama}</Typography>
+                                            >{wahana[index].nama}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -220,40 +281,12 @@ export default function App(props) {
                                             width: '100%',
                                         }}>
                                             <Typography
-                                            textAlign="justify"
                                             sx={{
-                                                lineHeight: 2,
-                                                fontSize: '18px',
-                                                fontWeight: 400,
+                                                fontSize: '14px',
+                                                fontWeight: 500,
                                                 color: '#333'
                                             }}
-                                            >{zonaByIndex(index).deskripsi}</Typography>
-                                        </Box>
-                                        <Box
-                                        sx={{
-                                            display: 'flex',
-                                            marginRight: '100px',
-                                            marginTop: '20px',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Typography
-                                            onClick={() => redirect(zonaByIndex(index).link)}
-                                            className="noselect"
-                                            align="justify"
-                                            sx={{
-                                                cursor: 'pointer',
-                                                fontSize: '18px',
-                                                fontWeight: 400,
-                                                color: '#789acf'
-                                            }}
-                                            >Baca Lebih Lanjut</Typography>
-                                            <ArrowForward
-                                            sx={{
-                                                cursor: 'pointer',
-                                                marginLeft: '10px',
-                                                fontSize: 20,
-                                                color: '#789acf'
-                                            }}/>
+                                            >{wahana[index].desk_singkat.slice(0, 500)+(wahana[index].desk_singkat.length > 500 ? "..." : "")}</Typography>
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -262,6 +295,43 @@ export default function App(props) {
                         ))}
 
                     </Box>
+
+                    <div className={`prev-main-wahana ${customStyle.prevMainWahana}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowBackIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
+                    <div className={`next-main-wahana ${customStyle.nextMainWahana}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowForwardIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
 
                 </Swiper>
             }

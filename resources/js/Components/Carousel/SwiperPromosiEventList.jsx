@@ -11,8 +11,8 @@ import {media, promosiEventListByIndex} from '../../assets/images/carousel_asset
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
-import {ArrowForward} from '@mui/icons-material';
-import "./swiperPromosiEventList.module.css";
+import {ArrowForward, ArrowForwardIos, ArrowBackIos} from '@mui/icons-material';
+import customStyle from "./swiperPromosiEventList.module.css";
 import { Inertia } from '@inertiajs/inertia';
 
 // import required modules
@@ -24,7 +24,25 @@ export default function App() {
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
 
-    const SLIDE_COUNT = 4;
+    const [promo, setPromo] = React.useState("");
+    React.useEffect(() => {
+        axios.get('/api/get-content-promoEvent')
+        .then((response) => {
+            //
+            let Obj = response.data.promo;
+            var result=[];
+            for(var i=0;i<Obj.length;i++){
+                result.push({id: Obj[i].id, nama: Obj[i].nama, link: Obj[i].link, tanggal: Obj[i].tanggal, type: Obj[i].type, gambar: Obj[i].gambar, deskripsi: Obj[i].deskripsi, no_urut: Obj[i].no_urut, status: Obj[i].status});
+            }
+            setPromo(result);
+            
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }, []);
+
+    const SLIDE_COUNT = promo.length;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
 
     const redirect = (route) => {
@@ -42,7 +60,10 @@ export default function App() {
                 loop={true}
                 preloadImages={true}
                 lazy={true}
-                navigation={true}
+                navigation={{
+                    prevEl: '.prev-main-promosiEvent',
+                    nextEl: '.next-main-promosiEvent',
+                }}
                 modules={[Navigation]}
                 className="swiper-promosi noselect"
                 style={{
@@ -80,8 +101,8 @@ export default function App() {
                                         alignItems: 'center',
                                     }}>
                                         <img
-                                        onClick={() => redirect(promosiEventListByIndex(index).link)}
-                                        src={media[index]}
+                                        onClick={() => redirect('/promosi/'+promo[index].link)}
+                                        src={'https://dashboard.salokapark.com/public/foto/promosi/daftarpromo/'+promo[index].gambar}
                                         loading="lazy"
                                         alt="logo saloka"
                                         style={{
@@ -109,7 +130,7 @@ export default function App() {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{promosiEventListByIndex(index).nama}</Typography>
+                                            >{promo[index].nama}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -118,15 +139,9 @@ export default function App() {
                                             alignItems: 'center',
                                             width: '100%',
                                         }}>
-                                            <Typography
-                                            textAlign="justify"
-                                            sx={{
-                                                lineHeight: 2,
-                                                fontSize: '18px',
-                                                fontWeight: 400,
-                                                color: '#333'
-                                            }}
-                                            >{promosiEventListByIndex(index).deskripsi}</Typography>
+                                            <section
+                                            dangerouslySetInnerHTML={{__html: promo[index].deskripsi}}>
+                                            </section>
                                         </Box>
                                         <Box
                                         sx={{
@@ -136,7 +151,7 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <Typography
-                                            onClick={() => redirect(promosiEventListByIndex(index).link)}
+                                            onClick={() => redirect('/promosi/'+promo[index].link)}
                                             className="noselect"
                                             align="justify"
                                             sx={{
@@ -162,13 +177,53 @@ export default function App() {
 
                     </Box>
 
+                    <div className={`prev-main-promosiEvent ${customStyle.prevMainPromosiEvent}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowBackIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
+                    <div className={`next-main-promosiEvent ${customStyle.nextMainPromosiEvent}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowForwardIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
+
                 </Swiper>
                 :
                 <Swiper
                 slidesPerView={1}
                 slidesPerGroup={1}
                 loop={true}
-                navigation={true}
+                navigation={{
+                    prevEl: '.prev-main-promosiEvent',
+                    nextEl: '.next-main-promosiEvent',
+                }}
                 modules={[Navigation]}
                 className="swiper-promosi noselect"
                 style={{
@@ -205,8 +260,8 @@ export default function App() {
                                         alignItems: 'center',
                                     }}>
                                         <img
-                                        onClick={() => redirect(promosiEventListByIndex(index).link)}
-                                        src={media[index]}
+                                        onClick={() => redirect('/promosi/'+promo[index].link)}
+                                        src={'https://dashboard.salokapark.com/public/foto/promosi/daftarpromo/'+promo[index].gambar}
                                         loading="lazy"
                                         alt="logo saloka"
                                         style={{
@@ -235,7 +290,7 @@ export default function App() {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{promosiEventListByIndex(index).nama}</Typography>
+                                            >{promo[index].nama}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -244,14 +299,9 @@ export default function App() {
                                             alignItems: 'center',
                                             width: '100%',
                                         }}>
-                                            <Typography
-                                            textAlign="justify"
-                                            sx={{
-                                                fontSize: '15px',
-                                                fontWeight: 400,
-                                                color: '#333'
-                                            }}
-                                            >{promosiEventListByIndex(index).deskripsi}</Typography>
+                                            <section
+                                            dangerouslySetInnerHTML={{__html: promo[index].deskripsi}}>
+                                            </section>
                                         </Box>
                                         <Box
                                         sx={{
@@ -261,7 +311,7 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <Typography
-                                            onClick={() => redirect(promosiEventListByIndex(index).link)}
+                                            onClick={() => redirect('/promosi/'+promo[index].link)}
                                             className="noselect"
                                             align="justify"
                                             sx={{
@@ -286,6 +336,43 @@ export default function App() {
                         ))}
 
                     </Box>
+
+                    <div className={`prev-main-promosiEvent ${customStyle.prevMainPromosiEvent}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowBackIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
+                    <div className={`next-main-promosiEvent ${customStyle.nextMainPromosiEvent}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowForwardIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
 
                 </Swiper>
             }

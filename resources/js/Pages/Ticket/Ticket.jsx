@@ -249,7 +249,9 @@ export default function Ticket(props) {
 
                                                 <Typography>other ticket provider:</Typography>
                                                 <Box>
-                                                    <Button>Ticket by goers</Button>
+                                                    <Button
+                                                    onClick={() => redirect('/ticket/goers')}
+                                                    >Ticket by goers</Button>
                                                 </Box>
 
                                             </Grid>
@@ -347,7 +349,9 @@ export default function Ticket(props) {
                                                 <Typography>other ticket provider:</Typography>
 
                                                 <Box>
-                                                    <Button>Ticket by goers</Button>
+                                                    <Button
+                                                    onClick={() => redirect('/ticket/goers')}
+                                                    >Ticket by goers</Button>
                                                 </Box>
 
                                             </Grid>
@@ -361,6 +365,7 @@ export default function Ticket(props) {
                     {/* footer */}
                     <Box
                     sx={{
+                        marginTop: '100px',
                         width: '100%',
                         height: '100%',
                         backgroundImage: `url(${media[2]})`,

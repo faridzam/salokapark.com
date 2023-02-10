@@ -12,6 +12,13 @@ import SwiperMerchandiseGantungan from './SwiperMerchandiseGantungan'
 import SwiperMerchandiseBoneka from './SwiperMerchandiseBoneka'
 import SwiperTentangFasum from './SwiperTentangFasum'
 import SwiperZonaWahana from './SwiperZonaWahana'
+import SwiperGroups from './SwiperGroups'
+import SwiperMenuResto from './SwiperMenuResto'
+import SwiperRekomendasiZona from './SwiperRekomendasiZona'
+import SwiperRekomendasiWahana from './SwiperRekomendasiWahana'
+import SwiperShowEvent from './SwiperShowEvent'
+import SwiperRestaurantList from './SwiperRestaurantList'
+import SwiperEventZona from './SwiperEventZona'
 
 export {
     SwiperMainBanner,
@@ -28,4 +35,11 @@ export {
     SwiperMerchandiseBoneka,
     SwiperTentangFasum,
     SwiperZonaWahana,
+    SwiperGroups,
+    SwiperMenuResto,
+    SwiperRekomendasiZona,
+    SwiperRekomendasiWahana,
+    SwiperShowEvent,
+    SwiperRestaurantList,
+    SwiperEventZona
 }

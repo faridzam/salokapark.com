@@ -55,7 +55,15 @@ export default function Zona(props) {
             style={{ transitionDelay: isMounted ? '500ms' : '0ms' }}>
                 <div>
                     {/* header */}
-                    <Header/>
+                    <Box
+                    sx={{
+                        position: 'sticky',
+                        zIndex: '1002',
+                        width: '100%',
+                        top: '0',
+                    }}>
+                        <Header/>
+                    </Box>
 
                     {
                         desktop
@@ -604,6 +612,7 @@ export default function Zona(props) {
                     {/* footer */}
                     <Box
                     sx={{
+                        marginTop: '100px',
                         width: '100%',
                         height: '100%',
                         backgroundImage: `url(${media[2]})`,

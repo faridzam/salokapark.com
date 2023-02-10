@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography, Button, Fade} from '@mui/material';
 import {ArrowForward} from '@mui/icons-material';
+import { saveAs } from 'file-saver';
 
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
@@ -32,6 +33,64 @@ export default function Zona(props) {
         Inertia.visit(route);
     }
 
+    function isOdd(num) { return num % 2;}
+
+    const [image, setImage] = React.useState("");
+    const [pdf, setPdf] = React.useState("");
+    React.useEffect(() => {
+        axios.get('/api/get-content-peta')
+        .then((response) => {
+            //
+            setImage(response.data.image);
+            setPdf(response.data.pdf);
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }, []);
+    
+
+    const lihatPeta = () => {
+        // location.href('https://dashboard.salokapark.com/public/peta/'+image);
+        window.open('https://dashboard.salokapark.com/public/peta/'+image)
+        .then((response) => {
+            //
+            //window.close();
+        }).catch((error) => {
+            //
+            //window.close();
+        });
+
+    }
+    const downloadPeta = () => {
+        window.open('https://staging.salokapark.com/api/download-peta/'+pdf)
+        .then((response) => {
+            window.close();
+        }).catch((error) => {
+            window.close();
+        });
+    }
+
+    const [zones, setZones] = React.useState([]);
+    React.useEffect(() => {
+        axios.get('/api/get-content-zones')
+        .then((response) => {
+            //
+            let Obj = response.data.zones;
+            var result=[];
+            for(var i=0;i<Obj.length;i++){
+                result.push({id: Obj[i].id, nama: Obj[i].nama, link: Obj[i].link, gambar: Obj[i].gambar, warnabg: Obj[i].warnabg, desk_singkat: Obj[i].desk_singkat, deskripsi: Obj[i].deskripsi, no_urut: Obj[i].no_urut, status: Obj[i].status});
+            }
+            setZones(result);
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }, []);
+
+    const CONTENT_COUNT = zones.length;
+    const contents = Array.from(Array(CONTENT_COUNT).keys());
+
     return(
         <>
             <Head title='Zona'/>
@@ -41,7 +100,15 @@ export default function Zona(props) {
             style={{ transitionDelay: isMounted ? '500ms' : '0ms' }}>
                 <div>
                     {/* header */}
-                    <Header/>
+                    <Box
+                    sx={{
+                        position: 'sticky',
+                        zIndex: '1002',
+                        width: '100%',
+                        top: '0',
+                    }}>
+                        <Header/>
+                    </Box>
 
                     {
                         desktop
@@ -51,7 +118,7 @@ export default function Zona(props) {
                         direction="column"
                         spacing={0}
                         sx={{
-                            marginTop: '100px',
+                            marginTop: '20px',
                             display: 'flex',
                             width: '100%',
                             justifyContent: 'center',
@@ -62,7 +129,7 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'fontin',
+                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '32px',
                                     color: '#333',
@@ -72,10 +139,19 @@ export default function Zona(props) {
 
                             <Box
                             sx={{
-                                marginTop: '50px',
+                                marginTop: '20px',
                                 cursor: 'pointer',
+                                width: '100%',
                             }}>
-                                <img src={mediaZona[0]} alt="logo saloka"></img>
+                                <img
+                                src={'https://dashboard.salokapark.com/public/peta/'+image}
+                                alt="peta saloka"
+                                style={{
+                                    layout: 'fill',
+                                    objectFit: 'cover',
+                                    objectPosition: 'top',
+                                    width: '100%',
+                                }}></img>
                             </Box>
 
                             <Box
@@ -90,17 +166,21 @@ export default function Zona(props) {
                             }}>
                                 <Button
                                 variant='outlined'
+                                onClick={() => lihatPeta()}
                                 sx={{
                                     width: '200px',
                                     height: '50px',
+                                    border: '2px solid',
                                 }}>
                                     Lihat Peta
                                 </Button>
                                 <Button
                                 variant='outlined'
+                                onClick={() => downloadPeta()}
                                 sx={{
                                     width: '200px',
                                     height: '50px',
+                                    border: '2px solid',
                                 }}>
                                     Download Peta
                                 </Button>
@@ -112,13 +192,14 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'fontin',
+                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '32px',
                                     color: '#333',
                                     textAlign: 'center',
-                                }}>5 Zona yang Ada di Saloka Theme Park</Typography>
+                                }}>5 Zona di Saloka Theme Park</Typography>
                             </Box>
+
 
                             <Box
                             sx={{
@@ -129,549 +210,236 @@ export default function Zona(props) {
                                 direction="column"
                                 spacing={0}
                                 sx={{
-                                    marginTop: '100px',
+                                    marginTop: '50px',
                                     display: 'flex',
                                     width: '100%',
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                 }}>
-                                    <Box
-                                    sx={{
-                                        backgroundColor: 'primary.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="row"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-start',
-                                            }}>
-                                                <img src={mediaZona[1]} alt="logo saloka"></img>
-                                            </Box>
 
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
+                                    {contents.map((index) => (
+                                        <Box
+                                        sx={{
+                                            backgroundColor: zones[index].warnabg,
+                                            width: '90%',
+                                            maxHeight: '600px',
+                                        }}>
+                                            {
+                                                isOdd(index)
+                                                ?
                                                 <Grid
                                                 container={true}
-                                                direction="column"
+                                                direction="row"
                                                 spacing={0}
                                                 sx={{
                                                     display: 'flex',
                                                     height: '100%',
-                                                    width: '80%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
+                                                    width: '100%',
+                                                    justifyContent: 'space-between',
+                                                    alignItems: 'center',
                                                 }}>
                                                     <Box
+                                                    onClick={() => redirect('/zona/'+zones[index].link)}
                                                     sx={{
-                                                        marginTop: '10px',
+                                                        width: '70%',
+                                                        maxHeight: '600px',
                                                         display: 'flex',
-                                                        alignItems: 'center',
+                                                        justifyContent: 'flex-start',
                                                     }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '28px',
-                                                            fontWeight: 500,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(1).nama}</Typography>
+                                                        <img src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar} style={{width: '100%', maxHeight: '600px', objectFit: 'cover'}} alt="logo saloka"></img>
                                                     </Box>
 
                                                     <Box
                                                     sx={{
-                                                        marginTop: '10px',
+                                                        width: '30%',
+                                                        height: '100%',
                                                         display: 'flex',
-                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
                                                     }}>
-                                                        <Typography
-                                                        textAlign="justify"
+                                                        <Grid
+                                                        container={true}
+                                                        direction="column"
+                                                        spacing={0}
                                                         sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(1).deskripsi}</Typography>
-                                                    </Box>
+                                                            display: 'flex',
+                                                            height: '100%',
+                                                            width: '80%',
+                                                            justifyContent: 'flex-start',
+                                                            alignItems: 'flex-start',
+                                                        }}>
+                                                            <Box
+                                                            sx={{
+                                                                marginTop: '10px',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                            }}>
+                                                                <Typography
+                                                                textAlign="left"
+                                                                sx={{
+                                                                    fontFamily: 'Arial',
+                                                                    fontSize: '28px',
+                                                                    fontWeight: 600,
+                                                                    color: '#ddd'
+                                                                }}
+                                                                >{zones[index].nama}</Typography>
+                                                            </Box>
 
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(1).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
+                                                            <Box
+                                                            sx={{
+                                                                marginTop: '10px',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                            }}>
+                                                                <Typography
+                                                                textAlign="left"
+                                                                sx={{
+                                                                    fontFamily: 'Arial',
+                                                                    fontSize: '16px',
+                                                                    fontWeight: 500,
+                                                                    color: '#ddd'
+                                                                }}
+                                                                >{zones[index].desk_singkat}</Typography>
+                                                            </Box>
+
+                                                            <Box
+                                                            onClick={() => redirect('/zona/'+zones[index].link)}
+                                                            sx={{
+                                                                display: 'flex',
+                                                                marginTop: '20px',
+                                                                alignItems: 'center',
+                                                            }}>
+                                                                <Typography
+                                                                className="noselect"
+                                                                align="justify"
+                                                                sx={{
+                                                                    cursor: 'pointer',
+                                                                    fontSize: '15px',
+                                                                    fontWeight: 400,
+                                                                    color: '#ddd'
+                                                                }}
+                                                                >Baca Lebih Lanjut</Typography>
+                                                                <ArrowForward
+                                                                sx={{
+                                                                    cursor: 'pointer',
+                                                                    marginLeft: '5px',
+                                                                    fontSize: 15,
+                                                                    color: '#ddd'
+                                                                }}/>
+                                                            </Box>
+
+                                                        </Grid>
                                                     </Box>
 
                                                 </Grid>
-                                            </Box>
-
-                                        </Grid>
-
-                                    </Box>
-
-                                    <Box
-                                    sx={{
-                                        backgroundColor: 'secondary.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="row"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
-                                        }}>
-
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
+                                                :
                                                 <Grid
                                                 container={true}
-                                                direction="column"
+                                                direction="row"
                                                 spacing={0}
                                                 sx={{
                                                     display: 'flex',
                                                     height: '100%',
-                                                    width: '80%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
+                                                    width: '100%',
+                                                    justifyContent: 'space-between',
+                                                    alignItems: 'center',
                                                 }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '28px',
-                                                            fontWeight: 500,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(2).nama}</Typography>
-                                                    </Box>
 
                                                     <Box
                                                     sx={{
-                                                        marginTop: '10px',
+                                                        width: '30%',
+                                                        height: '100%',
                                                         display: 'flex',
-                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
                                                     }}>
-                                                        <Typography
-                                                        textAlign="justify"
+                                                        <Grid
+                                                        container={true}
+                                                        direction="column"
+                                                        spacing={0}
                                                         sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(2).deskripsi}</Typography>
+                                                            display: 'flex',
+                                                            height: '100%',
+                                                            width: '80%',
+                                                            justifyContent: 'flex-start',
+                                                            alignItems: 'flex-start',
+                                                        }}>
+                                                            <Box
+                                                            sx={{
+                                                                marginTop: '10px',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                            }}>
+                                                                <Typography
+                                                                textAlign="left"
+                                                                sx={{
+                                                                    fontFamily: 'Arial',
+                                                                    fontSize: '28px',
+                                                                    fontWeight: 600,
+                                                                    color: '#ddd'
+                                                                }}
+                                                                >{zones[index].nama}</Typography>
+                                                            </Box>
+
+                                                            <Box
+                                                            sx={{
+                                                                marginTop: '10px',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                            }}>
+                                                                <Typography
+                                                                textAlign="left"
+                                                                sx={{
+                                                                    fontFamily: 'Arial',
+                                                                    fontSize: '16px',
+                                                                    fontWeight: 500,
+                                                                    color: '#ddd'
+                                                                }}
+                                                                >{zones[index].desk_singkat}</Typography>
+                                                            </Box>
+
+                                                            <Box
+                                                            onClick={() => redirect('/zona/'+zones[index].link)}
+                                                            sx={{
+                                                                display: 'flex',
+                                                                marginTop: '20px',
+                                                                alignItems: 'center',
+                                                            }}>
+                                                                <Typography
+                                                                className="noselect"
+                                                                align="justify"
+                                                                sx={{
+                                                                    cursor: 'pointer',
+                                                                    fontSize: '15px',
+                                                                    fontWeight: 400,
+                                                                    color: '#ddd'
+                                                                }}
+                                                                >Baca Lebih Lanjut</Typography>
+                                                                <ArrowForward
+                                                                sx={{
+                                                                    cursor: 'pointer',
+                                                                    marginLeft: '5px',
+                                                                    fontSize: 15,
+                                                                    color: '#ddd'
+                                                                }}/>
+                                                            </Box>
+
+                                                        </Grid>
                                                     </Box>
 
                                                     <Box
+                                                    onClick={() => redirect('/zona/'+zones[index].link)}
                                                     sx={{
+                                                        width: '70%',
+                                                        maxHeight: '600px',
                                                         display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
+                                                        justifyContent: 'flex-end',
                                                     }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(2).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
+                                                        <img src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar} style={{width: '100%', maxHeight: '600px', objectFit: 'cover'}} alt="logo saloka"></img>
                                                     </Box>
 
                                                 </Grid>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-end',
-                                            }}>
-                                                <img src={mediaZona[2]} alt="logo saloka"></img>
-                                            </Box>
-
-                                        </Grid>
-                                    </Box>
-
-                                    <Box
-                                    sx={{
-                                        backgroundColor: 'blue.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="row"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-start',
-                                            }}>
-                                                <img src={mediaZona[3]} alt="logo saloka"></img>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="column"
-                                                spacing={0}
-                                                sx={{
-                                                    display: 'flex',
-                                                    height: '100%',
-                                                    width: '80%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
-                                                }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '28px',
-                                                            fontWeight: 500,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(3).nama}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="justify"
-                                                        sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(3).deskripsi}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(3).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
-                                                    </Box>
-
-                                                </Grid>
-                                            </Box>
-
-                                        </Grid>
-                                    </Box>
-
-                                    <Box
-                                    sx={{
-                                        backgroundColor: 'red.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="row"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
-                                        }}>
-
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="column"
-                                                spacing={0}
-                                                sx={{
-                                                    display: 'flex',
-                                                    height: '100%',
-                                                    width: '80%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
-                                                }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '28px',
-                                                            fontWeight: 500,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(4).nama}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="justify"
-                                                        sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(4).deskripsi}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(4).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
-                                                    </Box>
-
-                                                </Grid>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-end',
-                                            }}>
-                                                <img src={mediaZona[4]} alt="logo saloka"></img>
-                                            </Box>
-
-                                        </Grid>
-                                    </Box>
-
-                                    <Box
-                                    sx={{
-                                        backgroundColor: 'brown.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="row"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-start',
-                                            }}>
-                                                <img src={mediaZona[5]} alt="logo saloka"></img>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '50%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="column"
-                                                spacing={0}
-                                                sx={{
-                                                    display: 'flex',
-                                                    height: '100%',
-                                                    width: '80%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
-                                                }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '28px',
-                                                            fontWeight: 500,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(5).nama}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="justify"
-                                                        sx={{
-                                                            fontSize: '18px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(5).deskripsi}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(5).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
-                                                    </Box>
-
-                                                </Grid>
-                                            </Box>
-
-                                        </Grid>
-                                    </Box>
+                                            }
+                                        </Box>
+                                    ))}
 
                                 </Grid>
                             </Box>
@@ -683,7 +451,7 @@ export default function Zona(props) {
                         direction="column"
                         spacing={0}
                         sx={{
-                            marginTop: '50px',
+                            marginTop: '20px',
                             display: 'flex',
                             width: '100%',
                             justifyContent: 'center',
@@ -694,7 +462,7 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'fontin',
+                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '32px',
                                     color: '#333',
@@ -704,10 +472,10 @@ export default function Zona(props) {
 
                             <Box
                             sx={{
-                                marginTop: '50px',
+                                marginTop: '20px',
                                 cursor: 'pointer',
                             }}>
-                                <img src={mediaZona[0]} alt="logo saloka"></img>
+                                <img src={'https://dashboard.salokapark.com/public/peta/'+image} alt="logo saloka"></img>
                             </Box>
 
                             <Box
@@ -722,10 +490,12 @@ export default function Zona(props) {
                             }}>
                                 <Button
                                 variant='outlined'
+                                onClick={() => lihatPeta()}
                                 sx={{
                                     marginX: '5px',
                                     width: '200px',
                                     height: '50px',
+                                    border: '2px solid',
                                 }}>
                                     Lihat Peta
                                 </Button>
@@ -735,8 +505,9 @@ export default function Zona(props) {
                                     marginX: '5px',
                                     width: '200px',
                                     height: '50px',
+                                    border: '2px solid',
                                 }}>
-                                    Download Peta
+                                    <a href={'https://dashboard.salokapark.com/public/peta/'+pdf} download="peta_saloka.pdf">Download Peta</a>
                                 </Button>
                             </Box>
 
@@ -747,12 +518,12 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'fontin',
+                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '24px',
                                     color: '#333',
                                     textAlign: 'center',
-                                }}>5 Zona yang Ada di Saloka Theme Park</Typography>
+                                }}>5 Zona di Saloka Theme Park</Typography>
                             </Box>
 
                             <Box
@@ -770,555 +541,121 @@ export default function Zona(props) {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                 }}>
-                                    <Box
-                                    sx={{
-                                        marginY: '10px',
-                                        backgroundColor: 'primary.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="column"
-                                        spacing={0}
+
+                                    {contents.map((index) => (
+                                        <Box
                                         sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'flex-start',
-                                            alignItems: 'center',
+                                            marginY: '10px',
+                                            backgroundColor: zones[index].warnabg,
+                                            width: '90%',
+                                            maxHeight: '600px',
                                         }}>
-                                            <Box
+                                            <Grid
+                                            container={true}
+                                            direction="column"
+                                            spacing={0}
                                             sx={{
+                                                display: 'flex',
+                                                height: '100%',
                                                 width: '100%',
-                                                display: 'flex',
                                                 justifyContent: 'flex-start',
+                                                alignItems: 'center',
                                             }}>
-                                                <img src={mediaZona[1]} alt="logo saloka"></img>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '80%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="column"
-                                                spacing={0}
+                                                <Box
+                                                onClick={() => redirect('/zona/'+zones[index].link)}
                                                 sx={{
-                                                    marginY: '30px',
-                                                    display: 'flex',
-                                                    height: '100%',
                                                     width: '100%',
+                                                    display: 'flex',
                                                     justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
                                                 }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '24px',
-                                                            fontWeight: 600,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(1).nama}</Typography>
-                                                    </Box>
+                                                    <img src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar} alt="logo saloka"></img>
+                                                </Box>
 
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="justify"
-                                                        sx={{
-                                                            fontSize: '16px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(1).deskripsi}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(1).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
-                                                    </Box>
-
-                                                </Grid>
-                                            </Box>
-
-                                        </Grid>
-
-                                    </Box>
-
-                                    <Box
-                                    sx={{
-                                        marginY: '10px',
-                                        backgroundColor: 'secondary.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="column"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'flex-start',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Box
-                                            sx={{
-                                                width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-start',
-                                            }}>
-                                                <img src={mediaZona[2]} alt="logo saloka"></img>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '80%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="column"
-                                                spacing={0}
+                                                <Box
                                                 sx={{
-                                                    marginY: '30px',
+                                                    width: '80%',
                                                     display: 'flex',
-                                                    height: '100%',
-                                                    width: '100%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
+                                                    justifyContent: 'center',
                                                 }}>
-                                                    <Box
+                                                    <Grid
+                                                    container={true}
+                                                    direction="column"
+                                                    spacing={0}
                                                     sx={{
-                                                        marginTop: '10px',
+                                                        marginY: '30px',
                                                         display: 'flex',
-                                                        alignItems: 'center',
+                                                        height: '100%',
+                                                        width: '100%',
+                                                        justifyContent: 'flex-start',
+                                                        alignItems: 'flex-start',
                                                     }}>
-                                                        <Typography
-                                                        textAlign="left"
+                                                        <Box
                                                         sx={{
-                                                            fontSize: '24px',
-                                                            fontWeight: 600,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(2).nama}</Typography>
-                                                    </Box>
+                                                            marginTop: '10px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                        }}>
+                                                            <Typography
+                                                            textAlign="left"
+                                                            sx={{
+                                                                fontFamily: 'Arial',
+                                                                fontSize: '24px',
+                                                                fontWeight: 600,
+                                                                color: '#ddd'
+                                                            }}
+                                                            >{zones[index].nama}</Typography>
+                                                        </Box>
 
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="justify"
+                                                        <Box
                                                         sx={{
-                                                            fontSize: '16px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(2).deskripsi}</Typography>
-                                                    </Box>
+                                                            marginTop: '10px',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                        }}>
+                                                            <Typography
+                                                            textAlign="left"
+                                                            sx={{
+                                                                fontFamily: 'Arial',
+                                                                fontSize: '14px',
+                                                                fontWeight: 500,
+                                                                color: '#ddd'
+                                                            }}
+                                                            >{zones[index].desk_singkat}</Typography>
+                                                        </Box>
 
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(2).link)}
-                                                        className="noselect"
-                                                        align="justify"
+                                                        <Box
+                                                        onClick={() => redirect('/zona/'+zones[index].link)}
                                                         sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
-                                                    </Box>
+                                                            display: 'flex',
+                                                            marginTop: '20px',
+                                                            alignItems: 'center',
+                                                        }}>
+                                                            <Typography
+                                                            className="noselect"
+                                                            align="justify"
+                                                            sx={{
+                                                                cursor: 'pointer',
+                                                                fontSize: '14px',
+                                                                fontWeight: 400,
+                                                                color: '#ddd'
+                                                            }}
+                                                            >Baca Lebih Lanjut</Typography>
+                                                            <ArrowForward
+                                                            sx={{
+                                                                cursor: 'pointer',
+                                                                marginLeft: '5px',
+                                                                fontSize: 14,
+                                                                color: '#ddd'
+                                                            }}/>
+                                                        </Box>
 
-                                                </Grid>
-                                            </Box>
+                                                    </Grid>
+                                                </Box>
 
-                                        </Grid>
+                                            </Grid>
 
-                                    </Box>
-
-                                    <Box
-                                    sx={{
-                                        marginY: '10px',
-                                        backgroundColor: 'blue.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="column"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'flex-start',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Box
-                                            sx={{
-                                                width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-start',
-                                            }}>
-                                                <img src={mediaZona[3]} alt="logo saloka"></img>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '80%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="column"
-                                                spacing={0}
-                                                sx={{
-                                                    marginY: '30px',
-                                                    display: 'flex',
-                                                    height: '100%',
-                                                    width: '100%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
-                                                }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '24px',
-                                                            fontWeight: 600,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(3).nama}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="justify"
-                                                        sx={{
-                                                            fontSize: '16px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(3).deskripsi}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(3).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
-                                                    </Box>
-
-                                                </Grid>
-                                            </Box>
-
-                                        </Grid>
-
-                                    </Box>
-
-                                    <Box
-                                    sx={{
-                                        marginY: '10px',
-                                        backgroundColor: 'red.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="column"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'flex-start',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Box
-                                            sx={{
-                                                width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-start',
-                                            }}>
-                                                <img src={mediaZona[4]} alt="logo saloka"></img>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '80%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="column"
-                                                spacing={0}
-                                                sx={{
-                                                    marginY: '30px',
-                                                    display: 'flex',
-                                                    height: '100%',
-                                                    width: '100%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
-                                                }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '24px',
-                                                            fontWeight: 600,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(4).nama}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="justify"
-                                                        sx={{
-                                                            fontSize: '16px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(4).deskripsi}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(4).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
-                                                    </Box>
-
-                                                </Grid>
-                                            </Box>
-
-                                        </Grid>
-
-                                    </Box>
-
-                                    <Box
-                                    sx={{
-                                        marginY: '10px',
-                                        backgroundColor: 'brown.light',
-                                        width: '90%',
-                                        maxHeight: '600px',
-                                    }}>
-                                        <Grid
-                                        container={true}
-                                        direction="column"
-                                        spacing={0}
-                                        sx={{
-                                            display: 'flex',
-                                            height: '100%',
-                                            width: '100%',
-                                            justifyContent: 'flex-start',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Box
-                                            sx={{
-                                                width: '100%',
-                                                display: 'flex',
-                                                justifyContent: 'flex-start',
-                                            }}>
-                                                <img src={mediaZona[5]} alt="logo saloka"></img>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                width: '80%',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                            }}>
-                                                <Grid
-                                                container={true}
-                                                direction="column"
-                                                spacing={0}
-                                                sx={{
-                                                    marginY: '30px',
-                                                    display: 'flex',
-                                                    height: '100%',
-                                                    width: '100%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'flex-start',
-                                                }}>
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="left"
-                                                        sx={{
-                                                            fontSize: '24px',
-                                                            fontWeight: 600,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(5).nama}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        marginTop: '10px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        textAlign="justify"
-                                                        sx={{
-                                                            fontSize: '16px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >{zonaByIndex(5).deskripsi}</Typography>
-                                                    </Box>
-
-                                                    <Box
-                                                    sx={{
-                                                        display: 'flex',
-                                                        marginTop: '20px',
-                                                        alignItems: 'center',
-                                                    }}>
-                                                        <Typography
-                                                        onClick={() => redirect(zonaByIndex(5).link)}
-                                                        className="noselect"
-                                                        align="justify"
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            fontSize: '15px',
-                                                            fontWeight: 400,
-                                                            color: '#333'
-                                                        }}
-                                                        >Baca Lebih Lanjut</Typography>
-                                                        <ArrowForward
-                                                        sx={{
-                                                            cursor: 'pointer',
-                                                            marginLeft: '5px',
-                                                            fontSize: 15,
-                                                            color: '#333'
-                                                        }}/>
-                                                    </Box>
-
-                                                </Grid>
-                                            </Box>
-
-                                        </Grid>
-
-                                    </Box>
+                                        </Box>
+                                    ))}
 
                                 </Grid>
                             </Box>
@@ -1329,6 +666,7 @@ export default function Zona(props) {
                     {/* footer */}
                     <Box
                     sx={{
+                        marginTop: '100px',
                         width: '100%',
                         height: '100%',
                         backgroundImage: `url(${media[2]})`,

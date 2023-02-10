@@ -53,7 +53,7 @@ class FrontEndMidtransController extends Controller
             };
 
             $dtNow = Carbon::now();
-            $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate))->endOfDay();
+            $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate))->startOfDate();
             $expireInMinutes = $bookingDate->diffInMinutes($dtNow->copy());
 
             $params = array(
@@ -271,7 +271,7 @@ class FrontEndMidtransController extends Controller
                     'status' => 0,
                 ]);
 
-                $affiliateID = '5443331226';
+                $affiliateID = '571343950';
                 // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
                 //     'encrypted_code' => $reservationData->zeals_code,
                 //     'aff_id' => $affiliateID,
@@ -284,20 +284,6 @@ class FrontEndMidtransController extends Controller
                 $client = new Client([
                     'headers' => ['Content-Type' => 'application/json']
                 ]);
-                $response = $client->post('https://demo.zeals.asia/apiv1/AMPcallback', [
-                    'json' => [
-                        'encrypted_code' => $reservationData->zeals_code,
-                        'aff_id' => $affiliateID,
-                        'unique_random_code' => $order_id,
-                        'transaction_value' => $reservationData->bill
-                    ]
-                ]);
-                $data = json_decode($response->getBody(), true);
-
-                zeals_callback_history::create([
-                    'response' => $response->getBody()->getContents(),
-                    'status_code' => $response->getStatusCode(),
-                ]);
 
                 $customer = customer::find($reservationData->customer_id);
                 $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
@@ -309,6 +295,25 @@ class FrontEndMidtransController extends Controller
                         'status' => 100,
                     ]
                 ]);
+
+                if(is_null($reservationData->zeals_code)){
+                    //
+                } else {
+                    $response = $client->post('https://app.zeals.asia/apiv1/AMPcallback', [
+                        'json' => [
+                            'encrypted_code' => $reservationData->zeals_code,
+                            'aff_id' => $affiliateID,
+                            'unique_random_code' => $order_id,
+                            'transaction_value' => $reservationData->bill
+                        ]
+                    ]);
+                    $data = json_decode($response->getBody(), true);
+    
+                    zeals_callback_history::create([
+                        'response' => $response->getBody()->getContents(),
+                        'status_code' => $response->getStatusCode(),
+                    ]);
+                }
 
                 // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
                 // $context = stream_context_create($opts);

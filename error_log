@@ -1,0 +1,1 @@
+[12-Jan-2023 02:51:51 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.3.33. in /home/sald8328/public_html/staging.salokapark.com/vendor/composer/platform_check.php on line 24

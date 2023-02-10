@@ -29,7 +29,13 @@ export function useIsMounted() {
     const isMounted = React.useCallback(() => isMountedRef.current, []);
 
     React.useEffect(() => {
-      return () => void (isMountedRef.current = false);
+        return () => void (isMountedRef.current = false);
+    }, []);
+
+    React.useEffect(() => {
+
+        window.sessionStorage.clear();
+
     }, []);
 
     return isMounted;
@@ -74,31 +80,22 @@ export default function Ticket(props) {
 
     // booking date
     const today = new Date()
-    const maxDate = new Date("2022-12-23");
+    const maxDate = new Date("2023-2-28");
     const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
     const timeString = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
     const [, hours, ampm] = timeString.match(/ (\d+).* ([AP]M)/);
-
-    if(Number(hours) < 0 && ampm === 'AM'){
-        //
-        tomorrow.setDate(tomorrow.getDate())
-    } else {
-        tomorrow.setDate(tomorrow.getDate() + 1)
-    }
-    const [bookingDate, setBookingDate] = React.useState(tomorrow);
+    // if(Number(hours) < 0 && ampm === 'AM'){
+    //     //
+    //     tomorrow.setDate(tomorrow.getDate())
+    // } else {
+    //     tomorrow.setDate(tomorrow.getDate() + 1)
+    // }
+    const [bookingDate, setBookingDate] = React.useState(today);
 
     // ticket section
     const [ticketOrder, setTicketOrder] = React.useState([]);
 
-    //get session storage data
-    React.useEffect(() => {
-        const localBookingDate = window.sessionStorage.getItem('arrivalDate');
-        if (localBookingDate) {
-            setBookingDate(new Date(parseInt(localBookingDate)));
-        } else {
-            //
-        }
-    }, []);
     React.useEffect(() => {
         const localTicketOrder = window.sessionStorage.getItem('ticketOrder');
         if (localTicketOrder) {
@@ -455,7 +452,7 @@ export default function Ticket(props) {
                                                                 }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                             </Box>
 
-                                                            {totalBill === 0
+                                                            {totalBill === 0 || bookingDate <= today
                                                                 ?   <Button
                                                                     disabled
                                                                     variant='contained'
@@ -575,7 +572,7 @@ export default function Ticket(props) {
                                                 value={bookingDate}
                                                 onChange={value => handleArrivalDate(value)}
                                                 minDate={ tomorrow }
-                                                maxDate={maxDate}
+                                                maxDate={ maxDate }
                                             />
                                         </Application>
                                     </Card>
@@ -777,7 +774,7 @@ export default function Ticket(props) {
                                                             }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                         </Box>
 
-                                                        {totalBill === 0
+                                                        {totalBill === 0 || bookingDate <= today
                                                             ?   <Button
                                                                 disabled
                                                                 variant='contained'

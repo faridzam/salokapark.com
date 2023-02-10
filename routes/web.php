@@ -38,6 +38,13 @@ Route::get('/ticket', function () {
     return Inertia::render('Ticket/Ticket');
 })->name('ticket');
 
+Route::get('/ticket/goers', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by goers');
+    Meta::addMeta('description', 'reservasi online tiket by goers.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka, goers');
+    return Inertia::render('Ticket/Goers');
+})->name('ticketByGoers');
+
 Route::get('/ticket/pilih-ticket', function () {
     Meta::addMeta('title', 'saloka theme park - tiket by saloka');
     Meta::addMeta('description', 'reservasi online tiket by saloka.');
@@ -114,11 +121,59 @@ Route::get('/tentang', function () {
     return Inertia::render('About/About');
 })->name('about');
 
+// Group
+Route::get('/group', function () {
+    Meta::addMeta('title', 'saloka theme park - group');
+    Meta::addMeta('description', 'Reservasi Group Rombongan Saloka Theme Park');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, rombongan, group, reservasi');
+    return Inertia::render('Groups/Groups');
+})->name('group');
+
+// Berita
+Route::get('/berita', function () {
+    Meta::addMeta('title', 'saloka theme park - berita');
+    Meta::addMeta('description', 'Berita Saloka Theme Park');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, berita, blog, kabar');
+    return Inertia::render('Berita/Berita');
+})->name('berita');
+
+// Membership
+Route::get('/membership', function () {
+    Meta::addMeta('title', 'saloka theme park - membership');
+    Meta::addMeta('description', 'Membership Saloka Theme Park');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, membership, tiket, langganan');
+    return Inertia::render('Membership/Membership');
+})->name('membership');
+
+// Surveys
+Route::get('/survey/customer', function () {
+    Meta::addMeta('title', 'saloka theme park - survey');
+    Meta::addMeta('description', 'customer satisfaction survey / survey kepuasan pelanggan');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, survey, polling, kepuasan, pelanggan');
+    return Inertia::render('Survey/Customer');
+})->name('surveyCustomer');
+Route::get('/survey/satisfaction', function () {
+    Meta::addMeta('title', 'saloka theme park - survey');
+    Meta::addMeta('description', 'customer satisfaction survey / survey kepuasan pelanggan');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, survey, polling, kepuasan, pelanggan');
+    return Inertia::render('Survey/Satisfaction');
+})->name('surveySatisfaction');
+Route::get('/survey/visit', function () {
+    Meta::addMeta('title', 'saloka theme park - survey');
+    Meta::addMeta('description', 'customer satisfaction survey / survey kepuasan pelanggan');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, survey, polling, kepuasan, pelanggan');
+    return Inertia::render('Survey/Visit');
+})->name('surveyVisit');
+
+//group
+Route::view('/grup/noslider', 'NoSliderLandingPage.LandingPage.noslider');
+Route::view('/grup/slider', 'SliderLandingPageEvent.SliderLandingPage.slider');
+
+// landscape & angon-ingon
+Route::get('/landscape/{slugs}', [DynamicRoutingController::class, 'renderLandscapeComponent']);
+Route::get('/animal/{slugs}', [DynamicRoutingController::class, 'renderAnimalComponent']);
+
 // Dynamic Routing
 Route::get('/{category}/{slugs}', [DynamicRoutingController::class, 'renderDetailComponent']);
-
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';

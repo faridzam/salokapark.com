@@ -4,15 +4,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 import "swiper/css/lazy";
 
 import {media, zonaByIndex} from '../../assets/images/carousel_assets/zona';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
-import {ArrowForward} from '@mui/icons-material';
-import "./swiperMainZones.module.css";
+import {ArrowForward, ArrowForwardIos, ArrowBackIos} from '@mui/icons-material';
+import customStyle from "./swiperMainZones.module.css";
 import { Inertia } from '@inertiajs/inertia';
 
 // import required modules
@@ -42,125 +42,166 @@ export default function App() {
                 loop={true}
                 preloadImages={true}
                 lazy={true}
-                navigation={true}
+                navigation={{
+                    prevEl: '.prev-main-zones',
+                    nextEl: '.next-main-zones',
+                }}
                 modules={[Navigation]}
                 className="swiper-zones noselect"
                 style={{
                     width: '100%',
                 }}
                 >
+
                     <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        overflowX: 'hidden',
-                    }}>
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            overflowX: 'hidden',
+                        }}>
 
-                        {slides.map((index) => (
+                            {slides.map((index) => (
 
-                            <SwiperSlide
-                            key={`zoneCarousel`+index}>
-                                <Grid
-                                container
-                                direction="column"
-                                spacing={0}
-                                sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}>
-                                    <Box
+                                <SwiperSlide
+                                key={`zoneCarousel`+index}>
+                                    <Grid
+                                    container
+                                    direction="column"
+                                    spacing={0}
                                     sx={{
-                                        maxHeight: '300px',
-                                        width: '80%',
-                                        cursor: 'pointer',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                     }}>
-                                        <img
-                                        onClick={() => redirect(zonaByIndex(index).link)}
-                                        src={media[index]}
-                                        loading="lazy"
-                                        alt="logo saloka"
-                                        style={{
-                                            layout: 'fill',
-                                            objectFit: 'cover',
-                                            objectPosition: 'top',
-                                            width: '100%',
-                                            minHeight: '400px',
-                                        }}></img>
-                                    </Box>
-                                    <Box
-                                    sx={{
-                                        marginTop: '100px',
-                                        width: '80%',
-                                    }}>
                                         <Box
                                         sx={{
+                                            maxHeight: '400px',
+                                            width: '90%',
+                                            cursor: 'pointer',
                                             display: 'flex',
-                                            alignItems: 'center',
-                                            width: '100%',
-                                        }}>
-                                            <Typography
-                                            sx={{
-                                                fontSize: '24px',
-                                                fontWeight: 600,
-                                                color: '#333'
-                                            }}
-                                            >{zonaByIndex(index).nama}</Typography>
-                                        </Box>
-                                        <Box
-                                        sx={{
-                                            marginTop: '10px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            width: '100%',
-                                        }}>
-                                            <Typography
-                                            textAlign="justify"
-                                            sx={{
-                                                lineHeight: 2,
-                                                fontSize: '18px',
-                                                fontWeight: 400,
-                                                color: '#333'
-                                            }}
-                                            >{zonaByIndex(index).deskripsi}</Typography>
-                                        </Box>
-                                        <Box
-                                        sx={{
-                                            display: 'flex',
-                                            marginRight: '100px',
-                                            marginTop: '20px',
+                                            justifyContent: 'center',
                                             alignItems: 'center',
                                         }}>
-                                            <Typography
+                                            <img
                                             onClick={() => redirect(zonaByIndex(index).link)}
-                                            className="noselect"
-                                            align="justify"
-                                            sx={{
-                                                cursor: 'pointer',
-                                                fontSize: '18px',
-                                                fontWeight: 400,
-                                                color: '#789acf'
-                                            }}
-                                            >Baca Lebih Lanjut</Typography>
-                                            <ArrowForward
-                                            sx={{
-                                                cursor: 'pointer',
-                                                marginLeft: '10px',
-                                                fontSize: 20,
-                                                color: '#789acf'
-                                            }}/>
+                                            src={media[index]}
+                                            loading="lazy"
+                                            alt="logo saloka"
+                                            style={{
+                                                layout: 'fill',
+                                                objectFit: 'cover',
+                                                objectPosition: 'top',
+                                                width: '100%',
+                                                maxHeight: '400px',
+                                            }}></img>
                                         </Box>
-                                    </Box>
-                                </Grid>
-                            </SwiperSlide>
+                                        <Box
+                                        sx={{
+                                            marginTop: '20px',
+                                            width: '90%',
+                                        }}>
+                                            <Box
+                                            sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                width: '100%',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '24px',
+                                                    fontWeight: 600,
+                                                    color: '#333'
+                                                }}
+                                                >{zonaByIndex(index).nama}</Typography>
+                                            </Box>
+                                            <Box
+                                            sx={{
+                                                marginTop: '10px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                width: '100%',
+                                            }}>
+                                                <Typography
+                                                textAlign="justify"
+                                                sx={{
+                                                    lineHeight: 1,
+                                                    fontSize: '18px',
+                                                    fontWeight: 400,
+                                                    color: '#333'
+                                                }}
+                                                >{zonaByIndex(index).deskripsi}</Typography>
+                                            </Box>
+                                            <Box
+                                            sx={{
+                                                display: 'flex',
+                                                marginRight: '100px',
+                                                marginTop: '20px',
+                                                alignItems: 'center',
+                                            }}>
+                                                <Typography
+                                                onClick={() => redirect(zonaByIndex(index).link)}
+                                                className="noselect"
+                                                align="justify"
+                                                sx={{
+                                                    cursor: 'pointer',
+                                                    fontSize: '18px',
+                                                    fontWeight: 400,
+                                                    color: 'primary.main'
+                                                }}
+                                                >Baca Lebih Lanjut</Typography>
+                                                <ArrowForward
+                                                sx={{
+                                                    cursor: 'pointer',
+                                                    marginLeft: '10px',
+                                                    fontSize: 20,
+                                                    color: 'primary.main'
+                                                }}/>
+                                            </Box>
+                                        </Box>
+                                    </Grid>
+                                </SwiperSlide>
 
-                        ))}
+                            ))}
 
                     </Box>
+                    
+                    <div className={`prev-main-zones ${customStyle.prevMainZones}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowBackIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
+                    <div className={`next-main-zones ${customStyle.nextMainZones}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowForwardIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
 
                 </Swiper>
                 :
@@ -168,7 +209,10 @@ export default function App() {
                 slidesPerView={1}
                 slidesPerGroup={1}
                 loop={true}
-                navigation={true}
+                navigation={{
+                    prevEl: '.prev-main-zones',
+                    nextEl: '.next-main-zones',
+                }}
                 modules={[Navigation]}
                 className="swiper-zones noselect"
                 style={{
@@ -215,13 +259,13 @@ export default function App() {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
-                                            minHeight: '300px',
+                                            maxHeight: '300px',
                                         }}></img>
                                     </Box>
                                     <Box
                                     sx={{
-                                        marginTop: '50px',
-                                        width: '100%',
+                                        marginTop: '20px',
+                                        width: '90%',
                                     }}>
                                         <Box
                                         sx={{
@@ -247,7 +291,7 @@ export default function App() {
                                             <Typography
                                             textAlign="justify"
                                             sx={{
-                                                lineHeight: 2,
+                                                lineHeight: 1,
                                                 fontSize: '18px',
                                                 fontWeight: 400,
                                                 color: '#333'
@@ -269,7 +313,7 @@ export default function App() {
                                                 cursor: 'pointer',
                                                 fontSize: '18px',
                                                 fontWeight: 400,
-                                                color: '#789acf'
+                                                color: 'primary.main'
                                             }}
                                             >Baca Lebih Lanjut</Typography>
                                             <ArrowForward
@@ -277,7 +321,7 @@ export default function App() {
                                                 cursor: 'pointer',
                                                 marginLeft: '10px',
                                                 fontSize: 20,
-                                                color: '#789acf'
+                                                color: 'primary.main'
                                             }}/>
                                         </Box>
                                     </Box>
@@ -287,6 +331,43 @@ export default function App() {
                         ))}
 
                     </Box>
+
+                    <div className={`prev-main-zones ${customStyle.prevMainZones}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowBackIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
+                    <div className={`next-main-zones ${customStyle.nextMainZones}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowForwardIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
 
                 </Swiper>
             }

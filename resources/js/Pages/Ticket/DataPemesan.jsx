@@ -156,7 +156,7 @@ export default function Ticket(props) {
     }, [name, phone, email, emailValid, emailActive, address])
 
     const submit = () => {
-        let orderID = new Date().getFullYear().toString()+new Date().getMonth().toString().padStart(2, "0")+new Date().getDate().toString().padStart(2, "0")+new Date().getMinutes().toString().padStart(2, "0")+new Date().getMilliseconds().toString().padStart(2, "0")+Math.floor(Math.random()*(999-100+1)+100).toString().substring(1);
+        let orderID = new Date().getFullYear().toString()+(new Date().getMonth()+1).toString().padStart(2, "0")+new Date().getDate().toString().padStart(2, "0")+new Date().getMinutes().toString().padStart(2, "0")+new Date().getMilliseconds().toString().padStart(2, "0")+Math.floor(Math.random()*(999-100+1)+100).toString().substring(1);
         window.sessionStorage.setItem('orderID', JSON.stringify(orderID));
         let zealsCode = window.localStorage.getItem('zeals_track')
 
@@ -173,6 +173,7 @@ export default function Ticket(props) {
             }).then((response) => {
                 //
                 window.sessionStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
+                window.sessionStorage.setItem('orderID', JSON.stringify(response.data.order_id));
             }).catch((error) => {
                 //
                 console.log(error)
@@ -190,6 +191,7 @@ export default function Ticket(props) {
             }).then((response) => {
                 //
                 window.sessionStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
+                window.sessionStorage.setItem('orderID', JSON.stringify(response.data.order_id));
             }).catch((error) => {
                 //
                 console.log(error)
@@ -400,6 +402,7 @@ export default function Ticket(props) {
                     {/* footer */}
                     <Box
                     sx={{
+                        marginTop: '100px',
                         width: '100%',
                         height: '100%',
                         backgroundImage: `url(${media[2]})`,

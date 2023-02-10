@@ -1,0 +1,989 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #f8f9fa;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: #f8f9fa;
+}
+
+.container .bg-img{
+    width: 100%;
+}
+
+.container .bg-img img{
+    width: 100%;
+    height: auto;
+}
+
+.text {
+    width: auto;
+    margin: 62px 124px;
+}
+
+.text .text-heading{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.text-heading h1{
+    color: #F39F19;
+    font-size: 24px;
+}
+
+.text-heading h2{
+    color: #F39F19;
+    font-size: 24px;
+}
+
+.container .event-container{
+    margin: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 2rem;
+}
+
+.container .event-container .event{
+    text-align: center;
+    padding: 3rem 2rem;
+    background: #FFFFFF;
+    border-radius: 10px;
+    outline: 1.5px solid #f8f9fa;
+    cursor: pointer;
+}
+
+.container .event-container .event img{
+    height: 12rem;
+}
+
+.container .event-container .event:hover{
+    outline: none;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,0.1);
+    transform: scale(1.1);
+}
+
+.events-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.events-preview .preview {
+    display: none;
+    padding: 32px;
+    text-align: center;
+    background: #f8f9fa;
+    position: relative;
+    width: 1040px;
+    margin: 32px;
+    border-radius: 10px;
+}
+
+.events-preview .preview.active{
+    display: inline-block;
+}
+
+.events-preview .preview img {
+    margin: 16px;
+    height: 320px;
+}
+
+.events-preview .preview .fa-times {
+    margin: 16px;
+    position: absolute;
+    top: 8px;
+    right: 24px;
+    cursor: pointer;
+    color: #444444;
+    font-size: 32px;
+}
+
+.events-preview .preview .fa-times:hover{
+    transform: rotate(90deg);
+}
+
+.events-preview .preview .event-title{
+    padding: 8px;
+}
+
+.events-preview .preview .event-title h3{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.events-preview .preview .event-desc{
+    padding-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+    text-align: justify;
+}
+
+.events-preview .preview .event-desc p{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.events-preview .preview .buttons{
+    margin: 16px;
+}
+
+.events-preview .preview .buttons a{
+    width: 100%;
+    background: linear-gradient(180deg, rgba(182, 119, 19, 0.9) 0%, rgba(243, 159, 25, 0.9) 100%);
+    padding: 16px 32px;
+    color: #FFFFFF;
+    outline: none;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.events-preview .preview .buttons a:hover{
+    background: linear-gradient(180deg, #107254 0%, #0B4C38 100%);
+}
+
+/*Responsive Start*/
+    /*Screen 480px start*/
+@media(max-width: 480px){
+
+    /*Event Start*/
+    .container {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+
+    .container .bg-img {
+        width: 100%;
+    }
+
+    .container .bg-img img {
+        width: 100%;
+        height: auto;
+    }
+
+    .text {
+        width: auto;
+        margin: 16px 32px;
+    }
+
+    .text .text-heading {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .text-heading h1 {
+        color: #F39F19;
+        font-size: 16px;
+    }
+
+    .text-heading h2 {
+        color: #F39F19;
+        font-size: 16px;
+    }
+
+    .container .event-container {
+        margin: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        gap: 2rem;
+    }
+
+    .container .event-container .event {
+        text-align: center;
+        padding: 32px 16px;
+        background: rgb(255, 255, 255);
+        border-radius: 10px;
+        outline: rgb(248, 249, 250) solid 1.5px;
+        cursor: pointer;
+    }
+
+    .container .event-container .event:hover {
+        outline: none;
+        box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+        transform: scale(1.1);
+    }
+
+    .container .event-container .event img {
+        height: 100px;
+    }
+
+    .container .event-container .event h3{
+        margin: 8px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    /*Event End*/
+
+    /*Preview Event Start*/
+    .events-preview {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        min-height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, .8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .events-preview .preview.active {
+        display: inline-block;
+    }
+
+    .events-preview .preview {
+        display: none;
+        padding: 32px;
+        text-align: center;
+        background: #f8f9fa;
+        position: relative;
+        width: 400px;
+        margin: 32px;
+        border-radius: 10px;
+    }
+
+    .events-preview .preview .fa-times {
+        margin: 16px;
+        position: absolute;
+        top: 0px;
+        right: 8px;
+        cursor: pointer;
+        color: #444444;
+        font-size: 24px;
+    }
+
+    .events-preview .preview img {
+        margin: 16px;
+        height: 110px;
+    }
+
+    .events-preview .preview .event-title {
+        padding: 8px;
+    }
+
+    .events-preview .preview .event-title h3 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .events-preview .preview .event-desc {
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        text-align: justify;
+    }
+
+    .events-preview .preview .event-desc p {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .events-preview .preview .buttons {
+        margin: 16px;
+    }
+
+    .events-preview .preview .buttons a {
+        width: 100%;
+        background: linear-gradient(180deg, rgba(182, 119, 19, 0.9) 0%, rgba(243, 159, 25, 0.9) 100%);
+        padding: 10px 20px;
+        color: #FFFFFF;
+        outline: none;
+        border: none;
+        font-weight: 600;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .events-preview .preview .buttons a:hover {
+        background: linear-gradient(180deg, #107254 0%, #0B4C38 100%);
+    }
+    /*Preview Event End*/
+
+}
+    /*Screen 480px End*/
+
+    /*Screen 481px - 575px Start*/
+@media(min-width: 481px) and (max-width: 575px){
+    /*Event Start*/
+    .container {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+
+    .container .bg-img {
+        width: 100%;
+    }
+
+    .container .bg-img img {
+        width: 100%;
+        height: auto;
+    }
+
+    .text {
+        width: auto;
+        margin: 16px 32px;
+    }
+
+    .text .text-heading {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .text-heading h1 {
+        color: #F39F19;
+        font-size: 16px;
+    }
+
+    .text-heading h2 {
+        color: #F39F19;
+        font-size: 16px;
+    }
+
+    .container .event-container {
+        margin: 50px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        gap: 2rem;
+    }
+
+    .container .event-container .event {
+        text-align: center;
+        padding: 32px 16px;
+        background: rgb(255, 255, 255);
+        border-radius: 10px;
+        outline: rgb(248, 249, 250) solid 1.5px;
+        cursor: pointer;
+    }
+
+    .container .event-container .event:hover {
+        outline: none;
+        box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+        transform: scale(1.1);
+    }
+
+    .container .event-container .event img {
+    height: 200px;
+    }   
+
+    .container .event-container .event h3{
+        margin: 8px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    /*Event End*/
+
+    /*Preview Event Start*/
+    .events-preview {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        min-height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, .8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .events-preview .preview.active {
+        display: inline-block;
+    }
+
+    .events-preview .preview {
+        display: none;
+        padding: 32px;
+        text-align: center;
+        background: #f8f9fa;
+        position: relative;
+        width: 400px;
+        margin: 32px;
+        border-radius: 10px;
+    }
+
+    .events-preview .preview .fa-times {
+        margin: 16px;
+        position: absolute;
+        top: 0px;
+        right: 8px;
+        cursor: pointer;
+        color: #444444;
+        font-size: 24px;
+    }
+
+    .events-preview .preview img {
+        margin: 16px;
+        height: 110px;
+    }
+
+    .events-preview .preview .event-title {
+        padding: 8px;
+    }
+
+    .events-preview .preview .event-title h3 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .events-preview .preview .event-desc {
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        text-align: justify;
+    }
+
+    .events-preview .preview .event-desc p {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .events-preview .preview .buttons {
+        margin: 16px;
+    }
+
+    .events-preview .preview .buttons a {
+        width: 100%;
+        background: linear-gradient(180deg, rgba(182, 119, 19, 0.9) 0%, rgba(243, 159, 25, 0.9) 100%);
+        padding: 10px 20px;
+        color: #FFFFFF;
+        outline: none;
+        border: none;
+        font-weight: 600;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .events-preview .preview .buttons a:hover {
+        background: linear-gradient(180deg, #107254 0%, #0B4C38 100%);
+    }
+    /*Preview Event End*/
+}
+    /*Screen 481px - 575px End*/
+
+    /*Screen 576px - 767px Start*/
+@media(min-width: 576px) and (max-width: 767px){
+    /*Event Start*/
+    .container {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+
+    .container .bg-img {
+        width: 100%;
+    }
+
+    .container .bg-img img {
+        width: 100%;
+        height: auto;
+    }
+
+    .text {
+        width: auto;
+        margin: 16px 32px;
+    }
+
+    .text .text-heading {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .text-heading h1 {
+        color: #F39F19;
+        font-size: 16px;
+    }
+
+    .text-heading h2 {
+        color: #F39F19;
+        font-size: 16px;
+    }
+
+    .container .event-container {
+        margin: 50px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        gap: 2rem;
+    }
+
+    .container .event-container .event {
+        text-align: center;
+        padding: 32px 16px;
+        background: rgb(255, 255, 255);
+        border-radius: 10px;
+        outline: rgb(248, 249, 250) solid 1.5px;
+        cursor: pointer;
+    }
+
+    .container .event-container .event:hover {
+        outline: none;
+        box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+        transform: scale(1.1);
+    }
+
+    .container .event-container .event img {
+        height: 240px;
+    }   
+
+    .container .event-container .event h3{
+        margin: 8px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    /*Event End*/
+
+    /*Preview Event Start*/
+    .events-preview {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        min-height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, .8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .events-preview .preview.active {
+        display: inline-block;
+    }
+
+    .events-preview .preview {
+        display: none;
+        padding: 32px;
+        text-align: center;
+        background: #f8f9fa;
+        position: relative;
+        width: 560px;
+        margin: 32px;
+        border-radius: 10px;
+    }
+
+    .events-preview .preview .fa-times {
+        margin: 16px;
+        position: absolute;
+        top: 0px;
+        right: 8px;
+        cursor: pointer;
+        color: #444444;
+        font-size: 24px;
+    }
+
+    .events-preview .preview img {
+        margin: 16px;
+        height: 208px;
+    }
+
+    .events-preview .preview .event-title {
+        padding: 8px;
+    }
+
+    .events-preview .preview .event-title h3 {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .events-preview .preview .event-desc {
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 32px;
+        text-align: justify;
+    }
+
+    .events-preview .preview .event-desc p {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .events-preview .preview .buttons {
+        margin: 16px;
+    }
+
+    .events-preview .preview .buttons a {
+        width: 100%;
+        background: linear-gradient(180deg, rgba(182, 119, 19, 0.9) 0%, rgba(243, 159, 25, 0.9) 100%);
+        padding: 16px 32px;
+        color: #FFFFFF;
+        outline: none;
+        border: none;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .events-preview .preview .buttons a:hover {
+        background: linear-gradient(180deg, #107254 0%, #0B4C38 100%);
+    }
+    /*Preview Event End*/
+}
+    /*Screen 576px - 767px End*/
+
+    /*Screen 768px - 991px Start*/
+@media(min-width: 768px) and (max-width: 991px){
+    /*Event Start*/
+    .container {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+
+    .container .bg-img {
+        width: 100%;
+    }
+
+    .container .bg-img img {
+        width: 100%;
+        height: auto;
+    }
+
+    .text {
+        width: auto;
+        margin: 16px 32px;
+    }
+
+    .text .text-heading {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .text-heading h1 {
+        color: #F39F19;
+        font-size: 20px;
+    }
+
+    .text-heading h2 {
+        color: #F39F19;
+        font-size: 20px;
+    }
+
+    .container .event-container {
+        margin: 80px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        gap: 2rem;
+    }
+
+    .container .event-container .event {
+        text-align: center;
+        padding: 32px 16px;
+        background: rgb(255, 255, 255);
+        border-radius: 10px;
+        outline: rgb(248, 249, 250) solid 1.5px;
+        cursor: pointer;
+    }
+
+    .container .event-container .event:hover {
+        outline: none;
+        box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+        transform: scale(1.1);
+    }
+
+    .container .event-container .event img {
+        height: 180px;
+    }   
+
+    .container .event-container .event h3{
+        margin: 8px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    /*Event End*/
+
+    /*Preview Event Start*/
+    .events-preview {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        min-height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, .8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .events-preview .preview.active {
+        display: inline-block;
+    }
+
+    .events-preview .preview {
+        display: none;
+        padding: 32px;
+        text-align: center;
+        background: #f8f9fa;
+        position: relative;
+        width: 640px;
+        margin: 32px;
+        border-radius: 10px;
+    }
+
+    .events-preview .preview .fa-times {
+        margin: 16px;
+        position: absolute;
+        top: 0px;
+        right: 8px;
+        cursor: pointer;
+        color: #444444;
+        font-size: 24px;
+    }
+
+    .events-preview .preview img {
+        margin: 16px;
+        height: 208px;
+    }
+
+    .events-preview .preview .event-title {
+        padding: 8px;
+    }
+
+    .events-preview .preview .event-title h3 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .events-preview .preview .event-desc {
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        text-align: justify;
+    }
+
+    .events-preview .preview .event-desc p {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .events-preview .preview .buttons {
+        margin: 32px;
+    }
+
+    .events-preview .preview .buttons a {
+        width: 100%;
+        background: linear-gradient(180deg, rgba(182, 119, 19, 0.9) 0%, rgba(243, 159, 25, 0.9) 100%);
+        padding: 16px 32px;
+        color: #FFFFFF;
+        outline: none;
+        border: none;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .events-preview .preview .buttons a:hover {
+        background: linear-gradient(180deg, #107254 0%, #0B4C38 100%);
+    }
+    /*Preview Event End*/
+
+}
+    /*Screen 768px - 991px End*/
+
+@media(min-width: 992px) and (max-width: 1199px){
+    /*Event Start*/
+    .container {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+
+    .container .bg-img {
+        width: 100%;
+    }
+
+    .container .bg-img img {
+        width: 100%;
+        height: auto;
+    }
+
+    .text {
+        width: auto;
+        margin: 32px 64px;
+    }
+
+    .text .text-heading {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .text-heading h1 {
+        color: #F39F19;
+        font-size: 24px;
+    }
+
+    .text-heading h2 {
+        color: #F39F19;
+        font-size: 24px;
+    }
+
+    .container .event-container {
+        margin: 100px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        gap: 2rem;
+    }
+
+    .container .event-container .event {
+        text-align: center;
+        padding: 32px 16px;
+        background: rgb(255, 255, 255);
+        border-radius: 10px;
+        outline: rgb(248, 249, 250) solid 1.5px;
+        cursor: pointer;
+    }
+
+    .container .event-container .event:hover {
+        outline: none;
+        box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
+        transform: scale(1.1);
+    }
+
+    .container .event-container .event img {
+        height: 200px;
+    }  
+
+    .container .event-container .event h3{
+        margin: 8px;
+        font-size: 24px;
+        font-weight: 600;
+    }
+    /*Event End*/
+
+    /*Preview Event Start*/
+    .events-preview {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        min-height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, .8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .events-preview .preview.active {
+        display: inline-block;
+    }
+
+    .events-preview .preview {
+        display: none;
+        padding: 32px;
+        text-align: center;
+        background: #f8f9fa;
+        position: relative;
+        width: 640px;
+        margin: 32px;
+        border-radius: 10px;
+    }
+
+    .events-preview .preview .fa-times {
+        margin: 16px;
+        position: absolute;
+        top: 0px;
+        right: 8px;
+        cursor: pointer;
+        color: #444444;
+        font-size: 24px;
+    }
+
+    .events-preview .preview img {
+        margin: 16px;
+        height: 208px;
+    }
+
+    .events-preview .preview .event-title {
+        padding: 8px;
+    }
+
+    .events-preview .preview .event-title h3 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .events-preview .preview .event-desc {
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+        text-align: justify;
+    }
+
+    .events-preview .preview .event-desc p {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .events-preview .preview .buttons {
+        margin: 32px;
+    }
+
+    .events-preview .preview .buttons a {
+        width: 100%;
+        background: linear-gradient(180deg, rgba(182, 119, 19, 0.9) 0%, rgba(243, 159, 25, 0.9) 100%);
+        padding: 16px 32px;
+        color: #FFFFFF;
+        outline: none;
+        border: none;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .events-preview .preview .buttons a:hover {
+        background: linear-gradient(180deg, #107254 0%, #0B4C38 100%);
+    }
+    /*Preview Event End*/
+}
+

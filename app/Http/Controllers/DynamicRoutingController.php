@@ -16,4 +16,16 @@ class DynamicRoutingController extends Controller
             'slugs' => $slugs,
         ]);
     }
+    public function renderLandscapeComponent(Request $request, $slugs) {
+        //
+        return Inertia::render("Landscape/Landscape", [
+            'slugs' => $slugs,
+        ]);
+    }
+    public function renderAnimalComponent(Request $request, $slugs) {
+        //
+        return Inertia::render("Animal/Animal", [
+            'slugs' => $slugs,
+        ]);
+    }
 }

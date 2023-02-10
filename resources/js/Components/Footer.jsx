@@ -41,7 +41,6 @@ export default function Footer() {
         direction="column"
         spacing={0}
         sx={{
-            paddingTop: '50px',
             paddingX: '10%',
             display: 'flex',
             justifyContent: 'flex-start',
@@ -54,7 +53,7 @@ export default function Footer() {
                 <>
                     <Box
                     sx={{
-                        marginTop: '125px',
+                        marginTop: '50px',
                         display: 'flex',
                         width: '100%',
                         height: '50px',
@@ -82,7 +81,6 @@ export default function Footer() {
                         direction="column"
                         spacing={0}
                         sx={{
-                            marginTop: '50px',
                             display: 'flex',
                             width: '10%'
                         }}>
@@ -215,7 +213,6 @@ export default function Footer() {
                         direction="column"
                         spacing={0}
                         sx={{
-                            marginTop: '50px',
                             display: 'flex',
                             width: '15%'
                         }}>
@@ -298,6 +295,27 @@ export default function Footer() {
                                 }}
                                 >Hubungi Kami</Typography>
                             </Box>
+                            <Box
+                            sx={{
+                                width: '100%',
+                                display: 'flex',
+                                justifyContent: 'flex-start'
+                            }}>
+                                <Typography
+                                onClick={() => redirect('/berita')}
+                                // onClick={() => externalRedirect('https://salokapark.com/hubungi')}
+                                className="noselect"
+                                sx={{
+                                    fontSize: '14px',
+                                    fontWeight: 500,
+                                    color: '#eee',
+                                    cursor: 'pointer',
+                                    "&:hover": {
+                                        color: 'primary.light'
+                                    },
+                                }}
+                                >Release</Typography>
+                            </Box>
                         </Grid>
 
                         {/* Restaurants */}
@@ -306,7 +324,6 @@ export default function Footer() {
                         direction="column"
                         spacing={0}
                         sx={{
-                            marginTop: '50px',
                             display: 'flex',
                             width: '15%'
                         }}>
@@ -542,7 +559,7 @@ export default function Footer() {
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
-                                >0823-5900-0077</Typography>
+                                >0878-3889-0777</Typography>
                                 <WhatsApp sx={{ color: '#eee'}}/>
                             </Box>
                             <Box
@@ -631,6 +648,7 @@ export default function Footer() {
                     spacing={0}
                     sx={{
                         marginTop: '10px',
+                        paddingBottom: '10px',
                         display: 'flex',
                         width: '100%',
                         height: '100%',
@@ -659,7 +677,7 @@ export default function Footer() {
                 <>
                     <Box
                     sx={{
-                        marginTop: '150px',
+                        marginTop: '30px',
                         display: 'flex',
                         width: '100%',
                         height: '87px',
@@ -673,7 +691,8 @@ export default function Footer() {
                         src={media[1]}
                         alt="logo_saloka"
                         width={300}
-                        height={87}></img>
+                        height={87}>
+                        </img>
                     </Box>
 
                     <Grid
@@ -785,7 +804,7 @@ export default function Footer() {
                                     fontWeight: 500,
                                     color: '#eee'
                                 }}
-                                >0823-5900-0077</Typography>
+                                >0878-3889-0777</Typography>
                                 <WhatsApp sx={{ color: '#eee'}}/>
                             </Box>
 
@@ -893,6 +912,7 @@ export default function Footer() {
 
                         <Box
                         sx={{
+                            marginBottom: '40px',
                             display: 'flex',
                             justifyContent: 'flex-end',
                         }}>
@@ -969,7 +989,7 @@ export default function Footer() {
                 </>
             }
             <Helmet>
-                <script src="https://demo.zeals.asia/platform/js/zealsamp.js"> </script>
+                <script src="https://app.zeals.asia/platform/js/zealsamp.js?aff_id=571343950"> </script>
             </Helmet>
         </Grid>
     )

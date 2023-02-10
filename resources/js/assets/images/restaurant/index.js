@@ -8,30 +8,38 @@ import iceCreamShop from "./ice-cream-shop.jpg";
 export const mediaRestaurant = [daimami, rimba, jenju, tukCio, srengenge, iceCreamShop];
 export const restaurant = [
     {
+        idzona: 5,
+        image: daimami,
         slugs: 'daimami',
         deskripsiLengkap: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis sapien et sapien pulvinar interdum. Phasellus ut euismod lorem, sit amet fringilla neque. Phasellus non dolor in massa sollicitudin pharetra. Ut posuere, lectus a faucibus luctus, lorem ante sodales magna, eget pretium metus tellus nec enim. Vivamus id lacinia enim, et facilisis massa. Aenean luctus mauris a porta euismod. Aliquam facilisis nunc ac sapien fermentum varius.',
         nama: 'Daimami',
         title: 'Daimami',
-        deskripsi: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tellus lectus, blandit ac ipsum a, tincidunt tristique lorem. Aenean eu iaculis ex. Fusce euismod mauris ligula, ut porta turpis aliquam et. Cras quis venenatis neque, sed venenatis lacus. Mauris est lorem, dapibus sit amet efficitur et, fringilla vitae arcu.',
+        deskripsi: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
         link: '/restaurant/daimami',
     },
     {
+        idzona: 2,
+        image: rimba,
         slugs: 'rimba',
         deskripsiLengkap: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis sapien et sapien pulvinar interdum. Phasellus ut euismod lorem, sit amet fringilla neque. Phasellus non dolor in massa sollicitudin pharetra. Ut posuere, lectus a faucibus luctus, lorem ante sodales magna, eget pretium metus tellus nec enim. Vivamus id lacinia enim, et facilisis massa. Aenean luctus mauris a porta euismod. Aliquam facilisis nunc ac sapien fermentum varius.',
         nama: 'Rimba',
         title: 'Rimba Café',
-        deskripsi: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In rutrum feugiat urna ac vehicula. Suspendisse molestie tincidunt nunc ac feugiat. Sed dui mi, tempor id urna quis, interdum vulputate eros. Curabitur eleifend dui in lacus mollis luctus.',
+        deskripsi: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
         link: '/restaurant/rimba',
     },
     {
+        idzona: 1,
+        image: jenju,
         slugs: 'jenju',
         deskripsiLengkap: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis sapien et sapien pulvinar interdum. Phasellus ut euismod lorem, sit amet fringilla neque. Phasellus non dolor in massa sollicitudin pharetra. Ut posuere, lectus a faucibus luctus, lorem ante sodales magna, eget pretium metus tellus nec enim. Vivamus id lacinia enim, et facilisis massa. Aenean luctus mauris a porta euismod. Aliquam facilisis nunc ac sapien fermentum varius.',
         nama: 'Jenju',
         title: 'Jenju Café',
-        deskripsi: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla ac luctus odio. In eu quam dui. Duis vel lectus odio. Fusce sit amet ullamcorper nibh. Nullam fermentum ligula elit, in condimentum dolor congue ut.',
+        deskripsi: 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
         link: '/restaurant/jenju',
     },
     {
+        idzona: 0,
+        image: tukCio,
         slugs: 'tuk-cio',
         deskripsiLengkap: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis sapien et sapien pulvinar interdum. Phasellus ut euismod lorem, sit amet fringilla neque. Phasellus non dolor in massa sollicitudin pharetra. Ut posuere, lectus a faucibus luctus, lorem ante sodales magna, eget pretium metus tellus nec enim. Vivamus id lacinia enim, et facilisis massa. Aenean luctus mauris a porta euismod. Aliquam facilisis nunc ac sapien fermentum varius.',
         nama: 'Tuk Cio',
@@ -40,6 +48,8 @@ export const restaurant = [
         link: '/restaurant/tuk-cio',
     },
     {
+        idzona: 0,
+        image: srengenge,
         slugs: 'srengenge',
         deskripsiLengkap: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis sapien et sapien pulvinar interdum. Phasellus ut euismod lorem, sit amet fringilla neque. Phasellus non dolor in massa sollicitudin pharetra. Ut posuere, lectus a faucibus luctus, lorem ante sodales magna, eget pretium metus tellus nec enim. Vivamus id lacinia enim, et facilisis massa. Aenean luctus mauris a porta euismod. Aliquam facilisis nunc ac sapien fermentum varius.',
         nama: 'Srengenge',
@@ -48,6 +58,8 @@ export const restaurant = [
         link: '/restaurant/srengenge',
     },
     {
+        idzona: 0,
+        image: iceCreamShop,
         slugs: 'ice-cream-shop',
         deskripsiLengkap: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis sapien et sapien pulvinar interdum. Phasellus ut euismod lorem, sit amet fringilla neque. Phasellus non dolor in massa sollicitudin pharetra. Ut posuere, lectus a faucibus luctus, lorem ante sodales magna, eget pretium metus tellus nec enim. Vivamus id lacinia enim, et facilisis massa. Aenean luctus mauris a porta euismod. Aliquam facilisis nunc ac sapien fermentum varius.',
         nama: 'Ice Cream Shop',
@@ -60,3 +72,5 @@ export const restaurant = [
 export const restaurantBannerByIndex = index => restaurant[index];
 export const mediaByIndex = index => mediaRestaurant[index % mediaRestaurant.length];
 export const getIndexRestaurantBySlugs = slugs => restaurant.findIndex(x => x.slugs === slugs);
+
+export const getIndexRestaurantByID = id => restaurant.findIndex(x => x.idzona === id);

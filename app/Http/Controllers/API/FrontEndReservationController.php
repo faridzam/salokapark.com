@@ -35,9 +35,11 @@ class FrontEndReservationController extends Controller
             }
         };
 
+        $sex = reservation::count();
+
         $reservation = reservation::create([
             'customer_id' => $customer->id,
-            'order_id' => request('orderID'),
+            'order_id' => Carbon::now()->format('y').sprintf('%05d', substr(strval($sex), -5)),
             'arrival_date' => $bookingDate,
             'zeals_code' => $request->zeals_code,
             'bill' => $totalBill,
@@ -108,6 +110,7 @@ class FrontEndReservationController extends Controller
 
         return response()->json([
             'reservation_id' => $reservation->id,
+            'order_id' => $reservation->order_id
         ]);
     }
 

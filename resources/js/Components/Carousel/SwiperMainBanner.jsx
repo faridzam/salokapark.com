@@ -27,20 +27,19 @@ export default function App() {
           disableOnInteraction: false,
         }}
         pagination={{
-          clickable: true,
+          clickable: false,
         }}
         preloadImages={true}
         lazy= {true}
         loop={true}
         effect={"fade"}
-        modules={[Autoplay, EffectFade, Pagination]}
+        modules={[Autoplay, EffectFade]}
         className="main-banner-swiper"
       >
         <SwiperSlide>
             <Box
             sx={{
                 maxHeight: '85vh',
-                cursor: 'pointer',
             }}>
                 <img
                 src={media[0]}
@@ -55,6 +54,8 @@ export default function App() {
                 }}></img>
             </Box>
         </SwiperSlide>
+        {/*
+
         <SwiperSlide>
             <Box
             sx={{
@@ -74,6 +75,8 @@ export default function App() {
                 }}></img>
             </Box>
         </SwiperSlide>
+        
+        */}
       </Swiper>
     </>
   );

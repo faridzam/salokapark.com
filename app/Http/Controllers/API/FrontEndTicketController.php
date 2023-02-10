@@ -71,6 +71,8 @@ class FrontEndTicketController extends Controller
                 // $value->price = $ticket->price;
                 if ($option->type === 'special_price') {
                     $value->price = $option->special_price;
+                } elseif ($option->type === 'discount') {
+                    $value->price = round($ticket->price * (100-$option->discount) / 100, -3);
                 } else {
                     $value->price = $ticket->price;
                 }
@@ -89,6 +91,8 @@ class FrontEndTicketController extends Controller
             };
 
         }
+
+        $ticketEvent = $ticketEvent->values();
 
         return response()->json([
             'ticketReguler' => $ticketReguler,

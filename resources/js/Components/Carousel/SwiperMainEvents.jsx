@@ -10,8 +10,9 @@ import "swiper/css/lazy";
 import {media, eventByIndex} from '../../assets/images/carousel_assets/events';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography, Button} from '@mui/material';
+import {ArrowForwardIos, ArrowBackIos} from '@mui/icons-material';
 import { useTheme } from "@mui/material/styles";
-import "./swiperMainEvents.module.css";
+import customStyle from "./swiperMainEvents.module.css";
 import { Inertia } from '@inertiajs/inertia';
 
 // import required modules
@@ -30,6 +31,14 @@ export default function App() {
         Inertia.visit(route);
     }
 
+    const [hovered, setHovered] = React.useState(false);
+    const handleHovered = () => {
+      setHovered(true);
+    };
+    const handleUnhovered = () => {
+      setHovered(false);
+    };
+
     return (
         <>
             {
@@ -40,7 +49,10 @@ export default function App() {
                     slidesPerGroup={1}
                     loop={true}
                     preloadImages={true}
-                    navigation={true}
+                    navigation={{
+                        prevEl: '.prev-main-events',
+                        nextEl: '.next-main-events',
+                    }}
                     lazy={true}
                     modules={[Navigation]}
                     className="swiper-events noselect"
@@ -59,6 +71,8 @@ export default function App() {
                             {slides.map((index) => (
 
                                 <SwiperSlide
+                                onMouseOver={handleHovered}
+                                onMouseOut={handleUnhovered}
                                 key={`eventCarousel`+index}>
                                     <Grid
                                     container
@@ -99,84 +113,93 @@ export default function App() {
                                                     width: '80%',
                                                 }}></img>
                                             </Box>
-                                            <Box
-                                            sx={{
-                                                marginRight: '11%',
-                                                display: 'flex',
-                                                alignItems: 'flex-start',
-                                                justifyContent: 'flex-start',
-                                                backgroundColor: 'rgba(0,0,0,0.7)',
-                                                position: 'absolute',
-                                                height: '100%',
-                                                width: '30%',
-                                            }}>
-                                                <Grid
-                                                container
-                                                direction="column"
-                                                spacing={0}
+
+                                            {
+                                                hovered
+                                                ?
+                                                <Box
                                                 sx={{
-                                                    width: '100%',
+                                                    marginRight: '11%',
+                                                    display: 'flex',
+                                                    alignItems: 'flex-start',
+                                                    justifyContent: 'flex-start',
+                                                    backgroundColor: 'rgba(0,0,0,0.7)',
+                                                    position: 'absolute',
                                                     height: '100%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
+                                                    width: '30%',
                                                 }}>
-                                                <Box
-                                                sx={{
-                                                    display: 'flex',
-                                                    width: '80%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'center',
-                                                }}>
-                                                    <Typography
+                                                    <Grid
+                                                    container
+                                                    direction="column"
+                                                    spacing={0}
                                                     sx={{
-                                                        fontSize: '28px',
-                                                        fontWeight: 600,
-                                                        color: '#ddd'
-                                                    }}
-                                                    >{eventByIndex(index).title}</Typography>
-                                                </Box>
-                                                <Box
-                                                sx={{
-                                                    marginTop: '20px',
-                                                    display: 'flex',
-                                                    width: '80%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'center',
-                                                }}>
-                                                    <Typography
-                                                    textAlign="justify"
-                                                    sx={{
-                                                        fontSize: '18px',
-                                                        fontWeight: 400,
-                                                        color: '#ddd'
-                                                    }}
-                                                    >{eventByIndex(index).deskripsi}</Typography>
-                                                </Box>
-                                                <Box
-                                                sx={{
-                                                    marginTop: '20px',
-                                                    display: 'flex',
-                                                    width: '80%',
-                                                    justifyContent: 'flex-start',
-                                                    alignItems: 'center',
-                                                }}>
-                                                    <Button
-                                                    onClick={() => redirect(eventByIndex(index).link)}
-                                                    variant="contained"
-                                                    sx={{
-                                                        borderRadius: 5,
-                                                        backgroundColor: 'primary.main',
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center',
                                                     }}>
-                                                    <Typography
+                                                    <Box
                                                     sx={{
-                                                        fontSize: '14px',
-                                                        color: '#ddd'
-                                                    }}>info lengkap</Typography>
-                                                    </Button>
+                                                        display: 'flex',
+                                                        width: '80%',
+                                                        justifyContent: 'flex-start',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                        <Typography
+                                                        sx={{
+                                                            fontSize: '28px',
+                                                            fontWeight: 600,
+                                                            color: '#ddd'
+                                                        }}
+                                                        >{eventByIndex(index).title}</Typography>
+                                                    </Box>
+                                                    <Box
+                                                    sx={{
+                                                        marginTop: '20px',
+                                                        display: 'flex',
+                                                        width: '80%',
+                                                        justifyContent: 'flex-start',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                        <Typography
+                                                        textAlign="justify"
+                                                        sx={{
+                                                            fontSize: '18px',
+                                                            fontWeight: 400,
+                                                            color: '#ddd'
+                                                        }}
+                                                        >{eventByIndex(index).deskripsi}</Typography>
+                                                    </Box>
+                                                    <Box
+                                                    sx={{
+                                                        marginTop: '20px',
+                                                        display: 'flex',
+                                                        width: '80%',
+                                                        justifyContent: 'flex-start',
+                                                        alignItems: 'center',
+                                                    }}>
+                                                        <Button
+                                                        onClick={() => redirect(eventByIndex(index).link)}
+                                                        variant="contained"
+                                                        sx={{
+                                                            borderRadius: 5,
+                                                            backgroundColor: 'primary.main',
+                                                        }}>
+                                                        <Typography
+                                                        sx={{
+                                                            fontSize: '14px',
+                                                            fontWeight: 500,
+                                                            color: '#ddd'
+                                                        }}>info lengkap</Typography>
+                                                        </Button>
+                                                    </Box>
+                                                    </Grid>
                                                 </Box>
-                                                </Grid>
-                                            </Box>
+                                                :
+                                                <div></div>
+                                            }
+
                                         </Grid>
 
                                     </Grid>
@@ -186,13 +209,53 @@ export default function App() {
 
                         </Box>
 
+                        <div className={`prev-main-events ${customStyle.prevMainEvents}`}>
+                            <Box
+                            sx={{
+                                display: 'flex',
+                                width: '100%',
+                                height: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                cursor: 'pointer',
+                            }}>
+                                <ArrowBackIos
+                                sx={{
+                                    fontSize: 28,
+                                    fontWeight: 600,
+                                    color: 'secondary.main'
+                                }}/>
+                            </Box>
+                        </div>
+                        <div className={`next-main-events ${customStyle.nextMainEvents}`}>
+                            <Box
+                            sx={{
+                                display: 'flex',
+                                width: '100%',
+                                height: '100%',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                cursor: 'pointer',
+                            }}>
+                                <ArrowForwardIos
+                                sx={{
+                                    fontSize: 28,
+                                    fontWeight: 600,
+                                    color: 'secondary.main'
+                                }}/>
+                            </Box>
+                        </div>
+
                 </Swiper>
                 :
                 <Swiper
                 slidesPerView={1}
                 slidesPerGroup={1}
                 loop={true}
-                navigation={true}
+                navigation={{
+                    prevEl: '.prev-main-events',
+                    nextEl: '.next-main-events',
+                }}
                 modules={[Navigation]}
                 className="swiper-events noselect"
                 style={{
@@ -210,6 +273,8 @@ export default function App() {
                         {slides.map((index) => (
 
                             <SwiperSlide
+                            onMouseOver={handleHovered}
+                            onMouseOut={handleUnhovered}
                             key={`eventCarousel`+index}>
                                 <Grid
                                 container
@@ -258,7 +323,7 @@ export default function App() {
                                         alignItems: 'flex-start',
                                         justifyContent: 'flex-start',
                                         height: '100%',
-                                        width: '100%',
+                                        width: '90%',
                                     }}>
                                         <Grid
                                         container
@@ -335,6 +400,43 @@ export default function App() {
                         ))}
 
                     </Box>
+
+                    <div className={`prev-main-events ${customStyle.prevMainEvents}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowBackIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
+                    <div className={`next-main-events ${customStyle.nextMainEvents}`}>
+                        <Box
+                        sx={{
+                            display: 'flex',
+                            width: '100%',
+                            height: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                        }}>
+                            <ArrowForwardIos
+                            sx={{
+                                fontSize: 28,
+                                fontWeight: 600,
+                                color: 'secondary.main'
+                            }}/>
+                        </Box>
+                    </div>
 
                 </Swiper>
             }

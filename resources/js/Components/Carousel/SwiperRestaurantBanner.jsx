@@ -27,7 +27,7 @@ export default function App() {
           disableOnInteraction: false,
         }}
         pagination={{
-          clickable: true,
+          clickable: false,
         }}
         loop={true}
         preloadImages={true}
@@ -55,6 +55,7 @@ export default function App() {
                 }}></img>
             </Box>
         </SwiperSlide>
+        {/*
         <SwiperSlide>
             <Box
             sx={{
@@ -150,6 +151,7 @@ export default function App() {
                 }}></img>
             </Box>
         </SwiperSlide>
+        */}
       </Swiper>
     </>
   );
