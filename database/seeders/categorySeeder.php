@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\category;
+use App\Models\category_zeals;
 
 class categorySeeder extends Seeder
 {
@@ -31,6 +32,7 @@ class categorySeeder extends Seeder
             ],
         ];
 
+        category_zeals::insert($categories);
         category::insert($categories);
     }
 }

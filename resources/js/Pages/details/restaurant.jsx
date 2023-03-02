@@ -6,7 +6,7 @@ import {useMediaQuery, Box, Typography, Button, Fade} from '@mui/material';
 import {ArrowForward} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
-import { SwiperMenuResto } from '../../Components/Carousel';
+import { SwiperMenuResto, SwiperRekomendasiResto } from '../../Components/Carousel';
 import {media} from '../../assets/images';
 import {mediaRestaurant, restaurantBannerByIndex, getIndexRestaurantBySlugs} from '../../assets/images/restaurant';
 
@@ -99,7 +99,7 @@ export default function Zona(props) {
                                     <Box
                                     sx={{
                                         width: '100%',
-                                        marginTop: '50px',
+                                        marginTop: '20px',
                                         cursor: 'pointer',
                                     }}>
                                         <img
@@ -119,7 +119,6 @@ export default function Zona(props) {
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'fontin',
                                             fontWeight: 600,
                                             fontSize: '32px',
                                             color: '#333',
@@ -139,16 +138,55 @@ export default function Zona(props) {
                                         </section>
                                     </Box>
 
-                                    {/* swiper menu
+                                    {/* swiper menu */}
                                     <Box
                                     sx={{
                                         marginTop: '50px',
-                                        width: '100%',
+                                        width: '90%',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontWeight: 600,
+                                            fontSize: '32px',
+                                            color: '#333',
+                                            textAlign: 'center',
+                                        }}>Menu di {resto[0].nama}</Typography>
+                                    </Box>
+
+                                    {/* swiper rekomendasi resto 
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '90%',
                                         height: '100%',
                                     }}>
-                                        <SwiperMenuResto slugs={props.slugs}/>
+                                        <SwiperMenuResto slugs={resto[0].id}/>
                                     </Box>
                                     */}
+
+                                    {/* swiper rekomendasi resto */}
+                                    <Box
+                                    sx={{
+                                        marginTop: '50px',
+                                        width: '90%',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontWeight: 600,
+                                            fontSize: '32px',
+                                            color: '#333',
+                                            textAlign: 'center',
+                                        }}>Resto Lainnya</Typography>
+                                    </Box>
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '90%',
+                                        height: '100%',
+                                    }}>
+                                        <SwiperRekomendasiResto slugs={resto[0].id}/>
+                                    </Box>
+                                    
 
                                 </Grid>
                                 :
@@ -163,7 +201,6 @@ export default function Zona(props) {
                         direction="column"
                         spacing={0}
                         sx={{
-                            marginTop: '20px',
                             display: 'flex',
                             width: '100%',
                             justifyContent: 'center',
@@ -186,7 +223,7 @@ export default function Zona(props) {
                                     <Box
                                     sx={{
                                         width: '100%',
-                                        marginTop: '50px',
+                                        marginTop: '20px',
                                         cursor: 'pointer',
                                     }}>
                                         <img
@@ -207,7 +244,6 @@ export default function Zona(props) {
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'fontin',
                                             fontWeight: 600,
                                             fontSize: '24px',
                                             color: '#333',
@@ -227,16 +263,56 @@ export default function Zona(props) {
                                         </section>
                                     </Box>
 
-                                    {/* swiper menu
+                                    {/* swiper menu */}
                                     <Box
                                     sx={{
                                         marginTop: '50px',
+                                        width: '80%',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontWeight: 600,
+                                            fontSize: '24px',
+                                            color: '#333',
+                                            textAlign: 'center',
+                                        }}>Menu di {resto[0].nama}</Typography>
+                                    </Box>
+
+                                    {/* swiper rekomendasi resto 
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
                                         width: '100%',
                                         height: '100%',
                                     }}>
-                                        <SwiperMenuResto slugs={props.slugs}/>
+                                        <SwiperMenuResto slugs={resto[0].id}/>
                                     </Box>
                                     */}
+
+                                    {/* swiper rekomendasi resto */}
+                                    <Box
+                                    sx={{
+                                        marginTop: '50px',
+                                        width: '80%',
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                            fontWeight: 600,
+                                            fontSize: '24px',
+                                            color: '#333',
+                                            textAlign: 'center',
+                                        }}>Resto Lainnya</Typography>
+                                    </Box>
+                                    
+                                    <Box
+                                    sx={{
+                                        marginTop: '20px',
+                                        width: '100%',
+                                        height: '100%',
+                                    }}>
+                                        <SwiperRekomendasiResto slugs={resto[0].id}/>
+                                    </Box>
+                                    
 
                                 </Grid>
                                 :

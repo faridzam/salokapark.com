@@ -97,8 +97,8 @@ export default function Zona(props) {
 
                                     <Box
                                     sx={{
-                                        width: '50%',
-                                        marginTop: '50px',
+                                        width: '100%',
+                                        height: '75vh',
                                         cursor: 'pointer',
                                     }}>
                                         <img
@@ -109,6 +109,7 @@ export default function Zona(props) {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
+                                            height: '75vh',
                                         }}></img>
                                     </Box>
         
@@ -135,7 +136,6 @@ export default function Zona(props) {
                                                 <Box>
                                                     <Typography
                                                     sx={{
-                                                        fontFamily: 'fontin',
                                                         fontWeight: 600,
                                                         fontSize: '32px',
                                                         color: '#333',
@@ -165,18 +165,17 @@ export default function Zona(props) {
                                             }}>
                                                 <Typography
                                                 sx={{
-                                                    fontFamily: 'fontin',
                                                     fontWeight: 600,
                                                     fontSize: '28px',
                                                     color: '#333',
                                                     textAlign: 'center',
                                                 }}>
-                                                    Tanggal Acara:
+                                                    Tanggal Promo:
                                                 </Typography>
                                                 <Typography
                                                 sx={{
-                                                    lineHeight: 2,
-                                                    fontSize: '24px',
+                                                    lineHeight: 1.5,
+                                                    fontSize: '16px',
                                                     fontWeight: 400,
                                                     color: '#333'
                                                 }}>
@@ -222,7 +221,7 @@ export default function Zona(props) {
                                     <Box
                                     sx={{
                                         width: '100%',
-                                        marginTop: '50px',
+                                        height: '50vh',
                                         cursor: 'pointer',
                                     }}>
                                         <img
@@ -233,6 +232,7 @@ export default function Zona(props) {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
+                                            height: '50vh',
                                         }}></img>
                                     </Box>
         
@@ -243,7 +243,6 @@ export default function Zona(props) {
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'fontin',
                                             fontWeight: 600,
                                             fontSize: '24px',
                                             color: '#333',

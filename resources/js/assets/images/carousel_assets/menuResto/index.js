@@ -33,6 +33,7 @@ export const mediaMenuResto = [
 ];
 export const menuResto = [
     {
+        idresto: 4,
         nama: 'Daimami 1',
         title: 'Daimami 1',
         image: daimami1,
@@ -43,6 +44,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 4,
         nama: 'Daimami 2',
         title: 'Daimami 2',
         image: daimami2,
@@ -53,6 +55,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 4,
         nama: 'Daimami 3',
         title: 'Daimami 3',
         image: daimami3,
@@ -63,6 +66,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 4,
         nama: 'Daimami 4',
         title: 'Daimami 4',
         image: daimami4,
@@ -73,6 +77,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Ice Cream 1',
         title: 'Ice Cream 1',
         image: iceCream1,
@@ -83,6 +88,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Ice Cream 2',
         title: 'Ice Cream 2',
         image: iceCream2,
@@ -93,6 +99,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Ice Cream 3',
         title: 'Ice Cream 3',
         image: iceCream3,
@@ -103,6 +110,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Ice Cream 4',
         title: 'Ice Cream 4',
         image: iceCream4,
@@ -113,6 +121,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 2,
         nama: 'Jenju 1',
         title: 'Jenju 1',
         image: jenju1,
@@ -123,6 +132,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 2,
         nama: 'Jenju 2',
         title: 'Jenju 2',
         image: jenju2,
@@ -133,6 +143,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 2,
         nama: 'Jenju 3',
         title: 'Jenju 3',
         image: jenju3,
@@ -143,6 +154,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 2,
         nama: 'Jenju 4',
         title: 'Jenju 4',
         image: jenju4,
@@ -153,6 +165,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 1,
         nama: 'Rimba 1',
         title: 'Rimba 1',
         image: rimba1,
@@ -163,6 +176,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 1,
         nama: 'Rimba 2',
         title: 'Rimba 2',
         image: rimba2,
@@ -173,6 +187,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 1,
         nama: 'Rimba 3',
         title: 'Rimba 3',
         image: rimba3,
@@ -183,6 +198,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 1,
         nama: 'Rimba 4',
         title: 'Rimba 4',
         image: rimba4,
@@ -193,6 +209,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Srengenge 1',
         title: 'Srengenge 1',
         image: srengenge1,
@@ -203,6 +220,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Srengenge 2',
         title: 'Srengenge 2',
         image: srengenge2,
@@ -213,6 +231,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Srengenge 3',
         title: 'Srengenge 3',
         image: srengenge3,
@@ -223,6 +242,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Srengenge 4',
         title: 'Srengenge 4',
         image: srengenge4,
@@ -233,6 +253,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Tuk Cio 1',
         title: 'Tuk Cio 1',
         image: tukCio1,
@@ -243,6 +264,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Tuk Cio 2',
         title: 'Tuk Cio 2',
         image: tukCio2,
@@ -253,6 +275,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Tuk Cio 3',
         title: 'Tuk Cio 3',
         image: tukCio3,
@@ -263,6 +286,7 @@ export const menuResto = [
         link: ''
     },
     {
+        idresto: 0,
         nama: 'Tuk Cio 4',
         title: 'Tuk Cio 4',
         image: tukCio4,
@@ -278,3 +302,5 @@ export const mediaMenuRestoByIndex = index => mediaMenuResto[index % mediaMenuRe
 
 export const menuRestoByIndex = (index, slugs) => menuResto.filter(x => x.slugs === slugs)[index];
 export const getIndexesMenuRestoBySlugs = slugs => menuResto.filter(x => x.slugs === slugs);
+
+export const getIndexesMenuRestoByID = id => menuResto.filter(x => x.idresto === id);

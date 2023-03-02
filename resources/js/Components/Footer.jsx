@@ -251,49 +251,7 @@ export default function Footer() {
                                         color: 'primary.light'
                                     },
                                 }}
-                                >Sejarah</Typography>
-                            </Box>
-                            <Box
-                            sx={{
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'flex-start'
-                            }}>
-                                <Typography
-                                onClick={() => redirect('/tentang')}
-                                // onClick={() => externalRedirect('https://salokapark.com/area_sekitar')}
-                                className="noselect"
-                                sx={{
-                                    fontSize: '14px',
-                                    fontWeight: 500,
-                                    color: '#eee',
-                                    cursor: 'pointer',
-                                    "&:hover": {
-                                        color: 'primary.light'
-                                    },
-                                }}
-                                >Fasilitas Umum</Typography>
-                            </Box>
-                            <Box
-                            sx={{
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'flex-start'
-                            }}>
-                                <Typography
-                                onClick={() => redirect('/tentang')}
-                                // onClick={() => externalRedirect('https://salokapark.com/hubungi')}
-                                className="noselect"
-                                sx={{
-                                    fontSize: '14px',
-                                    fontWeight: 500,
-                                    color: '#eee',
-                                    cursor: 'pointer',
-                                    "&:hover": {
-                                        color: 'primary.light'
-                                    },
-                                }}
-                                >Hubungi Kami</Typography>
+                                >Tentang</Typography>
                             </Box>
                             <Box
                             sx={{
@@ -314,7 +272,7 @@ export default function Footer() {
                                         color: 'primary.light'
                                     },
                                 }}
-                                >Release</Typography>
+                                >Berita</Typography>
                             </Box>
                         </Grid>
 
@@ -340,7 +298,7 @@ export default function Footer() {
                                     fontWeight: 600,
                                     color: '#eee',
                                 }}
-                                >Restaurants</Typography>
+                                >Resto & Café</Typography>
                             </Box>
 
                             <Box
@@ -405,69 +363,6 @@ export default function Footer() {
                                     },
                                 }}
                                 >Jenju Café</Typography>
-                            </Box>
-                            <Box
-                            sx={{
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'flex-start'
-                            }}>
-                                <Typography
-                                onClick={() => redirect('/restaurant/tuk-cio')}
-                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
-                                className="noselect"
-                                sx={{
-                                    fontSize: '14px',
-                                    fontWeight: 500,
-                                    color: '#eee',
-                                    cursor: 'pointer',
-                                    "&:hover": {
-                                        color: 'primary.light'
-                                    },
-                                }}
-                                >Tuk Cio Café</Typography>
-                            </Box>
-                            <Box
-                            sx={{
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'flex-start'
-                            }}>
-                                <Typography
-                                onClick={() => redirect('/restaurant/srengenge')}
-                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
-                                className="noselect"
-                                sx={{
-                                    fontSize: '14px',
-                                    fontWeight: 500,
-                                    color: '#eee',
-                                    cursor: 'pointer',
-                                    "&:hover": {
-                                        color: 'primary.light'
-                                    },
-                                }}
-                                >Srengenge Café</Typography>
-                            </Box>
-                            <Box
-                            sx={{
-                                width: '100%',
-                                display: 'flex',
-                                justifyContent: 'flex-start'
-                            }}>
-                                <Typography
-                                onClick={() => redirect('/restaurant/ice-cream-shop')}
-                                // onClick={() => externalRedirect('https://salokapark.com/kuliner')}
-                                className="noselect"
-                                sx={{
-                                    fontSize: '14px',
-                                    fontWeight: 500,
-                                    color: '#eee',
-                                    cursor: 'pointer',
-                                    "&:hover": {
-                                        color: 'primary.light'
-                                    },
-                                }}
-                                >Ice Cream Shop</Typography>
                             </Box>
                         </Grid>
 
@@ -677,7 +572,6 @@ export default function Footer() {
                 <>
                     <Box
                     sx={{
-                        marginTop: '30px',
                         display: 'flex',
                         width: '100%',
                         height: '87px',
@@ -690,8 +584,8 @@ export default function Footer() {
                         }}
                         src={media[1]}
                         alt="logo_saloka"
-                        width={300}
-                        height={87}>
+                        width={200}
+                        height={50}>
                         </img>
                     </Box>
 
@@ -700,7 +594,7 @@ export default function Footer() {
                     direction="row"
                     spacing={0}
                     sx={{
-                        marginTop: '100px',
+                        marginTop: '50px',
                         width: '100%',
                         display: 'flex',
                         justifyContent: 'center',
@@ -732,7 +626,7 @@ export default function Footer() {
                             </Box>
                             <Box
                             sx={{
-                                marginTop: '20px',
+                                marginTop: '10px',
                                 width: '100%',
                                 maxWidth: '400px',
                                 display: 'flex',
@@ -887,7 +781,7 @@ export default function Footer() {
                     direction="row"
                     spacing={0}
                     sx={{
-                        marginTop: '10px',
+                        marginTop: '50px',
                         display: 'flex',
                         width: '100%',
                         height: '100%',

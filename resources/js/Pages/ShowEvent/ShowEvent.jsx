@@ -112,7 +112,7 @@ export default function ShowEvent(props) {
                                 direction="column"
                                 spacing={0}
                                 sx={{
-                                    marginTop: '50px',
+                                    marginTop: '20px',
                                     display: 'flex',
                                     width: '100%',
                                     justifyContent: 'center',
@@ -124,29 +124,16 @@ export default function ShowEvent(props) {
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'Arial',
                                             fontWeight: 600,
                                             fontSize: '38px',
                                             color: '#333'
                                         }}>Show & Event</Typography>
                                     </Box>
-                                    <Box
-                                    sx={{
-
-                                    }}>
-                                        <Typography
-                                        sx={{
-                                            fontFamily: 'Arial',
-                                            fontWeight: 500,
-                                            fontSize: '24px',
-                                            color: '#333'
-                                        }}>Saloka Theme Park</Typography>
-                                    </Box>
 
                                     <Box
                                     sx={{
                                         width: '100%',
-                                        marginTop: '50px'
+                                        marginTop: '20px'
                                     }}>
                                         <SwiperShowEvent/>
                                     </Box>
@@ -194,7 +181,7 @@ export default function ShowEvent(props) {
                                 direction="column"
                                 spacing={0}
                                 sx={{
-                                    marginTop: '50px',
+                                    marginTop: '20px',
                                     display: 'flex',
                                     width: '100%',
                                     justifyContent: 'center',
@@ -207,29 +194,16 @@ export default function ShowEvent(props) {
                                         <Typography
                                         sx={{
                                             textAlign: 'center',
-                                            fontFamily: 'Arial',
                                             fontWeight: 600,
-                                            fontSize: '38px',
+                                            fontSize: '32px',
                                             color: '#333'
                                         }}>Show & Event</Typography>
-                                    </Box>
-                                    <Box
-                                    sx={{
-
-                                    }}>
-                                        <Typography
-                                        sx={{
-                                            fontFamily: 'Arial',
-                                            fontWeight: 500,
-                                            fontSize: '24px',
-                                            color: '#333'
-                                        }}>Saloka Theme Park</Typography>
                                     </Box>
 
                                     <Box
                                     sx={{
                                         width: '100%',
-                                        marginTop: '50px'
+                                        marginTop: '20px'
                                     }}>
                                         <SwiperShowEvent/>
                                     </Box>

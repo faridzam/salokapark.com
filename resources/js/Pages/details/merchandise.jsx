@@ -133,7 +133,6 @@ export default function Zona(props) {
                                         <Box>
                                             <Typography
                                             sx={{
-                                                fontFamily: 'fontin',
                                                 fontWeight: 600,
                                                 fontSize: '32px',
                                                 color: '#333',
@@ -163,7 +162,6 @@ export default function Zona(props) {
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'fontin',
                                             fontWeight: 600,
                                             fontSize: '28px',
                                             color: '#333',
@@ -183,7 +181,6 @@ export default function Zona(props) {
                                         <Typography
                                         sx={{
                                             marginTop: '30px',
-                                            fontFamily: 'fontin',
                                             fontWeight: 600,
                                             fontSize: '28px',
                                             color: '#333',
@@ -259,7 +256,6 @@ export default function Zona(props) {
                                 }}>
                                     <Typography
                                     sx={{
-                                        fontFamily: 'fontin',
                                         fontWeight: 600,
                                         fontSize: '24px',
                                         color: '#333',

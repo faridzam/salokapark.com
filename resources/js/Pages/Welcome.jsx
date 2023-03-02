@@ -3,7 +3,7 @@ import { Link, Head } from '@inertiajs/inertia-react';
 import { useTheme } from "@mui/material/styles";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography, Button, Accordion, AccordionSummary, AccordionDetails, Collapse, Zoom, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
-import {AccessTime, DeviceThermostat, ConfirmationNumber, Stars, ArrowForward, CalendarMonth, ExpandMore} from '@mui/icons-material';
+import {AccessTime, DeviceThermostat, ConfirmationNumber, Stars, ArrowForward, CalendarMonth, ExpandMore, KeyboardArrowDown} from '@mui/icons-material';
 import { useInView } from 'react-intersection-observer';
 import GoogleMapReact from 'google-map-react';
 import { Inertia } from '@inertiajs/inertia';
@@ -139,24 +139,17 @@ export default function Welcome(props) {
         zoom: 15
     };
 
-    // const [tempLopait, setTempLopait] = React.useState();
-    // React.useEffect(() => {
-    //     axios('https://api.openweathermap.org/data/2.5/weather?lat=-7.280711095665581&lon=110.45955097017394&appid=ce6e29a8019014230bf75c290bdbd5c9', {
-    //         method: 'GET',
-    //         mode: 'no-cors',
-    //         headers: {
-    //             'Access-Control-Allow-Origin': '*',
-    //             Accept: 'application/json',
-    //             'Content-Type': 'application/json',
-    //         },
-    //         credentials: 'same-origin',
-    //         crossdomain: true,
-    //     }).then((response) => {
-    //         //
-    //     }).catch((e) => {
-    //         //
-    //     });
-    // }, [tempLopait] );
+    const [temp, setTemp] = React.useState(false);
+    const [weather, setWeather] = React.useState(false);
+    React.useEffect(() => {
+        axios.get('/api/get-weather-now')
+        .then((response) => {
+            //
+            setTemp(response.data.status.current_weather.temperature)
+        }).catch((e) => {
+            //
+        });
+    }, [] );
 
     const isMounted = useIsMounted();
 
@@ -329,32 +322,39 @@ export default function Welcome(props) {
                                     fontWeight: 600,
                                     color: '#444'
                                 }}
-                                >Temperature Today:</Typography>
+                                >Suhu Hari Ini:</Typography>
                             </Grid>
-                            <Box
-                            sx={{
-                                marginLeft: '10px',
-                                display: 'flex',
-                                justifyContent: 'flex-start',
-                                alignItems: 'center'
-                            }}>
-                                <Grid
-                                container={true}
-                                direction="column"
-                                spacing={0}
-                                >
-                                <Typography
-                                noWrap={true}
+                            {
+                                temp
+                                ?
+                                <Box
                                 sx={{
-                                    margin: 0,
-                                    padding: 0,
-                                    fontSize: '15px',
-                                    fontWeight: 500,
-                                    color: '#444'
-                                }}
-                                >30°</Typography>
-                                </Grid>
-                            </Box>
+                                    marginLeft: '10px',
+                                    display: 'flex',
+                                    justifyContent: 'flex-start',
+                                    alignItems: 'center'
+                                }}>
+                                    <Grid
+                                    container={true}
+                                    direction="column"
+                                    spacing={0}
+                                    >
+                                    <Typography
+                                    noWrap={true}
+                                    sx={{
+                                        margin: 0,
+                                        padding: 0,
+                                        fontSize: '15px',
+                                        fontWeight: 500,
+                                        color: '#444'
+                                    }}
+                                    >{temp}°</Typography>
+                                    </Grid>
+                                </Box>
+                                :
+                                <div></div>
+                            }
+                            
 
                             </Grid>
 
@@ -382,7 +382,7 @@ export default function Welcome(props) {
                                 sx={{
                                     marginBottom: '2px',
                                     fontSize: '22px',
-                                    color: '#333',
+                                    color: 'white.lightest',
                                 }}/>
                                 <Typography
                                 noWrap={true}
@@ -390,9 +390,9 @@ export default function Welcome(props) {
                                     marginLeft: '10px',
                                     fontSize: '18px',
                                     fontWeight: 600,
-                                    color: '#333',
+                                    color: 'white.lightest',
                                 }}
-                                >Ticket</Typography>
+                                >Tiket</Typography>
                             </Box>
                             <Box
                             onClick={() => redirect('/membership')}
@@ -412,7 +412,7 @@ export default function Welcome(props) {
                                 sx={{
                                     marginBottom: '2px',
                                     fontSize: '22px',
-                                    color: '#333',
+                                    color: 'white.lightest',
                                 }}/>
                                 <Typography
                                 noWrap={true}
@@ -420,7 +420,7 @@ export default function Welcome(props) {
                                     marginLeft: '10px',
                                     fontSize: '18px',
                                     fontWeight: 600,
-                                    color: '#333',
+                                    color: 'white.lightest',
                                 }}
                                 >Membership</Typography>
                             </Box>
@@ -435,8 +435,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        paddingY: '10px',
-                        marginY: '20px',
+                        marginY: '10px',
                         display: 'flex',
                         height: '100%',
                         justifyContent: 'center',
@@ -454,8 +453,7 @@ export default function Welcome(props) {
                         }}>
                             <AccordionSummary
                             aria-controls="panel1a-content"
-                            id="panel1a-header"
-                            >
+                            id="panel1a-header">
                                 <Box
                                 sx={{
                                     width: '100%',
@@ -471,24 +469,26 @@ export default function Welcome(props) {
                                         <Typography
                                         sx={{
                                             fontFamily: 'AlrightSans',
-                                            fontWeight: 700,
-                                            fontSize: '18px',
+                                            fontWeight: 600,
+                                            fontSize: '14px',
                                             color: '#333'
-                                        }}>PARK ADVISORY</Typography>
+                                        }}>PETUNJUK KUNJUNGAN</Typography>
                                     </Box>
                                     <Button
-                                    variant="contained"
+                                    variant="text"
                                     sx={{
                                         borderRadius: 50,
-                                        backgroundColor: 'primary.light',
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'Arial',
                                             fontWeight: 600,
-                                            fontSize: '16px',
-                                            color: '#333'
-                                        }}>PELAJARI LEBIH LANJUT</Typography>
+                                            fontSize: '12px',
+                                            color: 'primary.main'
+                                        }}>BACA  LEBIH LANJUT</Typography>
+                                        <KeyboardArrowDown
+                                        sx={{
+                                            color: 'primary.main'
+                                        }}/>
                                     </Button>
                                 </Box>
                             </AccordionSummary>
@@ -509,42 +509,101 @@ export default function Welcome(props) {
                                     <Grid
                                     container={true}
                                     direction="column"
-                                    spacing={2}
+                                    spacing={0}
                                     sx={{
                                     }}>
 
-                                        <Typography
-                                        paragraph={true}
-                                        textAlign="justify"
+                                        <Box
                                         sx={{
-                                            fontFamily: 'Arial',
-                                            lineHeight: 2,
-                                            fontWeight: 300,
-                                            fontSize: '16px',
-                                            color: '#333'
-                                        }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non dictum nisl, ac pharetra nibh. Integer lacinia eleifend quam quis varius. Aenean sollicitudin efficitur faucibus. Duis at hendrerit massa. Cras non enim facilisis, blandit nisl ac, suscipit elit.</Typography>
+                                        }}>
+                                            <Typography
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 500,
+                                                fontSize: '15px',
+                                                color: '#333'
+                                            }}>Jam Operasional
+                                            </Typography>
 
-                                        <Typography
-                                        paragraph={true}
-                                        textAlign="justify"
-                                        sx={{
-                                            fontFamily: 'Arial',
-                                            fontWeight: 300,
-                                            lineHeight: 2,
-                                            fontSize: '16px',
-                                            color: '#333'
-                                        }}> Integer lobortis augue sapien, at venenatis nulla imperdiet vel. Donec risus nulla, commodo at risus at, tincidunt lobortis nulla. Aenean interdum ligula quis tellus consectetur tempor. Mauris eu tortor et sem pharetra fringilla.</Typography>
+                                            <Typography
+                                            paragraph={true}
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 300,
+                                                fontSize: '14px',
+                                                color: '#333'
+                                            }}>Jam operasional Saloka untuk hari Senin-Kamis adalah 10.00 – 18.00, hari Jumat adalah 12.00 – 19.00 WIB, hari Sabtu dan Minggu adalah 10.00 – 19.00. Pada hari libur nasional, jam operasional dapat berubah sewaktu-waktu.
+                                            </Typography>
+                                        </Box>
 
-                                        <Typography
-                                        paragraph={true}
-                                        textAlign="justify"
+                                        <Box
                                         sx={{
-                                            fontFamily: 'Arial',
-                                            fontWeight: 300,
-                                            lineHeight: 2,
-                                            fontSize: '16px',
-                                            color: '#333'
-                                        }}> Integer lobortis augue sapien, at venenatis nulla imperdiet vel. Donec risus nulla, commodo at risus at, tincidunt lobortis nulla. Aenean interdum ligula quis tellus consectetur tempor. Mauris eu tortor et sem pharetra fringilla.</Typography>
+                                        }}>
+                                            <Typography
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 500,
+                                                fontSize: '15px',
+                                                color: '#333'
+                                            }}>Harga Tiket
+                                            </Typography>
+
+                                            <Typography
+                                            paragraph={true}
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 300,
+                                                fontSize: '14px',
+                                                color: '#333'
+                                            }}>Harga tiket pada hari Senin-Jumat adalah Rp 120.000 dan hari Sabtu-Minggu adalah Rp 150.000 yang berlaku sebagai tiket terusan. Anak-anak dengan tinggi badan di bawah 90 cm belum berlaku harga tiket. Lansia di atas 55 tahun berlaku harga khusus dengan menunjukkan KTP di loket Saloka. Pembelian tiket bisa dilakukan di offline/loket tiket dan online pada website (maksimal H-1 kedatangan) dan merchant yang bekerjasama dengan Saloka. Tidak berlaku refund untuk pembatalan tiket yang sudah dibeli.
+                                            </Typography>
+                                        </Box>
+
+                                        <Box
+                                        sx={{
+                                        }}>
+                                            <Typography
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 500,
+                                                fontSize: '15px',
+                                                color: '#333'
+                                            }}>Pertunjukan di Saloka
+                                            </Typography>
+
+                                            <Typography
+                                            paragraph={true}
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 300,
+                                                fontSize: '14px',
+                                                color: '#333'
+                                            }}>Pertunjukan spektakuler Baru Klinthing Show hadir di hari Jumat, Sabtu, Minggu, dan di hari libur nasional pada jam 18.15 WIB dan Dancing Fountain setiap hari di jam 15.00 WIB. Lihat lebih lengkap mengenai pertunjukan di Saloka pada bagian Show & Event.
+                                            </Typography>
+                                        </Box>
+                                        
+                                        <Box
+                                        sx={{
+                                        }}>
+                                            <Typography
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 500,
+                                                fontSize: '15px',
+                                                color: '#333'
+                                            }}>Aturan Makanan & Minuman
+                                            </Typography>
+
+                                            <Typography
+                                            paragraph={true}
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 300,
+                                                fontSize: '14px',
+                                                color: '#333'
+                                            }}>Makanan dan minuman dari luar Saloka tidak boleh dibawa masuk ke area Saloka, kecuali minuman dalam tumbler dan makanan khusus bayi.
+                                            </Typography>
+                                        </Box>
 
                                     </Grid>
                                 </Box>
@@ -591,7 +650,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '18px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >TENTANG</Typography>
                             </Box>
@@ -612,7 +672,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '18px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >ZONA</Typography>
                             </Box>
@@ -633,9 +694,10 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '18px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
-                                >MAPS</Typography>
+                                >PETA</Typography>
                             </Box>
                             <Box
                             onClick={() => scrollToRef(eventsScrollRef)}
@@ -654,7 +716,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '18px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >EVENTS</Typography>
                             </Box>
@@ -675,7 +738,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '18px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >FAQs</Typography>
                             </Box>
@@ -696,9 +760,10 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '18px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
-                                >CONTACTS</Typography>
+                                >KONTAK</Typography>
                             </Box>
                         </Grid>
                     </Box>
@@ -711,7 +776,7 @@ export default function Welcome(props) {
                     direction="row"
                     spacing={0}
                     sx={{
-                        marginTop: '100px',
+                        marginTop: '50px',
                         display: 'flex',
                         width: '100%',
                         justifyContent: 'center',
@@ -737,7 +802,6 @@ export default function Welcome(props) {
                                 <img
                                 src={mediaHome[0]}
                                 style={{
-                                    borderRadius: '20px',
                                 }}></img>
                             </Box>
                             <Box
@@ -749,8 +813,8 @@ export default function Welcome(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'Arial',
-                                    fontSize: '32px',
+                                    lineHeight: 1.5,
+                                    fontSize: '28px',
                                     fontWeight: 600,
                                     color: '#333'
                                 }}
@@ -766,7 +830,7 @@ export default function Welcome(props) {
                                 <Typography
                                 textAlign="justify"
                                 sx={{
-                                    lineHeight: 1,
+                                    lineHeight: 1.5,
                                     fontSize: '18px',
                                     fontWeight: 400,
                                     color: '#333'
@@ -777,7 +841,7 @@ export default function Welcome(props) {
                             onClick={() => redirect('/tentang')}
                             sx={{
                                 display: 'flex',
-                                marginTop: '10px',
+                                marginTop: '20px',
                                 width: '80%',
                                 alignItems: 'center',
                             }}>
@@ -857,6 +921,7 @@ export default function Welcome(props) {
                                 width: '80%',
                                 marginTop: '10px',
                             }}>
+                                {/* official google maps
                                 <div style={{ height: '300px', width: '100%' }}>
                                     <GoogleMapReact
                                         defaultCenter={mapsProps.center}
@@ -868,6 +933,10 @@ export default function Welcome(props) {
                                         />
                                     </GoogleMapReact>
                                 </div>
+                                */}
+                                <div id="my-map-canvas" style={{ height: '300px', width: '100%' }}>
+                                    <iframe style={{ height: '100%', width: '100%', border: '0' }} frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=Saloka+Theme+Park,+Jalan+Fatmawati,+Gumuksari,+Lopait,+Semarang+Regency,+Central+Java,+Indonesia&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                                </div>
                             </Box>
                             <Box
                             sx={{
@@ -878,7 +947,6 @@ export default function Welcome(props) {
                                 <Typography
                                 noWrap={true}
                                 sx={{
-                                    fontFamily: 'Arial',
                                     fontSize: '18px',
                                     fontWeight: 500,
                                     color: '#333'
@@ -897,7 +965,6 @@ export default function Welcome(props) {
                                 textAlign="justify"
                                 sx={{
                                     textDecoration: 'underline',
-                                    fontFamily: 'Arial',
                                     fontSize: '14px',
                                     fontWeight: 400,
                                     color: '#333',
@@ -918,7 +985,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        marginTop: '100px',
+                        marginTop: '50px',
                         display: 'flex',
                         width: '100%',
                         justifyContent: 'center',
@@ -930,7 +997,6 @@ export default function Welcome(props) {
                         }}>
                             <Typography
                             sx={{
-                                fontFamily: 'AlrightSans',
                                 fontWeight: 600,
                                 fontSize: '38px',
                                 color: '#333'
@@ -960,10 +1026,9 @@ export default function Welcome(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '14px',
-                                    color: '#333'
+                                    color: 'primary.main'
                                 }}>LIHAT SEMUA ZONA</Typography>
                             </Button>
                         </Box>
@@ -976,7 +1041,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        marginTop: '100px',
+                        marginTop: '50px',
                         display: 'flex',
                         height: '100%',
                         justifyContent: 'center',
@@ -1024,31 +1089,30 @@ export default function Welcome(props) {
                         }}>
                         <Typography
                         sx={{
-                            fontFamily: 'Arial',
                             fontSize: '32px',
-                            fontWeight: 500,
+                            fontWeight: 600,
                             color: '#ddd'
                         }}
-                        >Ceria Tiada Habisnya di Saloka Theme Park</Typography>
+                        >Rasakan Keceriaan Tiada Habisnya di Saloka Theme Park!</Typography>
                         <Typography
                         sx={{
-                            fontFamily: 'Arial',
                             marginBottom: '30px',
                             fontSize: '18px',
-                            fontWeight: 200,
+                            fontWeight: 300,
                             color: '#ddd'
                         }}
-                        >Jangan lewatkan salah satu keseruannya. Rencanakan hari Anda mengunjungi 5 zona.</Typography>
+                        >Rencanakan petualangan di negeri ajaib dan ajak orang-orang tersayangmu sekarang!</Typography>
                         <Button
                         onClick={() => redirect('/zona')}
-                        variant="contained"
+                        variant="outlined"
                         sx={{
-                            borderRadius: 25,
-                            backgroundColor: 'primary.main',
+                            width: '200px',
+                            height: '50px',
+                            borderRadius: 50,
+                            border: '2px solid'
                         }}>
                             <Typography
                             sx={{
-                                fontFamily: 'Arial',
                                 fontSize: '14px',
                                 fontWeight: 600,
                                 color: '#ddd'
@@ -1078,7 +1142,6 @@ export default function Welcome(props) {
                         }}>
                             <Typography
                             sx={{
-                                fontFamily: 'Arial',
                                 fontWeight: 600,
                                 fontSize: '38px',
                                 color: '#333'
@@ -1184,8 +1247,6 @@ export default function Welcome(props) {
                                             >
                                                 <Typography
                                                 sx={{ 
-                                                    fontFamily: 'Arial',
-                                                    flexShrink: 0 
                                                 }}
                                                 >
                                                     {faq1[index].tanya}
@@ -1194,7 +1255,6 @@ export default function Welcome(props) {
                                             <AccordionDetails>
                                                 <Typography
                                                 sx={{
-                                                    fontFamily: 'Arial',
                                                 }}>
                                                     {faq1[index].jawab}
                                                 </Typography>
@@ -1234,7 +1294,6 @@ export default function Welcome(props) {
                                                 >
                                                     <Typography
                                                     sx={{
-                                                        fontFamily: 'Arial',
                                                         flexShrink: 0
                                                     }}>
                                                         {faq2[index].tanya}
@@ -1243,7 +1302,6 @@ export default function Welcome(props) {
                                                 <AccordionDetails>
                                                     <Typography
                                                     sx={{
-                                                        fontFamily: 'Arial',
                                                     }}>
                                                         {faq2[index].jawab}
                                                     </Typography>
@@ -1266,10 +1324,9 @@ export default function Welcome(props) {
                                     <Typography
                                     className={styles.fontinBold}
                                     sx={{
-                                        fontFamily: 'Arial',
                                         fontWeight: 600,
                                         fontSize: '14px',
-                                        color: '#333'
+                                        color: 'primary.main'
                                     }}>{expandedSecondary ? "Lihat Semua" : "Lihat Semua"}</Typography>
                                 </Button>
 
@@ -1366,7 +1423,7 @@ export default function Welcome(props) {
                                 sx={{
                                     marginBottom: '2px',
                                     fontSize: '18px',
-                                    color: '#333',
+                                    color: 'white.lightest',
                                 }}/>
                                 <Typography
                                 noWrap={true}
@@ -1374,7 +1431,7 @@ export default function Welcome(props) {
                                     marginLeft: '10px',
                                     fontSize: '15px',
                                     fontWeight: 600,
-                                    color: '#333',
+                                    color: 'white.lightest',
                                 }}
                                 >Ticket</Typography>
                             </Box>
@@ -1396,7 +1453,7 @@ export default function Welcome(props) {
                                 sx={{
                                     marginBottom: '2px',
                                     fontSize: '18px',
-                                    color: '#333',
+                                    color: 'white.lightest',
                                 }}/>
                                 <Typography
                                 noWrap={true}
@@ -1404,7 +1461,7 @@ export default function Welcome(props) {
                                     marginLeft: '10px',
                                     fontSize: '15px',
                                     fontWeight: 600,
-                                    color: '#333',
+                                    color: 'white.lightest',
                                 }}
                                 >Membership</Typography>
                             </Box>
@@ -1419,7 +1476,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        marginY: '20px',
+                        marginY: '10px',
                         display: 'flex',
                         height: '100%',
                         justifyContent: 'center',
@@ -1437,8 +1494,7 @@ export default function Welcome(props) {
                         }}>
                             <AccordionSummary
                             aria-controls="panel1a-content"
-                            id="panel1a-header"
-                            >
+                            id="panel1a-header">
                                 <Box
                                 sx={{
                                     width: '100%',
@@ -1448,23 +1504,25 @@ export default function Welcome(props) {
                                     <Typography
                                     sx={{
                                         fontFamily: 'AlrightSans',
-                                        fontWeight: 700,
-                                        fontSize: '14px',
+                                        fontWeight: 600,
+                                        fontSize: '12px',
                                         color: '#333'
-                                    }}>PARK ADVISORY</Typography>
+                                    }}>PETUNJUK KUNJUNGAN</Typography>
                                     <Button
-                                    variant="contained"
+                                    variant="text"
                                     sx={{
                                         borderRadius: 50,
-                                        backgroundColor: 'primary.light',
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'Arial',
                                             fontWeight: 600,
                                             fontSize: '12px',
-                                            color: '#333'
-                                        }}>PELAJARI LEBIH LANJUT</Typography>
+                                            color: 'primary.main'
+                                        }}>BACA LEBIH LANJUT</Typography>
+                                        <KeyboardArrowDown
+                                        sx={{
+                                            color: 'primary.main'
+                                        }}/>
                                     </Button>
                                 </Box>
                             </AccordionSummary>
@@ -1485,42 +1543,101 @@ export default function Welcome(props) {
                                     <Grid
                                     container={true}
                                     direction="column"
-                                    spacing={2}
+                                    spacing={0}
                                     sx={{
                                     }}>
 
-                                        <Typography
-                                        paragraph={true}
-                                        textAlign="justify"
+                                        <Box
                                         sx={{
-                                            fontFamily: 'Arial',
-                                            lineHeight: 2,
-                                            fontWeight: 300,
-                                            fontSize: '14px',
-                                            color: '#333'
-                                        }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque non dictum nisl, ac pharetra nibh. Integer lacinia eleifend quam quis varius. Aenean sollicitudin efficitur faucibus. Duis at hendrerit massa. Cras non enim facilisis, blandit nisl ac, suscipit elit.</Typography>
+                                        }}>
+                                            <Typography
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 600,
+                                                fontSize: '13px',
+                                                color: '#333'
+                                            }}>Jam Operasional
+                                            </Typography>
 
-                                        <Typography
-                                        paragraph={true}
-                                        textAlign="justify"
-                                        sx={{
-                                            fontFamily: 'Arial',
-                                            fontWeight: 300,
-                                            lineHeight: 2,
-                                            fontSize: '14px',
-                                            color: '#333'
-                                        }}> Integer lobortis augue sapien, at venenatis nulla imperdiet vel. Donec risus nulla, commodo at risus at, tincidunt lobortis nulla. Aenean interdum ligula quis tellus consectetur tempor. Mauris eu tortor et sem pharetra fringilla.</Typography>
+                                            <Typography
+                                            paragraph={true}
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 300,
+                                                fontSize: '12px',
+                                                color: '#333'
+                                            }}>Jam operasional Saloka untuk hari Senin-Kamis adalah 10.00 – 18.00, hari Jumat adalah 12.00 – 19.00 WIB, hari Sabtu dan Minggu adalah 10.00 – 19.00. Pada hari libur nasional, jam operasional dapat berubah sewaktu-waktu.
+                                            </Typography>
+                                        </Box>
 
-                                        <Typography
-                                        paragraph={true}
-                                        textAlign="justify"
+                                        <Box
                                         sx={{
-                                            fontFamily: 'Arial',
-                                            fontWeight: 300,
-                                            lineHeight: 2,
-                                            fontSize: '14px',
-                                            color: '#333'
-                                        }}> Integer lobortis augue sapien, at venenatis nulla imperdiet vel. Donec risus nulla, commodo at risus at, tincidunt lobortis nulla. Aenean interdum ligula quis tellus consectetur tempor. Mauris eu tortor et sem pharetra fringilla.</Typography>
+                                        }}>
+                                            <Typography
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 600,
+                                                fontSize: '13px',
+                                                color: '#333'
+                                            }}>Harga Tiket
+                                            </Typography>
+
+                                            <Typography
+                                            paragraph={true}
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 300,
+                                                fontSize: '12px',
+                                                color: '#333'
+                                            }}>Harga tiket pada hari Senin-Jumat adalah Rp 120.000 dan hari Sabtu-Minggu adalah Rp 150.000 yang berlaku sebagai tiket terusan. Anak-anak dengan tinggi badan di bawah 90 cm belum berlaku harga tiket. Lansia di atas 55 tahun berlaku harga khusus dengan menunjukkan KTP di loket Saloka. Pembelian tiket bisa dilakukan di offline/loket tiket dan online pada website (maksimal H-1 kedatangan) dan merchant yang bekerjasama dengan Saloka. Tidak berlaku refund untuk pembatalan tiket yang sudah dibeli.
+                                            </Typography>
+                                        </Box>
+
+                                        <Box
+                                        sx={{
+                                        }}>
+                                            <Typography
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 600,
+                                                fontSize: '13px',
+                                                color: '#333'
+                                            }}>Pertunjukan di Saloka
+                                            </Typography>
+
+                                            <Typography
+                                            paragraph={true}
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 300,
+                                                fontSize: '12px',
+                                                color: '#333'
+                                            }}>Pertunjukan spektakuler Baru Klinthing Show hadir di hari Jumat, Sabtu, Minggu, dan di hari libur nasional pada jam 18.15 WIB dan Dancing Fountain setiap hari di jam 15.00 WIB. Lihat lebih lengkap mengenai pertunjukan di Saloka pada bagian Show & Event.
+                                            </Typography>
+                                        </Box>
+                                        
+                                        <Box
+                                        sx={{
+                                        }}>
+                                            <Typography
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 600,
+                                                fontSize: '13px',
+                                                color: '#333'
+                                            }}>Aturan Makanan & Minuman
+                                            </Typography>
+
+                                            <Typography
+                                            paragraph={true}
+                                            textAlign="justify"
+                                            sx={{
+                                                fontWeight: 300,
+                                                fontSize: '12px',
+                                                color: '#333'
+                                            }}>Makanan dan minuman dari luar Saloka tidak boleh dibawa masuk ke area Saloka, kecuali minuman dalam tumbler dan makanan khusus bayi.
+                                            </Typography>
+                                        </Box>
 
                                     </Grid>
                                 </Box>
@@ -1573,7 +1690,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '9px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >TENTANG</Typography>
                             </Box>
@@ -1594,7 +1712,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '9px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >ZONA</Typography>
                             </Box>
@@ -1615,9 +1734,10 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '9px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
-                                >MAPS</Typography>
+                                >PETA</Typography>
                             </Box>
                             <Box
                             onClick={() => scrollToRef(eventsScrollRef)}
@@ -1636,7 +1756,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '9px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >EVENTS</Typography>
                             </Box>
@@ -1657,7 +1778,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '9px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >FAQs</Typography>
                             </Box>
@@ -1678,7 +1800,8 @@ export default function Welcome(props) {
                                 sx={{
                                     fontFamily: 'AlrightSans',
                                     fontSize: '9px',
-                                    fontWeight: 600,
+                                    fontWeight: 700,
+                                    color: 'white.lightest',
                                 }}
                                 >CONTACTS</Typography>
                             </Box>
@@ -1693,7 +1816,7 @@ export default function Welcome(props) {
                     direction="row"
                     spacing={0}
                     sx={{
-                        marginTop: '100px',
+                        marginTop: '50px',
                         display: 'flex',
                         width: '100%',
                         justifyContent: 'center',
@@ -1719,7 +1842,6 @@ export default function Welcome(props) {
                                 <img
                                 src={mediaHome[0]}
                                 style={{
-                                    borderRadius: '20px',
                                 }}></img>
                             </Box>
                             <Box
@@ -1731,7 +1853,6 @@ export default function Welcome(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'Arial',
                                     fontSize: '24px',
                                     fontWeight: 600,
                                     color: '#333',
@@ -1749,7 +1870,7 @@ export default function Welcome(props) {
                                 <Typography
                                 textAlign="justify"
                                 sx={{
-                                    lineHeight: 1,
+                                    lineHeight: 1.5,
                                     fontSize: '14px',
                                     fontWeight: 400,
                                     color: '#333'
@@ -1760,7 +1881,7 @@ export default function Welcome(props) {
                             onClick={() => redirect('/tentang')}
                             sx={{
                                 display: 'flex',
-                                marginTop: '10px',
+                                marginTop: '20px',
                                 width: '80%',
                                 alignItems: 'center',
                             }}>
@@ -1793,7 +1914,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        marginTop: '100px',
+                        marginTop: '50px',
                         display: 'flex',
                         width: '100%',
                         justifyContent: 'center',
@@ -1805,7 +1926,6 @@ export default function Welcome(props) {
                         }}>
                             <Typography
                             sx={{
-                                fontFamily: 'AlrightSans',
                                 fontWeight: 600,
                                 fontSize: '24px',
                                 color: '#333'
@@ -1834,10 +1954,9 @@ export default function Welcome(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '14px',
-                                    color: '#333'
+                                    color: 'primary.main'
                                 }}>LIHAT SEMUA ZONA</Typography>
                             </Button>
                         </Box>
@@ -1850,7 +1969,7 @@ export default function Welcome(props) {
                     direction="column"
                     spacing={0}
                     sx={{
-                        marginTop: '100px',
+                        marginTop: '50px',
                         display: 'flex',
                         height: '100%',
                         justifyContent: 'center',
@@ -1899,33 +2018,32 @@ export default function Welcome(props) {
                         }}>
                         <Typography
                         sx={{
-                            fontFamily: 'Arial',
                             fontSize: '26px',
-                            fontWeight: 500,
+                            fontWeight: 600,
                             color: '#ddd',
                             textAlign: 'center',
                         }}
-                        >Ceria Tiada Habisnya di Saloka Theme Park</Typography>
+                        >Rasakan Keceriaan Tiada Habisnya di Saloka Theme Park!</Typography>
                         <Typography
                         sx={{
-                            fontFamily: 'Arial',
                             marginBottom: '30px',
                             fontSize: '13px',
                             fontWeight: 300,
                             color: '#ddd',
                             textAlign: 'center',
                         }}
-                        >Jangan lewatkan salah satu keseruannya. Rencanakan hari Anda mengunjungi 5 zona.</Typography>
+                        >Rencanakan petualangan di negeri ajaib dan ajak orang-orang tersayangmu sekarang!</Typography>
                         <Button
                         onClick={() => redirect('/zona')}
-                        variant="contained"
+                        variant="outlined"
                         sx={{
-                            borderRadius: 25,
-                            backgroundColor: 'primary.main',
+                            width: '200px',
+                            height: '50px',
+                            borderRadius: 50,
+                            border: '2px solid'
                         }}>
                             <Typography
                             sx={{
-                                fontFamily: 'Arial',
                                 fontSize: '14px',
                                 fontWeight: 600,
                                 color: '#ddd'
@@ -1951,11 +2069,9 @@ export default function Welcome(props) {
                     }}>
                         <Box
                         sx={{
-
                         }}>
                             <Typography
                             sx={{
-                                fontFamily: 'Arial',
                                 fontWeight: 600,
                                 fontSize: '38px',
                                 color: '#333'
@@ -2013,7 +2129,6 @@ export default function Welcome(props) {
                         }}>
                             <Typography
                             sx={{
-                                fontFamily: 'Arial',
                                 fontSize: '40px',
                                 fontWeight: 600,
                                 color: '#333'
@@ -2063,7 +2178,6 @@ export default function Welcome(props) {
                                             >
                                                 <Typography
                                                 sx={{
-                                                    fontFamily: 'Arial',
                                                     flexShrink: 0,
                                                     fontSize: '14px',
                                                     fontWeight: 450,
@@ -2074,7 +2188,6 @@ export default function Welcome(props) {
                                             <AccordionDetails>
                                                 <Typography
                                                 sx={{
-                                                    fontFamily: 'Arial',
                                                     flexShrink: 0,
                                                     fontSize: '12px',
                                                 }}>
@@ -2116,7 +2229,6 @@ export default function Welcome(props) {
                                                 >
                                                     <Typography
                                                     sx={{
-                                                        fontFamily: 'Arial',
                                                         flexShrink: 0,
                                                         fontSize: '14px',
                                                         fontWeight: 450,
@@ -2127,7 +2239,6 @@ export default function Welcome(props) {
                                                 <AccordionDetails>
                                                     <Typography
                                                     sx={{
-                                                        fontFamily: 'Arial',
                                                         flexShrink: 0,
                                                         fontSize: '12px',
                                                     }}>
@@ -2152,10 +2263,9 @@ export default function Welcome(props) {
                                     <Typography
                                     className={styles.fontinBold}
                                     sx={{
-                                        fontFamily: 'Arial',
                                         fontWeight: 600,
                                         fontSize: '14px',
-                                        color: '#333'
+                                        color: 'primary.main'
                                     }}>{expandedSecondary ? "Lihat Semua" : "Lihat Semua"}</Typography>
                                 </Button>
 

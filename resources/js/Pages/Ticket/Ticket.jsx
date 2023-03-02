@@ -215,6 +215,29 @@ export default function Ticket(props) {
                                             marginTop: '30px',
                                         }}>
                                             <Button
+                                            onClick={() => redirect('/promo-ticket/pilih-ticket')}
+                                            variant='contained'
+                                            color='secondary'
+                                            sx={{
+                                                width: '100%',
+                                                height: '75px',
+                                                borderRadius: '30px',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '24px',
+                                                    fontWeight: 600,
+                                                    letterSpacing: 2
+                                                }}>HEMAT BEREMPAT!</Typography>
+                                            </Button>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            width: '50%',
+                                            minWidth: '550px',
+                                            marginTop: '30px',
+                                        }}>
+                                            <Button
                                             onClick={() => redirect('/ticket/pilih-ticket')}
                                             variant='contained'
                                             sx={{
@@ -310,6 +333,27 @@ export default function Ticket(props) {
                                                 fontSize: '18px',
                                                 fontWeight: 500
                                             }}>Rencanakan kunjungan kamu dan keluarga ke Saloka!</Typography>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            width: '80%',
+                                            marginTop: '30px',
+                                        }}>
+                                            <Button
+                                            onClick={() => redirect('/promo-ticket/pilih-ticket')}
+                                            variant='contained'
+                                            color='secondary'
+                                            sx={{
+                                                width: '100%',
+                                                height: '75px',
+                                                borderRadius: '30px',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '18px',
+                                                    fontWeight: 600,
+                                                }}>HEMAT BEREMPAT!</Typography>
+                                            </Button>
                                         </Box>
                                         <Box
                                         sx={{

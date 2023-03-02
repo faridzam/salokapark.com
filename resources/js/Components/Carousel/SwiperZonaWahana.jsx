@@ -11,7 +11,7 @@ import {wahanaByIndex, getIndexesWahanaBySlugs} from '../../assets/images/carous
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
-import {ArrowForwardIos, ArrowBackIos} from '@mui/icons-material';
+import {ArrowForwardIos, ArrowBackIos, ArrowForward} from '@mui/icons-material';
 import customStyle from "./swiperZonaWahana.module.css";
 import { Inertia } from '@inertiajs/inertia';
 
@@ -134,20 +134,45 @@ export default function App(props) {
                                             }}
                                             >{wahana[index].nama}</Typography>
                                         </Box>
-                                            <Box
+                                        <Box
+                                        sx={{
+                                            marginTop: '10px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            width: '100%',
+                                        }}>
+                                            <Typography
                                             sx={{
-                                                marginTop: '10px',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                width: '100%',
-                                            }}>
-                                                <Typography
-                                                sx={{
-                                                    fontSize: '14px',
-                                                    fontWeight: 500,
-                                                    color: '#333'
-                                                }}
-                                                >{wahana[index].desk_singkat.slice(0, 500)+(wahana[index].desk_singkat.length > 500 ? "..." : "")}</Typography>
+                                                fontSize: '14px',
+                                                fontWeight: 500,
+                                                color: '#333'
+                                            }}
+                                            >{wahana[index].desk_singkat.slice(0, 500)+(wahana[index].desk_singkat.length > 500 ? "..." : "")}</Typography>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            display: 'flex',
+                                            marginTop: '20px',
+                                            alignItems: 'center',
+                                        }}>
+                                            <Typography
+                                            //onClick={() => redirect(fasum[index].link)}
+                                            className="noselect"
+                                            align="justify"
+                                            sx={{
+                                                cursor: 'pointer',
+                                                fontSize: '14px',
+                                                fontWeight: 400,
+                                                color: 'primary.main'
+                                            }}
+                                            >Baca Lebih Lanjut</Typography>
+                                            <ArrowForward
+                                            sx={{
+                                                cursor: 'pointer',
+                                                marginLeft: '10px',
+                                                fontSize: 20,
+                                                color: 'primary.main'
+                                            }}/>
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -287,6 +312,31 @@ export default function App(props) {
                                                 color: '#333'
                                             }}
                                             >{wahana[index].desk_singkat.slice(0, 500)+(wahana[index].desk_singkat.length > 500 ? "..." : "")}</Typography>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            display: 'flex',
+                                            marginTop: '20px',
+                                            alignItems: 'center',
+                                        }}>
+                                            <Typography
+                                            // onClick={() => redirect(fasum[index].link)}
+                                            className="noselect"
+                                            align="justify"
+                                            sx={{
+                                                cursor: 'pointer',
+                                                fontSize: '18px',
+                                                fontWeight: 400,
+                                                color: 'primary.main'
+                                            }}
+                                            >Baca Lebih Lanjut</Typography>
+                                            <ArrowForward
+                                            sx={{
+                                                cursor: 'pointer',
+                                                marginLeft: '10px',
+                                                fontSize: 20,
+                                                color: 'primary.main'
+                                            }}/>
                                         </Box>
                                     </Box>
                                 </Grid>

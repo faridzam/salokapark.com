@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\ticket;
+use App\Models\ticket_zeals;
 
 class ticketSeeder extends Seeder
 {
@@ -39,6 +40,7 @@ class ticketSeeder extends Seeder
             ],
         ];
 
+        // ticket_zeals::insert($tickets);
         ticket::insert($tickets);
     }
 }

@@ -50,7 +50,7 @@ export default function App() {
                     objectFit: 'cover',
                     objectPosition: 'top',
                     width: '100%',
-                    minHeight: '30vh',
+                    minHeight: '20vh',
                 }}></img>
             </Box>
         </SwiperSlide>

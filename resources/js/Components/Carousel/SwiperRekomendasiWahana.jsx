@@ -78,7 +78,7 @@ export default function App(props) {
                                     <Box
                                     sx={{
                                         height: '400px',
-                                        width: '80%',
+                                        width: '90%',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         justifyContent: 'center',
@@ -101,7 +101,7 @@ export default function App(props) {
                                     onClick={() => redirect(RekomendasiWahanaByIndex(index, props.slugs, getZonaBySlugs(props.slugs)).link)}
                                     sx={{
                                         marginTop: '50px',
-                                        width: '80%',
+                                        width: '90%',
                                     }}>
                                         <Box
                                         sx={{

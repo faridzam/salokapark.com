@@ -19,10 +19,10 @@
   }
 
   .sticky-nav-text{
-    color: #333;
+    color: #FFFFFF;
   }
   .sticky-nav-text-active{
-    border-bottom: solid 3px #333;
+    border-bottom: solid 3px #FFFFFF;
   }
 
   input:focus,

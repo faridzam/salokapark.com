@@ -95,7 +95,7 @@ export default function App(props) {
                                     <Box
                                     sx={{
                                         height: '400px',
-                                        width: '80%',
+                                        width: '90%',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         justifyContent: 'center',
@@ -118,7 +118,7 @@ export default function App(props) {
                                     onClick={() => redirect('/zona/'+zone[index].link)}
                                     sx={{
                                         marginTop: '20px',
-                                        width: '80%',
+                                        width: '90%',
                                     }}>
                                         <Box
                                         sx={{

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\stock;
+use App\Models\stock_zeals;
 
 class stockSeeder extends Seeder
 {
@@ -39,6 +40,7 @@ class stockSeeder extends Seeder
             ],
         ];
 
+        stock_zeals::insert($stocks);
         stock::insert($stocks);
     }
 }

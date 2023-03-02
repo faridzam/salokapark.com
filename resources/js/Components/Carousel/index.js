@@ -19,6 +19,9 @@ import SwiperRekomendasiWahana from './SwiperRekomendasiWahana'
 import SwiperShowEvent from './SwiperShowEvent'
 import SwiperRestaurantList from './SwiperRestaurantList'
 import SwiperEventZona from './SwiperEventZona'
+import SwiperFasilitasUmum from './SwiperFasilitasUmum'
+import SwiperRekomendasiResto from './SwiperRekomendasiResto'
+import SwiperKeanggotaan from './SwiperKeanggotaan'
 
 export {
     SwiperMainBanner,
@@ -41,5 +44,8 @@ export {
     SwiperRekomendasiWahana,
     SwiperShowEvent,
     SwiperRestaurantList,
-    SwiperEventZona
+    SwiperEventZona,
+    SwiperFasilitasUmum,
+    SwiperRekomendasiResto,
+    SwiperKeanggotaan
 }

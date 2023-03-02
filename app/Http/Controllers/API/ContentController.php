@@ -6,9 +6,57 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
 
 class ContentController extends Controller
 {
+
+    public function getProvince(Request $request){
+        //
+        $client = new Client();
+        $response = $client->get('https://api.goapi.id/v1/regional/provinsi', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept'     => 'application/json',
+                'X-API-KEY' => 'IGeq0jGC8BEQOTa4PFDRiMY94Vdt7w',
+            ],
+        ]);
+
+        return response()->json([
+            'status' => json_decode($response->getBody()),
+        ]);
+    }
+    public function getRegency(Request $request){
+        //
+        $client = new Client();
+        $url = 'https://api.goapi.id/v1/regional/kota?provinsi_id='.$request->province_id;
+        $response = $client->get($url, [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept'     => 'application/json',
+                'X-API-KEY' => 'IGeq0jGC8BEQOTa4PFDRiMY94Vdt7w',
+            ],
+        ]);
+
+        return response()->json([
+            'status' => json_decode($response->getBody()),
+        ]);
+    }
+    
+    public function getWeatherNow(Request $request){
+        //
+        $client = new Client();
+        $response = $client->get('https://api.open-meteo.com/v1/forecast?latitude=-7.2807&longitude=110.4596&current_weather=true&timezone=Asia%2FBangkok', [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept'     => 'application/json',
+            ],
+        ]);
+
+        return response()->json([
+            'status' => json_decode($response->getBody()),
+        ]);
+    }
     public function getContentPeta(Request $request){
         //
         $image = DB::table('petas')->latest()->value('gambar');
@@ -32,7 +80,7 @@ class ContentController extends Controller
 
     public function getContentRestaurant(Request $request){
         //
-        $restos = DB::table('daftar_restos')->orderBy('nourut', 'asc')->get();
+        $restos = DB::table('daftar_restos')->where('status', 1)->orderBy('nourut', 'asc')->get();
 
         return response()->json([
             'restos' => $restos,
@@ -153,6 +201,14 @@ class ContentController extends Controller
             'restoBanner' => $restoBanner,
         ]);
     }
+    public function getContentRekomendasiRestaurant(Request $request){
+        //
+        $restos = DB::table('daftar_restos')->where('status', 1)->where('id', '!=', $request->id)->get();
+
+        return response()->json([
+            'restos' => $restos,
+        ]);
+    }
     public function getContentGroupBanner(Request $request){
         //
         $groupBanner = DB::table('groups')->latest()->value('gambar');
@@ -181,7 +237,7 @@ class ContentController extends Controller
     }
     public function getContentRestaurantDetail(Request $request){
         //
-        $resto = DB::table('daftar_restos')->where('link', $request->slugs)->get();
+        $resto = DB::table('daftar_restos')->where('status', 1)->where('link', $request->slugs)->get();
 
         return response()->json([
             'resto' => $resto,

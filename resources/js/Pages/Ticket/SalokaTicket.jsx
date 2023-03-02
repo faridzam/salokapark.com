@@ -79,10 +79,10 @@ export default function Ticket(props) {
     // }, []);
 
     // booking date
-    const today = new Date()
-    const maxDate = new Date("2023-2-28");
-    const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() + 1)
+    const today = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Jakarta'}));
+    const maxDate = new Date("2023-3-31");
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
     const timeString = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
     const [, hours, ampm] = timeString.match(/ (\d+).* ([AP]M)/);
     // if(Number(hours) < 0 && ampm === 'AM'){
@@ -106,11 +106,32 @@ export default function Ticket(props) {
         }
     }, [bookingDate]);
 
+    const [minQtyReq, setMinQtyReq] = React.useState(false);
+    const checkQuantity = () => {
+        //
+        let condition = [];
+        ticketOrder.forEach((ticket, index) => {
+            if (ticket.quantity === 0) {
+                //
+            } else if (ticket.quantity !== 0 && ticket.quantity >= ticket.min_qty) {
+                condition.push(true);
+            } else {
+                condition.push(false);
+            }
+        });
+
+        let checker = arr => arr.every(v => v === true);
+
+        if (checker(condition)) {
+            setMinQtyReq(true);
+        } else{
+            setMinQtyReq(false);
+        }
+    }
     const getTicketByDate = (date) => {
         axios.post('/api/get-ticket-date', {
             date: date
         }).then((response) => {
-            //
             let eventTicket = response.data.ticketEvent;
             let regulerTicket = response.data.ticketReguler;
             let newTicket = [];
@@ -120,6 +141,8 @@ export default function Ticket(props) {
                     ticket_id: eventTicket[index].id,
                     ticket_name: eventTicket[index].name,
                     ticket_description: eventTicket[index].description,
+                    min_qty: eventTicket[index].min_qty,
+                    max_qty: eventTicket[index].max_qty,
                     quantity: 0,
                     price: eventTicket[index].price,
                 })
@@ -130,11 +153,12 @@ export default function Ticket(props) {
                     ticket_id: regulerTicket[index].id,
                     ticket_name: regulerTicket[index].name,
                     ticket_description: regulerTicket[index].description,
+                    min_qty: regulerTicket[index].min_qty,
+                    max_qty: regulerTicket[index].max_qty,
                     quantity: 0,
                     price: regulerTicket[index].price,
                 })
             }
-
             setTicketOrder(newTicket);
         }).catch((error) => {
             //
@@ -142,26 +166,31 @@ export default function Ticket(props) {
         })
     }
     const handleArrivalDate = (value) => {
+        var userTimezoneOffset = (value.getTimezoneOffset() * 60000) + (7*60000);
         setBookingDate(value);
-        window.sessionStorage.setItem('arrivalDate', JSON.stringify(value.getTime()));
+        window.sessionStorage.setItem('arrivalDate', JSON.stringify(value.getTime() - userTimezoneOffset));
     }
 
     const ticketCount = Array.from(Array(ticketOrder.length).keys());
 
     const addQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
-        newArr[index].quantity++; // replace e.target.value with whatever you want to change it to
+        newArr[index].quantity+=newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
 
         setTicketOrder(newArr);
         window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
+
+        checkQuantity();
     }
     const subQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
         if (newArr[index].quantity > 0) {
-            newArr[index].quantity--; // replace e.target.value with whatever you want to change it to
+            newArr[index].quantity-=newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
         }
         setTicketOrder(newArr);
         window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
+
+        checkQuantity();
     }
     const [totalBill, setTotalBill] = React.useState(0);
     React.useEffect(() => {
@@ -452,7 +481,7 @@ export default function Ticket(props) {
                                                                 }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                             </Box>
 
-                                                            {totalBill === 0 || bookingDate <= today
+                                                            {totalBill === 0 || bookingDate <= today || minQtyReq === false
                                                                 ?   <Button
                                                                     disabled
                                                                     variant='contained'
@@ -774,7 +803,7 @@ export default function Ticket(props) {
                                                             }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                         </Box>
 
-                                                        {totalBill === 0 || bookingDate <= today
+                                                        {totalBill === 0 || bookingDate <= today || minQtyReq === false
                                                             ?   <Button
                                                                 disabled
                                                                 variant='contained'
@@ -846,6 +875,7 @@ export default function Ticket(props) {
                     {/* footer */}
                     <Box
                     sx={{
+                        marginTop: '20px',
                         width: '100%',
                         height: '100%',
                         backgroundImage: `url(${media[2]})`,

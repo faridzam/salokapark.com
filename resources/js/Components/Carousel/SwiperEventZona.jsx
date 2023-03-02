@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/lazy";
 
-import {showEvent, getIndexesShowEventByID} from '../../assets/images/showEvent';
+import {getIndexesShowEventByID} from '../../assets/images/showEvent';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography, Button} from '@mui/material';
 import {ArrowForwardIos, ArrowBackIos} from '@mui/icons-material';
@@ -89,13 +89,14 @@ export default function App(props) {
                                         direction="row"
                                         spacing={0}
                                         sx={{
+                                            width: '80%',
                                             display: 'flex',
                                             justifyContent: 'flex-end',
                                             alignItems: 'center',
                                         }}>
                                             <Box
                                             sx={{
-                                                maxHeight: '400px',
+                                                height: '600px',
                                                 width: '100%',
                                                 cursor: 'pointer',
                                                 display: 'flex',
@@ -110,7 +111,8 @@ export default function App(props) {
                                                     layout: 'fill',
                                                     objectFit: 'cover',
                                                     objectPosition: 'top',
-                                                    width: '80%',
+                                                    width: '100%',
+                                                    height: '600px',
                                                 }}></img>
                                             </Box>
 
@@ -119,7 +121,7 @@ export default function App(props) {
                                                 ?
                                                 <Box
                                                 sx={{
-                                                    marginRight: '11%',
+                                                    marginRight: '0%',
                                                     display: 'flex',
                                                     alignItems: 'flex-start',
                                                     justifyContent: 'flex-start',
@@ -165,7 +167,7 @@ export default function App(props) {
                                                         <Typography
                                                         textAlign="justify"
                                                         sx={{
-                                                            fontSize: '18px',
+                                                            fontSize: '14px',
                                                             fontWeight: 400,
                                                             color: '#ddd'
                                                         }}
@@ -180,7 +182,7 @@ export default function App(props) {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Button
-                                                        onClick={() => redirect(getIndexesShowEventByID(props.slugs)[index].link)}
+                                                        // onClick={() => redirect(getIndexesShowEventByID(props.slugs)[index].link)}
                                                         variant="contained"
                                                         sx={{
                                                             borderRadius: 5,
@@ -297,7 +299,7 @@ export default function App(props) {
                                     }}>
                                         <Box
                                         sx={{
-                                            maxHeight: '400px',
+                                            height: '400px',
                                             width: '100%',
                                             cursor: 'pointer',
                                             display: 'flex',
@@ -313,6 +315,7 @@ export default function App(props) {
                                                 objectFit: 'cover',
                                                 objectPosition: 'top',
                                                 width: '100%',
+                                                height: '400px',
                                             }}></img>
                                         </Box>
                                     </Grid>
@@ -378,7 +381,7 @@ export default function App(props) {
                                             alignItems: 'center',
                                         }}>
                                             <Button
-                                            onClick={() => redirect(getIndexesShowEventByID(props.slugs)[index].link)}
+                                            // onClick={() => redirect(getIndexesShowEventByID(props.slugs)[index].link)}
                                             variant="contained"
                                             sx={{
                                                 borderRadius: 5,

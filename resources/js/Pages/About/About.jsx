@@ -7,7 +7,7 @@ import {ExpandMore, FiberManualRecord} from '@mui/icons-material';
 
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
-import { SwiperTentangFasum } from '../../Components/Carousel';
+import { SwiperKeanggotaan } from '../../Components/Carousel';
 
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);
@@ -27,24 +27,36 @@ export default function Zona(props) {
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
 
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState("tentang");
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const fasilitasUmum = [
-        "Mushola",
-        "ATM Center",
-        "Toilet",
-        "Informasi Kehilangan",
-        "Loker",
-        "Ruang Laktasi",
-        "Toilet Difabel",
-        "Klinik Kesehatan",
-        "Loket Informasi",
-        "Area Merokok",
-        "Halte Bis",
+    const penghargaan = [
+        {
+            title: 'Lembaga Prestasi Indonesia Dunia(LEPRID)',
+            description: "Piagam Penghargaan Lembaga Prestasi Indonesia Dunia (LEPRID) atas Pertunjukan Spektakuler Pertama di Indonesia yang Mengangkat Legenda Rakyat dengan Menggunakan Teknologi Multimedia dan Fountain menjadi Sebuah Pertunjukan Permanen “BARU KLINTHING” pada tahun 2019.",
+        },
+        {
+            title: 'Pariwisata Award 2019',
+            description: "Piagam Penghargaan Pariwisata Award 2019 sebagai New Comers Top Service Execellent oleh LEMPPAR (Lembaga Masyarakat Peduli Pariwisata).",
+        },
+        {
+            title: 'Solo Best Brand and Innovation Awward 2020',
+            description: "Penghargaan Solo Best Brand and Innovation Award 2020 sebagai Merek Terbaik di Solo kategori Innovation Wahana Wisata Keluarga yang diumumkan oleh Solopos pada tahun 2020.",
+        },
+        {
+            title: 'Cleanliness, Health, Safety, Enviroment Sustainability(CHSE)',
+            description: "Tersertifikasi CHSE (Cleanliness, Health, Safety, Enviroment Sustainability) ruang lingkup Daya Tarik Wisata dengan kategori penilaian Memuaskan dalam memenuhi kriteria sebagaimana ditetapkan oleh Kementrian Pariwisata dan Ekonomi Kreatif / Badan Pariwisata dan Ekonomi Kreatif Republik Indonesia pada tahun 2020.",
+        },
+        {
+            title: 'Anugerah Pariwisata Jawa Tengah 2022',
+            description: "Piagam Penghargaan Anugerah Pariwisata Jawa Tengah 2022 sebagai Taman Wisata Terbaik oleh PWI (Persatuan Wartawan Indonesia)",
+        },
     ];
+
+    const PENGHARGAAN_COUNT = penghargaan.length;
+    const penghargaanContent = Array.from(Array(PENGHARGAAN_COUNT).keys());
 
     return(
         <>
@@ -73,7 +85,7 @@ export default function Zona(props) {
                         direction="column"
                         spacing={0}
                         sx={{
-                            marginTop: '100px',
+                            marginTop: '20px',
                             display: 'flex',
                             width: '100%',
                             justifyContent: 'center',
@@ -85,17 +97,17 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'fontin',
                                     fontWeight: 600,
-                                    fontSize: '32px',
+                                    fontSize: '38px',
                                     color: '#333',
                                     textAlign: 'center',
                                 }}>Tentang Saloka</Typography>
                             </Box>
 
+                            {/* tentang */}
                             <Box
                             sx={{
-                                width: '80%'
+                                width: '80%',
                             }}>
                                 <Accordion
                                 elevation={0}
@@ -125,7 +137,7 @@ export default function Zona(props) {
                                         <Typography sx={{
                                             flexShrink: 0,
                                             color: 'secondary.main',
-                                            fontSize: '32px',
+                                            fontSize: '24px',
                                             fontWeight: 700,
                                         }}>
                                             Tentang Saloka
@@ -139,123 +151,81 @@ export default function Zona(props) {
                                         sx={{
                                             display: 'flex',
                                             width: '100%',
-                                            justifyContent: 'flex-start',
-                                            alignItems: 'flex-start',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
                                         }}>
+                                            <Box
+                                            sx={{
+                                                display: 'flex',
+                                                width: '95%',
+                                                justifyContent: 'flex-start',
+                                                alignItems: 'flex-start',
+                                            }}>
                                                 <Typography
                                                 paragraph={true}
                                                 textAlign="justify"
                                                 sx={{
-                                                    lineHeight: 2,
+                                                    lineHeight: 1.5,
                                                     fontWeight: 500,
-                                                    fontSize: '18px',
+                                                    fontSize: '14px',
                                                     color: '#333'
-                                                }}>SALOKA hadir sebagai salah satu destinasi wisata Pesona Indonesia yang berbentuk taman rekreasi tematik keluarga di Jawa Tengah yang mengusung konsep kearifan lokal.
-                                                Berlokasi di persimpangan antara kota Semarang, Salatiga, Surakarta dan Daerah Istimewa Yogyakarta.
+                                                }}>SALOKA hadir sebagai salah satu destinasi wisata Pesona Indonesia yang berbentuk taman rekreasi tematik keluarga di Jawa Tengah yang mengusung konsep kearifan lokal. Berlokasi di persimpangan antara kota Semarang, Salatiga, Surakarta dan Daerah Istimewa Yogyakarta.
                                                 </Typography>
+                                            </Box>
 
+                                            <Box
+                                            sx={{
+                                                display: 'flex',
+                                                width: '95%',
+                                                justifyContent: 'flex-start',
+                                                alignItems: 'flex-start',
+                                            }}>
                                                 <Typography
                                                 paragraph={true}
                                                 textAlign="justify"
                                                 sx={{
-                                                    lineHeight: 2,
+                                                    lineHeight: 1.5,
                                                     fontWeight: 500,
-                                                    fontSize: '18px',
+                                                    fontSize: '14px',
                                                     color: '#333'
-                                                }}>Berdiri di atas lahan seluas 12 Hektare, memiliki 25 wahana yang terbagi dalam 5 zona permainan, yaitu zona Pesisir, zona Balalantar, zona Kamayayi, zona Ararya, dan zona Segara Prada.
-                                                Tidak hanya wahana permainan, di dalamnya juga terdapat pertunjukan Baru Klintihing.
-                                                Selain itu, ada pilihan restoran, café, dan foodtruck yang menawarkan berbagai makanan-minuman yang memanjakan lidah untuk bersantai.
+                                                }}>Berdiri di atas lahan seluas 12 Hektare, memiliki 25 wahana yang dibangun dengan peralatan modern oleh tenaga ahli berpengalaman dan berlisensi internasional. 
                                                 </Typography>
+                                            </Box>
 
+                                            <Box
+                                            sx={{
+                                                display: 'flex',
+                                                width: '95%',
+                                                justifyContent: 'flex-start',
+                                                alignItems: 'flex-start',
+                                            }}>
                                                 <Typography
                                                 paragraph={true}
                                                 textAlign="justify"
                                                 sx={{
-                                                    lineHeight: 2,
+                                                    lineHeight: 1.5,
                                                     fontWeight: 500,
-                                                    fontSize: '18px',
+                                                    fontSize: '14px',
                                                     color: '#333'
-                                                }}>SALOKA dibangun dengan peralatan modern oleh tenaga ahli berpengalaman dan berlisensi internasional.
+                                                }}>Nama SALOKA terinspirasi dari legenda Rawa Pening, suatu Kawasan yang dekat dengan wilayah SALOKA Theme Park berada. Diceritakan pada zaman dahulu hiduplah sepasang suami-istri bernama Ki Hajar Salokantara dan Nyi Endang Sawitri. Mereka mempunyai seorang anak bernama Baru Klinthing yang berwujud naga dan bisa berbicara seperti layaknya manusia. Baru Klinthing dikenal suka menolong. Berangkat dari cerita tersebut, SALOKA berharap mampu menyajikan keceriaan tiada habisnya dengan maskot berbentuk naga yang bernama “LOKA”.
                                                 </Typography>
-
-                                                <Box
-                                                sx={{
-                                                    backgroundColor: 'primary.main',
-                                                    width: '100%',
-                                                    paddingX: '30px',
-                                                    paddingY: '10px',
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    borderRadius: '30px',
-                                                }}>
-                                                    <Typography
-                                                    paragraph={true}
-                                                    textAlign="justify"
-                                                    sx={{
-                                                        lineHeight: 2,
-                                                        fontWeight: 500,
-                                                        fontSize: '24px',
-                                                        color: 'secondary.light'
-                                                    }}>Fakta Menarik!
-                                                    </Typography>
-
-                                                    <Typography
-                                                    paragraph={true}
-                                                    textAlign="justify"
-                                                    sx={{
-                                                        lineHeight: 2,
-                                                        fontWeight: 500,
-                                                        fontSize: '18px',
-                                                        color: '#ddd'
-                                                    }}>SALOKA telah terdaftar sebagai member International Association of Amusement Parks and Attractions (IAAPA).
-                                                    Pada 22 Juni 2019, SALOKA telah diresmikan oleh Menteri Pariwisata, Arief Yahya dan Gubernur Jawa Tengah, Ganjar Pranowo.
-                                                    </Typography>
-                                                </Box>
-
-                                                <Box
-                                                sx={{
-                                                    marginTop: '20px'
-                                                }}>
-                                                    <Typography
-                                                    paragraph={true}
-                                                    textAlign="justify"
-                                                    sx={{
-                                                        lineHeight: 2,
-                                                        fontWeight: 600,
-                                                        fontSize: '18px',
-                                                        color: 'secondary.light'
-                                                    }}>SALOKA THEME PARK MENGUSUNG KONSEP KEARIFAN LOKAL BERDASARKAN LEGENDA RAKYAT BARU KLINTHING.
-                                                    </Typography>
-                                                </Box>
-
-                                                <Typography
-                                                paragraph={true}
-                                                textAlign="justify"
-                                                sx={{
-                                                    lineHeight: 2,
-                                                    fontWeight: 500,
-                                                    fontSize: '18px',
-                                                    color: '#333'
-                                                }}>Nama SALOKA terinspirasi dari legenda Rawa Pening, suatu Kawasan yang dekat dengan wilayah SALOKA Theme Park berada.
-                                                Diceritakan pada zaman dahulu hiduplah sepasang suami-istri bernama Ki Hajar Salokantara dan Nyi Endang Sawitri.
-                                                Mereka mempunyai seorang anak bernama Baru Klinthing yang berwujud naga dan bisa berbicara seperti layaknya manusia. Baru Klinthing dikenal suka menolong.
-                                                Berangkat dari cerita tersebut, SALOKA berharap mampu menyajikan keceriaan tiada habisnya dengan maskot berbentuk naga yang bernama “LOKA”.
-                                                </Typography>
+                                            </Box>
 
                                         </Grid>
                                     </AccordionDetails>
                                 </Accordion>
                             </Box>
 
+                            {/* penghargaan */}
                             <Box
                             sx={{
-                                width: '80%'
+                                width: '80%',
                             }}>
                                 <Accordion
                                 elevation={0}
-                                key={`fasum`}
-                                expanded={expanded === "fasum"}
-                                onChange={handleChange("fasum")}
+                                key={`penghargaan`}
+                                expanded={expanded === "penghargaan"}
+                                onChange={handleChange("penghargaan")}
                                 sx={{
                                     width: '100%',
                                     '&& .MuiPaper-root-MuiAccordion-root:before': {
@@ -279,55 +249,144 @@ export default function Zona(props) {
                                         <Typography sx={{
                                             flexShrink: 0,
                                             color: 'secondary.main',
-                                            fontSize: '32px',
+                                            fontSize: '24px',
                                             fontWeight: 700,
                                         }}>
-                                            Fasilitas Umum
+                                            Penghargaan
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <Grid
                                         container={true}
-                                        direction="row"
+                                        direction="column"
                                         spacing={0}
                                         sx={{
                                             display: 'flex',
                                             width: '100%',
-                                            justifyContent: 'space-between',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}>
+                                            <List
+                                            sx = {{
+                                                width: '95%',
+                                                listStyleType: 'disc',
+                                                pl: 2,
+                                                '& .MuiListItem-root': {
+                                                    display: 'list-item',
+                                                },
+                                            }}>
+                                                {penghargaanContent.map((index) => (
+                                                    <ListItem>
+                                                        <Grid
+                                                        container={true}
+                                                        direction="column"
+                                                        spacing={0}
+                                                        sx={{
+                                                            display: 'flex',
+                                                            width: '100%',
+                                                            justifyContent: 'flex-start',
+                                                            alignItems: 'flex-start',
+                                                        }}>
+                                                            <Box
+                                                            sx={{
+                                                                display: 'flex',
+                                                                width: '100%',
+                                                                justifyContent: 'flex-start',
+                                                                alignItems: 'flex-start',
+                                                            }}>
+                                                                <Typography
+                                                                sx={{
+                                                                    fontWeight: 600,
+                                                                    fontSize: '14px',
+                                                                    color: '#333',
+                                                                    textAlign: 'justify',
+                                                                }}>{penghargaan[index].title}</Typography>
+                                                            </Box>
+                                                            <Box
+                                                            sx={{
+                                                                display: 'flex',
+                                                                width: '100%',
+                                                                justifyContent: 'flex-start',
+                                                                alignItems: 'flex-start',
+                                                            }}>
+                                                                <Typography
+                                                                sx={{
+                                                                    fontWeight: 500,
+                                                                    fontSize: '14px',
+                                                                    color: '#333',
+                                                                    textAlign: 'justify',
+                                                                }}>{penghargaan[index].description}</Typography>
+                                                            </Box>
+                                                        </Grid>
+                                                    </ListItem>
+                                                ))}
+                                            </List>
+
+                                        </Grid>
+                                    </AccordionDetails>
+                                </Accordion>
+                            </Box>
+
+                            {/* keanggotaan */}
+                            <Box
+                            sx={{
+                                width: '80%',
+                            }}>
+                                <Accordion
+                                elevation={0}
+                                key={`keanggotaan`}
+                                expanded={expanded === "keanggotaan"}
+                                onChange={handleChange("keanggotaan")}
+                                sx={{
+                                    width: '100%',
+                                    '&& .MuiPaper-root-MuiAccordion-root:before': {
+                                        backgroundColor: '#ff0000',
+                                        height: '0px',
+                                    },
+                                }}>
+                                    <AccordionSummary
+                                    expandIcon={
+                                        <ExpandMore
+                                        sx={{
+                                            color: 'secondary.main',
+                                            fontSize: '32px',
+                                            fontWeight: 700,
+                                            stroke: 'secondary.main',
+                                        }}/>
+                                    }
+                                    aria-controls="panel1bh-content"
+                                    id="panel1bh-header"
+                                    >
+                                        <Typography sx={{
+                                            flexShrink: 0,
+                                            color: 'secondary.main',
+                                            fontSize: '24px',
+                                            fontWeight: 700,
+                                        }}>
+                                            Keanggotaan
+                                        </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Grid
+                                        container={true}
+                                        direction="column"
+                                        spacing={0}
+                                        sx={{
+                                            display: 'flex',
+                                            width: '100%',
+                                            justifyContent: 'center',
                                             alignItems: 'center',
                                         }}>
                                             <Box
                                             sx={{
-                                                maxWidth: '40%',
+                                                display: 'flex',
+                                                width: '100%',
+                                                justifyContent: 'flex-start',
+                                                alignItems: 'flex-start',
                                             }}>
-                                                <List
-                                                sx={{
-                                                    width: '100%',
-                                                    maxHeight: '600px',
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    flexWrap: 'wrap',
-                                                }}>
-                                                {fasilitasUmum.map((value) => (
-                                                    <ListItem>
-                                                        <ListItemIcon>
-                                                        <FiberManualRecord/>
-                                                        </ListItemIcon>
-                                                        <ListItemText
-                                                        primary={value}
-                                                        secondary=""
-                                                        />
-                                                    </ListItem>
-                                                ))}
-                                                </List>
+                                                <SwiperKeanggotaan/>
                                             </Box>
-                                            <Box
-                                            sx={{
-                                                maxWidth: '70%',
-                                                maxHeight: '600px',
-                                            }}>
-                                                <SwiperTentangFasum/>
-                                            </Box>
+
                                         </Grid>
                                     </AccordionDetails>
                                 </Accordion>
@@ -340,7 +399,7 @@ export default function Zona(props) {
                         direction="column"
                         spacing={0}
                         sx={{
-                            marginTop: '100px',
+                            marginTop: '20px',
                             display: 'flex',
                             width: '100%',
                             justifyContent: 'center',
@@ -352,7 +411,6 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'fontin',
                                     fontWeight: 600,
                                     fontSize: '32px',
                                     color: '#333',
@@ -360,6 +418,7 @@ export default function Zona(props) {
                                 }}>Tentang Saloka</Typography>
                             </Box>
 
+                            {/* tentang */}
                             <Box
                             sx={{
                                 width: '80%'
@@ -392,7 +451,7 @@ export default function Zona(props) {
                                         <Typography sx={{
                                             flexShrink: 0,
                                             color: 'secondary.main',
-                                            fontSize: '32px',
+                                            fontSize: '18px',
                                             fontWeight: 700,
                                         }}>
                                             Tentang Saloka
@@ -414,10 +473,9 @@ export default function Zona(props) {
                                                 textAlign="justify"
                                                 sx={{
                                                     fontWeight: 500,
-                                                    fontSize: '15px',
+                                                    fontSize: '14px',
                                                     color: '#333'
-                                                }}>SALOKA hadir sebagai salah satu destinasi wisata Pesona Indonesia yang berbentuk taman rekreasi tematik keluarga di Jawa Tengah yang mengusung konsep kearifan lokal.
-                                                Berlokasi di persimpangan antara kota Semarang, Salatiga, Surakarta dan Daerah Istimewa Yogyakarta.
+                                                }}>SALOKA hadir sebagai salah satu destinasi wisata Pesona Indonesia yang berbentuk taman rekreasi tematik keluarga di Jawa Tengah yang mengusung konsep kearifan lokal. Berlokasi di persimpangan antara kota Semarang, Salatiga, Surakarta dan Daerah Istimewa Yogyakarta.
                                                 </Typography>
 
                                                 <Typography
@@ -425,11 +483,9 @@ export default function Zona(props) {
                                                 textAlign="justify"
                                                 sx={{
                                                     fontWeight: 500,
-                                                    fontSize: '15px',
+                                                    fontSize: '14px',
                                                     color: '#333'
-                                                }}>Berdiri di atas lahan seluas 12 Hektare, memiliki 25 wahana yang terbagi dalam 5 zona permainan, yaitu zona Pesisir, zona Balalantar, zona Kamayayi, zona Ararya, dan zona Segara Prada.
-                                                Tidak hanya wahana permainan, di dalamnya juga terdapat pertunjukan Baru Klintihing.
-                                                Selain itu, ada pilihan restoran, café, dan foodtruck yang menawarkan berbagai makanan-minuman yang memanjakan lidah untuk bersantai.
+                                                }}>Berdiri di atas lahan seluas 12 Hektare, memiliki 25 wahana yang dibangun dengan peralatan modern oleh tenaga ahli berpengalaman dan berlisensi internasional.
                                                 </Typography>
 
                                                 <Typography
@@ -437,70 +493,9 @@ export default function Zona(props) {
                                                 textAlign="justify"
                                                 sx={{
                                                     fontWeight: 500,
-                                                    fontSize: '15px',
+                                                    fontSize: '14px',
                                                     color: '#333'
-                                                }}>SALOKA dibangun dengan peralatan modern oleh tenaga ahli berpengalaman dan berlisensi internasional.
-                                                </Typography>
-
-                                                <Box
-                                                sx={{
-                                                    backgroundColor: 'primary.main',
-                                                    width: '100%',
-                                                    paddingX: '30px',
-                                                    paddingY: '10px',
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    borderRadius: '30px',
-                                                }}>
-                                                    <Typography
-                                                    paragraph={true}
-                                                    textAlign="justify"
-                                                    sx={{
-                                                        fontWeight: 500,
-                                                        fontSize: '18px',
-                                                        color: 'secondary.light'
-                                                    }}>Fakta Menarik!
-                                                    </Typography>
-
-                                                    <Typography
-                                                    paragraph={true}
-                                                    textAlign="justify"
-                                                    sx={{
-                                                        fontWeight: 500,
-                                                        fontSize: '15px',
-                                                        color: '#ddd'
-                                                    }}>SALOKA telah terdaftar sebagai member International Association of Amusement Parks and Attractions (IAAPA).
-                                                    Pada 22 Juni 2019, SALOKA telah diresmikan oleh Menteri Pariwisata, Arief Yahya dan Gubernur Jawa Tengah, Ganjar Pranowo.
-                                                    </Typography>
-                                                </Box>
-
-                                                <Box
-                                                sx={{
-                                                    marginTop: '20px'
-                                                }}>
-                                                    <Typography
-                                                    paragraph={true}
-                                                    textAlign="center"
-                                                    sx={{
-                                                        fontWeight: 600,
-                                                        fontSize: '18px',
-                                                        color: 'secondary.light'
-                                                    }}>SALOKA THEME PARK MENGUSUNG KONSEP KEARIFAN LOKAL BERDASARKAN LEGENDA RAKYAT BARU KLINTHING.
-                                                    </Typography>
-                                                </Box>
-
-                                                <Typography
-                                                paragraph={true}
-                                                textAlign="justify"
-                                                sx={{
-                                                    lineHeight: 2,
-                                                    fontWeight: 500,
-                                                    fontSize: '15px',
-                                                    color: '#333'
-                                                }}>Nama SALOKA terinspirasi dari legenda Rawa Pening, suatu Kawasan yang dekat dengan wilayah SALOKA Theme Park berada.
-                                                Diceritakan pada zaman dahulu hiduplah sepasang suami-istri bernama Ki Hajar Salokantara dan Nyi Endang Sawitri.
-                                                Mereka mempunyai seorang anak bernama Baru Klinthing yang berwujud naga dan bisa berbicara seperti layaknya manusia. Baru Klinthing dikenal suka menolong.
-                                                Berangkat dari cerita tersebut, SALOKA berharap mampu menyajikan keceriaan tiada habisnya dengan maskot berbentuk naga yang bernama “LOKA”.
+                                                }}>Nama SALOKA terinspirasi dari legenda Rawa Pening, suatu Kawasan yang dekat dengan wilayah SALOKA Theme Park berada. Diceritakan pada zaman dahulu hiduplah sepasang suami-istri bernama Ki Hajar Salokantara dan Nyi Endang Sawitri. Mereka mempunyai seorang anak bernama Baru Klinthing yang berwujud naga dan bisa berbicara seperti layaknya manusia. Baru Klinthing dikenal suka menolong. Berangkat dari cerita tersebut, SALOKA berharap mampu menyajikan keceriaan tiada habisnya dengan maskot berbentuk naga yang bernama “LOKA”.
                                                 </Typography>
 
                                         </Grid>
@@ -508,15 +503,16 @@ export default function Zona(props) {
                                 </Accordion>
                             </Box>
 
+                            {/* penghargaan */}
                             <Box
                             sx={{
                                 width: '80%'
                             }}>
                                 <Accordion
                                 elevation={0}
-                                key={`fasum`}
-                                expanded={expanded === "fasum"}
-                                onChange={handleChange("fasum")}
+                                key={`penghargaan`}
+                                expanded={expanded === "penghargaan"}
+                                onChange={handleChange("penghargaan")}
                                 sx={{
                                     width: '100%',
                                     '&& .MuiPaper-root-MuiAccordion-root:before': {
@@ -540,67 +536,125 @@ export default function Zona(props) {
                                         <Typography sx={{
                                             flexShrink: 0,
                                             color: 'secondary.main',
-                                            fontSize: '32px',
+                                            fontSize: '18px',
                                             fontWeight: 700,
                                         }}>
-                                            Fasilitas Umum
+                                            Penghargaan
                                         </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <Grid
                                         container={true}
-                                        direction="row"
+                                        direction="column"
                                         spacing={0}
                                         sx={{
                                             display: 'flex',
                                             width: '100%',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center',
+                                            justifyContent: 'flex-start',
+                                            alignItems: 'flex-start',
                                         }}>
-
-                                            <Box
-                                            sx={{
-                                                maxWidth: '100%',
-                                                height: '100%',
+                                            <List
+                                            sx = {{
+                                            listStyleType: 'disc',
+                                            pl: 2,
+                                            '& .MuiListItem-root': {
+                                            display: 'list-item',
+                                            },
                                             }}>
-                                                <SwiperTentangFasum/>
-                                            </Box>
-
-                                            <Box
-                                            sx={{
-                                                maxWidth: '100%',
-                                            }}>
-                                                <List
-                                                sx={{
-                                                    width: '100%',
-                                                    display: 'flex',
-                                                    flexDirection: 'column',
-                                                    flexWrap: 'wrap',
-                                                }}>
-                                                {fasilitasUmum.map((value) => (
+                                                {penghargaanContent.map((index) => (
                                                     <ListItem>
-                                                        <ListItemIcon
+                                                        <Grid
+                                                        container={true}
+                                                        direction="column"
+                                                        spacing={0}
                                                         sx={{
-                                                            minWidth: '0px',
-                                                            marginRight: '10px',
+                                                            display: 'flex',
+                                                            width: '100%',
+                                                            justifyContent: 'flex-start',
+                                                            alignItems: 'flex-start',
                                                         }}>
-                                                        <FiberManualRecord
-                                                        sx={{
-                                                            fontSize: '15px',
-                                                        }}/>
-                                                        </ListItemIcon>
-                                                        <ListItemText
-                                                        primary={value}
-                                                        secondary=""
-                                                        sx={{
-                                                            fontSize: '15px',
-                                                        }}
-                                                        />
+                                                            <Box
+                                                            sx={{
+                                                            }}>
+                                                                <Typography
+                                                                sx={{
+                                                                    fontWeight: 600,
+                                                                    fontSize: '14px',
+                                                                    color: '#333',
+                                                                    textAlign: 'justify',
+                                                                }}>{penghargaan[index].title}</Typography>
+                                                            </Box>
+                                                            <Box
+                                                            sx={{
+                                                            }}>
+                                                                <Typography
+                                                                sx={{
+                                                                    fontWeight: 500,
+                                                                    fontSize: '14px',
+                                                                    color: '#333',
+                                                                    textAlign: 'justify',
+                                                                }}>{penghargaan[index].description}</Typography>
+                                                            </Box>
+                                                        </Grid>
                                                     </ListItem>
                                                 ))}
-                                                </List>
-                                            </Box>
+                                            </List>
+                                        </Grid>
+                                    </AccordionDetails>
+                                </Accordion>
+                            </Box>
 
+                            {/* keanggotaan */}
+                            <Box
+                            sx={{
+                                width: '80%'
+                            }}>
+                                <Accordion
+                                elevation={0}
+                                key={`keanggotaan`}
+                                expanded={expanded === "keanggotaan"}
+                                onChange={handleChange("keanggotaan")}
+                                sx={{
+                                    width: '100%',
+                                    '&& .MuiPaper-root-MuiAccordion-root:before': {
+                                        backgroundColor: '#ff0000',
+                                        height: '0px',
+                                    },
+                                }}>
+                                    <AccordionSummary
+                                    expandIcon={
+                                        <ExpandMore
+                                        sx={{
+                                            color: 'secondary.main',
+                                            fontSize: '32px',
+                                            fontWeight: 700,
+                                            stroke: 'secondary.main',
+                                        }}/>
+                                    }
+                                    aria-controls="panel1bh-content"
+                                    id="panel1bh-header"
+                                    >
+                                        <Typography sx={{
+                                            flexShrink: 0,
+                                            color: 'secondary.main',
+                                            fontSize: '18px',
+                                            fontWeight: 700,
+                                        }}>
+                                            Keanggotaan
+                                        </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Grid
+                                        container={true}
+                                        direction="column"
+                                        spacing={0}
+                                        sx={{
+                                            display: 'flex',
+                                            width: '100%',
+                                            justifyContent: 'flex-start',
+                                            alignItems: 'flex-start',
+                                        }}>
+                                            <SwiperKeanggotaan/>
                                         </Grid>
                                     </AccordionDetails>
                                 </Accordion>

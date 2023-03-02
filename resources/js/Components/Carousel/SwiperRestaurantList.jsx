@@ -35,7 +35,6 @@ export default function App() {
                 result.push({id: Obj[i].id, idresto: Obj[i].idresto, nama: Obj[i].nama, link: Obj[i].link, gambar: Obj[i].gambar, desk_singkat: Obj[i].desk_singkat, deskripsi: Obj[i].deskripsi, nourut: Obj[i].nourut, status: Obj[i].status});
             }
             setResto(result);
-            console.log(result);
         }).catch((error) => {
             //
             console.log(error);

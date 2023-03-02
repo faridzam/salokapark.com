@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
 use App\Models\ticket_distribution;
+use App\Models\ticket_distribution_zeals;
 
 class ticketDistributionSeeder extends Seeder
 {
@@ -91,6 +92,7 @@ class ticketDistributionSeeder extends Seeder
             ],
         ];
 
+        // ticket_distribution_zeals::insert($ticketDistributions);
         ticket_distribution::insert($ticketDistributions);
     }
 }

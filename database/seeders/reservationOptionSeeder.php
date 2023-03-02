@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\reservation_option;
+use App\Models\reservation_option_zeals;
 
 class reservationOptionSeeder extends Seeder
 {
@@ -29,6 +30,7 @@ class reservationOptionSeeder extends Seeder
             ],
         ];
 
+        // reservation_option_zeals::insert($reservation_options);
         reservation_option::insert($reservation_options);
 
 

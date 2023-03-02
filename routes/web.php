@@ -52,6 +52,27 @@ Route::get('/ticket/pilih-ticket', function () {
     return Inertia::render('Ticket/SalokaTicket');
 })->name('pilihTicket');
 
+Route::get('/promo-ticket/pilih-ticket', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('PromoTicket/SalokaTicket');
+})->name('pilihTicketPromo');
+
+Route::get('/event-ticket/pilih-ticket', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('Ticket/SalokaTicketEvent');
+})->name('pilihTicketEvent');
+
+Route::get('/group-ticket/pilih-ticket', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('GroupTicket/SalokaTicket');
+})->name('pilihTicketGroup');
+
 Route::get('/ticket/data-pemesan', function () {
     Meta::addMeta('title', 'saloka theme park - tiket by saloka');
     Meta::addMeta('description', 'reservasi online tiket by saloka.');
@@ -59,12 +80,26 @@ Route::get('/ticket/data-pemesan', function () {
     return Inertia::render('Ticket/DataPemesan');
 })->name('dataPemesan');
 
+Route::get('/group-ticket/data-pemesan', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('GroupTicket/DataPemesan');
+})->name('dataPemesanGroup');
+
 Route::get('/ticket/konfirmasi-pembayaran', function () {
     Meta::addMeta('title', 'saloka theme park - tiket by saloka');
     Meta::addMeta('description', 'reservasi online tiket by saloka.');
     Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
     return Inertia::render('Ticket/KonfirmasiPembayaran');
 })->name('konfirmasiPembayaran');
+
+Route::get('/group-ticket/konfirmasi-pembayaran', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('GroupTicket/KonfirmasiPembayaran');
+})->name('konfirmasiPembayaranGroup');
 
 Route::get('/ticket/check-status', function () {
     Meta::addMeta('title', 'saloka theme park - cek status pemesanan');
@@ -172,6 +207,30 @@ Route::view('/grup/slider', 'SliderLandingPageEvent.SliderLandingPage.slider');
 // landscape & angon-ingon
 Route::get('/landscape/{slugs}', [DynamicRoutingController::class, 'renderLandscapeComponent']);
 Route::get('/animal/{slugs}', [DynamicRoutingController::class, 'renderAnimalComponent']);
+
+// Zeals Ticket
+Route::get('/zeals-ticket/pilih-ticket', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('ZealsTicket/SalokaTicketReguler');
+})->name('pilihTicketZeals');
+
+Route::get('/zeals-ticket/pilih-ticket/{slugs}', [DynamicRoutingController::class, 'renderZealsTicket']);
+
+Route::get('/zeals-ticket/data-pemesan', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('ZealsTicket/DataPemesan');
+})->name('dataPemesanZeals');
+
+Route::get('/zeals-ticket/konfirmasi-pembayaran', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('ZealsTicket/KonfirmasiPembayaran');
+})->name('konfirmasiPembayaranZeals');
 
 // Dynamic Routing
 Route::get('/{category}/{slugs}', [DynamicRoutingController::class, 'renderDetailComponent']);

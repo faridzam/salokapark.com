@@ -30,8 +30,11 @@ const ToTopButton = () => {
     return (
         <div style={fabStyle}>
             <Zoom in={showTopBtn}>
-                <Fab size="small" color='primary' onClick={goToTop}>
-                    <KeyboardDoubleArrowUp />
+                <Fab size="small" color='secondary' onClick={goToTop}>
+                    <KeyboardDoubleArrowUp
+                    sx={{
+                        color: 'white.lightest',
+                    }}/>
                 </Fab>
             </Zoom>
         </div>

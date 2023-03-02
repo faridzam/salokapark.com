@@ -128,7 +128,6 @@ export default function Restaurant(props) {
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'Arial',
                                             fontWeight: 600,
                                             fontSize: '38px',
                                             color: '#333'
@@ -199,7 +198,6 @@ export default function Restaurant(props) {
                                         <Typography
                                         sx={{
                                             textAlign: 'center',
-                                            fontFamily: 'Arial',
                                             fontWeight: 600,
                                             fontSize: '28px',
                                             color: '#333'

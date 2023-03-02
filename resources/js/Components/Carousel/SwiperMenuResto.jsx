@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/lazy";
 
-import {menuRestoByIndex, getIndexesMenuRestoBySlugs} from '../../assets/images/carousel_assets/menuResto';
+import {getIndexesMenuRestoByID} from '../../assets/images/carousel_assets/menuResto';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography} from '@mui/material';
 import { useTheme } from "@mui/material/styles";
@@ -24,7 +24,7 @@ export default function App(props) {
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
 
-    const SLIDE_COUNT = getIndexesMenuRestoBySlugs(props.slugs).length;
+    const SLIDE_COUNT = getIndexesMenuRestoByID(props.slugs).length;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
 
     const redirect = (route) => {
@@ -37,7 +37,7 @@ export default function App(props) {
                 desktop
                 ?
                 <Swiper
-                slidesPerView={3}
+                slidesPerView={2}
                 slidesPerGroup={1}
                 loop={true}
                 preloadImages={true}
@@ -76,14 +76,14 @@ export default function App(props) {
                                     <Box
                                     sx={{
                                         height: '400px',
-                                        width: '80%',
+                                        width: '90%',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                     }}>
                                         <img
-                                        src={menuRestoByIndex(index, props.slugs).image}
+                                        src={getIndexesMenuRestoByID(props.slugs)[index].image}
                                         loading="lazy"
                                         alt="logo saloka"
                                         style={{
@@ -96,8 +96,8 @@ export default function App(props) {
                                     </Box>
                                     <Box
                                     sx={{
-                                        marginTop: '100px',
-                                        width: '80%',
+                                        marginTop: '20px',
+                                        width: '90%',
                                     }}>
                                         <Box
                                         sx={{
@@ -111,7 +111,7 @@ export default function App(props) {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{menuRestoByIndex(index, props.slugs).title}</Typography>
+                                            >{getIndexesMenuRestoByID(props.slugs)[index].nama}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -123,12 +123,12 @@ export default function App(props) {
                                             <Typography
                                             textAlign="justify"
                                             sx={{
-                                                lineHeight: 2,
-                                                fontSize: '18px',
+                                                lineHeight: 1.5,
+                                                fontSize: '14px',
                                                 fontWeight: 400,
                                                 color: '#333'
                                             }}
-                                            >{menuRestoByIndex(index, props.slugs).description}</Typography>
+                                            >{getIndexesMenuRestoByID(props.slugs)[index].description}</Typography>
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -214,7 +214,7 @@ export default function App(props) {
                                 }}>
                                     <Box
                                     sx={{
-                                        maxHeight: '400px',
+                                        height: '300px',
                                         width: '100%',
                                         cursor: 'pointer',
                                         display: 'flex',
@@ -222,7 +222,7 @@ export default function App(props) {
                                         alignItems: 'center',
                                     }}>
                                         <img
-                                        src={menuRestoByIndex(index, props.slugs).image}
+                                        src={getIndexesMenuRestoByID(props.slugs)[index].image}
                                         loading="lazy"
                                         alt="logo saloka"
                                         style={{
@@ -230,12 +230,12 @@ export default function App(props) {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
-                                            maxHeight: '400px',
+                                            height: '300px',
                                         }}></img>
                                     </Box>
                                     <Box
                                     sx={{
-                                        marginTop: '50px',
+                                        marginTop: '20px',
                                         width: '90%',
                                     }}>
                                         <Box
@@ -250,7 +250,7 @@ export default function App(props) {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{menuRestoByIndex(index, props.slugs).title}</Typography>
+                                            >{getIndexesMenuRestoByID(props.slugs)[index].title}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -262,37 +262,12 @@ export default function App(props) {
                                             <Typography
                                             textAlign="justify"
                                             sx={{
-                                                lineHeight: 2,
-                                                fontSize: '18px',
+                                                lineHeight: 1.5,
+                                                fontSize: '14px',
                                                 fontWeight: 400,
                                                 color: '#333'
                                             }}
-                                            >{menuRestoByIndex(index, props.slugs).description}</Typography>
-                                        </Box>
-                                        <Box
-                                        sx={{
-                                            display: 'flex',
-                                            marginRight: '100px',
-                                            marginTop: '20px',
-                                            alignItems: 'center',
-                                        }}>
-                                            <Typography
-                                            className="noselect"
-                                            align="justify"
-                                            sx={{
-                                                cursor: 'pointer',
-                                                fontSize: '18px',
-                                                fontWeight: 400,
-                                                color: '#789acf'
-                                            }}
-                                            >Baca Lebih Lanjut</Typography>
-                                            <ArrowForward
-                                            sx={{
-                                                cursor: 'pointer',
-                                                marginLeft: '10px',
-                                                fontSize: 20,
-                                                color: '#789acf'
-                                            }}/>
+                                            >{getIndexesMenuRestoByID(props.slugs)[index].description}</Typography>
                                         </Box>
                                     </Box>
                                 </Grid>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\FrontEndMidtransController;
 use App\Http\Controllers\API\FrontEndTicketController;
+use App\Http\Controllers\API\FrontEndZealsTicketController;
 use App\Http\Controllers\API\FrontEndReservationController;
 use App\Http\Controllers\API\ContentController;
 
@@ -23,17 +24,32 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//get location
+Route::get('get-province', [ContentController::class, 'getProvince']);
+Route::post('get-regency', [ContentController::class, 'getRegency']);
+//weather
+Route::get('get-weather-now', [ContentController::class, 'getWeatherNow']);
+
 //midtrans
 Route::post('get-midtrans-token', [FrontEndMidtransController::class, 'getTransactionToken']);
+Route::post('get-midtrans-token-zeals', [FrontEndMidtransController::class, 'getTransactionTokenZeals']);
+Route::post('get-midtrans-token-group', [FrontEndMidtransController::class, 'getTransactionTokenGroup']);
 Route::post('get-midtrans-transaction-status', [FrontEndMidtransController::class, 'getMidtransTransactionStatus']);
 Route::post('cancel-midtrans-transaction', [FrontEndMidtransController::class, 'cancelMidtransTransaction']);
 Route::post('notification-handler', [FrontEndMidtransController::class, 'midtransNotificationHandler']);
 
 //Ticket
 Route::post('get-ticket-date', [FrontEndTicketController::class, 'getTicketDate']);
+Route::post('get-ticket-date-promo', [FrontEndTicketController::class, 'getTicketDatePromo']);
+Route::post('get-ticket-date-group', [FrontEndTicketController::class, 'getTicketDateGroup']);
+Route::post('get-ticket-date-roadshow', [FrontEndTicketController::class, 'getTicketDateRoadshow']);
+Route::post('get-ticket-date-zeals', [FrontEndZealsTicketController::class, 'getTicketDate']);
+Route::post('get-ticket-date-zeals-reguler', [FrontEndZealsTicketController::class, 'getTicketDateReguler']);
 
 //Reservation
 Route::post('create-reservation', [FrontEndReservationController::class, 'createReservation']);
+Route::post('create-reservation-zeals', [FrontEndReservationController::class, 'createReservationZeals']);
+Route::post('create-reservation-group', [FrontEndReservationController::class, 'createReservationGroup']);
 Route::post('get-reservation-by-email', [FrontEndReservationController::class, 'getReservationByEmail']);
 Route::post('get-reservation-by-order-id', [FrontEndReservationController::class, 'getReservationByOrderID']);
 Route::post('get-reservation-detail', [FrontEndReservationController::class, 'getReservationDetail']);
@@ -43,6 +59,7 @@ Route::get('get-content-peta', [ContentController::class, 'getContentPeta']);
 Route::get('download-peta/{filename}', [ContentController::class, 'downloadPeta']);
 //CMS Restaurant
 Route::get('get-content-restaurant', [ContentController::class, 'getContentRestaurant']);
+Route::post('get-content-rekomendasi-restaurant', [ContentController::class, 'getContentRekomendasiRestaurant']);
 Route::get('get-content-restaurant-banner', [ContentController::class, 'getContentRestaurantBanner']);
 Route::post('get-content-restaurant-detail', [ContentController::class, 'getContentRestaurantDetail']);
 //CMS Merchandise

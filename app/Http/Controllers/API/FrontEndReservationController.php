@@ -7,11 +7,23 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\Models\customer;
+use App\Models\customer_zeals;
+use App\Models\customer_group;
 use App\Models\reservation;
+use App\Models\reservation_zeals;
+use App\Models\reservation_group;
 use App\Models\reservation_detail;
+use App\Models\reservation_detail_zeals;
+use App\Models\reservation_detail_group;
 use App\Models\ticket_distribution;
+use App\Models\ticket_distribution_zeals;
+use App\Models\ticket_distribution_group;
 use App\Models\ticket;
+use App\Models\ticket_zeals;
+use App\Models\ticket_group;
 use App\Models\option;
+use App\Models\option_zeals;
+use App\Models\option_group;
 
 class FrontEndReservationController extends Controller
 {
@@ -95,6 +107,204 @@ class FrontEndReservationController extends Controller
                         $price = $ticket->price;
 
                         reservation_detail::create([
+                            'reservation_id' => $reservation->id,
+                            'ticket_distribution_id' => $value['ticket_id'],
+                            'qty' => $value['quantity'],
+                            'subtotal' => $price*$value['quantity'],
+                        ]);
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            }
+        };
+
+        return response()->json([
+            'reservation_id' => $reservation->id,
+            'order_id' => $reservation->order_id
+        ]);
+    }
+    
+    public function createReservationGroup(Request $request) {
+        //
+        $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate));
+
+        $customer = customer_group::create([
+            'name' => request('name'),
+            'company_name' => request('companyName'),
+            'phone' => request('phone'),
+            'email' => request('email'),
+            'address' => request('address'),
+        ]);
+
+        $totalBill = 0;
+
+        foreach ($request->ticketOrder as $key => $value) {
+            if ($value['quantity'] > 0) {
+                $totalBill += ($value['quantity'] * $value['price']);
+            }
+        };
+
+        $sex = reservation::count();
+
+        $reservation = reservation_group::create([
+            'customer_id' => $customer->id,
+            'order_id' => "ro-".Carbon::now()->format('y').sprintf('%05d', substr(strval($sex), -5)),
+            'arrival_date' => $bookingDate,
+            'zeals_code' => $request->zeals_code,
+            'bill' => $totalBill,
+            'status' => "created",
+        ]);
+
+        foreach ($request->ticketOrder as $key => $value) {
+            if ($value['quantity'] > 0) {
+                $ticketDistribution = ticket_distribution::find($value['ticket_id']);
+                $ticket = ticket_group::find($ticketDistribution->ticket_id);
+                $option = option_group::find($ticketDistribution->option_id);
+
+                switch ($option->type) {
+                    case 'reguler':
+
+                        $price = $ticket->price;
+
+                        reservation_detail_group::create([
+                            'reservation_id' => $reservation->id,
+                            'ticket_distribution_id' => $value['ticket_id'],
+                            'qty' => $value['quantity'],
+                            'subtotal' => $price*$value['quantity'],
+                        ]);
+
+                        break;
+                    case 'discount':
+                        $price = $ticket->price * (100 - $option->discount) / 100;
+
+                        reservation_detail_group::create([
+                            'reservation_id' => $reservation->id,
+                            'ticket_distribution_id' => $value['ticket_id'],
+                            'qty' => $value['quantity'],
+                            'subtotal' => $price*$value['quantity'],
+                        ]);
+                        break;
+                    case 'special_price':
+                        $price = $option->special_price;
+
+                        reservation_detail_group::create([
+                            'reservation_id' => $reservation->id,
+                            'ticket_distribution_id' => $value['ticket_id'],
+                            'qty' => $value['quantity'],
+                            'subtotal' => $price*$value['quantity'],
+                        ]);
+                        break;
+                    case 'buy_x_get_y':
+                        # code...
+                        break;
+                    case 'cashback':
+                        # code...
+                        break;
+                    case 'others':
+                        $price = $ticket->price;
+
+                        reservation_detail_group::create([
+                            'reservation_id' => $reservation->id,
+                            'ticket_distribution_id' => $value['ticket_id'],
+                            'qty' => $value['quantity'],
+                            'subtotal' => $price*$value['quantity'],
+                        ]);
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            }
+        };
+
+        return response()->json([
+            'reservation_id' => $reservation->id,
+            'order_id' => $reservation->order_id
+        ]);
+    }
+    
+    public function createReservationZeals(Request $request) {
+        //
+        $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate));
+
+        $customer = customer_zeals::create([
+            'name' => request('name'),
+            'phone' => request('phone'),
+            'email' => request('email'),
+            'address' => request('address'),
+        ]);
+
+        $totalBill = 0;
+
+        foreach ($request->ticketOrder as $key => $value) {
+            if ($value['quantity'] > 0) {
+                $totalBill += ($value['quantity'] * $value['price']);
+            }
+        };
+
+        $sex = reservation_zeals::count();
+
+        $reservation = reservation_zeals::create([
+            'customer_id' => $customer->id,
+            'reservation_option_id' => $request->reservationOptionID,
+            'order_id' => "ze-".Carbon::now()->format('y').sprintf('%05d', substr(strval($sex), -5)),
+            'arrival_date' => $bookingDate,
+            'zeals_code' => $request->zeals_code,
+            'bill' => $totalBill,
+            'status' => "created",
+        ]);
+
+        foreach ($request->ticketOrder as $key => $value) {
+            if ($value['quantity'] > 0) {
+                $ticketDistribution = ticket_distribution::find($value['ticket_id']);
+                $ticket = ticket_zeals::find($ticketDistribution->ticket_id);
+                $option = option_zeals::find($ticketDistribution->option_id);
+
+                switch ($option->type) {
+                    case 'reguler':
+
+                        $price = $ticket->price;
+
+                        reservation_detail_zeals::create([
+                            'reservation_id' => $reservation->id,
+                            'ticket_distribution_id' => $value['ticket_id'],
+                            'qty' => $value['quantity'],
+                            'subtotal' => $price*$value['quantity'],
+                        ]);
+
+                        break;
+                    case 'discount':
+                        $price = $ticket->price * (100 - $option->discount) / 100;
+
+                        reservation_detail_zeals::create([
+                            'reservation_id' => $reservation->id,
+                            'ticket_distribution_id' => $value['ticket_id'],
+                            'qty' => $value['quantity'],
+                            'subtotal' => $price*$value['quantity'],
+                        ]);
+                        break;
+                    case 'special_price':
+                        $price = $option->special_price;
+
+                        reservation_detail_zeals::create([
+                            'reservation_id' => $reservation->id,
+                            'ticket_distribution_id' => $value['ticket_id'],
+                            'qty' => $value['quantity'],
+                            'subtotal' => $price*$value['quantity'],
+                        ]);
+                        break;
+                    case 'buy_x_get_y':
+                        # code...
+                        break;
+                    case 'cashback':
+                        # code...
+                        break;
+                    case 'others':
+                        $price = $ticket->price;
+
+                        reservation_detail_zeals::create([
                             'reservation_id' => $reservation->id,
                             'ticket_distribution_id' => $value['ticket_id'],
                             'qty' => $value['quantity'],

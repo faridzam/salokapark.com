@@ -169,7 +169,7 @@ export default function App(props) {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                 }}>
-                                    <Button variant="contained" color="primary" size="large" startIcon={<WhatsApp/>} onClick={() => contactUs(phone)}>
+                                    <Button variant="contained" color="primary" size="large" startIcon={<WhatsApp/>} onClick={() => contactUs('+6285788890777')}>
                                         Hubungi Kami
                                     </Button>
                                 </Box>
@@ -267,7 +267,7 @@ export default function App(props) {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                 }}>
-                                    <Button variant="contained" color="primary" size="large" startIcon={<WhatsApp/>} onClick={() => contactUs(phone)}>
+                                    <Button variant="contained" color="primary" size="large" startIcon={<WhatsApp/>} onClick={() => contactUs('+6285788890777')}>
                                         Hubungi Kami
                                     </Button>
                                 </Box>
@@ -320,8 +320,8 @@ export default function App(props) {
                                 }}>
                                     <Box
                                     sx={{
-                                        maxHeight: '300px',
-                                        width: '80%',
+                                        height: '400px',
+                                        width: '90%',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         justifyContent: 'center',
@@ -336,13 +336,13 @@ export default function App(props) {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
-                                            maxHeight: '400px',
+                                            height: '400px',
                                         }}></img>
                                     </Box>
                                     <Box
                                     sx={{
-                                        marginTop: '100px',
-                                        width: '80%',
+                                        marginTop: '20px',
+                                        width: '90%',
                                     }}>
                                         <Box
                                         sx={{
@@ -454,7 +454,7 @@ export default function App(props) {
                                 }}>
                                     <Box
                                     sx={{
-                                        maxHeight: '300px',
+                                        height: '300px',
                                         width: '100%',
                                         cursor: 'pointer',
                                         display: 'flex',
@@ -470,12 +470,12 @@ export default function App(props) {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
-                                            maxHeight: '300px',
+                                            height: '300px',
                                         }}></img>
                                     </Box>
                                     <Box
                                     sx={{
-                                        marginTop: '50px',
+                                        marginTop: '20px',
                                         width: '80%',
                                     }}>
                                         <Box

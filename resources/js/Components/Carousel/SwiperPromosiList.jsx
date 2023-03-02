@@ -258,7 +258,7 @@ export default function App() {
                                     <Box
                                     sx={{
                                         width: '100%',
-                                        height: '400px',
+                                        height: '200px',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         justifyContent: 'center',
@@ -274,7 +274,7 @@ export default function App() {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
-                                            height: '400px'
+                                            height: '200px'
                                         }}></img>
                                     </Box>
                                     <Box

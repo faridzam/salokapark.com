@@ -24,7 +24,24 @@ export default function App() {
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
 
-    const SLIDE_COUNT = 5;
+    const [zones, setZones] = React.useState([]);
+    React.useEffect(() => {
+        axios.get('/api/get-content-zones')
+        .then((response) => {
+            //
+            let Obj = response.data.zones;
+            var result=[];
+            for(var i=0;i<Obj.length;i++){
+                result.push({id: Obj[i].id, nama: Obj[i].nama, link: Obj[i].link, gambar: Obj[i].gambar, warnabg: Obj[i].warnabg, desk_singkat: Obj[i].desk_singkat, deskripsi: Obj[i].deskripsi, no_urut: Obj[i].no_urut, status: Obj[i].status});
+            }
+            setZones(result);
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }, []);
+
+    const SLIDE_COUNT = zones.length;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
 
     const redirect = (route) => {
@@ -76,7 +93,7 @@ export default function App() {
                                     }}>
                                         <Box
                                         sx={{
-                                            maxHeight: '400px',
+                                            height: '400px',
                                             width: '90%',
                                             cursor: 'pointer',
                                             display: 'flex',
@@ -84,8 +101,8 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <img
-                                            onClick={() => redirect(zonaByIndex(index).link)}
-                                            src={media[index]}
+                                            onClick={() => redirect('/zona/'+zones[index].link)}
+                                            src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar}
                                             loading="lazy"
                                             alt="logo saloka"
                                             style={{
@@ -93,7 +110,7 @@ export default function App() {
                                                 objectFit: 'cover',
                                                 objectPosition: 'top',
                                                 width: '100%',
-                                                maxHeight: '400px',
+                                                height: '400px',
                                             }}></img>
                                         </Box>
                                         <Box
@@ -113,7 +130,7 @@ export default function App() {
                                                     fontWeight: 600,
                                                     color: '#333'
                                                 }}
-                                                >{zonaByIndex(index).nama}</Typography>
+                                                >{zones[index].nama}</Typography>
                                             </Box>
                                             <Box
                                             sx={{
@@ -130,7 +147,7 @@ export default function App() {
                                                     fontWeight: 400,
                                                     color: '#333'
                                                 }}
-                                                >{zonaByIndex(index).deskripsi}</Typography>
+                                                >{zones[index].desk_singkat}</Typography>
                                             </Box>
                                             <Box
                                             sx={{
@@ -140,7 +157,7 @@ export default function App() {
                                                 alignItems: 'center',
                                             }}>
                                                 <Typography
-                                                onClick={() => redirect(zonaByIndex(index).link)}
+                                                onClick={() => redirect('/zona/'+zones[index].link)}
                                                 className="noselect"
                                                 align="justify"
                                                 sx={{
@@ -242,7 +259,7 @@ export default function App() {
                                 }}>
                                     <Box
                                     sx={{
-                                        maxHeight: '300px',
+                                        height: '300px',
                                         width: '100%',
                                         cursor: 'pointer',
                                         display: 'flex',
@@ -250,8 +267,8 @@ export default function App() {
                                         alignItems: 'center',
                                     }}>
                                         <img
-                                        onClick={() => redirect(zonaByIndex(index).link)}
-                                        src={media[index]}
+                                        onClick={() => redirect('/zona/'+zones[index].link)}
+                                        src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar}
                                         loading="lazy"
                                         alt="logo saloka"
                                         style={{
@@ -259,7 +276,7 @@ export default function App() {
                                             objectFit: 'cover',
                                             objectPosition: 'top',
                                             width: '100%',
-                                            maxHeight: '300px',
+                                            height: '300px',
                                         }}></img>
                                     </Box>
                                     <Box
@@ -279,7 +296,7 @@ export default function App() {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{zonaByIndex(index).nama}</Typography>
+                                            >{zones[index].nama}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -296,7 +313,7 @@ export default function App() {
                                                 fontWeight: 400,
                                                 color: '#333'
                                             }}
-                                            >{zonaByIndex(index).deskripsi}</Typography>
+                                            >{zones[index].desk_singkat}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -306,7 +323,7 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <Typography
-                                            onClick={() => redirect(zonaByIndex(index).link)}
+                                            onClick={() => redirect('/zona/'+zones[index].link)}
                                             className="noselect"
                                             align="justify"
                                             sx={{

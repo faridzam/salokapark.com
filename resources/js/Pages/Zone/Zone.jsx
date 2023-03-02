@@ -129,7 +129,6 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '32px',
                                     color: '#333',
@@ -170,7 +169,8 @@ export default function Zona(props) {
                                 sx={{
                                     width: '200px',
                                     height: '50px',
-                                    border: '2px solid',
+                                    borderRadius: 50,
+                                    border: '2px solid'
                                 }}>
                                     Lihat Peta
                                 </Button>
@@ -180,7 +180,8 @@ export default function Zona(props) {
                                 sx={{
                                     width: '200px',
                                     height: '50px',
-                                    border: '2px solid',
+                                    borderRadius: 50,
+                                    border: '2px solid'
                                 }}>
                                     Download Peta
                                 </Button>
@@ -192,7 +193,6 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '32px',
                                     color: '#333',
@@ -242,11 +242,11 @@ export default function Zona(props) {
                                                     onClick={() => redirect('/zona/'+zones[index].link)}
                                                     sx={{
                                                         width: '70%',
-                                                        maxHeight: '600px',
+                                                        height: '500px',
                                                         display: 'flex',
                                                         justifyContent: 'flex-start',
                                                     }}>
-                                                        <img src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar} style={{width: '100%', maxHeight: '600px', objectFit: 'cover'}} alt="logo saloka"></img>
+                                                        <img src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar} style={{width: '100%', height: '500px', objectFit: 'cover'}} alt="logo saloka"></img>
                                                     </Box>
 
                                                     <Box
@@ -276,10 +276,9 @@ export default function Zona(props) {
                                                                 <Typography
                                                                 textAlign="left"
                                                                 sx={{
-                                                                    fontFamily: 'Arial',
                                                                     fontSize: '28px',
                                                                     fontWeight: 600,
-                                                                    color: '#ddd'
+                                                                    color: '#fff'
                                                                 }}
                                                                 >{zones[index].nama}</Typography>
                                                             </Box>
@@ -293,10 +292,9 @@ export default function Zona(props) {
                                                                 <Typography
                                                                 textAlign="left"
                                                                 sx={{
-                                                                    fontFamily: 'Arial',
                                                                     fontSize: '16px',
                                                                     fontWeight: 500,
-                                                                    color: '#ddd'
+                                                                    color: '#fff'
                                                                 }}
                                                                 >{zones[index].desk_singkat}</Typography>
                                                             </Box>
@@ -315,7 +313,7 @@ export default function Zona(props) {
                                                                     cursor: 'pointer',
                                                                     fontSize: '15px',
                                                                     fontWeight: 400,
-                                                                    color: '#ddd'
+                                                                    color: '#fff'
                                                                 }}
                                                                 >Baca Lebih Lanjut</Typography>
                                                                 <ArrowForward
@@ -323,7 +321,7 @@ export default function Zona(props) {
                                                                     cursor: 'pointer',
                                                                     marginLeft: '5px',
                                                                     fontSize: 15,
-                                                                    color: '#ddd'
+                                                                    color: '#fff'
                                                                 }}/>
                                                             </Box>
 
@@ -371,10 +369,9 @@ export default function Zona(props) {
                                                                 <Typography
                                                                 textAlign="left"
                                                                 sx={{
-                                                                    fontFamily: 'Arial',
                                                                     fontSize: '28px',
                                                                     fontWeight: 600,
-                                                                    color: '#ddd'
+                                                                    color: '#fff'
                                                                 }}
                                                                 >{zones[index].nama}</Typography>
                                                             </Box>
@@ -388,12 +385,11 @@ export default function Zona(props) {
                                                                 <Typography
                                                                 textAlign="left"
                                                                 sx={{
-                                                                    fontFamily: 'Arial',
                                                                     fontSize: '16px',
                                                                     fontWeight: 500,
-                                                                    color: '#ddd'
+                                                                    color: '#fff'
                                                                 }}
-                                                                >{zones[index].desk_singkat}</Typography>
+                                                                >{zones[index].desk_singkat.slice(0, 500)+(zones[index].desk_singkat.length > 500 ? "..." : "")}</Typography>
                                                             </Box>
 
                                                             <Box
@@ -410,7 +406,7 @@ export default function Zona(props) {
                                                                     cursor: 'pointer',
                                                                     fontSize: '15px',
                                                                     fontWeight: 400,
-                                                                    color: '#ddd'
+                                                                    color: '#fff'
                                                                 }}
                                                                 >Baca Lebih Lanjut</Typography>
                                                                 <ArrowForward
@@ -418,7 +414,7 @@ export default function Zona(props) {
                                                                     cursor: 'pointer',
                                                                     marginLeft: '5px',
                                                                     fontSize: 15,
-                                                                    color: '#ddd'
+                                                                    color: '#fff'
                                                                 }}/>
                                                             </Box>
 
@@ -429,11 +425,11 @@ export default function Zona(props) {
                                                     onClick={() => redirect('/zona/'+zones[index].link)}
                                                     sx={{
                                                         width: '70%',
-                                                        maxHeight: '600px',
+                                                        height: '500px',
                                                         display: 'flex',
                                                         justifyContent: 'flex-end',
                                                     }}>
-                                                        <img src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar} style={{width: '100%', maxHeight: '600px', objectFit: 'cover'}} alt="logo saloka"></img>
+                                                        <img src={'https://dashboard.salokapark.com/public/foto/zona/'+zones[index].gambar} style={{width: '100%', height: '500px', objectFit: 'cover'}} alt="logo saloka"></img>
                                                     </Box>
 
                                                 </Grid>
@@ -462,7 +458,6 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '32px',
                                     color: '#333',
@@ -495,6 +490,7 @@ export default function Zona(props) {
                                     marginX: '5px',
                                     width: '200px',
                                     height: '50px',
+                                    borderRadius: 50,
                                     border: '2px solid',
                                 }}>
                                     Lihat Peta
@@ -505,6 +501,7 @@ export default function Zona(props) {
                                     marginX: '5px',
                                     width: '200px',
                                     height: '50px',
+                                    borderRadius: 50,
                                     border: '2px solid',
                                 }}>
                                     <a href={'https://dashboard.salokapark.com/public/peta/'+pdf} download="peta_saloka.pdf">Download Peta</a>
@@ -518,7 +515,6 @@ export default function Zona(props) {
                             }}>
                                 <Typography
                                 sx={{
-                                    fontFamily: 'Arial',
                                     fontWeight: 600,
                                     fontSize: '24px',
                                     color: '#333',
@@ -598,7 +594,6 @@ export default function Zona(props) {
                                                             <Typography
                                                             textAlign="left"
                                                             sx={{
-                                                                fontFamily: 'Arial',
                                                                 fontSize: '24px',
                                                                 fontWeight: 600,
                                                                 color: '#ddd'
@@ -615,12 +610,11 @@ export default function Zona(props) {
                                                             <Typography
                                                             textAlign="left"
                                                             sx={{
-                                                                fontFamily: 'Arial',
                                                                 fontSize: '14px',
                                                                 fontWeight: 500,
                                                                 color: '#ddd'
                                                             }}
-                                                            >{zones[index].desk_singkat}</Typography>
+                                                            >{zones[index].desk_singkat.slice(0, 500)+(zones[index].desk_singkat.length > 500 ? "..." : "")}</Typography>
                                                         </Box>
 
                                                         <Box

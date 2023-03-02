@@ -1,5 +1,4 @@
-import media1 from "./media-1.jpg";
-import media2 from "./media-2.png";
+import banner from "./banner_homepage.jpg";
 
-export const media = [media1, media2];
+export const media = [banner];
 export const mediaByIndex = index => media[index % media.length];

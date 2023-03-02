@@ -97,7 +97,6 @@ export default function Zona(props) {
                                     <Box
                                     sx={{
                                         width: '100%',
-                                        marginTop: '50px',
                                         cursor: 'pointer',
                                     }}>
                                         <img
@@ -134,7 +133,6 @@ export default function Zona(props) {
                                             <Box>
                                                 <Typography
                                                 sx={{
-                                                    fontFamily: 'fontin',
                                                     fontWeight: 600,
                                                     fontSize: '32px',
                                                     color: '#333',
@@ -164,21 +162,20 @@ export default function Zona(props) {
                                         }}>
                                             <Typography
                                             sx={{
-                                                fontFamily: 'fontin',
                                                 fontWeight: 600,
                                                 fontSize: '28px',
                                                 color: '#333',
                                                 textAlign: 'center',
                                             }}>
-                                                Jadwal Show:
+                                                Jadwal Show
                                             </Typography>
                                             <Typography
                                             sx={{
                                                 fontSize: '18px',
-                                                fontWeight: 500,
+                                                fontWeight: 600,
                                                 color: '#333'
                                             }}>
-                                                weekdays:
+                                                Weekday:
                                             </Typography>
                                             <Typography
                                             sx={{
@@ -191,10 +188,10 @@ export default function Zona(props) {
                                             <Typography
                                             sx={{
                                                 fontSize: '18px',
-                                                fontWeight: 500,
+                                                fontWeight: 600,
                                                 color: '#333'
                                             }}>
-                                                weekends:
+                                                Weekend:
                                             </Typography>
                                             <Typography
                                             sx={{
@@ -207,7 +204,7 @@ export default function Zona(props) {
                                             <Typography
                                             sx={{
                                                 fontSize: '18px',
-                                                fontWeight: 500,
+                                                fontWeight: 600,
                                                 color: '#333'
                                             }}>
                                                 Tanggal Merah:
@@ -232,9 +229,17 @@ export default function Zona(props) {
                                                     color: '#333',
                                                     textAlign: 'center',
                                                 }}>
-                                                    Zona: {showEvent[0].zona}
+                                                    Zona:
                                                 </Typography>
                                             </Box>
+                                            <Typography
+                                            sx={{
+                                                fontSize: '15px',
+                                                fontWeight: 400,
+                                                color: '#333'
+                                            }}>
+                                                {showEvent[0].zona}
+                                            </Typography>
         
                                         </Box>
                                         </Grid>
@@ -276,7 +281,6 @@ export default function Zona(props) {
                                     <Box
                                     sx={{
                                         width: '100%',
-                                        marginTop: '50px',
                                         cursor: 'pointer',
                                     }}>
                                         <img
@@ -297,7 +301,6 @@ export default function Zona(props) {
                                     }}>
                                         <Typography
                                         sx={{
-                                            fontFamily: 'fontin',
                                             fontWeight: 600,
                                             fontSize: '24px',
                                             color: '#333',

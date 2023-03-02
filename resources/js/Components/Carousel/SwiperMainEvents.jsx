@@ -24,7 +24,25 @@ export default function App() {
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
 
-    const SLIDE_COUNT = 2;
+    const [promo, setPromo] = React.useState("");
+    React.useEffect(() => {
+        axios.get('/api/get-content-promo')
+        .then((response) => {
+            //
+            let Obj = response.data.promo;
+            var result=[];
+            for(var i=0;i<Obj.length;i++){
+                result.push({id: Obj[i].id, nama: Obj[i].nama, link: Obj[i].link, tanggal: Obj[i].tanggal, type: Obj[i].type, gambar: Obj[i].gambar, desk_singkat: Obj[i].desk_singkat, deskripsi: Obj[i].deskripsi, no_urut: Obj[i].no_urut, status: Obj[i].status});
+            }
+            setPromo(result);
+            
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }, []);
+
+    const SLIDE_COUNT = promo.length;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
 
     const redirect = (route) => {
@@ -90,12 +108,13 @@ export default function App() {
                                         spacing={0}
                                         sx={{
                                             display: 'flex',
+                                            width: '80%',
                                             justifyContent: 'flex-end',
                                             alignItems: 'center',
                                         }}>
                                             <Box
                                             sx={{
-                                                maxHeight: '400px',
+                                                height: '600px',
                                                 width: '100%',
                                                 cursor: 'pointer',
                                                 display: 'flex',
@@ -103,14 +122,16 @@ export default function App() {
                                                 alignItems: 'center',
                                             }}>
                                                 <img
-                                                src={media[index]}
+                                                onClick={() => redirect('/promosi/'+promo[index].link)}
+                                                src={'https://dashboard.salokapark.com/public/foto/promosi/daftarpromo/'+promo[index].gambar}
                                                 loading="lazy"
                                                 alt="logo saloka"
                                                 style={{
                                                     layout: 'fill',
                                                     objectFit: 'cover',
                                                     objectPosition: 'top',
-                                                    width: '80%',
+                                                    width: '100%',
+                                                    height: '600px',
                                                 }}></img>
                                             </Box>
 
@@ -119,7 +140,7 @@ export default function App() {
                                                 ?
                                                 <Box
                                                 sx={{
-                                                    marginRight: '11%',
+                                                    marginRight: '0%',
                                                     display: 'flex',
                                                     alignItems: 'flex-start',
                                                     justifyContent: 'flex-start',
@@ -150,13 +171,13 @@ export default function App() {
                                                         sx={{
                                                             fontSize: '28px',
                                                             fontWeight: 600,
-                                                            color: '#ddd'
+                                                            color: 'white.light'
                                                         }}
-                                                        >{eventByIndex(index).title}</Typography>
+                                                        >{promo[index].nama}</Typography>
                                                     </Box>
                                                     <Box
                                                     sx={{
-                                                        marginTop: '20px',
+                                                        marginTop: '10px',
                                                         display: 'flex',
                                                         width: '80%',
                                                         justifyContent: 'flex-start',
@@ -165,11 +186,11 @@ export default function App() {
                                                         <Typography
                                                         textAlign="justify"
                                                         sx={{
-                                                            fontSize: '18px',
+                                                            fontSize: '14px',
                                                             fontWeight: 400,
-                                                            color: '#ddd'
+                                                            color: 'white.light'
                                                         }}
-                                                        >{eventByIndex(index).deskripsi}</Typography>
+                                                        >{promo[index].desk_singkat}</Typography>
                                                     </Box>
                                                     <Box
                                                     sx={{
@@ -180,7 +201,7 @@ export default function App() {
                                                         alignItems: 'center',
                                                     }}>
                                                         <Button
-                                                        onClick={() => redirect(eventByIndex(index).link)}
+                                                        onClick={() => redirect('/promosi/'+promo[index].link)}
                                                         variant="contained"
                                                         sx={{
                                                             borderRadius: 5,
@@ -190,7 +211,7 @@ export default function App() {
                                                         sx={{
                                                             fontSize: '14px',
                                                             fontWeight: 500,
-                                                            color: '#ddd'
+                                                            color: 'white.lightest'
                                                         }}>info lengkap</Typography>
                                                         </Button>
                                                     </Box>
@@ -297,7 +318,7 @@ export default function App() {
                                     }}>
                                         <Box
                                         sx={{
-                                            maxHeight: '400px',
+                                            height: '150px',
                                             width: '100%',
                                             cursor: 'pointer',
                                             display: 'flex',
@@ -305,7 +326,8 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <img
-                                            src={media[index]}
+                                            onClick={() => redirect('/promosi/'+promo[index].link)}
+                                            src={'https://dashboard.salokapark.com/public/foto/promosi/daftarpromo/'+promo[index].gambar}
                                             loading="lazy"
                                             alt="logo saloka"
                                             style={{
@@ -313,6 +335,7 @@ export default function App() {
                                                 objectFit: 'cover',
                                                 objectPosition: 'top',
                                                 width: '100%',
+                                                height: '150px',
                                             }}></img>
                                         </Box>
                                     </Grid>
@@ -350,7 +373,7 @@ export default function App() {
                                                 fontWeight: 600,
                                                 color: '#333'
                                             }}
-                                            >{eventByIndex(index).title}</Typography>
+                                            >{promo[index].nama}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -367,7 +390,7 @@ export default function App() {
                                                 fontWeight: 400,
                                                 color: '#333'
                                             }}
-                                            >{eventByIndex(index).deskripsi}</Typography>
+                                            >{promo[index].desk_singkat}</Typography>
                                         </Box>
                                         <Box
                                         sx={{
@@ -378,7 +401,7 @@ export default function App() {
                                             alignItems: 'center',
                                         }}>
                                             <Button
-                                            onClick={() => redirect(eventByIndex(index).link)}
+                                            onClick={() => redirect('/promosi/'+promo[index].link)}
                                             variant="contained"
                                             sx={{
                                                 borderRadius: 5,
@@ -387,7 +410,7 @@ export default function App() {
                                             <Typography
                                             sx={{
                                                 fontSize: '14px',
-                                                color: '#ddd'
+                                                color: 'white.lightest'
                                             }}>info lengkap</Typography>
                                             </Button>
                                         </Box>

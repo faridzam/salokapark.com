@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\option;
+use App\Models\option_zeals;
 
 class optionSeeder extends Seeder
 {
@@ -69,6 +70,7 @@ class optionSeeder extends Seeder
             ],
         ];
 
+        option_zeals::insert($options);
         option::insert($options);
     }
 }

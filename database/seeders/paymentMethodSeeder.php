@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\payment_method;
+use App\Models\payment_method_zeals;
 
 class paymentMethodSeeder extends Seeder
 {
@@ -67,6 +68,7 @@ class paymentMethodSeeder extends Seeder
 
         ];
 
+        payment_method_zeals::insert($payment_methods);
         payment_method::insert($payment_methods);
 
     }

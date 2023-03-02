@@ -145,7 +145,7 @@ export default function Groups(props) {
                             <Box
                             sx={{
                                 width: '80%',
-                                marginTop: '50px',
+                                marginTop: '20px',
                             }}>
 
                                 <Grid
@@ -165,10 +165,10 @@ export default function Groups(props) {
                                         <Typography
                                         paragraph={true}
                                         sx={{
-                                            fontFamily: 'Arial',
+                                            lineHeight: 1.5,
                                             textAlign: 'center',
                                             color: '#333',
-                                            fontSize: '24px',
+                                            fontSize: '16px',
                                             fontWeight: 500,
                                         }}
                                         >SEMAKIN HANGAT DAN AKRAB WISATA ANDA BERSAMA ROMBONGAN DENGAN ACARA DAN FASILITAS WAHANA PERMAINAN SERU DAN ASIK. AYO.!! AGENDAKAN WISATA ROMBONGAN ANDA BERSAMA SALOKA THEME PARK</Typography>
@@ -180,9 +180,10 @@ export default function Groups(props) {
                                         <Typography
                                         paragraph={true}
                                         sx={{
+                                            lineHeight: 1.5,
                                             textAlign: 'center',
                                             color: '#333',
-                                            fontSize: '24px',
+                                            fontSize: '16px',
                                             fontWeight: 500,
                                         }}
                                         >"CERIA TIADA HABISNYA"</Typography>
@@ -192,7 +193,7 @@ export default function Groups(props) {
 
                             <Box
                             sx={{
-                                marginTop: '50px',
+                                marginTop: '20px',
                                 width: '100%',
                             }}>
                                 <SwiperGroups/>
@@ -200,7 +201,7 @@ export default function Groups(props) {
 
                             <Box
                             sx={{
-                                marginTop: '50px'
+                                marginTop: '20px'
                             }}>
                                 <Grid
                                 container={true}
@@ -342,18 +343,19 @@ export default function Groups(props) {
             
                                             <Button
                                             onClick={() => setExpandedSecondary(!expandedSecondary)}
-                                            variant="contained"
+                                            variant="outlined"
                                             sx={{
-                                                marginTop: '20px',
+                                                marginTop: '50px',
                                                 width: '200px',
-                                                borderRadius: 25,
-                                                backgroundColor: 'primary.main',
+                                                height: '50px',
+                                                borderRadius: 50,
+                                                border: '2px solid',
                                             }}>
                                                 <Typography
                                                 sx={{
                                                 fontSize: '16px',
-                                                color: '#ddd'
-                                                }}>{expandedSecondary ? "show less" : "show more"}</Typography>
+                                                color: 'primary.main'
+                                                }}>{expandedSecondary ? "Lihat Semua" : "Lihat Semua"}</Typography>
                                             </Button>
             
                                         </Grid>
@@ -407,7 +409,7 @@ export default function Groups(props) {
                             <Box
                             sx={{
                                 width: '80%',
-                                marginTop: '50px',
+                                marginTop: '20px',
                             }}>
 
                                 <Grid
@@ -427,10 +429,10 @@ export default function Groups(props) {
                                         <Typography
                                         paragraph={true}
                                         sx={{
-                                            fontFamily: 'Arial',
+                                            lineHeight: 1.5,
                                             textAlign: 'center',
                                             color: '#333',
-                                            fontSize: '16px',
+                                            fontSize: '14px',
                                             fontWeight: 500,
                                         }}
                                         >SEMAKIN HANGAT DAN AKRAB WISATA ANDA BERSAMA ROMBONGAN DENGAN ACARA DAN FASILITAS WAHANA PERMAINAN SERU DAN ASIK. AYO.!! AGENDAKAN WISATA ROMBONGAN ANDA BERSAMA SALOKA THEME PARK</Typography>
@@ -442,10 +444,10 @@ export default function Groups(props) {
                                         <Typography
                                         paragraph={true}
                                         sx={{
-                                            fontFamily: 'Arial',
+                                            lineHeight: 1.5,
                                             textAlign: 'center',
                                             color: '#333',
-                                            fontSize: '16px',
+                                            fontSize: '14px',
                                             fontWeight: 500,
                                         }}
                                         >"CERIA TIADA HABISNYA"</Typography>
@@ -456,14 +458,14 @@ export default function Groups(props) {
                             <Box
                             sx={{
                                 width: '100%',
-                                marginTop: '50px',
+                                marginTop: '20px',
                             }}>
                                 <SwiperGroups/>
                             </Box>
 
                             <Box
                             sx={{
-                                marginTop: '50px',
+                                marginTop: '20px',
                             }}>
                                 <Grid
                                 container={true}
@@ -548,8 +550,8 @@ export default function Groups(props) {
                                                         aria-controls="panel1bh-content"
                                                         id="panel1bh-header"
                                                         >
-                                                            <Typography sx={{
-                                                                flexShrink: 0,
+                                                            <Typography
+                                                            sx={{
                                                                 fontSize: '15px',
                                                                 fontWeight: 450,
                                                             }}>
@@ -559,7 +561,6 @@ export default function Groups(props) {
                                                         <AccordionDetails>
                                                             <Typography
                                                             sx={{
-                                                                flexShrink: 0,
                                                                 fontSize: '14px',
                                                             }}>
                                                                 {faq1[index].jawab}
@@ -623,18 +624,19 @@ export default function Groups(props) {
 
                                             <Button
                                             onClick={() => setExpandedSecondary(!expandedSecondary)}
-                                            variant="contained"
+                                            variant="outlined"
                                             sx={{
                                                 marginTop: '20px',
                                                 width: '200px',
-                                                borderRadius: 25,
-                                                backgroundColor: 'primary.main',
+                                                height: '50px',
+                                                borderRadius: 50,
+                                                border: '2px solid',
                                             }}>
                                                 <Typography
                                                 sx={{
                                                 fontSize: '16px',
-                                                color: '#ddd'
-                                                }}>{expandedSecondary ? "show less" : "show more"}</Typography>
+                                                color: 'primary.main'
+                                                }}>{expandedSecondary ? "Lihat Semua" : "Lihat Semua"}</Typography>
                                             </Button>
 
                                         </Grid>
