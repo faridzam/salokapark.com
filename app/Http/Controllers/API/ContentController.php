@@ -42,7 +42,7 @@ class ContentController extends Controller
             'status' => json_decode($response->getBody()),
         ]);
     }
-    
+
     public function getWeatherNow(Request $request){
         //
         $client = new Client();
@@ -86,7 +86,7 @@ class ContentController extends Controller
             'restos' => $restos,
         ]);
     }
-    
+
     public function getContentMerchandise(Request $request){
         //
         $merchandise = DB::table('daftar_souvenirs')->orderBy('nourut', 'asc')->get();
@@ -95,7 +95,7 @@ class ContentController extends Controller
             'merchandise' => $merchandise,
         ]);
     }
-    
+
     public function getContentFaqs(Request $request){
         //
         $faqs = DB::table('faqs')->orderBy('no_urut', 'asc')->get();

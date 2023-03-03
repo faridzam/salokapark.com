@@ -343,8 +343,8 @@ export default function Ticket(props) {
                                     value={name}
                                     onChange={value => handleNameChange(value)}
                                     autoComplete='off'
-                                    label="Nama"
-                                    placeholder='nama'
+                                    label="Nama PIC"
+                                    placeholder='Loka'
                                     InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -369,7 +369,7 @@ export default function Ticket(props) {
                                     value={companyName}
                                     onChange={value => handleCompanyNameChange(value)}
                                     autoComplete='off'
-                                    label="Nama Perusahaan"
+                                    label="Nama Group"
                                     placeholder='Saloka Theme Park'
                                     InputProps={{
                                     startAdornment: (
