@@ -180,7 +180,7 @@ export default function Header() {
                         }}
                         >SHOW & EVENT</Typography>
                     </Box>
-                    
+
                     <Box
                     sx={{
                     marginY: '10px',
@@ -233,7 +233,7 @@ export default function Header() {
                             },
                         }}
                         >ROMBONGAN</Typography>
-                        {isMenuDropDownOpen && 
+                        {isMenuDropDownOpen &&
                             <Grid
                             className="dropdown-menu"
                             container={true}
@@ -274,7 +274,7 @@ export default function Header() {
                                     }}
                                     >Program Rombongan</Typography>
                                 </Box>
-                                {/* ticket-order 
+                                {/* ticket-order
                                 <Box
                                 sx={{
                                 paddingY: '10px',
@@ -314,7 +314,7 @@ export default function Header() {
                     marginY: '20px',
                 }}>
                     <Button
-                    onClick={() => redirect('/ticket')}
+                    onClick={() => {activeRoute.includes("group")?redirect('/group-ticket/pilih-ticket'):redirect('/ticket')}}
                     // onClick={() => externalRedirect('https://webdev.salokapark.com/ticket')}
                     className="ticket-cta-button"
                     variant="contained"
@@ -409,7 +409,7 @@ export default function Header() {
 
                         <ListItem key="ticket">
                             <ListItemButton
-                            onClick={() => redirect('/ticket')}
+                            onClick={() => {activeRoute.includes("group") ? redirect('/group-ticket/pilih-ticket') : redirect('/ticket')}}
                             // onClick={() => externalRedirect('https://webdev.salokapark.com/ticket')}
                             >
                                 <ListItemText primary="Tiket" sx={{textAlign: 'center', color: 'red.light'}}/>

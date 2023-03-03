@@ -16,7 +16,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists($maintenance = __DIR__.'/../../staging.salokapark.com/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__.'/../../salokapark.com/storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -31,7 +31,7 @@ if (file_exists($maintenance = __DIR__.'/../../staging.salokapark.com/storage/fr
 |
 */
 
-require __DIR__.'/../../staging.salokapark.com/vendor/autoload.php';
+require __DIR__.'/../../salokapark.com/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ require __DIR__.'/../../staging.salokapark.com/vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../../staging.salokapark.com/bootstrap/app.php';
+$app = require_once __DIR__.'/../../salokapark.com/bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 

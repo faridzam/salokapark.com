@@ -10,7 +10,7 @@ const WhatsAppButton = () => {
     }, []);
 
     const contactUs = () => {
-        window.open('https://wa.me/+6287838890777')
+        window.open('https://wa.me/+6285788890777')
         .then((response) => {
             window.close();
         }).catch((error) => {
