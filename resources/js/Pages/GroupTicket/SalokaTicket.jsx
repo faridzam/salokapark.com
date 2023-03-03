@@ -92,7 +92,7 @@ export default function Ticket(props) {
     //     tomorrow.setDate(tomorrow.getDate() + 1)
     // }
     const [bookingDate, setBookingDate] = React.useState(today);
-    
+
     // ticket section
     const [ticketOrder, setTicketOrder] = React.useState([]);
     const [minQtyReq, setMinQtyReq] = React.useState(false);
@@ -191,7 +191,7 @@ export default function Ticket(props) {
     const addQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
         if(newArr[index].quantity === 0){
-            newArr[index].quantity += 25; // replace e.target.value with whatever you want to change it to
+            newArr[index].quantity += newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
         } else{
             newArr[index].quantity++;
         }
@@ -205,9 +205,9 @@ export default function Ticket(props) {
     }
     const subQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
-        if (newArr[index].quantity > 25) {
+        if (newArr[index].quantity > newArr[index].min_qty) {
             newArr[index].quantity--; // replace e.target.value with whatever you want to change it to
-        } else if(newArr[index].quantity <= 25){
+        } else if(newArr[index].quantity <= newArr[index].min_qty){
             newArr[index].quantity = 0;
         }
 

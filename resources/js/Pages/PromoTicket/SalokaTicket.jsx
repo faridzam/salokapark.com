@@ -143,7 +143,7 @@ export default function Ticket(props) {
                     ticket_description: eventTicket[index].description,
                     min_qty: eventTicket[index].min_qty,
                     max_qty: eventTicket[index].max_qty,
-                    quantity: 0,
+                    quantity: eventTicket[index].min_qty,
                     price: eventTicket[index].price,
                 })
             }
@@ -155,16 +155,19 @@ export default function Ticket(props) {
                     ticket_description: regulerTicket[index].description,
                     min_qty: regulerTicket[index].min_qty,
                     max_qty: regulerTicket[index].max_qty,
-                    quantity: 0,
+                    quantity: regulerTicket[index].min_qty,
                     price: regulerTicket[index].price,
                 })
             }
             setTicketOrder(newTicket);
+            checkQuantity();
+            window.sessionStorage.setItem('ticketOrder', JSON.stringify(newTicket));
         }).catch((error) => {
             //
             console.log(error);
         })
     }
+
     const handleArrivalDate = (value) => {
         var userTimezoneOffset = (value.getTimezoneOffset() * 60000) + (7*60000);
         setBookingDate(value);
@@ -175,23 +178,35 @@ export default function Ticket(props) {
 
     const addQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
-        newArr[index].quantity++; // replace e.target.value with whatever you want to change it to
+        if(newArr[index].quantity === 0){
+            newArr[index].quantity += newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
+        } else{
+            newArr[index].quantity++;
+        }
 
+        if (newArr[index].quantity >= newArr[index].min_qty){
+            setMinQtyReq(true);
+        }
+        checkQuantity();
         setTicketOrder(newArr);
         window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
-
-        checkQuantity();
     }
     const subQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
-        if (newArr[index].quantity > 0) {
+        if (newArr[index].quantity > newArr[index].min_qty) {
             newArr[index].quantity--; // replace e.target.value with whatever you want to change it to
+        } else if(newArr[index].quantity <= newArr[index].min_qty){
+            newArr[index].quantity = 0;
         }
+
+        if (newArr[index].min_qty > newArr[index].quantity){
+            setMinQtyReq(false);
+        }
+        checkQuantity();
         setTicketOrder(newArr);
         window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
-
-        checkQuantity();
     }
+
     const [totalBill, setTotalBill] = React.useState(0);
     React.useEffect(() => {
             let subtotal = 0;
