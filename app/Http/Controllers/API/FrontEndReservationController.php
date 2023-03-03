@@ -125,7 +125,7 @@ class FrontEndReservationController extends Controller
             'order_id' => $reservation->order_id
         ]);
     }
-    
+
     public function createReservationGroup(Request $request) {
         //
         $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate));
@@ -146,7 +146,7 @@ class FrontEndReservationController extends Controller
             }
         };
 
-        $sex = reservation::count();
+        $sex = reservation_group::count();
 
         $reservation = reservation_group::create([
             'customer_id' => $customer->id,
@@ -224,7 +224,7 @@ class FrontEndReservationController extends Controller
             'order_id' => $reservation->order_id
         ]);
     }
-    
+
     public function createReservationZeals(Request $request) {
         //
         $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate));
