@@ -272,9 +272,10 @@ export default function Header() {
                                             color: 'secondary.light',
                                         },
                                     }}
-                                    >Program Rombongan</Typography>
+                                    >Info Rombongan</Typography>
                                 </Box>
-                                {/* ticket-order
+
+                                {/* ticket-order*/}
                                 <Box
                                 sx={{
                                 paddingY: '10px',
@@ -297,7 +298,6 @@ export default function Header() {
                                     }}
                                     >Beli Tiket Rombongan</Typography>
                                 </Box>
-                                */}
 
                             </Grid>
                         }
@@ -401,7 +401,14 @@ export default function Header() {
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("group") ? " navbar-item-active" : ""}`}
                             onClick={() => redirect('/group')}>
-                                <ListItemText primary="Rombongan" sx={{textAlign: 'center'}}/>
+                                <ListItemText primary="Info Rombongan" sx={{textAlign: 'center'}}/>
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem key="group">
+                            <ListItemButton
+                            className={`navbar-item noselect ${activeRoute.includes("group") ? " navbar-item-active" : ""}`}
+                            onClick={() => redirect('/group')}>
+                                <ListItemText primary="Beli Tiket Rombongan" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
 
