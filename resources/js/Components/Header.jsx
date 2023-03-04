@@ -329,12 +329,35 @@ export default function Header() {
                     }}
                     >
                         <ConfirmationNumber/>
-                        <Typography
+                        <Grid
+                        container={true}
+                        direction="column"
+                        spacing={0}
                         sx={{
-                            fontFamily: 'AlrightSans',
-                            marginLeft: '10px',
-                            fontWeight: 700
-                        }}>TIKET</Typography>
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'flex-start',
+                        }}>
+                            <Typography
+                            sx={{
+                                fontFamily: 'AlrightSans',
+                                marginLeft: '10px',
+                                fontWeight: 700
+                            }}>TIKET</Typography>
+                            {
+                                activeRoute.includes("group")
+                                ?
+                                <Typography
+                                sx={{
+                                    fontFamily: 'AlrightSans',
+                                    marginLeft: '10px',
+                                    fontSize: '10px',
+                                    fontWeight: 400
+                                }}>ROMBONGAN</Typography>
+                                :
+                                <div></div>
+                            }
+                        </Grid>
                     </Button>
 
                 </Box>
