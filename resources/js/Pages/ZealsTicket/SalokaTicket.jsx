@@ -80,7 +80,7 @@ export default function Ticket(props) {
 
     // booking date
     const today = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Jakarta'}));
-    const maxDate = new Date("2023-3-31");
+    const maxDate = new Date("2023-3-21");
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
     const timeString = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
@@ -92,7 +92,7 @@ export default function Ticket(props) {
     //     tomorrow.setDate(tomorrow.getDate() + 1)
     // }
     const [bookingDate, setBookingDate] = React.useState(today);
-    
+
     // ticket section
     const [ticketOrder, setTicketOrder] = React.useState([]);
     const [minQtyReq, setMinQtyReq] = React.useState(false);
@@ -171,7 +171,7 @@ export default function Ticket(props) {
         if (newArr[index].quantity >= newArr[index].min_qty){
             setMinQtyReq(true);
         }
-        
+
         setTicketOrder(newArr);
         window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
     }
