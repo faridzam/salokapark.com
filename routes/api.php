@@ -8,6 +8,7 @@ use App\Http\Controllers\API\FrontEndTicketController;
 use App\Http\Controllers\API\FrontEndZealsTicketController;
 use App\Http\Controllers\API\FrontEndReservationController;
 use App\Http\Controllers\API\ContentController;
+use App\Http\Controllers\API\visitorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,14 @@ use App\Http\Controllers\API\ContentController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//visitor
+Route::post('add-visitor', [visitorController::class, 'addVisitor']);
+Route::post('get-visitor', [visitorController::class, 'getVisitor']);
 
 //get location
 Route::get('get-province', [ContentController::class, 'getProvince']);
 Route::post('get-regency', [ContentController::class, 'getRegency']);
+
 //weather
 Route::get('get-weather-now', [ContentController::class, 'getWeatherNow']);
 

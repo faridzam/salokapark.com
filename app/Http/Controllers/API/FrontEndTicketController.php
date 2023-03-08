@@ -51,9 +51,7 @@ class FrontEndTicketController extends Controller
             }
         }
 
-        $ticketEvent = ticket_distribution::where('category_id', '!=', 1)
-        ->where('category_id', '!=', 9)
-        ->where('category_id', '!=', 10)
+        $ticketEvent = ticket_distribution::whereNotIn('category_id', [1, 9, 10])
         ->where('date_start', '<=', $bookingDate)
         ->where('date_end', '>=', $bookingDate)
         ->get();
@@ -105,6 +103,16 @@ class FrontEndTicketController extends Controller
                 }
             };
 
+            // Ramadhan
+            if ($value->category_id === 11) {
+                if (in_array($bookingDate->dayOfWeekIso, unserialize($value->days))) {
+                    $ticketReguler = [];
+                } else {
+                    $ticketReguler = [];
+                    unset($ticketEvent[$key]);
+                }
+            };
+
         }
 
         $ticketEvent = $ticketEvent->values();
@@ -114,7 +122,7 @@ class FrontEndTicketController extends Controller
             'ticketEvent' => $ticketEvent,
         ]);
     }
-    
+
     public function getTicketDatePromo(Request $request) {
         //
 
@@ -212,7 +220,7 @@ class FrontEndTicketController extends Controller
             'ticketEvent' => $ticketEvent,
         ]);
     }
-    
+
     public function getTicketDateRoadshow(Request $request) {
         //
 
@@ -260,7 +268,7 @@ class FrontEndTicketController extends Controller
             'ticketEvent' => $ticketEvent,
         ]);
     }
-    
+
     public function getTicketDateGroup(Request $request) {
         //
 

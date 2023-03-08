@@ -38,7 +38,17 @@ export default function Header() {
 
     React.useEffect(() => {
         setActiveRoute(window.location.pathname);
-      }, []);
+
+        axios.post('/api/add-visitor', {
+            page: window.location.pathname
+        }).then((response) => {
+            //
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+
+    }, []);
 
     const redirect = (route) => {
         Inertia.visit(route);

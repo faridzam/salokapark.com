@@ -24,6 +24,19 @@ export function useIsMounted() {
 export default function Groups(props) {
     const isMounted = useIsMounted();
 
+    const [visitor, setVisitor] = React.useState([]);
+    React.useEffect(() => {
+        axios.post('/api/get-visitor', {
+            page: window.location.pathname
+        }).then((response) => {
+            //
+            setVisitor(response.data.visitor);
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+    }, []);
+
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
@@ -244,7 +257,7 @@ export default function Groups(props) {
                                         }}
                                         >FAQs</Typography>
                                     </Box>
-            
+
                                     <Box
                                     sx={{
                                         marginTop: '20px',
@@ -297,7 +310,7 @@ export default function Groups(props) {
                                                     </Accordion>
                                                 ))}
                                             </Box>
-            
+
                                             <hr
                                                 style={{
                                                     width: '100%',
@@ -306,7 +319,7 @@ export default function Groups(props) {
                                                     height: '1px'
                                                 }}
                                             />
-            
+
                                             {/* secondary faqs */}
                                             <Box
                                             sx={{
@@ -340,7 +353,7 @@ export default function Groups(props) {
                                                     ))}
                                                 </Collapse>
                                             </Box>
-            
+
                                             <Button
                                             onClick={() => setExpandedSecondary(!expandedSecondary)}
                                             variant="outlined"
@@ -357,8 +370,18 @@ export default function Groups(props) {
                                                 color: 'primary.main'
                                                 }}>{expandedSecondary ? "Lihat Semua" : "Lihat Semua"}</Typography>
                                             </Button>
-            
+
                                         </Grid>
+                                    </Box>
+                                    <Box
+                                    sx={{
+                                        marginY: '20px'
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                        fontSize: '14px',
+                                        color: 'white.dark'
+                                        }}>visitor: {visitor.qty}</Typography>
                                     </Box>
                                     </Grid>
                                 </Box>
@@ -640,6 +663,16 @@ export default function Groups(props) {
                                             </Button>
 
                                         </Grid>
+                                    </Box>
+                                    <Box
+                                    sx={{
+                                        marginY: '20px'
+                                    }}>
+                                        <Typography
+                                        sx={{
+                                        fontSize: '14px',
+                                        color: 'white.dark'
+                                        }}>visitor: {visitor.qty}</Typography>
                                     </Box>
                                     </Grid>
                                 </Box>

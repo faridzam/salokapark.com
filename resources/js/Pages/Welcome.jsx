@@ -3,7 +3,7 @@ import { Link, Head } from '@inertiajs/inertia-react';
 import { useTheme } from "@mui/material/styles";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import {useMediaQuery, Box, Typography, Button, Accordion, AccordionSummary, AccordionDetails, Collapse, Zoom, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
-import {AccessTime, DeviceThermostat, ConfirmationNumber, Stars, ArrowForward, CalendarMonth, ExpandMore, KeyboardArrowDown} from '@mui/icons-material';
+import {AccessTime, DeviceThermostat, ConfirmationNumber, Stars, ArrowForward, CalendarMonth, ExpandMore, KeyboardArrowDown, Groups} from '@mui/icons-material';
 import { useInView } from 'react-intersection-observer';
 import GoogleMapReact from 'google-map-react';
 import { Inertia } from '@inertiajs/inertia';
@@ -354,7 +354,7 @@ export default function Welcome(props) {
                                 :
                                 <div></div>
                             }
-                            
+
 
                             </Grid>
 
@@ -423,6 +423,36 @@ export default function Welcome(props) {
                                     color: 'white.lightest',
                                 }}
                                 >Membership</Typography>
+                            </Box>
+                            <Box
+                            onClick={() => redirect('/group')}
+                            sx={{
+                                width: '200px',
+                                height: '50px',
+                                backgroundColor: 'red.light',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                cursor: 'pointer',
+                                '&:hover': {
+                                    backgroundColor: 'red.lightest',
+                                },
+                            }}>
+                                <Groups
+                                sx={{
+                                    marginBottom: '2px',
+                                    fontSize: '22px',
+                                    color: 'white.lightest',
+                                }}/>
+                                <Typography
+                                noWrap={true}
+                                sx={{
+                                    marginLeft: '10px',
+                                    fontSize: '18px',
+                                    fontWeight: 600,
+                                    color: 'white.lightest',
+                                }}
+                                >Rombongan</Typography>
                             </Box>
                             </Grid>
                         </Grid>
@@ -581,7 +611,7 @@ export default function Welcome(props) {
                                             }}>Pertunjukan spektakuler Baru Klinthing Show hadir di hari Jumat, Sabtu, Minggu, dan di hari libur nasional pada jam 18.15 WIB dan Dancing Fountain setiap hari di jam 15.00 WIB. Lihat lebih lengkap mengenai pertunjukan di Saloka pada bagian Show & Event.
                                             </Typography>
                                         </Box>
-                                        
+
                                         <Box
                                         sx={{
                                         }}>
@@ -1246,7 +1276,7 @@ export default function Welcome(props) {
                                             id="panel1bh-header"
                                             >
                                                 <Typography
-                                                sx={{ 
+                                                sx={{
                                                 }}
                                                 >
                                                     {faq1[index].tanya}
@@ -1384,89 +1414,119 @@ export default function Welcome(props) {
                         <Box
                         sx={{
                             width: '100%',
-                            height: '50px',
+                            height: '100px',
                             backgroundColor: '#eee'
                         }}>
-                        <Grid
-                        container={true}
-                        direction="row"
-                        spacing={0}
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}>
-
                             <Grid
                             container={true}
                             direction="row"
                             spacing={0}
                             sx={{
-                                width: '100%'
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
                             }}>
 
-                            <Box
-                            onClick={() => redirect('/ticket')}
-                            sx={{
-                                width: '50%',
-                                height: '50px',
-                                backgroundColor: 'primary.light',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                cursor: 'pointer',
-                                '&:hover': {
-                                    backgroundColor: 'primary.lightest',
-                                },
-                            }}>
-                                <ConfirmationNumber
+                                <Grid
+                                container={true}
+                                direction="row"
+                                spacing={0}
                                 sx={{
-                                    marginBottom: '2px',
-                                    fontSize: '18px',
-                                    color: 'white.lightest',
-                                }}/>
-                                <Typography
-                                noWrap={true}
+                                    width: '100%'
+                                }}>
+
+                                <Box
+                                onClick={() => redirect('/ticket')}
                                 sx={{
-                                    marginLeft: '10px',
-                                    fontSize: '15px',
-                                    fontWeight: 600,
-                                    color: 'white.lightest',
-                                }}
-                                >Ticket</Typography>
-                            </Box>
-                            <Box
-                            onClick={() => redirect('/membership')}
-                            sx={{
-                                width: '50%',
-                                height: '50px',
-                                backgroundColor: 'secondary.light',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                cursor: 'pointer',
-                                '&:hover': {
-                                    backgroundColor: 'secondary.lightest',
-                                },
-                            }}>
-                                <Stars
+                                    width: '100%',
+                                    height: '50px',
+                                    backgroundColor: 'primary.light',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                        backgroundColor: 'primary.lightest',
+                                    },
+                                }}>
+                                    <ConfirmationNumber
+                                    sx={{
+                                        marginBottom: '2px',
+                                        fontSize: '18px',
+                                        color: 'white.lightest',
+                                    }}/>
+                                    <Typography
+                                    noWrap={true}
+                                    sx={{
+                                        marginLeft: '10px',
+                                        fontSize: '15px',
+                                        fontWeight: 600,
+                                        color: 'white.lightest',
+                                    }}
+                                    >Ticket</Typography>
+                                </Box>
+                                <Box
+                                onClick={() => redirect('/membership')}
                                 sx={{
-                                    marginBottom: '2px',
-                                    fontSize: '18px',
-                                    color: 'white.lightest',
-                                }}/>
-                                <Typography
-                                noWrap={true}
+                                    width: '50%',
+                                    height: '50px',
+                                    backgroundColor: 'secondary.light',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                        backgroundColor: 'secondary.lightest',
+                                    },
+                                }}>
+                                    <Stars
+                                    sx={{
+                                        marginBottom: '2px',
+                                        fontSize: '18px',
+                                        color: 'white.lightest',
+                                    }}/>
+                                    <Typography
+                                    noWrap={true}
+                                    sx={{
+                                        marginLeft: '10px',
+                                        fontSize: '15px',
+                                        fontWeight: 600,
+                                        color: 'white.lightest',
+                                    }}
+                                    >Membership</Typography>
+                                </Box>
+                                <Box
+                                onClick={() => redirect('/group')}
                                 sx={{
-                                    marginLeft: '10px',
-                                    fontSize: '15px',
-                                    fontWeight: 600,
-                                    color: 'white.lightest',
-                                }}
-                                >Membership</Typography>
-                            </Box>
+                                    width: '50%',
+                                    height: '50px',
+                                    backgroundColor: 'red.light',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                        backgroundColor: 'red.lightest',
+                                    },
+                                }}>
+                                    <Groups
+                                    sx={{
+                                        marginBottom: '2px',
+                                        fontSize: '18px',
+                                        color: 'white.lightest',
+                                    }}/>
+                                    <Typography
+                                    noWrap={true}
+                                    sx={{
+                                        marginLeft: '10px',
+                                        fontSize: '15px',
+                                        fontWeight: 600,
+                                        color: 'white.lightest',
+                                    }}
+                                    >Rombongan</Typography>
+                                </Box>
+                                </Grid>
                             </Grid>
-                        </Grid>
                         </Box>
                     </Box>
 
@@ -1615,7 +1675,7 @@ export default function Welcome(props) {
                                             }}>Pertunjukan spektakuler Baru Klinthing Show hadir di hari Jumat, Sabtu, Minggu, dan di hari libur nasional pada jam 18.15 WIB dan Dancing Fountain setiap hari di jam 15.00 WIB. Lihat lebih lengkap mengenai pertunjukan di Saloka pada bagian Show & Event.
                                             </Typography>
                                         </Box>
-                                        
+
                                         <Box
                                         sx={{
                                         }}>

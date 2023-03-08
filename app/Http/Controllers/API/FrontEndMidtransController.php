@@ -122,7 +122,7 @@ class FrontEndMidtransController extends Controller
 
         // }
     }
-    
+
     public function getTransactionTokenGroup(Request $request){
         //
 
@@ -215,7 +215,7 @@ class FrontEndMidtransController extends Controller
 
         // }
     }
-    
+
     public function getTransactionTokenZeals(Request $request){
         //
 
@@ -374,7 +374,7 @@ class FrontEndMidtransController extends Controller
                     ]);
                     break;
                 case 'cstore':
-    
+
                     if ($notif->store = 'alfamart') {
                         $reservation = reservation_zeals::where('order_id', $order_id)
                         ->update([
@@ -388,7 +388,7 @@ class FrontEndMidtransController extends Controller
                     }
                     break;
                 case 'bank_transfer':
-    
+
                     if ($notif->permata_va_number) {
                         $reservation = reservation_zeals::where('order_id', $order_id)
                         ->update([
@@ -414,7 +414,7 @@ class FrontEndMidtransController extends Controller
                                     'payment_method_id' => 7,
                                 ]);
                                 break;
-    
+
                             default:
                                 # code...
                                 break;
@@ -427,12 +427,12 @@ class FrontEndMidtransController extends Controller
                         'payment_method_id' => 8,
                     ]);
                     break;
-    
+
                 default:
                     # code...
                     break;
             }
-    
+
             if ($transaction == 'capture') {
                 // For credit card transaction, we need to check whether transaction is challenge by FDS or not
                 if ($type == 'credit_card'){
@@ -451,19 +451,19 @@ class FrontEndMidtransController extends Controller
                     // TODO set payment status in merchant's database to 'Settlement'
                     $reservationData = reservation_zeals::where('order_id', $order_id)->first();
                     $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
-    
+
                     $reservation = reservation_zeals::where('order_id', $order_id)
                     ->update([
                         'booking_code' => $bookingCode,
                         'status' => 'settlement',
                     ]);
-    
+
                     $reserved = reserved_zeals::create([
                         'reservation_id' => $reservationData->id,
                         'customer_id' => $reservationData->customer_id,
                         'status' => 0,
                     ]);
-    
+
                     $affiliateID = '571343950';
                     // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
                     //     'encrypted_code' => $reservationData->zeals_code,
@@ -473,11 +473,11 @@ class FrontEndMidtransController extends Controller
                     // ])
                     // ->throw()
                     // ->json();
-    
+
                     $client = new Client([
                         'headers' => ['Content-Type' => 'application/json']
                     ]);
-    
+
                     $customer = customer_zeals::find($reservationData->customer_id);
                     $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
                         'json' => [
@@ -488,7 +488,7 @@ class FrontEndMidtransController extends Controller
                             'status' => 100,
                         ]
                     ]);
-    
+
                     if(is_null($reservationData->zeals_code)){
                         //
                     } else {
@@ -501,18 +501,18 @@ class FrontEndMidtransController extends Controller
                             ]
                         ]);
                         $data = json_decode($response->getBody(), true);
-        
+
                         zeals_callback_history::create([
                             'response' => $response->getBody()->getContents(),
                             'status_code' => $response->getStatusCode(),
                         ]);
                     }
-    
+
                     // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
                     // $context = stream_context_create($opts);
                     // // $header = file_get_contents('https://www.example.com',false,$context);
                     // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
-    
+
                 }
                 else if($transaction == 'pending'){
                     // TODO set payment status in merchant's database to 'Pending'
@@ -557,7 +557,7 @@ class FrontEndMidtransController extends Controller
                     ]);
                     break;
                 case 'cstore':
-    
+
                     if ($notif->store = 'alfamart') {
                         $reservation = reservation_group::where('order_id', $order_id)
                         ->update([
@@ -571,7 +571,7 @@ class FrontEndMidtransController extends Controller
                     }
                     break;
                 case 'bank_transfer':
-    
+
                     if ($notif->permata_va_number) {
                         $reservation = reservation_group::where('order_id', $order_id)
                         ->update([
@@ -597,7 +597,7 @@ class FrontEndMidtransController extends Controller
                                     'payment_method_id' => 7,
                                 ]);
                                 break;
-    
+
                             default:
                                 # code...
                                 break;
@@ -610,12 +610,12 @@ class FrontEndMidtransController extends Controller
                         'payment_method_id' => 8,
                     ]);
                     break;
-    
+
                 default:
                     # code...
                     break;
             }
-    
+
             if ($transaction == 'capture') {
                 // For credit card transaction, we need to check whether transaction is challenge by FDS or not
                 if ($type == 'credit_card'){
@@ -634,19 +634,19 @@ class FrontEndMidtransController extends Controller
                     // TODO set payment status in merchant's database to 'Settlement'
                     $reservationData = reservation_group::where('order_id', $order_id)->first();
                     $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
-    
+
                     $reservation = reservation_group::where('order_id', $order_id)
                     ->update([
                         'booking_code' => $bookingCode,
                         'status' => 'settlement',
                     ]);
-    
+
                     $reserved = reserved_group::create([
                         'reservation_id' => $reservationData->id,
                         'customer_id' => $reservationData->customer_id,
                         'status' => 0,
                     ]);
-    
+
                     $affiliateID = '571343950';
                     // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
                     //     'encrypted_code' => $reservationData->zeals_code,
@@ -656,22 +656,24 @@ class FrontEndMidtransController extends Controller
                     // ])
                     // ->throw()
                     // ->json();
-    
+
                     $client = new Client([
                         'headers' => ['Content-Type' => 'application/json']
                     ]);
-    
+
                     $customer = customer_group::find($reservationData->customer_id);
                     $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
                         'json' => [
                             'name' => $customer->name,
+                            'company_name' => $customer->company_name,
                             'booking_code' => $bookingCode,
                             'email' => $customer->email,
+                            'address' => $customer->address,
                             'arrival' => $reservationData->arrival_date,
                             'status' => 100,
                         ]
                     ]);
-    
+
                     if(is_null($reservationData->zeals_code)){
                         //
                     } else {
@@ -684,18 +686,18 @@ class FrontEndMidtransController extends Controller
                             ]
                         ]);
                         $data = json_decode($response->getBody(), true);
-        
+
                         zeals_callback_history::create([
                             'response' => $response->getBody()->getContents(),
                             'status_code' => $response->getStatusCode(),
                         ]);
                     }
-    
+
                     // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
                     // $context = stream_context_create($opts);
                     // // $header = file_get_contents('https://www.example.com',false,$context);
                     // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
-    
+
                 }
                 else if($transaction == 'pending'){
                     // TODO set payment status in merchant's database to 'Pending'
@@ -741,7 +743,7 @@ class FrontEndMidtransController extends Controller
                     ]);
                     break;
                 case 'cstore':
-    
+
                     if ($notif->store = 'alfamart') {
                         $reservation = reservation::where('order_id', $order_id)
                         ->update([
@@ -755,7 +757,7 @@ class FrontEndMidtransController extends Controller
                     }
                     break;
                 case 'bank_transfer':
-    
+
                     if ($notif->permata_va_number) {
                         $reservation = reservation::where('order_id', $order_id)
                         ->update([
@@ -781,7 +783,7 @@ class FrontEndMidtransController extends Controller
                                     'payment_method_id' => 7,
                                 ]);
                                 break;
-    
+
                             default:
                                 # code...
                                 break;
@@ -794,12 +796,12 @@ class FrontEndMidtransController extends Controller
                         'payment_method_id' => 8,
                     ]);
                     break;
-    
+
                 default:
                     # code...
                     break;
             }
-    
+
             if ($transaction == 'capture') {
                 // For credit card transaction, we need to check whether transaction is challenge by FDS or not
                 if ($type == 'credit_card'){
@@ -818,19 +820,19 @@ class FrontEndMidtransController extends Controller
                     // TODO set payment status in merchant's database to 'Settlement'
                     $reservationData = reservation::where('order_id', $order_id)->first();
                     $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
-    
+
                     $reservation = reservation::where('order_id', $order_id)
                     ->update([
                         'booking_code' => $bookingCode,
                         'status' => 'settlement',
                     ]);
-    
+
                     $reserved = reserved::create([
                         'reservation_id' => $reservationData->id,
                         'customer_id' => $reservationData->customer_id,
                         'status' => 0,
                     ]);
-    
+
                     $affiliateID = '571343950';
                     // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
                     //     'encrypted_code' => $reservationData->zeals_code,
@@ -840,11 +842,11 @@ class FrontEndMidtransController extends Controller
                     // ])
                     // ->throw()
                     // ->json();
-    
+
                     $client = new Client([
                         'headers' => ['Content-Type' => 'application/json']
                     ]);
-    
+
                     $customer = customer::find($reservationData->customer_id);
                     $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
                         'json' => [
@@ -855,7 +857,7 @@ class FrontEndMidtransController extends Controller
                             'status' => 100,
                         ]
                     ]);
-    
+
                     if(is_null($reservationData->zeals_code)){
                         //
                     } else {
@@ -868,18 +870,18 @@ class FrontEndMidtransController extends Controller
                             ]
                         ]);
                         $data = json_decode($response->getBody(), true);
-        
+
                         zeals_callback_history::create([
                             'response' => $response->getBody()->getContents(),
                             'status_code' => $response->getStatusCode(),
                         ]);
                     }
-    
+
                     // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
                     // $context = stream_context_create($opts);
                     // // $header = file_get_contents('https://www.example.com',false,$context);
                     // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
-    
+
                 }
                 else if($transaction == 'pending'){
                     // TODO set payment status in merchant's database to 'Pending'
@@ -910,6 +912,6 @@ class FrontEndMidtransController extends Controller
                     ]);
             }
         }
-        
+
     }
 }
