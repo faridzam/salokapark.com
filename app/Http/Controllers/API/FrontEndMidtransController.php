@@ -662,13 +662,12 @@ class FrontEndMidtransController extends Controller
                     ]);
 
                     $customer = customer_group::find($reservationData->customer_id);
-                    $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
+                    $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
                         'json' => [
                             'name' => $customer->name,
                             'company_name' => $customer->company_name,
                             'booking_code' => $bookingCode,
                             'email' => $customer->email,
-                            'address' => $customer->address,
                             'arrival' => $reservationData->arrival_date,
                             'status' => 100,
                         ]

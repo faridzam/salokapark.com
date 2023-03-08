@@ -84,11 +84,6 @@ export default function Groups(props) {
         axios.get('/api/get-content-group-banner')
         .then((response) => {
             //
-            // let Obj = response.data.promoBanner;
-            // var result=[];
-            // for(var i=0;i<Obj.length;i++){
-            //     result.push({id: Obj[i].id, gambar: Obj[i].gambar, deskripsi: Obj[i].deskripsi});
-            // }
             setBanner(response.data.groupBanner);
         }).catch((error) => {
             //
