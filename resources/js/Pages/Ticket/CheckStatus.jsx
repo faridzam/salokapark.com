@@ -35,7 +35,7 @@ export function useIsMounted() {
         // optional if you want to set script attribute
         // for example snap.js have data-client-key attribute
         scriptTag.setAttribute('data-client-key', myMidtransClientKey);
-        
+
         document.body.appendChild(scriptTag);
         return () => {
             document.body.removeChild(scriptTag);
@@ -47,7 +47,7 @@ export function useIsMounted() {
 }
 
 export default function CheckStatus(props) {
-    
+
     // React.useEffect(() => {
     //     // componentDidMount() {}
     //     const externalScript = document.createElement('script');
@@ -58,7 +58,7 @@ export default function CheckStatus(props) {
     //         document.body.removeChild(scriptTag);
     //     }
     // }, []);
-    
+
 
     //media query
     const theme = useTheme();
@@ -87,14 +87,35 @@ export default function CheckStatus(props) {
         }).then((response) => {
             //
             let reservations = response.data.reservations;
+            let reservationsGroup = response.data.reservationsGroup;
+            let reservationsZeals = response.data.reservationsZeals;
             let newReservation = [];
 
             for (let index = 0; index < reservations.length; index++) {
                 newReservation.push({
                     id: reservations[index].id,
+                    type: 'reguler',
                     order_id: reservations[index].order_id,
                     bill: reservations[index].bill,
                     arrival_date: reservations[index].arrival_date,
+                })
+            }
+            for (let index = 0; index < reservationsGroup.length; index++) {
+                newReservation.push({
+                    id: reservationsGroup[index].id,
+                    type: 'group',
+                    order_id: reservationsGroup[index].order_id,
+                    bill: reservationsGroup[index].bill,
+                    arrival_date: reservationsGroup[index].arrival_date,
+                })
+            }
+            for (let index = 0; index < reservationsZeals.length; index++) {
+                newReservation.push({
+                    id: reservationsZeals[index].id,
+                    type: 'zeals',
+                    order_id: reservationsZeals[index].order_id,
+                    bill: reservationsZeals[index].bill,
+                    arrival_date: reservationsZeals[index].arrival_date,
                 })
             }
             setReservation(newReservation);
@@ -111,7 +132,7 @@ export default function CheckStatus(props) {
         })
     }
 
-    const selectReservation = (id) => {
+    const selectReservation = (id, type) => {
         //
         setSelectedReservation({
             id: id,
@@ -119,7 +140,8 @@ export default function CheckStatus(props) {
             status: '',
         });
         axios.post('/api/get-reservation-detail', {
-            id: id
+            id: id,
+            type: type
         }).then((response) => {
             //
 
@@ -602,7 +624,7 @@ export default function CheckStatus(props) {
                                                 <Card
                                                 elevation={2}
                                                 className={`reservation-container ${selectedReservation.id ===  reservation[index].id ? styles.reservationContainerActive : ""} `}
-                                                onClick={() => selectReservation(reservation[index].id)}
+                                                onClick={() => selectReservation(reservation[index].id, reservation[index].type)}
                                                 sx={{
                                                     display: 'flex',
                                                     width: '80%',
@@ -1049,7 +1071,7 @@ export default function CheckStatus(props) {
                                                 <Card
                                                 elevation={2}
                                                 className={`reservation-container ${selectedReservation.id ===  reservation[index].id ? styles.reservationContainerActive : ""} `}
-                                                onClick={() => selectReservation(reservation[index].id)}
+                                                onClick={() => selectReservation(reservation[index].id, reservation[index].type)}
                                                 sx={{
                                                     display: 'flex',
                                                     width: '80%',

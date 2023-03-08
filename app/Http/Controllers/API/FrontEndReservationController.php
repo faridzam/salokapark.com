@@ -328,8 +328,22 @@ class FrontEndReservationController extends Controller
         //
         $customerIDs = customer::where('email', $request->email)
         ->pluck('id');
+        $customerGroupIDs = customer_group::where('email', $request->email)
+        ->pluck('id');
+        $customerZealsIDs = customer_zeals::where('email', $request->email)
+        ->pluck('id');
 
         $reservations = reservation::whereIn('customer_id', $customerIDs)
+        ->where('status', '!=', 'created')
+        ->orderBy('created_at', 'desc')
+        ->limit(5)
+        ->get();
+        $reservationsGroup = reservation_group::whereIn('customer_id', $customerGroupIDs)
+        ->where('status', '!=', 'created')
+        ->orderBy('created_at', 'desc')
+        ->limit(5)
+        ->get();
+        $reservationsZeals = reservation_zeals::whereIn('customer_id', $customerZealsIDs)
         ->where('status', '!=', 'created')
         ->orderBy('created_at', 'desc')
         ->limit(5)
@@ -337,20 +351,46 @@ class FrontEndReservationController extends Controller
 
         return response()->json([
             'reservations' => $reservations,
+            'reservationsGroup' => $reservationsGroup,
+            'reservationsZeals' => $reservationsZeals,
         ]);
 
     }
 
     public function getReservationDetail(Request $request) {
 
-        $reservation = reservation::find($request->id);
-        $reservationDetail = reservation_detail::where('reservation_id', $request->id)->get();
-        $customer = customer::find($reservation->customer_id);
+        if ($request->type === 'reguler') {
+            $reservation = reservation::find($request->id);
+            $reservationDetail = reservation_detail::where('reservation_id', $request->id)->get();
+            $customer = customer::find($reservation->customer_id);
 
-        foreach ($reservationDetail as $key =>$value) {
-            $ticketDistribution = ticket_distribution::find($value->ticket_distribution_id);
-            $ticket = ticket::find($ticketDistribution->ticket_id);
-            $value->name = $ticket->name;
+            foreach ($reservationDetail as $key =>$value) {
+                $ticketDistribution = ticket_distribution::find($value->ticket_distribution_id);
+                $ticket = ticket::find($ticketDistribution->ticket_id);
+                $value->name = $ticket->name;
+            }
+
+        }elseif ($request->type === 'group') {
+            $reservation = reservation_group::find($request->id);
+            $reservationDetail = reservation_detail_group::where('reservation_id', $request->id)->get();
+            $customer = customer_group::find($reservation->customer_id);
+
+            foreach ($reservationDetail as $key =>$value) {
+                $ticketDistribution = ticket_distribution_group::find($value->ticket_distribution_id);
+                $ticket = ticket_group::find($ticketDistribution->ticket_id);
+                $value->name = $ticket->name;
+            }
+
+        } elseif ($request->type === 'zeals') {
+            $reservation = reservation_zeals::find($request->id);
+            $reservationDetail = reservation_detail_zeals::where('reservation_id', $request->id)->get();
+            $customer = customer_zeals::find($reservation->customer_id);
+
+            foreach ($reservationDetail as $key =>$value) {
+                $ticketDistribution = ticket_distribution_zeals::find($value->ticket_distribution_id);
+                $ticket = ticket_zeals::find($ticketDistribution->ticket_id);
+                $value->name = $ticket->name;
+            }
         }
 
         return response()->json([
