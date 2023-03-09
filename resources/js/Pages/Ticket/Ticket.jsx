@@ -215,6 +215,29 @@ export default function Ticket(props) {
                                             marginTop: '30px',
                                         }}>
                                             <Button
+                                            onClick={() => redirect('/ticket/pilih-ticket')}
+                                            variant='contained'
+                                            color='primary'
+                                            sx={{
+                                                width: '100%',
+                                                height: '75px',
+                                                borderRadius: '30px',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '24px',
+                                                    fontWeight: 600,
+                                                    letterSpacing: 2
+                                                }}>Ticket by Saloka</Typography>
+                                            </Button>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            width: '50%',
+                                            minWidth: '550px',
+                                            marginTop: '30px',
+                                        }}>
+                                            <Button
                                             onClick={() => redirect('/promo-ticket/pilih-ticket')}
                                             variant='contained'
                                             color='secondary'
@@ -228,7 +251,7 @@ export default function Ticket(props) {
                                                     fontSize: '24px',
                                                     fontWeight: 600,
                                                     letterSpacing: 2
-                                                }}>HEMAT BEREMPAT!</Typography>
+                                                }}>Hemat Berempat</Typography>
                                             </Button>
                                         </Box>
                                         <Box
@@ -238,19 +261,21 @@ export default function Ticket(props) {
                                             marginTop: '30px',
                                         }}>
                                             <Button
-                                            onClick={() => redirect('/ticket/pilih-ticket')}
+                                            onClick={() => redirect('/group-ticket/pilih-ticket')}
                                             variant='contained'
+                                            color='red'
                                             sx={{
                                                 width: '100%',
                                                 height: '75px',
                                                 borderRadius: '30px',
+                                                backgroundColor: 'red.light'
                                             }}>
                                                 <Typography
                                                 sx={{
                                                     fontSize: '24px',
                                                     fontWeight: 600,
                                                     letterSpacing: 2
-                                                }}>Ticket by Saloka!</Typography>
+                                                }}>Tiket Rombongan</Typography>
                                             </Button>
                                         </Box>
                                         <Box
@@ -340,6 +365,27 @@ export default function Ticket(props) {
                                             marginTop: '30px',
                                         }}>
                                             <Button
+                                            onClick={() => redirect('/ticket/pilih-ticket')}
+                                            variant='contained'
+                                            color='primary'
+                                            sx={{
+                                                width: '100%',
+                                                height: '75px',
+                                                borderRadius: '30px',
+                                            }}>
+                                                <Typography
+                                                sx={{
+                                                    fontSize: '18px',
+                                                    fontWeight: 600,
+                                                }}>Ticket by Saloka</Typography>
+                                            </Button>
+                                        </Box>
+                                        <Box
+                                        sx={{
+                                            width: '80%',
+                                            marginTop: '30px',
+                                        }}>
+                                            <Button
                                             onClick={() => redirect('/promo-ticket/pilih-ticket')}
                                             variant='contained'
                                             color='secondary'
@@ -352,7 +398,7 @@ export default function Ticket(props) {
                                                 sx={{
                                                     fontSize: '18px',
                                                     fontWeight: 600,
-                                                }}>HEMAT BEREMPAT!</Typography>
+                                                }}>Hemat Berempat</Typography>
                                             </Button>
                                         </Box>
                                         <Box
@@ -361,18 +407,20 @@ export default function Ticket(props) {
                                             marginTop: '30px',
                                         }}>
                                             <Button
-                                            onClick={() => redirect('/ticket/pilih-ticket')}
+                                            onClick={() => redirect('/group-ticket/pilih-ticket')}
                                             variant='contained'
+                                            color='red'
                                             sx={{
                                                 width: '100%',
                                                 height: '75px',
                                                 borderRadius: '30px',
+                                                backgroundColor: 'red.light'
                                             }}>
                                                 <Typography
                                                 sx={{
                                                     fontSize: '18px',
                                                     fontWeight: 600,
-                                                }}>Ticket by Saloka!</Typography>
+                                                }}>Tiket Rombongan</Typography>
                                             </Button>
                                         </Box>
                                         <Box
