@@ -8,6 +8,15 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use App\Models\ticket;
+use App\Models\ticket_zeals;
+use App\Models\ticket_group;
+use App\Models\option;
+use App\Models\option_zeals;
+use App\Models\option_group;
+use App\Models\ticket_distribution;
+use App\Models\ticket_distribution_zeals;
+use App\Models\ticket_distribution_group;
 use App\Models\reservation;
 use App\Models\reservation_zeals;
 use App\Models\reservation_group;
@@ -48,12 +57,45 @@ class FrontEndMidtransController extends Controller
 
             foreach ($request->ticketOrder as $key => $value) {
                 if ($value['quantity'] > 0) {
-                    $totalBill += ($value['quantity'] * $value['price']);
+                    $ticketDistribution = ticket_distribution::find($value['ticket_id']);
+                    $ticket = ticket::find($ticketDistribution->ticket_id);
+                    $option = option::find($ticketDistribution->option_id);
+
+                    switch ($option->type) {
+                        case 'reguler':
+
+                            $price = $ticket->price;
+
+                            break;
+                        case 'discount':
+                            $price = $ticket->price * (100 - $option->discount) / 100;
+
+                            break;
+                        case 'special_price':
+                            $price = $option->special_price;
+
+                            break;
+                        case 'buy_x_get_y':
+                            # code...
+                            break;
+                        case 'cashback':
+                            # code...
+                            break;
+                        case 'others':
+                            $price = $ticket->price;
+
+                            break;
+                        default:
+                            # code...
+                            break;
+                    }
+
+                    $totalBill += ($value['quantity'] * $price);
                     array_push($itemDetails, [
                         'id' => $value['ticket_id'],
                         'name' => $value['ticket_name'],
                         'quantity' => $value['quantity'],
-                        'price' => $value['price'],
+                        'price' => $price,
                     ]);
                 }
             };
@@ -141,12 +183,44 @@ class FrontEndMidtransController extends Controller
 
             foreach ($request->ticketOrder as $key => $value) {
                 if ($value['quantity'] > 0) {
-                    $totalBill += ($value['quantity'] * $value['price']);
+                    $ticketDistribution = ticket_distribution_group::find($value['ticket_id']);
+                    $ticket = ticket_group::find($ticketDistribution->ticket_id);
+                    $option = option_group::find($ticketDistribution->option_id);
+
+                    switch ($option->type) {
+                        case 'reguler':
+
+                            $price = $ticket->price;
+
+                            break;
+                        case 'discount':
+                            $price = $ticket->price * (100 - $option->discount) / 100;
+
+                            break;
+                        case 'special_price':
+                            $price = $option->special_price;
+
+                            break;
+                        case 'buy_x_get_y':
+                            # code...
+                            break;
+                        case 'cashback':
+                            # code...
+                            break;
+                        case 'others':
+                            $price = $ticket->price;
+
+                            break;
+                        default:
+                            # code...
+                            break;
+                    }
+                    $totalBill += ($value['quantity'] * $price);
                     array_push($itemDetails, [
                         'id' => $value['ticket_id'],
                         'name' => $value['ticket_name'],
                         'quantity' => $value['quantity'],
-                        'price' => $value['price'],
+                        'price' => $price,
                     ]);
                 }
             };
@@ -234,12 +308,44 @@ class FrontEndMidtransController extends Controller
 
             foreach ($request->ticketOrder as $key => $value) {
                 if ($value['quantity'] > 0) {
-                    $totalBill += ($value['quantity'] * $value['price']);
+                    $ticketDistribution = ticket_distribution_zeals::find($value['ticket_id']);
+                    $ticket = ticket_zeals::find($ticketDistribution->ticket_id);
+                    $option = option_zeals::find($ticketDistribution->option_id);
+
+                    switch ($option->type) {
+                        case 'reguler':
+
+                            $price = $ticket->price;
+
+                            break;
+                        case 'discount':
+                            $price = $ticket->price * (100 - $option->discount) / 100;
+
+                            break;
+                        case 'special_price':
+                            $price = $option->special_price;
+
+                            break;
+                        case 'buy_x_get_y':
+                            # code...
+                            break;
+                        case 'cashback':
+                            # code...
+                            break;
+                        case 'others':
+                            $price = $ticket->price;
+
+                            break;
+                        default:
+                            # code...
+                            break;
+                    }
+                    $totalBill += ($value['quantity'] * $price);
                     array_push($itemDetails, [
                         'id' => $value['ticket_id'],
                         'name' => $value['ticket_name'],
                         'quantity' => $value['quantity'],
-                        'price' => $value['price'],
+                        'price' => $price,
                     ]);
                 }
             };
