@@ -171,7 +171,7 @@ export default function Ticket(props) {
         console.log(event);
         setSelectedRegency('');
         setSelectedProvince(event.target.value);
-        window.sessionStorage.setItem('selectedProvince', event.target.value);
+        window.sessionStorage.setItem('selectedProvince', JSON.stringify(JSON.parse(event.target.value).name));
 
         axios.post('/api/get-regency', {
             province_id: JSON.parse(event.target.value).id
@@ -186,7 +186,7 @@ export default function Ticket(props) {
     const onRegencyChange = (event) => {
         console.log(event);
         setSelectedRegency(event.target.value);
-        window.sessionStorage.setItem('selectedRegency', event.target.value);
+        window.sessionStorage.setItem('selectedRegency', JSON.stringify(JSON.parse(event.target.value).name));
     }
 
     // alamat text area

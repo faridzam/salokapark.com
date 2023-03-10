@@ -20,12 +20,16 @@ use App\Models\ticket_distribution_group;
 use App\Models\reservation;
 use App\Models\reservation_zeals;
 use App\Models\reservation_group;
+use App\Models\reservation_detail;
+use App\Models\reservation_detail_zeals;
+use App\Models\reservation_detail_group;
 use App\Models\customer;
 use App\Models\customer_zeals;
 use App\Models\customer_group;
 use App\Models\reserved;
 use App\Models\reserved_zeals;
 use App\Models\reserved_group;
+use App\Models\payment_method;
 use App\Models\zeals_callback_history;
 
 class FrontEndMidtransController extends Controller
@@ -772,15 +776,26 @@ class FrontEndMidtransController extends Controller
                     ]);
 
                     $customer = customer_group::find($reservationData->customer_id);
+                    $ticket = ticket_group::find($reservationData->ticket_id);
+                    $reservationDetail = reservation_detail_group::where('reservation_id', $reservationData->id)->first();
+                    $paymentMethod = payment_method::find($reservationData->payment_method_id);
                     $reservationBill = $reservationData->bill;
                     if ($reservationBill === $grossAmount) {
                         $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
                             'json' => [
+                                'arrival' => $reservationData->arrival_date,
                                 'name' => $customer->name,
                                 'company_name' => $customer->company_name,
-                                'booking_code' => $bookingCode,
+                                'phone' => $customer->phone,
                                 'email' => $customer->email,
-                                'arrival' => $reservationData->arrival_date,
+                                'address' => $customer->address,
+                                'ticket_name' => $ticket->name,
+                                'qty' => $reservationDetail->qty,
+                                'subtotal' => $reservationDetail->subtotal,
+                                'total' => $reservationDetail->subtotal,
+                                'booking_code' => $bookingCode,
+                                'payment_method' => $paymentMethod->name,
+                                'pay_date' => Carbon::today()->toDateString(),
                                 'status' => 100,
                             ]
                         ]);

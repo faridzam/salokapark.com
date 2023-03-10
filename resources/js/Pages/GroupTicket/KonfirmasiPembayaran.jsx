@@ -66,9 +66,12 @@ export default function Ticket(props) {
     ]);
     const ticketCount = Array.from(Array(ticketOrder.length).keys());
     const [name, setName] = React.useState();
+    const [companyName, setCompanyName] = React.useState();
     const [phone, setPhone] = React.useState();
     const [email, setEmail] = React.useState();
     const [address, setAddress] = React.useState();
+    const [selectedProvince, setSelectedProvince] = React.useState();
+    const [selectedRegency, setSelectedRegency] = React.useState();
 
     //get session storage data
     React.useEffect(() => {
@@ -102,6 +105,12 @@ export default function Ticket(props) {
         } else {
             //
         }
+        const localCustomerCompanyName = window.sessionStorage.getItem('customerCompanyName');
+        if (localCustomerCompanyName) {
+            setCompanyName(JSON.parse(localCustomerCompanyName));
+        } else {
+            //
+        }
         const localCustomerEmail = window.sessionStorage.getItem('customerEmail');
         if (localCustomerEmail) {
             setEmail(JSON.parse(localCustomerEmail));
@@ -120,7 +129,18 @@ export default function Ticket(props) {
         } else {
             //
         }
-
+        const localSelectedProvince = window.sessionStorage.getItem('selectedProvince');
+        if (localSelectedProvince) {
+            setSelectedProvince(JSON.parse(localSelectedProvince));
+        } else {
+            //
+        }
+        const localSelectedRegency = window.sessionStorage.getItem('selectedRegency');
+        if (localSelectedRegency) {
+            setSelectedRegency(JSON.parse(localSelectedRegency));
+        } else {
+            //
+        }
     }, []);
     const [totalBill, setTotalBill] = React.useState(0);
     React.useEffect(() => {
@@ -167,7 +187,7 @@ export default function Ticket(props) {
                 //                 total_bill: response.data.status.gross_amount,
                 //             });
                 //             break;
-    
+
                 //         case "bank_transfer":
                 //             if (response.data.status.hasOwnProperty('permata_va_number')) {
                 //                 handleTransactionDialogOpen({
@@ -196,7 +216,7 @@ export default function Ticket(props) {
                 //                 total_bill: response.data.status.gross_amount,
                 //             });
                 //             break;
-    
+
                 //         default:
                 //             break;
                 //     }
@@ -271,7 +291,7 @@ export default function Ticket(props) {
                 name: name,
                 phone: phone,
                 email: email,
-                address: address,
+                address: selectedRegency+", "+selectedProvince,
             })
             .then((response) => {
                 //
@@ -556,6 +576,26 @@ export default function Ticket(props) {
                                     fontSize: '14px',
                                     fontWeight: 400,
                                     color: '#333'
+                                }}>Group Name:</Typography>
+                                <Typography
+                                sx={{
+                                    fontSize: '14px',
+                                    fontWeight: 400,
+                                    color: '#333'
+                                }}>{companyName}</Typography>
+                            </Box>
+                            <Box
+                            sx={{
+                                width: '90%',
+                                height: '100%',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                            }}>
+                                <Typography
+                                sx={{
+                                    fontSize: '14px',
+                                    fontWeight: 400,
+                                    color: '#333'
                                 }}>phone:</Typography>
                                 <Typography
                                 sx={{
@@ -612,7 +652,7 @@ export default function Ticket(props) {
                                         fontWeight: 400,
                                         color: '#333',
                                         lineHeight: 'normal'
-                                    }}>{address}</Typography>
+                                    }}>{selectedRegency+", "+selectedProvince}</Typography>
                                 </Box>
                             </Box>
 
