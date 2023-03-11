@@ -591,7 +591,7 @@ class FrontEndMidtransController extends Controller
 
                     $customer = customer_zeals::find($reservationData->customer_id);
                     $reservationBill = $reservationData->bill;
-                    if ($reservationBill === $grossAmount) {
+                    // if ($reservationBill === $grossAmount) {
                         $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
                             'json' => [
                                 'name' => $customer->name,
@@ -601,7 +601,7 @@ class FrontEndMidtransController extends Controller
                                 'status' => 100,
                             ]
                         ]);
-                    }
+                    // }
 
                     if(is_null($reservationData->zeals_code)){
                         //
@@ -780,7 +780,7 @@ class FrontEndMidtransController extends Controller
                     $reservationDetail = reservation_detail_group::where('reservation_id', $reservationData->id)->first();
                     $paymentMethod = payment_method::find($reservationData->payment_method_id);
                     $reservationBill = $reservationData->bill;
-                    if ($reservationBill === $grossAmount) {
+                    // if ($reservationBill === $grossAmount) {
                         $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
                             'json' => [
                                 'arrival' => $reservationData->arrival_date,
@@ -799,7 +799,7 @@ class FrontEndMidtransController extends Controller
                                 'status' => 100,
                             ]
                         ]);
-                    }
+                    // }
 
                     if(is_null($reservationData->zeals_code)){
                         //
@@ -975,7 +975,7 @@ class FrontEndMidtransController extends Controller
 
                     $customer = customer::find($reservationData->customer_id);
                     $reservationBill = $reservationData->bill;
-                    if ($grossAmount === $reservationBill) {
+                    // if ($grossAmount === $reservationBill) {
                         $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
                             'json' => [
                                 'name' => $customer->name,
@@ -985,7 +985,7 @@ class FrontEndMidtransController extends Controller
                                 'status' => 100,
                             ]
                         ]);
-                    }
+                    // }
 
                     if(is_null($reservationData->zeals_code)){
                         //
