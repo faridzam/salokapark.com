@@ -776,8 +776,9 @@ class FrontEndMidtransController extends Controller
                     ]);
 
                     $customer = customer_group::find($reservationData->customer_id);
-                    $ticket = ticket_group::find($reservationData->ticket_id);
                     $reservationDetail = reservation_detail_group::where('reservation_id', $reservationData->id)->first();
+                    $ticketDistribution = ticket_distribution_group::find($reservationDetail->ticket_distribution_id);
+                    $ticket = ticket_group::find($ticketDistribution->ticket_id);
                     $paymentMethod = payment_method::find($reservationData->payment_method_id);
                     $reservationBill = $reservationData->bill;
                     // if ($reservationBill === $grossAmount) {
