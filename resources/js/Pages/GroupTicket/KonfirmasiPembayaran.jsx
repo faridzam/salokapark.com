@@ -8,6 +8,8 @@ import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
 import {Helmet} from "react-helmet";
 
+import { EncryptStorage } from 'encrypt-storage';
+
 export function useIsMounted() {
 
     const isMountedRef = React.useRef(true);
@@ -37,6 +39,10 @@ export function useIsMounted() {
 
     return isMounted;
 }
+
+export const encryptStorage = new EncryptStorage('@encryptedByZam', {
+    storageType: 'sessionStorage',
+});
 
 export default function Ticket(props) {
 
@@ -75,27 +81,27 @@ export default function Ticket(props) {
 
     //get session storage data
     React.useEffect(() => {
-        const localReservationID = window.sessionStorage.getItem('reservationID');
+        const localReservationID = encryptStorage.getItem('reservationID');
         if (localReservationID) {
-            setReservationID(JSON.parse(localReservationID));
+            setReservationID(localReservationID);
         } else {
             //
         }
-        const localOrderID = window.sessionStorage.getItem('orderID');
+        const localOrderID = encryptStorage.getItem('orderID');
         if (localOrderID) {
-            setOrderID(JSON.parse(localOrderID));
+            setOrderID(localOrderID);
         } else {
             //
         }
-        const localBookingDate = window.sessionStorage.getItem('arrivalDate');
+        const localBookingDate = encryptStorage.getItem('arrivalDate');
         if (localBookingDate) {
             setBookingDate(new Date(parseInt(localBookingDate)));
         } else {
             //
         }
-        const localTicketOrder = window.sessionStorage.getItem('ticketOrder');
+        const localTicketOrder = encryptStorage.getItem('ticketOrder');
         if (localTicketOrder) {
-            setTicketOrder(JSON.parse(localTicketOrder));
+            setTicketOrder(localTicketOrder);
         } else {
             //
         }
@@ -281,7 +287,7 @@ export default function Ticket(props) {
         .then((response) => {
             //
             let newOrderID = new Date().getFullYear().toString()+new Date().getMonth().toString()+new Date().getDate().toString()+new Date().getHours().toString()+new Date().getMinutes().toString()+new Date().getSeconds().toString()+new Date().getMilliseconds().toString()+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1);
-            window.sessionStorage.setItem('orderID', JSON.stringify(newOrderID));
+            encryptStorage.setItem('orderID', JSON.stringify(newOrderID));
             setOrderID(newOrderID);
 
             axios.post('/api/get-midtrans-token', {

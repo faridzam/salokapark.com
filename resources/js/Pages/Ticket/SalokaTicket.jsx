@@ -10,6 +10,8 @@ import {media} from '../../assets/images';
 import { Application, Calendar } from 'react-rainbow-components';
 import axios from 'axios';
 
+import { EncryptStorage } from 'encrypt-storage';
+
 import { Inertia } from '@inertiajs/inertia';
 
 const calendarContainerStyles = {
@@ -48,6 +50,10 @@ const rainbowTheme = {
         },
     },
 };
+
+export const encryptStorage = new EncryptStorage('@encryptedByZam', {
+    storageType: 'sessionStorage',
+});
 
 export default function Ticket(props) {
 
@@ -168,7 +174,7 @@ export default function Ticket(props) {
     const handleArrivalDate = (value) => {
         var userTimezoneOffset = (value.getTimezoneOffset() * 60000) + (7*60000);
         setBookingDate(value);
-        window.sessionStorage.setItem('arrivalDate', JSON.stringify(value.getTime() - userTimezoneOffset));
+        encryptStorage.setItem('arrivalDate', JSON.stringify(value.getTime() - userTimezoneOffset));
     }
 
     const ticketCount = Array.from(Array(ticketOrder.length).keys());
@@ -178,7 +184,7 @@ export default function Ticket(props) {
         newArr[index].quantity+=newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
 
         setTicketOrder(newArr);
-        window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
+        encryptStorage.setItem('ticketOrder', JSON.stringify(newArr));
 
         checkQuantity();
     }
@@ -188,7 +194,7 @@ export default function Ticket(props) {
             newArr[index].quantity-=newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
         }
         setTicketOrder(newArr);
-        window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
+        encryptStorage.setItem('ticketOrder', JSON.stringify(newArr));
 
         checkQuantity();
     }
