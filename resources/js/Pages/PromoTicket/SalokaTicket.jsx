@@ -12,6 +12,8 @@ import axios from 'axios';
 
 import { Inertia } from '@inertiajs/inertia';
 
+import { EncryptStorage } from 'encrypt-storage';
+
 const calendarContainerStyles = {
     padding: '30px',
     width: '100%',
@@ -48,6 +50,10 @@ const rainbowTheme = {
         },
     },
 };
+
+export const encryptStorage = new EncryptStorage('@encryptedByZam', {
+    storageType: 'sessionStorage',
+});
 
 export default function Ticket(props) {
 
@@ -161,7 +167,7 @@ export default function Ticket(props) {
             }
             setTicketOrder(newTicket);
             checkQuantity();
-            window.sessionStorage.setItem('ticketOrder', JSON.stringify(newTicket));
+            encryptStorage.setItem('ticketOrder', JSON.stringify(newTicket));
         }).catch((error) => {
             //
             console.log(error);
@@ -171,7 +177,7 @@ export default function Ticket(props) {
     const handleArrivalDate = (value) => {
         var userTimezoneOffset = (value.getTimezoneOffset() * 60000) + (7*60000);
         setBookingDate(value);
-        window.sessionStorage.setItem('arrivalDate', JSON.stringify(value.getTime() - userTimezoneOffset));
+        encryptStorage.setItem('arrivalDate', JSON.stringify(value.getTime() - userTimezoneOffset));
     }
 
     const ticketCount = Array.from(Array(ticketOrder.length).keys());
@@ -189,7 +195,7 @@ export default function Ticket(props) {
         }
         checkQuantity();
         setTicketOrder(newArr);
-        window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
+        encryptStorage.setItem('ticketOrder', JSON.stringify(newArr));
     }
     const subQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
@@ -204,7 +210,7 @@ export default function Ticket(props) {
         }
         checkQuantity();
         setTicketOrder(newArr);
-        window.sessionStorage.setItem('ticketOrder', JSON.stringify(newArr));
+        encryptStorage.setItem('ticketOrder', JSON.stringify(newArr));
     }
 
     const [totalBill, setTotalBill] = React.useState(0);

@@ -8,6 +8,8 @@ import {AccountCircle, Email, Phone, LocationOn} from '@mui/icons-material';
 import { Header, Footer, ToTopButton} from '../../Components';
 import {media} from '../../assets/images';
 
+import { EncryptStorage } from 'encrypt-storage';
+
 export function useIsMounted() {
 
     const isMountedRef = React.useRef(true);
@@ -21,6 +23,10 @@ export function useIsMounted() {
 
 }
 
+export const encryptStorage = new EncryptStorage('@encryptedByZam', {
+    storageType: 'sessionStorage',
+});
+
 export default function Ticket(props) {
     const isMounted = useIsMounted();
     const initialMountRef = React.useRef(true);
@@ -32,15 +38,15 @@ export default function Ticket(props) {
 
     //get session storage data
     React.useEffect(() => {
-        const localBookingDate = window.sessionStorage.getItem('arrivalDate');
+        const localBookingDate = encryptStorage.getItem('arrivalDate');
         if (localBookingDate) {
             setBookingDate(new Date(parseInt(localBookingDate)));
         } else {
             //
         }
-        const localTicketOrder = window.sessionStorage.getItem('ticketOrder');
+        const localTicketOrder = encryptStorage.getItem('ticketOrder');
         if (localTicketOrder) {
-            setTicketOrder(JSON.parse(localTicketOrder));
+            setTicketOrder(localTicketOrder);
         } else {
             //
         }
@@ -68,9 +74,9 @@ export default function Ticket(props) {
         } else {
             //
         }
-        const reservationOption = window.sessionStorage.getItem('reservationOptionID');
+        const reservationOption = encryptStorage.getItem('reservationOptionID');
         if (reservationOption) {
-            setReservationOptionID(JSON.parse(reservationOption));
+            setReservationOptionID(reservationOption);
         } else {
             //
         }
@@ -169,7 +175,7 @@ export default function Ticket(props) {
 
     const submit = () => {
         let orderID = "ze-"+new Date().getFullYear().toString()+(new Date().getMonth()+1).toString().padStart(2, "0")+new Date().getDate().toString().padStart(2, "0")+new Date().getMinutes().toString().padStart(2, "0")+new Date().getMilliseconds().toString().padStart(2, "0")+Math.floor(Math.random()*(999-100+1)+100).toString().substring(1);
-        window.sessionStorage.setItem('orderID', JSON.stringify(orderID));
+        encryptStorage.setItem('orderID', JSON.stringify(orderID));
         let zealsCode = window.localStorage.getItem('zeals_track');
 
         if(zealsCode) {
@@ -185,8 +191,8 @@ export default function Ticket(props) {
                 ticketOrder: ticketOrder,
             }).then((response) => {
                 //
-                window.sessionStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
-                window.sessionStorage.setItem('orderID', JSON.stringify(response.data.order_id));
+                encryptStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
+                encryptStorage.setItem('orderID', JSON.stringify(response.data.order_id));
             }).catch((error) => {
                 //
                 console.log(error)
