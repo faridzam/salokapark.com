@@ -179,7 +179,7 @@ class FrontEndReservationController extends Controller
                     case 'discount':
                         $price = $ticket->price * (100 - $option->discount) / 100;
 
-                        reservation_detail_group::create([
+                        $created_reservation_detail = reservation_detail_group::create([
                             'reservation_id' => $reservation->id,
                             'ticket_distribution_id' => $value['ticket_id'],
                             'qty' => $value['quantity'],
@@ -187,10 +187,11 @@ class FrontEndReservationController extends Controller
                         ]);
 
                         if ($ticketDistribution->category_id === 11 || $ticketDistribution->category_id === 12) {
+                            $quantity_bonus = floor($created_reservation_detail->qty / 15);
                             reservation_detail_group::create([
                                 'reservation_id' => $reservation->id,
                                 'ticket_distribution_id' => 24,
-                                'qty' => 2,
+                                'qty' => $quantity_bonus*2,
                                 'subtotal' => 0,
                             ]);
                         }
