@@ -86,7 +86,7 @@ export default function Ticket(props) {
 
     // booking date
     const today = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Jakarta'}));
-    const maxDate = new Date("2024-3-21");
+    const maxDate = new Date("2023-4-20");
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
     const timeString = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });

@@ -56,6 +56,8 @@ class FrontEndTicketController extends Controller
         ->where('date_end', '>=', $bookingDate)
         ->get();
 
+        $theOnlyID = 0;
+
         foreach ($ticketEvent as $key => $value) {
             $stock = stock::where('ticket_id', $value->ticket_id)->value('stock');
 
@@ -113,6 +115,40 @@ class FrontEndTicketController extends Controller
                 }
             };
 
+            // The Only
+            if ($value->category_id === 13) {
+                if (in_array($bookingDate->dayOfWeekIso, unserialize($value->days))) {
+                    $ticketReguler = [];
+                    $theOnlyID = $value->id;
+                } else {
+                    $ticketReguler = [];
+                    unset($ticketEvent[$key]);
+                }
+            };
+
+        }
+
+        if ($theOnlyID !== 0) {
+            $ticketEvent = ticket_distribution::where('id', $theOnlyID)
+            ->where('date_start', '<=', $bookingDate)
+            ->where('date_end', '>=', $bookingDate)
+            ->get();
+
+            foreach ($ticketEvent as $key => $value) {
+                $ticket = ticket::find($value->ticket_id);
+                $option = option::find($value->option_id);
+                $value->name = $ticket->name;
+                #price-option
+                // $value->price = $ticket->price;
+                if ($option->type === 'special_price') {
+                    $value->price = $option->special_price;
+                } elseif ($option->type === 'discount') {
+                    $value->price = round($ticket->price * (100-$option->discount) / 100, -3);
+                } else {
+                    $value->price = $ticket->price;
+                }
+                $value->description = $option->description;
+            }
         }
 
         $ticketEvent = $ticketEvent->values();
@@ -314,6 +350,8 @@ class FrontEndTicketController extends Controller
         ->where('date_end', '>=', $bookingDate)
         ->get();
 
+        $theOnlyID = 0;
+
         foreach ($ticketEvent as $key => $value) {
             $stock = stock_group::where('ticket_id', $value->ticket_id)->value('stock');
 
@@ -371,6 +409,40 @@ class FrontEndTicketController extends Controller
                 }
             };
 
+            // The Only
+            if ($value->category_id === 13) {
+                if (in_array($bookingDate->dayOfWeekIso, unserialize($value->days))) {
+                    $ticketReguler = [];
+                    $theOnlyID = $value->id;
+                } else {
+                    $ticketReguler = [];
+                    unset($ticketEvent[$key]);
+                }
+            };
+
+        }
+
+        if ($theOnlyID !== 0) {
+            $ticketEvent = ticket_distribution_group::where('id', $theOnlyID)
+            ->where('date_start', '<=', $bookingDate)
+            ->where('date_end', '>=', $bookingDate)
+            ->get();
+
+            foreach ($ticketEvent as $key => $value) {
+                $ticket = ticket_group::find($value->ticket_id);
+                $option = option_group::find($value->option_id);
+                $value->name = $ticket->name;
+                #price-option
+                // $value->price = $ticket->price;
+                if ($option->type === 'special_price') {
+                    $value->price = $option->special_price;
+                } elseif ($option->type === 'discount') {
+                    $value->price = round($ticket->price * (100-$option->discount) / 100, -3);
+                } else {
+                    $value->price = $ticket->price;
+                }
+                $value->description = $option->description;
+            }
         }
 
         $ticketEvent = $ticketEvent->values();
