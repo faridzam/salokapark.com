@@ -139,7 +139,7 @@ export default function Ticket(props) {
                     ticket_description: eventTicket[index].description,
                     min_qty: eventTicket[index].min_qty,
                     max_qty: eventTicket[index].max_qty,
-                    quantity: 0,
+                    quantity: eventTicket[index].min_qty,
                     price: eventTicket[index].price,
                 })
             }
@@ -231,7 +231,7 @@ export default function Ticket(props) {
                 subtotal += ticket.price * ticket.quantity;
             });
             setTotalBill(subtotal)
-    }, [ticketOrder])
+    }, [ticketOrder]);
 
     const isMounted = useIsMounted();
     return (

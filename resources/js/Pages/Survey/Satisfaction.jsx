@@ -9,7 +9,13 @@ import PropTypes from 'prop-types';
 
 import {media} from '../../assets/images';
 import {mediaSurvey} from '../../assets/images/survey';
-import '../../styles/satisfactionSurvey.module.css';
+import customStyle from '../../styles/satisfactionSurvey.module.css';
+
+import { EncryptStorage } from 'encrypt-storage';
+
+export const encryptStorage = new EncryptStorage('@encryptedByZam', {
+    storageType: 'sessionStorage',
+});
 
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);
@@ -22,33 +28,6 @@ export function useIsMounted() {
     return isMounted;
 }
 
-function customPageThumb(props) {
-    const { children, ...other } = props;
-    return (
-      <SliderThumb {...other}>
-        {children}
-        <p 
-        className="page-label">
-          {props.ownerState.componentsProps.page.page}
-        </p>
-      </SliderThumb>
-    );
-}
-  
-customPageThumb.propTypes = {
-    children: PropTypes.node,
-};
-
-function ValueLabelComponent(props) {
-    const { children, value } = props;
-  
-    return (
-      <Tooltip enterTouchDelay={0} placement="top" title={value}>
-        {children}
-      </Tooltip>
-    );
-}
-  
 ValueLabelComponent.propTypes = {
   children: PropTypes.element.isRequired,
   value: PropTypes.number.isRequired,
@@ -57,12 +36,43 @@ ValueLabelComponent.propTypes = {
 export default function CustomerSurvey(props) {
     const isMounted = useIsMounted();
 
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
+
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
 
+    React.useEffect(() => {
+        const localPage = encryptStorage.getItem('page-satisfaction');
+        if (localPage) {
+            setPage(localPage);
+        } else {
+            //
+        }
+        const localProgress = encryptStorage.getItem('progress-satisfaction');
+        if (localProgress) {
+            setProgress(localProgress);
+        } else {
+            //
+        }
+        const localQuestion = encryptStorage.getItem('question-satisfaction');
+        if (localQuestion) {
+            setQuestion(localQuestion);
+        } else {
+            //
+        }
+        const localOwner = encryptStorage.getItem('owner');
+        if (localOwner) {
+            setOwner(localOwner);
+        } else {
+            //
+        }
+    }, []);
+
     const [loaded, setLoaded] = React.useState(false);
-    const [page, setPage] = React.useState(true);
+    const [page, setPage] = React.useState(null);
     const [progress, setProgress] = React.useState(null);
     const [question, setQuestion] = React.useState(null);
     const [owner, setOwner] = React.useState(null);
@@ -73,6 +83,98 @@ export default function CustomerSurvey(props) {
     const [equivalence, setEquivalence] = React.useState(null);
     const [notes, setNotes] = React.useState(null);
     const [isNotesFormValid, setIsNotesFormValid] = React.useState(true);
+
+    const onReview = (event, value) => {
+        //
+        switch (page) {
+            case 1:
+                setRides(value);
+                setPage(page+1);
+                setProgress(33);
+                setQuestion("Bagaimana fasilitas dan kebersihan area kami?(fasum, resto, dll)");
+                break;
+            case 2:
+                setFacilities(value);
+                setPage(page+1);
+                setProgress(50);
+                setQuestion("Bagaimana keramahtamahan karyawan kami?");
+                break;
+            case 3:
+                setHospitality(value);
+                setPage(page+1);
+                setProgress(67);
+                setQuestion("Bagaimana pelayanan kami secara keseluruhan?");
+                break;
+            case 4:
+                setServices(value);
+                setPage(page+1);
+                setProgress(83);
+                setQuestion("Apakah harga tiket sesuai dengan kualitas kami?");
+                break;
+            case 5:
+                setEquivalence(value);
+                setPage(page+1);
+                setProgress(100);
+                setQuestion("Tuliskan komentar anda tentang saloka!");
+                break;
+
+            default:
+                break;
+        }
+    }
+    const handleNoteChange = (event) => {
+        //
+        // console.log(event);
+        if (event.target.name === "notes") {
+            if (!event.target.value) {
+                setIsNotesFormValid(false);
+            } else {
+                setIsNotesFormValid(true);
+            }
+            setNotes(event.target.value);
+        }
+    }
+    const onSubmit = () => {
+        if (notes) {
+            axios.post('/api/store-satisfaction', {
+                'owner': owner,
+                'rides': rides,
+                'facilities': facilities,
+                'hospitality': hospitality,
+                'services': services,
+                'equivalence': equivalence,
+                'notes': notes
+            }).then((res) => {
+                encryptStorage.setItem('page-visit', 1);
+                encryptStorage.setItem('progressBefore-visit', 0);
+                encryptStorage.setItem('progress-visit', 1);
+                encryptStorage.setItem('question-visit', "Sudah berapa kali anda berkunjung ke saloka?");
+                encryptStorage.setItem('option-visit',
+                [
+                    {
+                        value: 1,
+                        text: "1 kali"
+                    },
+                    {
+                        value: 2,
+                        text: "2 kali"
+                    },
+                    {
+                        value: 3,
+                        text: "> 2 kali"
+                    },
+                ]);
+                redirect('/survey/visit');
+            }).catch((error) => {
+                //catch the error
+                console.log(error);
+            });
+        } else {
+            if (!notes) {
+                setIsNotesFormValid(false);
+            }
+        }
+    }
 
     return(
         <>
@@ -92,7 +194,7 @@ export default function CustomerSurvey(props) {
                         style={{
                             overflow: 'hidden',
                         }}>
-                        {loaded === true ? null : 
+                        {loaded === true ? null :
                             <Box
                             sx={{
                                 position: 'absolute',
@@ -131,9 +233,15 @@ export default function CustomerSurvey(props) {
                                 }}>
                                     <Fade in={loaded}>
                                         <img
-                                        style={loaded ? {} : {display: 'none'}}
+                                        style={loaded ? {
+                                            objectFit: 'contain',
+                                            objectPosition: 'top',
+                                            width: '100%',
+                                            height: '100px',
+                                        } : {display: 'none'}}
                                         src={mediaSurvey[1]}
-                                        height="100px" alt="loka"
+                                        height="100px"
+                                        alt="loka"
                                         onLoad={() => setLoaded(true)}/>
                                     </Fade>
                                 </Box>
@@ -176,16 +284,16 @@ export default function CustomerSurvey(props) {
                                     alignItems: 'center',
                                 }}>
                                     <Fade in={loaded}>
-                                        <h2 
+                                        <h2
                                         className="title"
                                         style={{
-                                            textAlign: 'center', 
-                                            color: '#444', 
-                                            margin: 0, 
-                                            padding: 0, 
-                                            maxWidth: '400px', 
+                                            textAlign: 'center',
+                                            color: '#444',
+                                            margin: 0,
+                                            padding: 0,
+                                            maxWidth: '400px',
                                         }}>Silahkan Berikan Penilaian Atas Pengalaman Anda di Saloka</h2>
-                                    </Fade>                        
+                                    </Fade>
                                 </Box>
                                 {/*<Box
                                 sx={{
@@ -201,7 +309,7 @@ export default function CustomerSurvey(props) {
                                     </Fade>
                                 </Box> */}
                             </Box>
-            
+
                             <Box
                             sx={{
                                 width: '100%',
@@ -248,14 +356,14 @@ export default function CustomerSurvey(props) {
                                     autoComplete='off'
                                     value={notes}
                                     name="notes"
-                                    onChange={this.onChange}
+                                    onChange={event => handleNoteChange(event)}
                                     multiline
                                     rows={10}
                                     label="Komentar"
                                     placeholder="Silahkan tulis komentar di kolom ini..."
                                     color="primary"
                                     focused/>
-            
+
                                     <Button
                                     sx={{
                                         mt: 1,
@@ -265,8 +373,8 @@ export default function CustomerSurvey(props) {
                                         alignItems: 'center',
                                         background: 'linear-gradient(to right bottom, #30E8BF, #FF8235)'
                                     }}
-                                    variant="standard" 
-                                    onClick={this.onSubmit}
+                                    variant="standard"
+                                    onClick={onSubmit}
                                     >
                                         <Typography
                                         sx={{
@@ -306,7 +414,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 5)}>
+                                    onClick={event => onReview(event, 5)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -342,7 +450,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 4)}>
+                                    onClick={event => onReview(event, 4)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -378,7 +486,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 3)}>
+                                    onClick={event => onReview(event, 3)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -414,7 +522,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 2)}>
+                                    onClick={event => onReview(event, 2)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -450,7 +558,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 1)}>
+                                    onClick={event => onReview(event, 1)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -479,7 +587,7 @@ export default function CustomerSurvey(props) {
                                 </Paper>
                                 </Fade>
                             }
-                            
+
                         </Grid>
                     :
                         <Grid
@@ -490,7 +598,7 @@ export default function CustomerSurvey(props) {
                         style={{
                             overflow: 'hidden',
                         }}>
-                        {loaded === true ? null : 
+                        {loaded === true ? null :
                             <Box
                             sx={{
                                 position: 'absolute',
@@ -529,9 +637,15 @@ export default function CustomerSurvey(props) {
                                 }}>
                                     <Fade in={loaded}>
                                         <img
-                                        style={loaded ? {} : {display: 'none'}}
+                                        style={loaded ? {
+                                            objectFit: 'contain',
+                                            objectPosition: 'top',
+                                            width: '100%',
+                                            height: '100px',
+                                        } : {display: 'none'}}
                                         src={mediaSurvey[1]}
-                                        height="100px" alt="loka"
+                                        height="100px"
+                                        alt="loka"
                                         onLoad={() => setLoaded(true)}/>
                                     </Fade>
                                 </Box>
@@ -574,16 +688,16 @@ export default function CustomerSurvey(props) {
                                     alignItems: 'center',
                                 }}>
                                     <Fade in={loaded}>
-                                        <h2 
+                                        <h2
                                         className="title"
                                         style={{
-                                            textAlign: 'center', 
-                                            color: '#444', 
-                                            margin: 0, 
-                                            padding: 0, 
-                                            maxWidth: '400px', 
+                                            textAlign: 'center',
+                                            color: '#444',
+                                            margin: 0,
+                                            padding: 0,
+                                            maxWidth: '400px',
                                         }}>Silahkan Berikan Penilaian Atas Pengalaman Anda di Saloka</h2>
-                                    </Fade>                        
+                                    </Fade>
                                 </Box>
                                 {/*<Box
                                 sx={{
@@ -599,7 +713,7 @@ export default function CustomerSurvey(props) {
                                     </Fade>
                                 </Box> */}
                             </Box>
-            
+
                             <Box
                             sx={{
                                 width: '100%',
@@ -646,14 +760,14 @@ export default function CustomerSurvey(props) {
                                     autoComplete='off'
                                     value={notes}
                                     name="notes"
-                                    onChange={this.onChange}
+                                    onChange={event => handleNoteChange(event)}
                                     multiline
                                     rows={10}
                                     label="Komentar"
                                     placeholder="Silahkan tulis komentar di kolom ini..."
                                     color="primary"
                                     focused/>
-            
+
                                     <Button
                                     sx={{
                                         mt: 1,
@@ -663,8 +777,8 @@ export default function CustomerSurvey(props) {
                                         alignItems: 'center',
                                         background: 'linear-gradient(to right bottom, #30E8BF, #FF8235)'
                                     }}
-                                    variant="standard" 
-                                    onClick={this.onSubmit}
+                                    variant="standard"
+                                    onClick={onSubmit}
                                     >
                                         <Typography
                                         sx={{
@@ -704,7 +818,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 5)}>
+                                    onClick={event => onReview(event, 5)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -740,7 +854,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 4)}>
+                                    onClick={event => onReview(event, 4)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -776,7 +890,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 3)}>
+                                    onClick={event => onReview(event, 3)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -812,7 +926,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 2)}>
+                                    onClick={event => onReview(event, 2)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -848,7 +962,7 @@ export default function CustomerSurvey(props) {
                                         borderRadius: 3,
                                     }}
                                     variant="outlined"
-                                    onClick={event => this.onReview(event, 1)}>
+                                    onClick={event => onReview(event, 1)}>
                                         <Box
                                         sx={{
                                             width: '100%',
@@ -877,10 +991,38 @@ export default function CustomerSurvey(props) {
                                 </Paper>
                                 </Fade>
                             }
-                            
+
                         </Grid>
                 }
             </Fade>
         </>
+    );
+}
+
+
+function customPageThumb(props) {
+    const { children, ...other } = props;
+    // console.log(props);
+    return (
+      <SliderThumb {...other}>
+        {children}
+        <p className="page-label">
+          {props.ownerState.slotProps.page.page}
+        </p>
+      </SliderThumb>
+    );
+}
+
+customPageThumb.propTypes = {
+    children: PropTypes.node,
+};
+
+function ValueLabelComponent(props) {
+    const { children, value } = props;
+    // console.log(props);
+    return (
+      <Tooltip enterTouchDelay={0} placement="top" title={value}>
+        {children}
+      </Tooltip>
     );
 }

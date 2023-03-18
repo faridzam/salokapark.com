@@ -9,6 +9,7 @@ use App\Http\Controllers\API\FrontEndZealsTicketController;
 use App\Http\Controllers\API\FrontEndReservationController;
 use App\Http\Controllers\API\ContentController;
 use App\Http\Controllers\API\visitorController;
+use App\Http\Controllers\API\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,10 @@ use App\Http\Controllers\API\visitorController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//survey
+Route::post('store-customer', [SurveyController::class, 'storeCustomer']);
+Route::post('store-satisfaction', [SurveyController::class, 'storeSatisfaction']);
+Route::post('store-visit', [SurveyController::class, 'storeVisit']);
 //visitor
 Route::post('add-visitor', [visitorController::class, 'addVisitor']);
 Route::post('get-visitor', [visitorController::class, 'getVisitor']);

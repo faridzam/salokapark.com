@@ -199,6 +199,12 @@ Route::get('/survey/visit', function () {
     Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, survey, polling, kepuasan, pelanggan');
     return Inertia::render('Survey/Visit');
 })->name('surveyVisit');
+Route::get('/survey/finished', function () {
+    Meta::addMeta('title', 'saloka theme park - survey');
+    Meta::addMeta('description', 'customer satisfaction survey / survey kepuasan pelanggan');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, survey, polling, kepuasan, pelanggan');
+    return Inertia::render('Survey/Finished');
+})->name('surveyFinished');
 
 //group
 Route::view('/grup/noslider', 'NoSliderLandingPage.LandingPage.noslider');

@@ -185,6 +185,16 @@ class FrontEndReservationController extends Controller
                             'qty' => $value['quantity'],
                             'subtotal' => $price*$value['quantity'],
                         ]);
+
+                        if ($ticketDistribution->category_id === 11 || $ticketDistribution->category_id === 12) {
+                            reservation_detail_group::create([
+                                'reservation_id' => $reservation->id,
+                                'ticket_distribution_id' => 24,
+                                'qty' => 2,
+                                'subtotal' => 0,
+                            ]);
+                        }
+
                         break;
                     case 'special_price':
                         $price = $option->special_price;

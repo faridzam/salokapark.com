@@ -9,6 +9,8 @@ import { Inertia } from '@inertiajs/inertia';
 import {media} from '../../assets/images';
 import {mediaSurvey} from '../../assets/images/survey';
 
+import { EncryptStorage } from 'encrypt-storage';
+
 export function useIsMounted() {
     const isMountedRef = React.useRef(true);
     const isMounted = React.useCallback(() => isMountedRef.current, []);
@@ -20,12 +22,23 @@ export function useIsMounted() {
     return isMounted;
 }
 
+export const encryptStorage = new EncryptStorage('@encryptedByZam', {
+    storageType: 'sessionStorage',
+});
+
 export default function CustomerSurvey(props) {
     const isMounted = useIsMounted();
 
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
+
+    const redirect = (route) => {
+        Inertia.visit(route);
+    }
+    const redirectWithParams = (route, params) => {
+        Inertia.visit(route, params);
+    }
 
     const [loaded, setLoaded] = React.useState(false);
     const [isNameFormValid, setIsNameFormValid] = React.useState(true);
@@ -67,36 +80,44 @@ export default function CustomerSurvey(props) {
             }
             setAddress(e.target.value);
         }
-        console.log(e);
     }
 
     const onSubmit = (e) => {
         if (name && phone && address) {
-            // axios.post('http://'+process.env.REACT_APP_SERVER+':'+process.env.REACT_APP_SERVER_PORT+'/api/survey/customer', { name, phone, address })
-            // .then((res) => {
-            //     this.props.router.navigate('/satisfaction', { state: {
-            //         owner: res.data.id,
-            //         page: 1,
-            //         progressBefore: 0,
-            //         progress: 16.7,
-            //         question: "Bagaimana kualitas permainan wahana Kami?"
-            //     }});
-            // }).catch((error) => {
-            //     //catch the error
-            //     console.log(error);
-            // });
+            axios.post('/api/store-customer', {
+                'name': name,
+                'phone': phone,
+                'address': address
+            }).then((res) => {
+                encryptStorage.setItem('owner', res.data.customer.id);
+                encryptStorage.setItem('page-satisfaction', 1);
+                encryptStorage.setItem('progressBefore-satisfaction', 0);
+                encryptStorage.setItem('progress-satisfaction', 16.7);
+                encryptStorage.setItem('question-satisfaction', "Bagaimana kualitas permainan wahana Kami?");
+                redirect('/survey/satisfaction');
+                // this.props.router.navigate('/satisfaction', { state: {
+                //     owner: res.data.id,
+                //     page: 1,
+                //     progressBefore: 0,
+                //     progress: 16.7,
+                //     question: "Bagaimana kualitas permainan wahana Kami?"
+                // }});
+            }).catch((error) => {
+                //catch the error
+                // console.log(error);
+            });
         } else {
             if (!name) {
-                this.setState({ isNameFormValid: false });
+                setIsNameFormValid(false);
             }
             if(!phone) {
-                this.setState({ isPhoneFormValid: false });
+                setIsPhoneFormValid(false);
             }
             if(!address) {
-                this.setState({ isAddressFormValid: false });
+                setIsAddressFormValid(false);
             }
         }
-        
+
     }
 
     return(
@@ -116,7 +137,7 @@ export default function CustomerSurvey(props) {
                         alignItems="center"
                         style={{  }}
                         >
-                            {loaded === true ? null : 
+                            {loaded === true ? null :
                                 <Box
                                 sx={{
                                     position: 'absolute',
@@ -150,9 +171,9 @@ export default function CustomerSurvey(props) {
                                 }}
                                 >
                                     <Fade in={loaded}>
-                                        <img 
+                                        <img
                                         style={loaded ? {} : {display: 'none'}}
-                                        src={mediaSurvey[0]} 
+                                        src={mediaSurvey[0]}
                                         width="150px" alt="loka"
                                         onLoad={() => setLoaded(true)}/>
                                     </Fade>
@@ -180,7 +201,7 @@ export default function CustomerSurvey(props) {
                                     >
 
                                         <p style={{margin: 0, padding: 0, textAlign: 'center', fontFamily: 'sans-serif', fontSize: '18px', color: 'white'}}>Survey Kepuasan Pengunjung</p>
-                                        <FormControl 
+                                        <FormControl
                                         variant="standard"
                                         sx={{width: '100%', alignItems: 'center'}}>
                                             <Box sx={{width: '90%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', my: 1}}>
@@ -209,10 +230,10 @@ export default function CustomerSurvey(props) {
                                                 label="Nama"
                                                 InputProps={{
                                                     startAdornment: (
-                                                        <InputAdornment 
+                                                        <InputAdornment
                                                         position="start"
                                                         sx={{
-                                                            
+
                                                         }}>
                                                             <Person
                                                             sx={{
@@ -254,10 +275,10 @@ export default function CustomerSurvey(props) {
                                                 label="Nomor Ponsel"
                                                 InputProps={{
                                                     startAdornment: (
-                                                        <InputAdornment 
+                                                        <InputAdornment
                                                         position="start"
                                                         sx={{
-                                                            
+
                                                         }}>
                                                             <PhoneIphone
                                                             sx={{
@@ -300,10 +321,10 @@ export default function CustomerSurvey(props) {
                                                 label="Alamat"
                                                 InputProps={{
                                                     startAdornment: (
-                                                        <InputAdornment 
+                                                        <InputAdornment
                                                         position="start"
                                                         sx={{
-                                                            
+
                                                         }}>
                                                             <LocationOn
                                                             sx={{
@@ -329,7 +350,7 @@ export default function CustomerSurvey(props) {
                                                 alignItems: 'center',
                                                 background: 'linear-gradient(to right bottom, #30E8BF, #FF8235)'
                                             }}
-                                            variant="standard" 
+                                            variant="standard"
                                             onClick={(e) => onSubmit(e)}
                                             >
                                                 <Typography
@@ -354,7 +375,7 @@ export default function CustomerSurvey(props) {
                         alignItems="center"
                         style={{  }}
                         >
-                            {loaded === true ? null : 
+                            {loaded === true ? null :
                                 <Box
                                 sx={{
                                     position: 'absolute',
@@ -388,9 +409,9 @@ export default function CustomerSurvey(props) {
                                 }}
                                 >
                                     <Fade in={loaded}>
-                                        <img 
+                                        <img
                                         style={loaded ? {} : {display: 'none'}}
-                                        src={mediaSurvey[0]} 
+                                        src={mediaSurvey[0]}
                                         width="150px" alt="loka"
                                         onLoad={() => setLoaded(true)}/>
                                     </Fade>
@@ -418,7 +439,7 @@ export default function CustomerSurvey(props) {
                                     >
 
                                         <p style={{margin: 0, padding: 0, textAlign: 'center', fontFamily: 'sans-serif', fontSize: '18px', color: 'white'}}>Survey Kepuasan Pengunjung</p>
-                                        <FormControl 
+                                        <FormControl
                                         variant="standard"
                                         sx={{width: '100%', alignItems: 'center'}}>
                                             <Box sx={{width: '90%', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', my: 1}}>
@@ -447,10 +468,10 @@ export default function CustomerSurvey(props) {
                                                 label="Nama"
                                                 InputProps={{
                                                     startAdornment: (
-                                                        <InputAdornment 
+                                                        <InputAdornment
                                                         position="start"
                                                         sx={{
-                                                            
+
                                                         }}>
                                                             <Person
                                                             sx={{
@@ -492,10 +513,10 @@ export default function CustomerSurvey(props) {
                                                 label="Nomor Ponsel"
                                                 InputProps={{
                                                     startAdornment: (
-                                                        <InputAdornment 
+                                                        <InputAdornment
                                                         position="start"
                                                         sx={{
-                                                            
+
                                                         }}>
                                                             <PhoneIphone
                                                             sx={{
@@ -538,10 +559,10 @@ export default function CustomerSurvey(props) {
                                                 label="Alamat"
                                                 InputProps={{
                                                     startAdornment: (
-                                                        <InputAdornment 
+                                                        <InputAdornment
                                                         position="start"
                                                         sx={{
-                                                            
+
                                                         }}>
                                                             <LocationOn
                                                             sx={{
@@ -567,7 +588,7 @@ export default function CustomerSurvey(props) {
                                                 alignItems: 'center',
                                                 background: 'linear-gradient(to right bottom, #30E8BF, #FF8235)'
                                             }}
-                                            variant="standard" 
+                                            variant="standard"
                                             onClick={(e) => onSubmit(e)}
                                             >
                                                 <Typography

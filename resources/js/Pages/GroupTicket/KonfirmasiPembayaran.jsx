@@ -57,20 +57,11 @@ export default function Ticket(props) {
     const [ticketOrder, setTicketOrder] = React.useState([
         {
             ticket_id: 1,
-            ticket_name: 'Regular Weekdays Ticket',
-            ticket_description: 'Nam a nisl aliquet arcu aliquam aliquam id semper metus.',
-            quantity: 0,
-            price: 120000,
         },
         {
             ticket_id: 2,
-            ticket_name: 'Ticket Sheila on 7',
-            ticket_description: 'Proin imperdiet velit metus, a mattis tellus facilisis id.',
-            quantity: 0,
-            price: 300000,
         },
     ]);
-    const ticketCount = Array.from(Array(ticketOrder.length).keys());
     const [name, setName] = React.useState();
     const [companyName, setCompanyName] = React.useState();
     const [phone, setPhone] = React.useState();
@@ -78,6 +69,21 @@ export default function Ticket(props) {
     const [address, setAddress] = React.useState();
     const [selectedProvince, setSelectedProvince] = React.useState();
     const [selectedRegency, setSelectedRegency] = React.useState();
+    const [selectedReservation, setSelectedReservation] = React.useState({
+        id: 0,
+        bill: 0,
+        status: '',
+    });
+    const [selectedReservationDetail, setSelectedReservationDetail] = React.useState([
+        {
+            ticket_id: 1,
+        },
+        {
+            ticket_id: 2,
+        },
+    ]);
+    // const ticketCount = Array.from(Array(ticketOrder.length).keys());
+    const ticketCount = Array.from(Array(selectedReservationDetail.length).keys());
 
     //get session storage data
     React.useEffect(() => {
@@ -147,7 +153,56 @@ export default function Ticket(props) {
         } else {
             //
         }
+
+        selectReservation(localReservationID, 'group');
     }, []);
+
+    const selectReservation = (id, type) => {
+        //
+        setSelectedReservation({
+            id: id,
+            bill: 0,
+            status: '',
+        });
+        axios.post('/api/get-reservation-detail', {
+            id: id,
+            type: type
+        }).then((response) => {
+            //
+
+            let reservation = response.data.reservation;
+            let customer = response.data.customer;
+            let reservationDetail = response.data.reservationDetail;
+            let newReservationDetail = [];
+
+            setSelectedReservation({
+                id: reservation.id,
+                snap_token: reservation.snap_token,
+                order_id: reservation.order_id,
+                arrival_date: reservation.arrival_date,
+                bill: reservation.bill,
+                status: reservation.status,
+                name: customer.name,
+            });
+
+            for (let index = 0; index < reservationDetail.length; index++) {
+                newReservationDetail.push({
+                    name: reservationDetail[index].name,
+                    qty: reservationDetail[index].qty,
+                    subtotal: reservationDetail[index].subtotal,
+                })
+            }
+
+            setSelectedReservationDetail(newReservationDetail);
+
+
+        }).catch((error) => {
+            //
+            console.log(error);
+        })
+
+    }
+
     const [totalBill, setTotalBill] = React.useState(0);
     React.useEffect(() => {
             let subtotal = 0;
@@ -733,7 +788,7 @@ export default function Ticket(props) {
                                 {ticketCount.map((index) => (
                                     <>
                                         {
-                                            ticketOrder[index].quantity > 0
+                                            selectedReservationDetail[index].qty > 0
                                             ?
                                             <Box
                                             sx={{
@@ -755,7 +810,7 @@ export default function Ticket(props) {
                                                         fontSize: '14px',
                                                         fontWeight: 400,
                                                         color: '#333'
-                                                    }}>{ticketOrder[index].ticket_name}</Typography>
+                                                    }}>{selectedReservationDetail[index].name}</Typography>
                                                 </Box>
                                                 <Box
                                                 sx={{
@@ -769,7 +824,7 @@ export default function Ticket(props) {
                                                         fontSize: '14px',
                                                         fontWeight: 400,
                                                         color: '#333'
-                                                    }}>{ticketOrder[index].quantity}</Typography>
+                                                    }}>{selectedReservationDetail[index].qty}</Typography>
                                                 </Box>
                                                 <Box
                                                 sx={{
@@ -783,7 +838,7 @@ export default function Ticket(props) {
                                                         fontSize: '14px',
                                                         fontWeight: 400,
                                                         color: '#333'
-                                                    }}>Rp. {(ticketOrder[index].price * ticketOrder[index].quantity).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
+                                                    }}>Rp. {(selectedReservationDetail[index].subtotal).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                 </Box>
                                             </Box>
                                             : null
