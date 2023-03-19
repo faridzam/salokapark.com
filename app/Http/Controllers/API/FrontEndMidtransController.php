@@ -1088,7 +1088,7 @@ class FrontEndMidtransController extends Controller
         if ($request->bonus_qty > 0) {
             $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
                 'json' => [
-                    'arrival' => $request->arrival_date,
+                    'arrival' => $request->arrival,
                     'name' => $request->name,
                     'company_name' => $request->company_name,
                     'phone' => $request->phone,
@@ -1110,7 +1110,7 @@ class FrontEndMidtransController extends Controller
         }else {
             $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
                 'json' => [
-                    'arrival' => $request->arrival_date,
+                    'arrival' => $request->arrival,
                     'name' => $request->name,
                     'company_name' => $request->company_name,
                     'phone' => $request->phone,
