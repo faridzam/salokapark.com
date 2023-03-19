@@ -775,31 +775,65 @@ class FrontEndMidtransController extends Controller
                         'headers' => ['Content-Type' => 'application/json']
                     ]);
 
+                    //customer
                     $customer = customer_group::find($reservationData->customer_id);
-                    $reservationDetail = reservation_detail_group::where('reservation_id', $reservationData->id)->first();
+                    //reservation
+                    $reservationDetail = reservation_detail_group::where('reservation_id', $reservationData->id)->where('subtotal', '>', 0)->first();
                     $ticketDistribution = ticket_distribution_group::find($reservationDetail->ticket_distribution_id);
                     $ticket = ticket_group::find($ticketDistribution->ticket_id);
+                    //bonus
+                    $reservationDetailBonus = reservation_detail_group::where('reservation_id', $reservationData->id)->where('subtotal', '=', 0)->first();
+                    $ticketDistributionBonus = ticket_distribution_group::find($reservationDetailBonus->ticket_distribution_id);
+                    $ticketBonus = ticket_group::find($ticketDistributionBonus->ticket_id);
+                    //payment
                     $paymentMethod = payment_method::find($reservationData->payment_method_id);
                     $reservationBill = $reservationData->bill;
                     if ($reservationBill === (double)$grossAmount) {
-                        $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
-                            'json' => [
-                                'arrival' => $reservationData->arrival_date,
-                                'name' => $customer->name,
-                                'company_name' => $customer->company_name,
-                                'phone' => $customer->phone,
-                                'email' => $customer->email,
-                                'address' => $customer->address,
-                                'ticket_name' => $ticket->name,
-                                'qty' => $reservationDetail->qty,
-                                'subtotal' => $reservationDetail->subtotal,
-                                'total' => $reservationDetail->subtotal,
-                                'booking_code' => $bookingCode,
-                                'payment_method' => $paymentMethod->name,
-                                'pay_date' => Carbon::today()->toDateString(),
-                                'status' => 100,
-                            ]
-                        ]);
+                        if ($reservationDetailBonus) {
+                            $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
+                                'json' => [
+                                    'arrival' => $reservationData->arrival_date,
+                                    'name' => $customer->name,
+                                    'company_name' => $customer->company_name,
+                                    'phone' => $customer->phone,
+                                    'email' => $customer->email,
+                                    'address' => $customer->address,
+                                    'ticket_name' => $ticket->name,
+                                    'qty' => $reservationDetail->qty,
+                                    'subtotal' => $reservationDetail->subtotal,
+                                    "bonus_ticket" => $ticketBonus->name,
+                                    "bonus_qty" => $reservationDetailBonus->qty,
+                                    "bonus_subtotal" => $reservationDetail->subtotal,
+                                    'total' => $reservationDetail->subtotal + $reservationDetailBonus->subtotal,
+                                    'booking_code' => $bookingCode,
+                                    'payment_method' => $paymentMethod->name,
+                                    'pay_date' => Carbon::today()->toDateString(),
+                                    'status' => 100,
+                                ]
+                            ]);
+                        }else {
+                            $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
+                                'json' => [
+                                    'arrival' => $reservationData->arrival_date,
+                                    'name' => $customer->name,
+                                    'company_name' => $customer->company_name,
+                                    'phone' => $customer->phone,
+                                    'email' => $customer->email,
+                                    'address' => $customer->address,
+                                    'ticket_name' => $ticket->name,
+                                    'qty' => $reservationDetail->qty,
+                                    'subtotal' => $reservationDetail->subtotal,
+                                    "bonus_ticket" => "Tiket Bonus",
+                                    "bonus_qty" => 0,
+                                    "bonus_subtotal" => 0,
+                                    'total' => $reservationDetail->subtotal,
+                                    'booking_code' => $bookingCode,
+                                    'payment_method' => $paymentMethod->name,
+                                    'pay_date' => Carbon::today()->toDateString(),
+                                    'status' => 100,
+                                ]
+                            ]);
+                        }
                     }
 
                     if(is_null($reservationData->zeals_code)){
@@ -1043,5 +1077,58 @@ class FrontEndMidtransController extends Controller
             }
         }
 
+    }
+
+    public function testBotmailGroup(Request $request){
+        //
+        $client = new Client([
+            'headers' => ['Content-Type' => 'application/json']
+        ]);
+
+        if ($request->bonus_qty > 0) {
+            $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
+                'json' => [
+                    'arrival' => $request->arrival_date,
+                    'name' => $request->name,
+                    'company_name' => $request->company_name,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'ticket_name' => $request->ticket_name,
+                    'qty' => $request->qty,
+                    'subtotal' => $request->subtotal,
+                    "bonus_ticket" => $request->bonus_ticket,
+                    "bonus_qty" => $request->bonus_qty,
+                    "bonus_subtotal" => $request->bonus_subtotal,
+                    'total' => $request->total,
+                    'booking_code' => $request->booking_code,
+                    'payment_method' => $request->payment_method,
+                    'pay_date' => Carbon::today()->toDateString(),
+                    'status' => 100,
+                ]
+            ]);
+        }else {
+            $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasigrup', [
+                'json' => [
+                    'arrival' => $request->arrival_date,
+                    'name' => $request->name,
+                    'company_name' => $request->company_name,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'ticket_name' => $request->ticket_name,
+                    'qty' => $request->qty,
+                    'subtotal' => $request->subtotal,
+                    "bonus_ticket" => $request->bonus_ticket,
+                    "bonus_qty" => $request->bonus_qty,
+                    "bonus_subtotal" => $request->bonus_subtotal,
+                    'total' => $request->total,
+                    'booking_code' => $request->booking_code,
+                    'payment_method' => $request->payment_method,
+                    'pay_date' => Carbon::today()->toDateString(),
+                    'status' => 100,
+                ]
+            ]);
+        }
     }
 }

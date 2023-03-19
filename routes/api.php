@@ -47,6 +47,7 @@ Route::post('get-midtrans-token-group', [FrontEndMidtransController::class, 'get
 Route::post('get-midtrans-transaction-status', [FrontEndMidtransController::class, 'getMidtransTransactionStatus']);
 Route::post('cancel-midtrans-transaction', [FrontEndMidtransController::class, 'cancelMidtransTransaction']);
 Route::post('notification-handler', [FrontEndMidtransController::class, 'midtransNotificationHandler']);
+Route::post('test-botmail-group', [FrontEndMidtransController::class, 'testBotmailGroup']);
 
 //Ticket
 Route::post('get-ticket-date', [FrontEndTicketController::class, 'getTicketDate']);
