@@ -186,7 +186,7 @@ class FrontEndReservationController extends Controller
                             'subtotal' => $price*$value['quantity'],
                         ]);
 
-                        if ($ticketDistribution->category_id === 11 || $ticketDistribution->category_id === 12) {
+                        if ($ticketDistribution->category_id === 11 || $ticketDistribution->category_id === 12 || $ticketDistribution->id === 26) {
                             $quantity_bonus = floor($created_reservation_detail->qty / 15);
                             reservation_detail_group::create([
                                 'reservation_id' => $reservation->id,
