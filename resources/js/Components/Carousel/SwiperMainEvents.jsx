@@ -35,7 +35,7 @@ export default function App() {
                 result.push({id: Obj[i].id, nama: Obj[i].nama, link: Obj[i].link, tanggal: Obj[i].tanggal, type: Obj[i].type, gambar: Obj[i].gambar, desk_singkat: Obj[i].desk_singkat, deskripsi: Obj[i].deskripsi, no_urut: Obj[i].no_urut, status: Obj[i].status});
             }
             setPromo(result);
-            
+
         }).catch((error) => {
             //
             console.log(error);

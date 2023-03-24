@@ -430,14 +430,14 @@ export default function Header() {
                             </ListItemButton>
                         </ListItem>
 
-                        <ListItem key="group">
+                        <ListItem key="group-info">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("group") ? " navbar-item-active" : ""}`}
                             onClick={() => redirect('/group')}>
                                 <ListItemText primary="Info Rombongan" sx={{textAlign: 'center'}}/>
                             </ListItemButton>
                         </ListItem>
-                        <ListItem key="group">
+                        <ListItem key="group-ticket">
                             <ListItemButton
                             className={`navbar-item noselect ${activeRoute.includes("group") ? " navbar-item-active" : ""}`}
                             onClick={() => redirect('/group-ticket/pilih-ticket')}>

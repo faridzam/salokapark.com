@@ -231,7 +231,7 @@ export default function Ticket(props) {
                                                 }}>Ticket by Saloka</Typography>
                                             </Button>
                                         </Box>
-                                        <Box
+                                        {/* <Box
                                         sx={{
                                             width: '50%',
                                             minWidth: '550px',
@@ -253,7 +253,7 @@ export default function Ticket(props) {
                                                     letterSpacing: 2
                                                 }}>Hemat Berempat</Typography>
                                             </Button>
-                                        </Box>
+                                        </Box> */}
                                         <Box
                                         sx={{
                                             width: '50%',
@@ -380,7 +380,7 @@ export default function Ticket(props) {
                                                 }}>Ticket by Saloka</Typography>
                                             </Button>
                                         </Box>
-                                        <Box
+                                        {/* <Box
                                         sx={{
                                             width: '80%',
                                             marginTop: '30px',
@@ -400,7 +400,7 @@ export default function Ticket(props) {
                                                     fontWeight: 600,
                                                 }}>Hemat Berempat</Typography>
                                             </Button>
-                                        </Box>
+                                        </Box> */}
                                         <Box
                                         sx={{
                                             width: '80%',

@@ -1,4 +1,3 @@
-
 .swiper-events > .swiper-button-next{
     top: 30%;
     width: 65px;
@@ -142,7 +141,7 @@
         border-bottom-right-radius: 100%;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
-    
+
     .nextMainEvents{
         position: absolute;
         z-index: 10;
