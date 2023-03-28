@@ -169,7 +169,6 @@ export default function Ticket(props) {
             type: type
         }).then((response) => {
             //
-
             let reservation = response.data.reservation;
             let customer = response.data.customer;
             let reservationDetail = response.data.reservationDetail;

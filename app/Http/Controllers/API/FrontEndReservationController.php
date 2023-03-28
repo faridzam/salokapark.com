@@ -159,7 +159,7 @@ class FrontEndReservationController extends Controller
 
         foreach ($request->ticketOrder as $key => $value) {
             if ($value['quantity'] > 0) {
-                $ticketDistribution = ticket_distribution::find($value['ticket_id']);
+                $ticketDistribution = ticket_distribution_group::find($value['ticket_id']);
                 $ticket = ticket_group::find($ticketDistribution->ticket_id);
                 $option = option_group::find($ticketDistribution->option_id);
 

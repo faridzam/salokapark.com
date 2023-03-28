@@ -67,7 +67,6 @@ class FrontEndMidtransController extends Controller
 
                     switch ($option->type) {
                         case 'reguler':
-
                             $price = $ticket->price;
 
                             break;
@@ -146,7 +145,6 @@ class FrontEndMidtransController extends Controller
 
             return response()->json([
                 'token' => $reservation->snap_token,
-
             ]);
         // } catch (\Throwable $th) {
 
