@@ -53,6 +53,7 @@ class SurveyController extends Controller
 
         $client = new Client([
             'headers' => ['Content-Type' => 'application/json'],
+            'verify' => false
         ]);
 
         $jsonObject = [
