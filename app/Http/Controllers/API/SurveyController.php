@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 use App\Models\survey_customer;
 use App\Models\survey_satisfaction;
@@ -47,9 +49,64 @@ class SurveyController extends Controller
         ]);
 
         $customer = survey_customer::find($request->owner);
+        $satisfaction = survey_satisfaction::where('owner', $request->owner)->first();
+
+        $client = new Client([
+            'headers' => ['Content-Type' => 'application/json'],
+            'verify' => false
+        ]);
+
+        $jsonObject = [
+            "customers" => [
+                "idUser" => $customer->id,
+                "name" => $customer->name,
+                "phone" => $customer->phone,
+                "address" => $customer->address
+            ],
+            "statisfactions" => [
+                "rides" => $satisfaction->rides,
+                "facilities" => $satisfaction->facilities,
+                "hospitality" => $satisfaction->hospitality,
+                "services" => $satisfaction->services,
+                "equivalence" => $satisfaction->equivalence,
+                "notes" => $satisfaction->notes
+            ],
+            "visits" => [
+                "frequency" => $stored_visit->frequency,
+                "referal" => $stored_visit->referal,
+                "isRecommended" => $stored_visit->isRecommended,
+                "notes" => $stored_visit->notes
+            ],
+        ];
+
+        $response = $client->post('https://surveyops.salokapark.app/api/InsertSurvey', [
+            'json' => [
+                "customers" => [
+                    "idUser" => $customer->id,
+                    "name" => $customer->name,
+                    "phone" => $customer->phone,
+                    "address" => $customer->address
+                ],
+                "statisfactions" => [
+                    "rides" => $satisfaction->rides,
+                    "facilities" => $satisfaction->facilities,
+                    "hospitality" => $satisfaction->hospitality,
+                    "services" => $satisfaction->services,
+                    "equivalence" => $satisfaction->equivalence,
+                    "notes" => $satisfaction->notes
+                ],
+                "visits" => [
+                    "frequency" => $stored_visit->frequency,
+                    "referal" => $stored_visit->referal,
+                    "isRecommended" => $stored_visit->isRecommended,
+                    "notes" => $stored_visit->notes
+                ],
+            ]
+        ]);
 
         return response()->json([
             'customer' => $customer->name,
+            'response' => $response->getBody(),
         ]);
     }
 }
