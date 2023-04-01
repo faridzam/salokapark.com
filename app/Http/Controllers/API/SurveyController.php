@@ -52,34 +52,13 @@ class SurveyController extends Controller
         $satisfaction = survey_satisfaction::where('owner', $request->owner)->first();
 
         $client = new Client([
-            'headers' => ['Content-Type' => 'application/json'],
-            'verify' => false
+            'headers' => [
+                'Accept' => 'application/json',
+                'content-type' => 'application/json'
+            ],
         ]);
 
-        $jsonObject = [
-            "customers" => [
-                "idUser" => $customer->id,
-                "name" => $customer->name,
-                "phone" => $customer->phone,
-                "address" => $customer->address
-            ],
-            "statisfactions" => [
-                "rides" => $satisfaction->rides,
-                "facilities" => $satisfaction->facilities,
-                "hospitality" => $satisfaction->hospitality,
-                "services" => $satisfaction->services,
-                "equivalence" => $satisfaction->equivalence,
-                "notes" => $satisfaction->notes
-            ],
-            "visits" => [
-                "frequency" => $stored_visit->frequency,
-                "referal" => $stored_visit->referal,
-                "isRecommended" => $stored_visit->isRecommended,
-                "notes" => $stored_visit->notes
-            ],
-        ];
-
-        $response = $client->post('https://surveyops.salokapark.app/api/InsertSurvey', [
+        $response = $client->post('http://192.168.0.75:8000/api/InsertSurvey', [
             'json' => [
                 "customers" => [
                     "idUser" => $customer->id,
@@ -103,6 +82,34 @@ class SurveyController extends Controller
                 ],
             ]
         ]);
+
+        // $response = Http::withoutVerifying()
+        // ->withOptions([
+        //     'headers' => ['Content-Type' => 'application/json'],
+        //     "verify" => false
+        // ])
+        // ->post('https://surveyops.salokapark.app/api/InsertSurvey', [
+        //     "customers" => [
+        //         "idUser" => $customer->id,
+        //         "name" => $customer->name,
+        //         "phone" => $customer->phone,
+        //         "address" => $customer->address
+        //     ],
+        //     "statisfactions" => [
+        //         "rides" => $satisfaction->rides,
+        //         "facilities" => $satisfaction->facilities,
+        //         "hospitality" => $satisfaction->hospitality,
+        //         "services" => $satisfaction->services,
+        //         "equivalence" => $satisfaction->equivalence,
+        //         "notes" => $satisfaction->notes
+        //     ],
+        //     "visits" => [
+        //         "frequency" => $stored_visit->frequency,
+        //         "referal" => $stored_visit->referal,
+        //         "isRecommended" => $stored_visit->isRecommended,
+        //         "notes" => $stored_visit->notes
+        //     ],
+        // ]);
 
         return response()->json([
             'customer' => $customer->name,

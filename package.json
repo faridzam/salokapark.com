@@ -30,6 +30,7 @@
         "@mui/icons-material": "^5.10.9",
         "@mui/material": "^5.10.9",
         "@reduxjs/toolkit": "^1.8.6",
+        "crypto-js": "^4.1.1",
         "encrypt-storage": "^2.12.15",
         "file-saver": "^2.0.5",
         "google-map-react": "^2.2.0",

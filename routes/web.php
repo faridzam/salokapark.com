@@ -30,6 +30,11 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('welcome');
 
+//Salokafest
+Route::get('/salokafest/check-session/', function () {
+    return Inertia::render('ExternalRedirect/Salokafest');
+})->name('salokafest.check-session');
+
 // Ticket
 Route::get('/ticket', function () {
     Meta::addMeta('title', 'saloka theme park - tiket');
