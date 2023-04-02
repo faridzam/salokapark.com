@@ -46,8 +46,6 @@ export default function Zona(props) {
             console.log(error);
         })
     }, []);
-
-
     return(
         <>
             <Head title={props.slugs}/>
@@ -112,7 +110,7 @@ export default function Zona(props) {
                                             height: '75vh',
                                         }}></img>
                                     </Box>
-        
+
                                     <Box>
                                         <Grid
                                         container={true}
@@ -142,7 +140,7 @@ export default function Zona(props) {
                                                         textAlign: 'center',
                                                     }}>{promo[0].nama}</Typography>
                                                 </Box>
-            
+
                                                 <Box
                                                 sx={{
                                                     marginTop: '10px',
@@ -235,7 +233,7 @@ export default function Zona(props) {
                                             height: '50vh',
                                         }}></img>
                                     </Box>
-        
+
                                     <Box
                                     sx={{
                                         marginTop: '50px',
@@ -249,7 +247,7 @@ export default function Zona(props) {
                                             textAlign: 'center',
                                         }}>{promo[0].nama}</Typography>
                                     </Box>
-        
+
                                     <Box
                                     sx={{
                                         marginTop: '10px',

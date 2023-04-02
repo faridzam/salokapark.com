@@ -54,32 +54,26 @@ class SurveyController extends Controller
         $client = new Client([
             'headers' => [
                 'Accept' => 'application/json',
-                'content-type' => 'application/json'
+                'Content-Type' => 'application/json',
             ],
         ]);
 
-        $response = $client->post('http://192.168.0.75:8000/api/InsertSurvey', [
+        $response = $client->post('https://surveyops.salokapark.app/api/InsertSurvey', [
             'json' => [
-                "customers" => [
                     "idUser" => $customer->id,
                     "name" => $customer->name,
                     "phone" => $customer->phone,
-                    "address" => $customer->address
-                ],
-                "statisfactions" => [
+                    "address" => $customer->address,
                     "rides" => $satisfaction->rides,
                     "facilities" => $satisfaction->facilities,
                     "hospitality" => $satisfaction->hospitality,
                     "services" => $satisfaction->services,
                     "equivalence" => $satisfaction->equivalence,
-                    "notes" => $satisfaction->notes
-                ],
-                "visits" => [
+                    "notesSatisfaction" => $satisfaction->notes,
                     "frequency" => $stored_visit->frequency,
                     "referal" => $stored_visit->referal,
                     "isRecommended" => $stored_visit->isRecommended,
-                    "notes" => $stored_visit->notes
-                ],
+                    "notesVisit" => $stored_visit->notes
             ]
         ]);
 
@@ -113,7 +107,7 @@ class SurveyController extends Controller
 
         return response()->json([
             'customer' => $customer->name,
-            'response' => $response->getBody(),
+            'response' => $response,
         ]);
     }
 }
