@@ -51,29 +51,24 @@ class SurveyController extends Controller
         $customer = survey_customer::find($request->owner);
         $satisfaction = survey_satisfaction::where('owner', $request->owner)->first();
 
-        $client = new Client([
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
-        ]);
+        $client = new Client();
 
         $response = $client->post('https://surveyops.salokapark.app/api/InsertSurvey', [
             'json' => [
-                    "idUser" => $customer->id,
-                    "name" => $customer->name,
-                    "phone" => $customer->phone,
-                    "address" => $customer->address,
-                    "rides" => $satisfaction->rides,
-                    "facilities" => $satisfaction->facilities,
-                    "hospitality" => $satisfaction->hospitality,
-                    "services" => $satisfaction->services,
-                    "equivalence" => $satisfaction->equivalence,
-                    "notesSatisfaction" => $satisfaction->notes,
-                    "frequency" => $stored_visit->frequency,
-                    "referal" => $stored_visit->referal,
-                    "isRecommended" => $stored_visit->isRecommended,
-                    "notesVisit" => $stored_visit->notes
+                "idUser" => $customer->id,
+                "name" => $customer->name,
+                "phone" => $customer->phone,
+                "address" => $customer->address,
+                "rides" => $satisfaction->rides,
+                "facilities" => $satisfaction->facilities,
+                "hospitality" => $satisfaction->hospitality,
+                "services" => $satisfaction->services,
+                "equivalence" => $satisfaction->equivalence,
+                "notesSatisfaction" => $satisfaction->notes,
+                "frequency" => $stored_visit->frequency,
+                "referal" => $stored_visit->referal,
+                "isRecommended" => $stored_visit->isRecommended,
+                "notesVisit" => $stored_visit->notes
             ]
         ]);
 
@@ -107,7 +102,7 @@ class SurveyController extends Controller
 
         return response()->json([
             'customer' => $customer->name,
-            'response' => $response,
+            'response' => $response->getBody(),
         ]);
     }
 }
