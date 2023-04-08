@@ -195,7 +195,7 @@ export default function Ticket(props) {
             });
         } else {
             axios.post('/api/create-reservation-referral', {
-                orderID: orderID,
+                orderID: 1,
                 url_param: referrer,
                 name: name,
                 phone: phone,

@@ -158,7 +158,7 @@ export default function Ticket(props) {
         if(bookingDate <= now){
             redirect('/ticket/pilih-ticket');
         } else {
-            axios.post('/api/get-midtrans-token', {
+            axios.post('/api/get-midtrans-token-referral', {
                 reservationID: reservationID,
                 orderID: orderID,
                 bookingDate: bookingDate,

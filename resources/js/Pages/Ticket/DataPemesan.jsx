@@ -186,7 +186,7 @@ export default function Ticket(props) {
             });
         } else {
             axios.post('/api/create-reservation', {
-                orderID: orderID,
+                orderID: 1,
                 name: name,
                 phone: phone,
                 email: email,
