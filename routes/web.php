@@ -57,6 +57,13 @@ Route::get('/ticket/pilih-ticket', function () {
     return Inertia::render('Ticket/SalokaTicket');
 })->name('pilihTicket');
 
+Route::get('/referral-ticket/pilih-ticket', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('ReferralTicket/SalokaTicket');
+})->name('pilihTicketReferral');
+
 Route::get('/promo-ticket/pilih-ticket', function () {
     Meta::addMeta('title', 'saloka theme park - tiket by saloka');
     Meta::addMeta('description', 'reservasi online tiket by saloka.');
@@ -85,6 +92,13 @@ Route::get('/ticket/data-pemesan', function () {
     return Inertia::render('Ticket/DataPemesan');
 })->name('dataPemesan');
 
+Route::get('/referral-ticket/data-pemesan', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('ReferralTicket/DataPemesan');
+})->name('dataPemesanReferral');
+
 Route::get('/group-ticket/data-pemesan', function () {
     Meta::addMeta('title', 'saloka theme park - tiket by saloka');
     Meta::addMeta('description', 'reservasi online tiket by saloka.');
@@ -98,6 +112,13 @@ Route::get('/ticket/konfirmasi-pembayaran', function () {
     Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
     return Inertia::render('Ticket/KonfirmasiPembayaran');
 })->name('konfirmasiPembayaran');
+
+Route::get('/referral-ticket/konfirmasi-pembayaran', function () {
+    Meta::addMeta('title', 'saloka theme park - tiket by saloka');
+    Meta::addMeta('description', 'reservasi online tiket by saloka.');
+    Meta::addMeta('keyword', 'saloka theme park, saloka, theme park, tiket, ticket, tiket saloka, pesan tiket saloka');
+    return Inertia::render('ReferralTicket/KonfirmasiPembayaran');
+})->name('konfirmasiPembayaranReferral');
 
 Route::get('/group-ticket/konfirmasi-pembayaran', function () {
     Meta::addMeta('title', 'saloka theme park - tiket by saloka');

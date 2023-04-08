@@ -8,12 +8,16 @@ use Carbon\Carbon;
 
 use App\Models\ticket;
 use App\Models\ticket_group;
+use App\Models\ticket_referral;
 use App\Models\ticket_distribution;
 use App\Models\ticket_distribution_group;
+use App\Models\ticket_distribution_referral;
 use App\Models\stock;
 use App\Models\stock_group;
+use App\Models\stock_referral;
 use App\Models\option;
 use App\Models\option_group;
+use App\Models\option_referral;
 
 class FrontEndTicketController extends Controller
 {
@@ -137,6 +141,148 @@ class FrontEndTicketController extends Controller
             foreach ($ticketEvent as $key => $value) {
                 $ticket = ticket::find($value->ticket_id);
                 $option = option::find($value->option_id);
+                $value->name = $ticket->name;
+                #price-option
+                // $value->price = $ticket->price;
+                if ($option->type === 'special_price') {
+                    $value->price = $option->special_price;
+                } elseif ($option->type === 'discount') {
+                    $value->price = round($ticket->price * (100-$option->discount) / 100, -3);
+                } else {
+                    $value->price = $ticket->price;
+                }
+                $value->description = $option->description;
+            }
+        }
+
+        $ticketEvent = $ticketEvent->values();
+
+        return response()->json([
+            'ticketReguler' => $ticketReguler,
+            'ticketEvent' => $ticketEvent,
+        ]);
+    }
+
+    public function getTicketDateReferral(Request $request) {
+        //
+
+        $bookingDate = Carbon::createFromTimestamp(strtotime($request->date));
+
+        //get reguler ticket
+        if ($bookingDate->isWeekday()) {
+            $ticketReguler = ticket_distribution_referral::where('category_id', 1)
+            ->where('option_id', 1)
+            ->get();
+
+            foreach ($ticketReguler as $value) {
+                $ticket = ticket_referral::find($value->ticket_id);
+                $option = option_referral::find($value->option_id);
+
+                $value->name = $ticket->name;
+                $value->price = $ticket->price;
+                $value->description = $option->description;
+            }
+        } elseif ($bookingDate->isWeekend()) {
+            $ticketReguler = ticket_distribution_referral::where('category_id', 1)
+            ->where('option_id', 2)
+            ->get();
+
+            foreach ($ticketReguler as $value) {
+                $ticket = ticket_referral::find($value->ticket_id);
+                $option = option_referral::find($value->option_id);
+
+                $value->name = $ticket->name;
+                $value->price = $ticket->price;
+                $value->description = $option->description;
+            }
+        }
+
+        $ticketEvent = ticket_distribution_referral::whereNotIn('category_id', [1, 9, 10])
+        ->where('date_start', '<=', $bookingDate)
+        ->where('date_end', '>=', $bookingDate)
+        ->get();
+
+        $theOnlyID = 0;
+
+        foreach ($ticketEvent as $key => $value) {
+            $stock = stock_referral::where('ticket_id', $value->ticket_id)->value('stock');
+
+            if ($stock > 0) {
+
+                $ticket = ticket_referral::find($value->ticket_id);
+                $option = option_referral::find($value->option_id);
+
+                $value->name = $ticket->name;
+
+                #price-option
+                // $value->price = $ticket->price;
+                if ($option->type === 'special_price') {
+                    $value->price = $option->special_price;
+                } elseif ($option->type === 'discount') {
+                    $value->price = round($ticket->price * (100-$option->discount) / 100, -3);
+                } else {
+                    $value->price = $ticket->price;
+                }
+
+                $value->description = $option->description;
+
+            }
+
+            if($value->category_id === 2) {
+                if (in_array($bookingDate->dayOfWeekIso, unserialize($value->days))) {
+                    // clear this unset to show event ticket
+                    unset($ticketEvent[$key]);
+                } else {
+                    unset($ticketEvent[$key]);
+                }
+            };
+
+            // certain day
+            if($value->category_id === 3){
+                $ticketReguler = [];
+            }
+
+            // certain day
+            if ($value->category_id === 4) {
+                if (in_array($bookingDate->dayOfWeekIso, unserialize($value->days))) {
+                    $ticketReguler = [];
+                } else {
+                    unset($ticketEvent[$key]);
+                }
+            };
+
+            // Ramadhan
+            if ($value->category_id === 11) {
+                if (in_array($bookingDate->dayOfWeekIso, unserialize($value->days))) {
+                    $ticketReguler = [];
+                } else {
+                    $ticketReguler = [];
+                    unset($ticketEvent[$key]);
+                }
+            };
+
+            // The Only
+            if ($value->category_id === 13) {
+                if (in_array($bookingDate->dayOfWeekIso, unserialize($value->days))) {
+                    $ticketReguler = [];
+                    $theOnlyID = $value->id;
+                } else {
+                    $ticketReguler = [];
+                    unset($ticketEvent[$key]);
+                }
+            };
+
+        }
+
+        if ($theOnlyID !== 0) {
+            $ticketEvent = ticket_distribution_referral::where('id', $theOnlyID)
+            ->where('date_start', '<=', $bookingDate)
+            ->where('date_end', '>=', $bookingDate)
+            ->get();
+
+            foreach ($ticketEvent as $key => $value) {
+                $ticket = ticket_referral::find($value->ticket_id);
+                $option = option_referral::find($value->option_id);
                 $value->name = $ticket->name;
                 #price-option
                 // $value->price = $ticket->price;

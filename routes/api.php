@@ -42,6 +42,7 @@ Route::get('get-weather-now', [ContentController::class, 'getWeatherNow']);
 
 //midtrans
 Route::post('get-midtrans-token', [FrontEndMidtransController::class, 'getTransactionToken']);
+Route::post('get-midtrans-token-referral', [FrontEndMidtransController::class, 'getTransactionTokenReferral']);
 Route::post('get-midtrans-token-zeals', [FrontEndMidtransController::class, 'getTransactionTokenZeals']);
 Route::post('get-midtrans-token-group', [FrontEndMidtransController::class, 'getTransactionTokenGroup']);
 Route::post('get-midtrans-transaction-status', [FrontEndMidtransController::class, 'getMidtransTransactionStatus']);
@@ -51,6 +52,7 @@ Route::post('test-botmail-group', [FrontEndMidtransController::class, 'testBotma
 
 //Ticket
 Route::post('get-ticket-date', [FrontEndTicketController::class, 'getTicketDate']);
+Route::post('get-ticket-date-referral', [FrontEndTicketController::class, 'getTicketDateReferral']);
 Route::post('get-ticket-date-promo', [FrontEndTicketController::class, 'getTicketDatePromo']);
 Route::post('get-ticket-date-group', [FrontEndTicketController::class, 'getTicketDateGroup']);
 Route::post('get-ticket-date-roadshow', [FrontEndTicketController::class, 'getTicketDateRoadshow']);
@@ -59,6 +61,7 @@ Route::post('get-ticket-date-zeals-reguler', [FrontEndZealsTicketController::cla
 
 //Reservation
 Route::post('create-reservation', [FrontEndReservationController::class, 'createReservation']);
+Route::post('create-reservation-referral', [FrontEndReservationController::class, 'createReservationReferral']);
 Route::post('create-reservation-zeals', [FrontEndReservationController::class, 'createReservationZeals']);
 Route::post('create-reservation-group', [FrontEndReservationController::class, 'createReservationGroup']);
 Route::post('get-reservation-by-email', [FrontEndReservationController::class, 'getReservationByEmail']);

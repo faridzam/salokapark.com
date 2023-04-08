@@ -39,6 +39,12 @@ export default function Ticket(props) {
         } else {
             //
         }
+        const localReferrer = encryptStorage.getItem('referrer');
+        if (localReferrer) {
+            setReferrer(localReferrer);
+        } else {
+            //
+        }
         const localTicketOrder = encryptStorage.getItem('ticketOrder');
         if (localTicketOrder) {
             setTicketOrder(localTicketOrder);
@@ -71,6 +77,7 @@ export default function Ticket(props) {
         }
     }, []);
 
+    const [referrer, setReferrer] = React.useState( new Date());
     const [bookingDate, setBookingDate] = React.useState( new Date());
     const [ticketOrder, setTicketOrder] = React.useState();
     const [name, setName] = React.useState("");
@@ -167,8 +174,9 @@ export default function Ticket(props) {
         let zealsCode = window.localStorage.getItem('zeals_track');
 
         if(zealsCode) {
-            axios.post('/api/create-reservation', {
+            axios.post('/api/create-reservation-referral', {
                 orderID: 1,
+                url_param: referrer,
                 name: name,
                 phone: phone,
                 email: email,
@@ -180,13 +188,15 @@ export default function Ticket(props) {
                 //
                 encryptStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
                 encryptStorage.setItem('orderID', JSON.stringify(response.data.order_id));
+                encryptStorage.setItem('referrerName', JSON.stringify(response.data.referrer_name));
             }).catch((error) => {
                 //
                 console.log(error)
             });
         } else {
-            axios.post('/api/create-reservation', {
+            axios.post('/api/create-reservation-referral', {
                 orderID: orderID,
+                url_param: referrer,
                 name: name,
                 phone: phone,
                 email: email,
@@ -198,6 +208,7 @@ export default function Ticket(props) {
                 //
                 encryptStorage.setItem('reservationID', JSON.stringify(response.data.reservation_id));
                 encryptStorage.setItem('orderID', JSON.stringify(response.data.order_id));
+                encryptStorage.setItem('referrerName', JSON.stringify(response.data.referrer_name));
             }).catch((error) => {
                 //
                 console.log(error)
@@ -205,7 +216,7 @@ export default function Ticket(props) {
         }
 
         handleDialogClose();
-        Inertia.visit('/ticket/konfirmasi-pembayaran');
+        Inertia.visit('/referral-ticket/konfirmasi-pembayaran');
     }
 
     // confirmation dialog

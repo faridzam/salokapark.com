@@ -8,25 +8,33 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use App\Models\referrer;
 use App\Models\ticket;
+use App\Models\ticket_referral;
 use App\Models\ticket_zeals;
 use App\Models\ticket_group;
 use App\Models\option;
+use App\Models\option_referral;
 use App\Models\option_zeals;
 use App\Models\option_group;
 use App\Models\ticket_distribution;
+use App\Models\ticket_distribution_referral;
 use App\Models\ticket_distribution_zeals;
 use App\Models\ticket_distribution_group;
 use App\Models\reservation;
+use App\Models\reservation_referral;
 use App\Models\reservation_zeals;
 use App\Models\reservation_group;
 use App\Models\reservation_detail;
+use App\Models\reservation_detail_referral;
 use App\Models\reservation_detail_zeals;
 use App\Models\reservation_detail_group;
 use App\Models\customer;
+use App\Models\customer_referral;
 use App\Models\customer_zeals;
 use App\Models\customer_group;
 use App\Models\reserved;
+use App\Models\reserved_referral;
 use App\Models\reserved_zeals;
 use App\Models\reserved_group;
 use App\Models\payment_method;
@@ -131,6 +139,130 @@ class FrontEndMidtransController extends Controller
             );
 
             $reservation = reservation::find(request('reservationID'));
+
+            if (!$reservation->snap_token) {
+
+                $snapToken = \Midtrans\Snap::getSnapToken($params);
+                $reservation->snap_token = $snapToken;
+                $reservation->updated_at = Carbon::now();
+                $reservation->update();
+
+            } else {
+                $snapToken = $reservation->snapToken;
+            }
+
+            return response()->json([
+                'token' => $reservation->snap_token,
+            ]);
+        // } catch (\Throwable $th) {
+
+            // $client = new Client();
+            // $response = $client->get('https://api.sandbox.midtrans.com/v2/'.$request->orderID.'/status', [
+            //     'auth' => [
+            //         'SB-Mid-server-Mcyaglb-OqsipP7H_PPvHnLD',
+            //         "",
+            //     ],
+            //     'headers' => [
+            //         'Content-Type' => 'application/json',
+            //         'Accept'     => 'application/json',
+            //     ],
+            // ]);
+
+            // return response()->json([
+            //     'status' => json_decode($response->getBody()),
+            // ]);
+
+        // }
+    }
+
+    public function getTransactionTokenReferral(Request $request){
+        //
+
+        // try {
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = $this->serverKey;
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = $this->isProduction;
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = $this->isSanitized;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = $this->is3ds;
+
+            $totalBill = 0;
+            $itemDetails = [];
+
+            foreach ($request->ticketOrder as $key => $value) {
+                if ($value['quantity'] > 0) {
+                    $ticketDistribution = ticket_distribution_referral::find($value['ticket_id']);
+                    $ticket = ticket_referral::find($ticketDistribution->ticket_id);
+                    $option = option_referral::find($ticketDistribution->option_id);
+
+                    switch ($option->type) {
+                        case 'reguler':
+                            $price = $ticket->price;
+
+                            break;
+                        case 'discount':
+                            $price = $ticket->price * (100 - $option->discount) / 100;
+
+                            break;
+                        case 'special_price':
+                            $price = $option->special_price;
+
+                            break;
+                        case 'buy_x_get_y':
+                            # code...
+                            break;
+                        case 'cashback':
+                            # code...
+                            break;
+                        case 'others':
+                            $price = $ticket->price;
+
+                            break;
+                        default:
+                            # code...
+                            break;
+                    }
+
+                    $totalBill += ($value['quantity'] * $price);
+                    array_push($itemDetails, [
+                        'id' => $value['ticket_id'],
+                        'name' => $value['ticket_name'],
+                        'quantity' => $value['quantity'],
+                        'price' => $price,
+                    ]);
+                }
+            };
+
+            $dtNow = Carbon::now();
+            $bookingDate = Carbon::createFromTimestamp(strtotime($request->bookingDate))->startOfDay();
+            $expireInMinutes = $bookingDate->diffInMinutes($dtNow->copy());
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $request->orderID,
+                    'gross_amount' => $totalBill,
+                ),
+                'item_details' => $itemDetails,
+                'credit_card' => array(
+                    'secure' => true,
+                ),
+                'customer_details' => array(
+                    'first_name' => $request->name,
+                    'last_name' => "",
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'address' => $request->address,
+                ),
+                "expiry" => array(
+                    "start_time" => Carbon::now()->format('Y-m-d H:i:s')." +0700",
+                    "unit" => "minutes",
+                    "duration" => $expireInMinutes,
+                )
+            );
+
+            $reservation = reservation_referral::find(request('reservationID'));
 
             if (!$reservation->snap_token) {
 
@@ -887,6 +1019,192 @@ class FrontEndMidtransController extends Controller
                         'status' => 'cancel',
                     ]);
             }
+        } elseif (mb_substr($order_id, 0, 4) === "ref-") {
+            switch ($type) {
+                case 'gopay':
+                    $reservation = reservation_referral::where('order_id', $order_id)
+                    ->update([
+                        'payment_method_id' => 1,
+                    ]);
+                    break;
+                case 'qris':
+                    $reservation = reservation_referral::where('order_id', $order_id)
+                    ->update([
+                        'payment_method_id' => 2,
+                    ]);
+                    break;
+                case 'cstore':
+
+                    if ($notif->store = 'alfamart') {
+                        $reservation = reservation_referral::where('order_id', $order_id)
+                        ->update([
+                            'payment_method_id' => 3,
+                        ]);
+                    } elseif ($notif->store = 'indomaret') {
+                        $reservation = reservation_referral::where('order_id', $order_id)
+                        ->update([
+                            'payment_method_id' => 4,
+                        ]);
+                    }
+                    break;
+                case 'bank_transfer':
+
+                    if ($notif->permata_va_number) {
+                        $reservation = reservation_referral::where('order_id', $order_id)
+                        ->update([
+                            'payment_method_id' => 9,
+                        ]);
+                    } elseif ($notif->va_numbers[0]->bank) {
+                        switch ($notif->va_numbers[0]->bank) {
+                            case 'bca':
+                                $reservation = reservation_referral::where('order_id', $order_id)
+                                ->update([
+                                    'payment_method_id' => 5,
+                                ]);
+                                break;
+                            case 'bni':
+                                $reservation = reservation_referral::where('order_id', $order_id)
+                                ->update([
+                                    'payment_method_id' => 6,
+                                ]);
+                                break;
+                            case 'bri':
+                                $reservation = reservation_referral::where('order_id', $order_id)
+                                ->update([
+                                    'payment_method_id' => 7,
+                                ]);
+                                break;
+
+                            default:
+                                # code...
+                                break;
+                        }
+                    }
+                    break;
+                case 'echannel':
+                    $reservation = reservation_referral::where('order_id', $order_id)
+                    ->update([
+                        'payment_method_id' => 8,
+                    ]);
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
+
+            if ($transaction == 'capture') {
+                // For credit card transaction, we need to check whether transaction is challenge by FDS or not
+                if ($type == 'credit_card'){
+                    if($fraud == 'challenge'){
+                        // TODO set payment status in merchant's database to 'Challenge by FDS'
+                        // TODO merchant should decide whether this transaction is authorized or not in MAP
+                        echo "Transaction order_id: " . $order_id ." is challenged by FDS";
+                    }
+                    else {
+                        // TODO set payment status in merchant's database to 'Success'
+                        echo "Transaction order_id: " . $order_id ." successfully captured using " . $type;
+                    }
+                }
+            }
+            else if ($transaction == 'settlement'){
+                // TODO set payment status in merchant's database to 'Settlement'
+                $reservationData = reservation_referral::where('order_id', $order_id)->first();
+                $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
+
+                $reservation = reservation_referral::where('order_id', $order_id)
+                ->update([
+                    'booking_code' => $bookingCode,
+                    'status' => 'settlement',
+                ]);
+
+                $reserved = reserved_referral::create([
+                    'reservation_id' => $reservationData->id,
+                    'customer_id' => $reservationData->customer_id,
+                    'status' => 0,
+                ]);
+
+                $affiliateID = '571343950';
+                // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
+                //     'encrypted_code' => $reservationData->zeals_code,
+                //     'aff_id' => $affiliateID,
+                //     'unique_random_code' => $order_id,
+                //     'transaction_value' => $reservationData->bill
+                // ])
+                // ->throw()
+                // ->json();
+
+                $client = new Client([
+                    'headers' => ['Content-Type' => 'application/json']
+                ]);
+
+                $customer = customer_referral::find($reservationData->customer_id);
+                $reservationBill = $reservationData->bill;
+                if ((double)$grossAmount === $reservationBill) {
+                    $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
+                        'json' => [
+                            'name' => $customer->name,
+                            'booking_code' => $bookingCode,
+                            'email' => $customer->email,
+                            'arrival' => $reservationData->arrival_date,
+                            'status' => 100,
+                        ]
+                    ]);
+                }
+
+                if(is_null($reservationData->zeals_code)){
+                    //
+                } else {
+                    $response = $client->post('https://app.zeals.asia/apiv1/AMPcallback', [
+                        'json' => [
+                            'encrypted_code' => $reservationData->zeals_code,
+                            'aff_id' => $affiliateID,
+                            'unique_random_code' => $order_id,
+                            'transaction_value' => $reservationData->bill
+                        ]
+                    ]);
+                    $data = json_decode($response->getBody(), true);
+
+                    zeals_callback_history::create([
+                        'response' => $response->getBody()->getContents(),
+                        'status_code' => $response->getStatusCode(),
+                    ]);
+                }
+
+                // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
+                // $context = stream_context_create($opts);
+                // // $header = file_get_contents('https://www.example.com',false,$context);
+                // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
+
+            }
+            else if($transaction == 'pending'){
+                // TODO set payment status in merchant's database to 'Pending'
+                $reservation = reservation_referral::where('order_id', $order_id)
+                ->update([
+                    'status' => 'pending',
+                ]);
+            }
+            else if ($transaction == 'deny') {
+                // TODO set payment status in merchant's database to 'Denied'
+                $reservation = reservation_referral::where('order_id', $order_id)
+                ->update([
+                    'status' => 'deny',
+                ]);
+            }
+            else if ($transaction == 'expire') {
+                // TODO set payment status in merchant's database to 'expire'
+                $reservation = reservation_referral::where('order_id', $order_id)
+                ->update([
+                    'status' => 'expire',
+                ]);
+            }
+            else if ($transaction == 'cancel') {
+                // TODO set payment status in merchant's database to 'Denied'
+                $reservation = reservation_referral::where('order_id', $order_id)
+                ->update([
+                    'status' => 'cancel',
+                ]);
+            }
         } else {
             switch ($type) {
                 case 'gopay':
@@ -973,105 +1291,105 @@ class FrontEndMidtransController extends Controller
                         // TODO set payment status in merchant's database to 'Success'
                         echo "Transaction order_id: " . $order_id ." successfully captured using " . $type;
                     }
-                    }
                 }
-                else if ($transaction == 'settlement'){
-                    // TODO set payment status in merchant's database to 'Settlement'
-                    $reservationData = reservation::where('order_id', $order_id)->first();
-                    $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
+            }
+            else if ($transaction == 'settlement'){
+                // TODO set payment status in merchant's database to 'Settlement'
+                $reservationData = reservation::where('order_id', $order_id)->first();
+                $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
 
-                    $reservation = reservation::where('order_id', $order_id)
-                    ->update([
-                        'booking_code' => $bookingCode,
-                        'status' => 'settlement',
-                    ]);
+                $reservation = reservation::where('order_id', $order_id)
+                ->update([
+                    'booking_code' => $bookingCode,
+                    'status' => 'settlement',
+                ]);
 
-                    $reserved = reserved::create([
-                        'reservation_id' => $reservationData->id,
-                        'customer_id' => $reservationData->customer_id,
-                        'status' => 0,
-                    ]);
+                $reserved = reserved::create([
+                    'reservation_id' => $reservationData->id,
+                    'customer_id' => $reservationData->customer_id,
+                    'status' => 0,
+                ]);
 
-                    $affiliateID = '571343950';
-                    // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
-                    //     'encrypted_code' => $reservationData->zeals_code,
-                    //     'aff_id' => $affiliateID,
-                    //     'unique_random_code' => $order_id,
-                    //     'transaction_value' => $reservationData->bill
-                    // ])
-                    // ->throw()
-                    // ->json();
+                $affiliateID = '571343950';
+                // $zealsCallback = Http::post('https://demo.zeals.asia/apiv1/AMPcallback/', [
+                //     'encrypted_code' => $reservationData->zeals_code,
+                //     'aff_id' => $affiliateID,
+                //     'unique_random_code' => $order_id,
+                //     'transaction_value' => $reservationData->bill
+                // ])
+                // ->throw()
+                // ->json();
 
-                    $client = new Client([
-                        'headers' => ['Content-Type' => 'application/json']
-                    ]);
+                $client = new Client([
+                    'headers' => ['Content-Type' => 'application/json']
+                ]);
 
-                    $customer = customer::find($reservationData->customer_id);
-                    $reservationBill = $reservationData->bill;
-                    if ((double)$grossAmount === $reservationBill) {
-                        $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
-                            'json' => [
-                                'name' => $customer->name,
-                                'booking_code' => $bookingCode,
-                                'email' => $customer->email,
-                                'arrival' => $reservationData->arrival_date,
-                                'status' => 100,
-                            ]
-                        ]);
-                    }
-
-                    if(is_null($reservationData->zeals_code)){
-                        //
-                    } else {
-                        $response = $client->post('https://app.zeals.asia/apiv1/AMPcallback', [
-                            'json' => [
-                                'encrypted_code' => $reservationData->zeals_code,
-                                'aff_id' => $affiliateID,
-                                'unique_random_code' => $order_id,
-                                'transaction_value' => $reservationData->bill
-                            ]
-                        ]);
-                        $data = json_decode($response->getBody(), true);
-
-                        zeals_callback_history::create([
-                            'response' => $response->getBody()->getContents(),
-                            'status_code' => $response->getStatusCode(),
-                        ]);
-                    }
-
-                    // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
-                    // $context = stream_context_create($opts);
-                    // // $header = file_get_contents('https://www.example.com',false,$context);
-                    // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
-
-                }
-                else if($transaction == 'pending'){
-                    // TODO set payment status in merchant's database to 'Pending'
-                    $reservation = reservation::where('order_id', $order_id)
-                    ->update([
-                        'status' => 'pending',
+                $customer = customer::find($reservationData->customer_id);
+                $reservationBill = $reservationData->bill;
+                if ((double)$grossAmount === $reservationBill) {
+                    $responseMail = $client->post('https://botmail.salokapark.app/api/data/reservasi', [
+                        'json' => [
+                            'name' => $customer->name,
+                            'booking_code' => $bookingCode,
+                            'email' => $customer->email,
+                            'arrival' => $reservationData->arrival_date,
+                            'status' => 100,
+                        ]
                     ]);
                 }
-                else if ($transaction == 'deny') {
-                    // TODO set payment status in merchant's database to 'Denied'
-                    $reservation = reservation::where('order_id', $order_id)
-                    ->update([
-                        'status' => 'deny',
+
+                if(is_null($reservationData->zeals_code)){
+                    //
+                } else {
+                    $response = $client->post('https://app.zeals.asia/apiv1/AMPcallback', [
+                        'json' => [
+                            'encrypted_code' => $reservationData->zeals_code,
+                            'aff_id' => $affiliateID,
+                            'unique_random_code' => $order_id,
+                            'transaction_value' => $reservationData->bill
+                        ]
+                    ]);
+                    $data = json_decode($response->getBody(), true);
+
+                    zeals_callback_history::create([
+                        'response' => $response->getBody()->getContents(),
+                        'status_code' => $response->getStatusCode(),
                     ]);
                 }
-                else if ($transaction == 'expire') {
-                    // TODO set payment status in merchant's database to 'expire'
-                    $reservation = reservation::where('order_id', $order_id)
-                    ->update([
-                        'status' => 'expire',
-                    ]);
-                }
-                else if ($transaction == 'cancel') {
-                    // TODO set payment status in merchant's database to 'Denied'
-                    $reservation = reservation::where('order_id', $order_id)
-                    ->update([
-                        'status' => 'cancel',
-                    ]);
+
+                // $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
+                // $context = stream_context_create($opts);
+                // // $header = file_get_contents('https://www.example.com',false,$context);
+                // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
+
+            }
+            else if($transaction == 'pending'){
+                // TODO set payment status in merchant's database to 'Pending'
+                $reservation = reservation::where('order_id', $order_id)
+                ->update([
+                    'status' => 'pending',
+                ]);
+            }
+            else if ($transaction == 'deny') {
+                // TODO set payment status in merchant's database to 'Denied'
+                $reservation = reservation::where('order_id', $order_id)
+                ->update([
+                    'status' => 'deny',
+                ]);
+            }
+            else if ($transaction == 'expire') {
+                // TODO set payment status in merchant's database to 'expire'
+                $reservation = reservation::where('order_id', $order_id)
+                ->update([
+                    'status' => 'expire',
+                ]);
+            }
+            else if ($transaction == 'cancel') {
+                // TODO set payment status in merchant's database to 'Denied'
+                $reservation = reservation::where('order_id', $order_id)
+                ->update([
+                    'status' => 'cancel',
+                ]);
             }
         }
 
