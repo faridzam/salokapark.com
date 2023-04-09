@@ -192,6 +192,9 @@ export default function Ticket(props) {
             }).catch((error) => {
                 //
                 console.log(error)
+            }).finally(() => {
+                handleDialogClose();
+                Inertia.visit('/referral-ticket/konfirmasi-pembayaran');
             });
         } else {
             axios.post('/api/create-reservation-referral', {
@@ -212,11 +215,11 @@ export default function Ticket(props) {
             }).catch((error) => {
                 //
                 console.log(error)
+            }).finally(() => {
+                handleDialogClose();
+                Inertia.visit('/referral-ticket/konfirmasi-pembayaran');
             });
         }
-
-        handleDialogClose();
-        Inertia.visit('/referral-ticket/konfirmasi-pembayaran');
     }
 
     // confirmation dialog

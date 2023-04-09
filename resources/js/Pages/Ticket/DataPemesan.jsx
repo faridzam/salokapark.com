@@ -183,6 +183,9 @@ export default function Ticket(props) {
             }).catch((error) => {
                 //
                 console.log(error)
+            }).finally(() => {
+                handleDialogClose();
+                Inertia.visit('/ticket/konfirmasi-pembayaran');
             });
         } else {
             axios.post('/api/create-reservation', {
@@ -201,11 +204,12 @@ export default function Ticket(props) {
             }).catch((error) => {
                 //
                 console.log(error)
+            }).finally(() => {
+                handleDialogClose();
+                Inertia.visit('/ticket/konfirmasi-pembayaran');
             });
         }
 
-        handleDialogClose();
-        Inertia.visit('/ticket/konfirmasi-pembayaran');
     }
 
     // confirmation dialog
