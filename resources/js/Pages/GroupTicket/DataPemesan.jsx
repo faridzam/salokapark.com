@@ -251,6 +251,9 @@ export default function Ticket(props) {
             }).catch((error) => {
                 //
                 console.log(error)
+            }).finally(() => {
+                handleDialogClose();
+                Inertia.visit('/group-ticket/konfirmasi-pembayaran');
             });
         } else {
             axios.post('/api/create-reservation-group', {
@@ -270,11 +273,11 @@ export default function Ticket(props) {
             }).catch((error) => {
                 //
                 console.log(error)
+            }).finally(() => {
+                handleDialogClose();
+                Inertia.visit('/group-ticket/konfirmasi-pembayaran');
             });
         }
-
-        handleDialogClose();
-        Inertia.visit('/group-ticket/konfirmasi-pembayaran');
     }
 
     // confirmation dialog
