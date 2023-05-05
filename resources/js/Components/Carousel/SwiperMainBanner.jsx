@@ -42,7 +42,7 @@ export default function App() {
                 maxHeight: '85vh',
             }}>
                 <img
-                src={media[0]}
+                src={media[1]}
                 alt="logo saloka"
                 loading="lazy"
                 style={{
