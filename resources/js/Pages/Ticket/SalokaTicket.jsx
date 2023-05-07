@@ -181,7 +181,13 @@ export default function Ticket(props) {
 
     const addQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
-        newArr[index].quantity+=newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
+        if (newArr[index].quantity <= newArr[index].min_qty) {
+            newArr[index].quantity+=newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
+        } else if(newArr[index].quantity >= newArr[index].max_qty) {
+            // 
+        } else {
+            newArr[index].quantity+=1;
+        }
 
         setTicketOrder(newArr);
         encryptStorage.setItem('ticketOrder', JSON.stringify(newArr));
@@ -191,7 +197,11 @@ export default function Ticket(props) {
     const subQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
         if (newArr[index].quantity > 0) {
-            newArr[index].quantity-=newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
+            if (newArr[index].quantity <= newArr[index].min_qty) {
+                newArr[index].quantity = 0; // replace e.target.value with whatever you want to change it to
+            } else {
+                newArr[index].quantity-=1; // replace e.target.value with whatever you want to change it to
+            }
         }
         setTicketOrder(newArr);
         encryptStorage.setItem('ticketOrder', JSON.stringify(newArr));
