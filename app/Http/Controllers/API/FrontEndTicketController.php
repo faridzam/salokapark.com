@@ -89,7 +89,7 @@ class FrontEndTicketController extends Controller
             if($value->category_id === 2) {
                 if (in_array($bookingDate->dayOfWeekIso, unserialize($value->days))) {
                     // clear this unset to show event ticket
-                    unset($ticketEvent[$key]);
+                    // unset($ticketEvent[$key]);
                 } else {
                     unset($ticketEvent[$key]);
                 }
