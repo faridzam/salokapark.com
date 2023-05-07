@@ -181,12 +181,12 @@ export default function Ticket(props) {
 
     const addQuantityTicket = index => {
         let newArr = [...ticketOrder]; // copying the old datas array
-        if (newArr[index].quantity = 0) {
+        if (newArr[index].quantity < newArr[index].min_qty) {
             newArr[index].quantity+=newArr[index].min_qty; // replace e.target.value with whatever you want to change it to
-        } else if(newArr[index].quantity >= newArr[index].max_qty) {
-            // 
-        } else {
+        } else if(newArr[index].quantity <= newArr[index].max_qty) {
             newArr[index].quantity+=1;
+        } else {
+            // 
         }
 
         setTicketOrder(newArr);
