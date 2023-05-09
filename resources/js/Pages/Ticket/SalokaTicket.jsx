@@ -501,7 +501,7 @@ export default function Ticket(props) {
                                                                 }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                             </Box>
 
-                                                            {totalBill === 0 || bookingDate <= today || minQtyReq === false
+                                                            {totalBill === 0 || (date !== null ? null : bookingDate <= today) || minQtyReq === false
                                                                 ?   <Button
                                                                     disabled
                                                                     variant='contained'
@@ -823,7 +823,7 @@ export default function Ticket(props) {
                                                             }}>Rp. {totalBill.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Typography>
                                                         </Box>
 
-                                                        {totalBill === 0 || bookingDate <= today || minQtyReq === false
+                                                        {totalBill === 0 || (date !== null ? null : bookingDate <= today) || minQtyReq === false
                                                             ?   <Button
                                                                 disabled
                                                                 variant='contained'
