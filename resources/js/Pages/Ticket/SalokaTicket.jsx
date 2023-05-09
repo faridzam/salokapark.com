@@ -57,6 +57,14 @@ export const encryptStorage = new EncryptStorage('@encryptedByZam', {
 
 export default function Ticket(props) {
 
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+    let date = params.get('date');
+
+    console.log(search);
+    console.log(params);
+    console.log(date);
+
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
@@ -86,9 +94,9 @@ export default function Ticket(props) {
 
     // booking date
     const today = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Jakarta'}));
-    const maxDate = new Date("2023-5-31");
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+    const maxDate = new Date(date !== null ? date : "2023-6-30");
+    const tomorrow = new Date(date !== null ? date : today);
+    tomorrow.setDate(tomorrow.getDate() + (date !== null ? 0 : 1));
     const timeString = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
     const [, hours, ampm] = timeString.match(/ (\d+).* ([AP]M)/);
     // if(Number(hours) < 0 && ampm === 'AM'){
@@ -97,7 +105,7 @@ export default function Ticket(props) {
     // } else {
     //     tomorrow.setDate(tomorrow.getDate() + 1)
     // }
-    const [bookingDate, setBookingDate] = React.useState(today);
+    const [bookingDate, setBookingDate] = React.useState(date !== null ? tomorrow : today);
 
     // ticket section
     const [ticketOrder, setTicketOrder] = React.useState([]);
