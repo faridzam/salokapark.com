@@ -61,10 +61,6 @@ export default function Ticket(props) {
     let params = new URLSearchParams(search);
     let date = params.get('date');
 
-    console.log(search);
-    console.log(params);
-    console.log(date);
-
     //media query
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('laptop'));
@@ -93,7 +89,7 @@ export default function Ticket(props) {
     // }, []);
 
     // booking date
-    const today = new Date(new Date().toLocaleString('en', {timeZone: 'Asia/Jakarta'}));
+    const today = new Date(new Date(date !== null ? date : new Date().toLocaleString('en', {timeZone: 'Asia/Jakarta'})).toLocaleString('en', {timeZone: 'Asia/Jakarta'}));
     const maxDate = new Date(date !== null ? date : "2023-6-30");
     const tomorrow = new Date(date !== null ? date : today);
     tomorrow.setDate(tomorrow.getDate() + (date !== null ? 0 : 1));
