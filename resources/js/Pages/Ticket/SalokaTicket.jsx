@@ -116,6 +116,9 @@ export default function Ticket(props) {
             console.log("tidak ada");
             window.sessionStorage.clear();
         }
+    }, [])
+
+    React.useEffect(() => {
         const localTicketOrder = window.sessionStorage.getItem('ticketOrder');
         if (localTicketOrder) {
             window.sessionStorage.removeItem('ticketOrder');
