@@ -36,7 +36,7 @@ export function useIsMounted() {
 
     React.useEffect(() => {
 
-        window.sessionStorage.clear();
+        // window.sessionStorage.clear();
 
     }, []);
 
@@ -107,6 +107,15 @@ export default function Ticket(props) {
     const [ticketOrder, setTicketOrder] = React.useState([]);
 
     React.useEffect(() => {
+        if(date !== null){
+            console.log("ada")
+            var userTimezoneOffset = (tomorrow.getTimezoneOffset() * 60000) + (7*60000);
+            setBookingDate(tomorrow);
+            encryptStorage.setItem('arrivalDate', JSON.stringify(tomorrow.getTime() - userTimezoneOffset));
+        } else {
+            console.log("tidak ada");
+            window.sessionStorage.clear();
+        }
         const localTicketOrder = window.sessionStorage.getItem('ticketOrder');
         if (localTicketOrder) {
             window.sessionStorage.removeItem('ticketOrder');
@@ -175,6 +184,7 @@ export default function Ticket(props) {
             console.log(error);
         })
     }
+
     const handleArrivalDate = (value) => {
         var userTimezoneOffset = (value.getTimezoneOffset() * 60000) + (7*60000);
         setBookingDate(value);
