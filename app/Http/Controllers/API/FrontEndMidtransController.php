@@ -1298,7 +1298,8 @@ class FrontEndMidtransController extends Controller
                 $reservationData = reservation::where('order_id', $order_id)->first();
                 $bookingCode = date('Ymd', strtotime( $reservationData->arrival_date )).$reservationData->payment_method_id.$reservationData->reservation_option_id.$reservationData->id;
 
-                $reservation = reservation::where('order_id', $order_id)
+                if ($reservationData->status !== 'settlement') {
+                    $reservation = reservation::where('order_id', $order_id)
                 ->update([
                     'booking_code' => $bookingCode,
                     'status' => 'settlement',
@@ -1361,6 +1362,7 @@ class FrontEndMidtransController extends Controller
                 // $context = stream_context_create($opts);
                 // // $header = file_get_contents('https://www.example.com',false,$context);
                 // $header = file_get_contents('https://demo.zeals.asia/platform/api/AMPcallback/'.$affiliateID.'/CMP00000050', false, $context);
+                }
 
             }
             else if($transaction == 'pending'){
