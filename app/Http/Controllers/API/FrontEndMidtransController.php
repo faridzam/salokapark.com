@@ -912,9 +912,9 @@ class FrontEndMidtransController extends Controller
                     $ticketDistribution = ticket_distribution_group::find($reservationDetail->ticket_distribution_id);
                     $ticket = ticket_group::find($ticketDistribution->ticket_id);
                     //bonus
-                    $reservationDetailBonus = reservation_detail_group::where('reservation_id', $reservationData->id)->where('subtotal', '=', 0)->first();
-                    $ticketDistributionBonus = ticket_distribution_group::find($reservationDetailBonus->ticket_distribution_id);
-                    $ticketBonus = ticket_group::find($ticketDistributionBonus->ticket_id);
+                    // $reservationDetailBonus = reservation_detail_group::where('reservation_id', $reservationData->id)->where('subtotal', '=', 0)->first();
+                    // $ticketDistributionBonus = ticket_distribution_group::find($reservationDetailBonus->ticket_distribution_id);
+                    // $ticketBonus = ticket_group::find($ticketDistributionBonus->ticket_id);
                     //payment
                     $paymentMethod = payment_method::find($reservationData->payment_method_id);
                     $reservationBill = $reservationData->bill;
